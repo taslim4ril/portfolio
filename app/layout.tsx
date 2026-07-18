@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/data";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,7 +54,10 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${display.variable} antialiased`}
     >
-      <body className="grain min-h-dvh">{children}</body>
+      <body className="grain min-h-dvh">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

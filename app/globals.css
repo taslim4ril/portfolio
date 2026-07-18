@@ -80,11 +80,28 @@ body {
   animation: marquee 28s linear infinite;
 }
 
+/* Hero backdrop */
+@keyframes heroWash {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-hero-wash {
+  animation: heroWash 1.4s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .animate-marquee {
     animation: none;
+  }
+  .animate-hero-wash {
+    animation: none;
+    opacity: 1;
   }
 }

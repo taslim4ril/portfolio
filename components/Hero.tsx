@@ -1,91 +1,131 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { site, stats } from "@/lib/data";
+import { site } from "@/lib/data";
+import Marquee from "./Marquee";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
-};
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden px-6 pt-36 pb-20 md:pt-44 md:pb-28">
-      {/* glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full blur-3xl"
-        style={{ background: "radial-gradient(closest-side, rgba(200,255,61,0.12), transparent)" }}
-      />
-
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative mx-auto max-w-6xl"
-      >
-        <motion.div variants={item} className="mb-8 flex items-center gap-3">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
-          </span>
-          <span className="text-sm text-muted">
-            Available for work · {site.location}
-          </span>
-        </motion.div>
-
-        <h1 className="display max-w-5xl text-5xl font-semibold sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-          <motion.span variants={item} className="block">
-            Bridging the gap
-          </motion.span>
-          <motion.span variants={item} className="block">
-            between{" "}
-            <span className="text-accent">technology</span>
-          </motion.span>
-          <motion.span variants={item} className="block">
-            & human interaction
-          </motion.span>
-        </h1>
-
-        <motion.p
-          variants={item}
-          className="mt-8 max-w-xl text-lg text-muted md:text-xl"
+    <section
+      id="top"
+      className="relative flex min-h-dvh flex-col overflow-hidden bg-[#0d0d0e]"
+    >
+      {/* ===== Background image placeholder (swap for your own later) ===== */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%]">
+        {/* Landscape silhouette stand-in */}
+        <svg
+          className="absolute bottom-0 h-full w-full"
+          viewBox="0 0 1440 620"
+          preserveAspectRatio="xMidYMax slice"
         >
-          {site.subhead}
-        </motion.p>
+          <defs>
+            <linearGradient id="hero-bg-fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0d0d0e" />
+              <stop offset="45%" stopColor="#141416" />
+              <stop offset="100%" stopColor="#1c1c1f" />
+            </linearGradient>
+          </defs>
+          <rect width="1440" height="620" fill="url(#hero-bg-fade)" />
+          <path
+            d="M0 470 L220 360 L430 430 L650 320 L880 420 L1080 340 L1300 430 L1440 380 L1440 620 L0 620 Z"
+            fill="#202023"
+          />
+          <path
+            d="M0 540 L260 450 L520 520 L760 430 L1010 520 L1240 450 L1440 510 L1440 620 L0 620 Z"
+            fill="#2a2a2e"
+          />
+        </svg>
+        {/* Fade the top of the image into the page */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0e] via-transparent to-transparent" />
+      </div>
 
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
-          <a
-            href="#work"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
+      {/* ===== Foreground content ===== */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6">
+        <div className="grid gap-10 pt-36 md:grid-cols-2 md:pt-44 lg:grid-cols-[460px_1fr]">
+          {/* Photo card placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.15 }}
           >
-            View my work
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </a>
+            <div
+              data-cursor
+              className="group relative aspect-[2/1] w-full max-w-[460px] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#232326] to-[#141416]"
+            >
+              {/* Placeholder body */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 text-white/40">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="9" r="1.6" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
+                <span className="text-[11px] uppercase tracking-widest">Your photo</span>
+              </div>
+              {/* Chrome overlay to echo the reference style */}
+              <span className="absolute left-3 top-3 text-[10px] font-medium uppercase tracking-widest text-white/60">
+                {site.location}
+              </span>
+              <span className="absolute right-3 top-3 text-right text-[9px] leading-tight text-white/50">
+                09:00 WAT
+                <br />
+                Available
+              </span>
+            </div>
+          </motion.div>
+
+          {/* About text */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.3 }}
+            className="flex items-start gap-4 md:justify-end"
+          >
+            <span className="mt-3 shrink-0 text-sm text-white/45">(About me)</span>
+            <h1
+              className="display max-w-[46rem] font-medium leading-[1.08] text-white"
+              style={{ fontSize: "clamp(2.1rem, 4.6vw, 3.7rem)" }}
+            >
+              I&apos;m {site.name},{" "}
+              <span className="text-white/60">
+                a {site.role} based in {site.location}.
+              </span>
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Bottom meta row */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, ease, delay: 0.5 }}
+          className="mt-auto flex items-center justify-between gap-4 pb-6 pt-16"
+        >
+          <span className="text-xs tracking-widest text-white/50">/ 2026 /</span>
+          <span className="hidden items-center gap-2 text-xs tracking-widest text-white/50 sm:flex">
+            Scroll down
+            <motion.span
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              ↓
+            </motion.span>
+          </span>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-medium text-foreground transition-colors hover:bg-surface"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-white transition-colors hover:bg-white/10"
           >
-            Get in touch
+            Start a project
+            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-[10px] transition-transform group-hover:translate-x-0.5">
+              ↗
+            </span>
           </a>
         </motion.div>
+      </div>
 
-        <motion.div
-          variants={item}
-          className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8"
-        >
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="display text-3xl font-semibold md:text-4xl">{s.value}</div>
-              <div className="mt-1 text-sm text-muted">{s.label}</div>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
+      {/* ===== Scrolling text (your existing marquee) ===== */}
+      <Marquee />
     </section>
   );
 }
