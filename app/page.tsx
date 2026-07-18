@@ -12,14 +12,18 @@ export default function Home() {
     <>
       <Intro />
       <Nav />
-      <main className="relative z-10">
+      <main className="relative">
         <Hero />
-        <Projects />
-        <About />
-        <Writing />
-        <Contact />
+        {/* Scrolls up and over the pinned hero. Solid background so the hero
+            never shows through, and a higher stacking order than the hero. */}
+        <div className="relative z-10 bg-background">
+          <Projects />
+          <About />
+          <Writing />
+          <Contact />
+          <Footer />
+        </div>
       </main>
-      <Footer />
     </>
   );
 }

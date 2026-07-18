@@ -1,5 +1,35 @@
 @import "tailwindcss";
 
+/* ===== PP Neue Montreal (self-hosted) ===== */
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Thin.otf") format("opentype");
+  font-weight: 100 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Bold.otf") format("opentype");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Core palette — dark, editorial, bold */
   --background: #0a0a0b;
@@ -22,8 +52,8 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
 
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-display);
+  --font-sans: "PP Neue Montreal", var(--font-inter), system-ui, sans-serif;
+  --font-display: "PP Neue Montreal", var(--font-inter), system-ui, sans-serif;
 
   --radius-xl: 1.25rem;
 }
@@ -32,17 +62,27 @@
   border-color: var(--border);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* NOTE: no `scroll-behavior: smooth` and no `overflow-x: hidden` on body.
+   Lenis drives smoothing, and an overflow on <body> would turn it into a
+   scroll container, which silently breaks `position: sticky` (the hero). */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 ::selection {
@@ -93,11 +133,29 @@ body {
   animation: heroWash 1.4s ease-out forwards;
 }
 
+/* Hero recedes as the Selected Work section scrolls over it.
+   CSS scroll-driven animation — composited, runs off the main thread, zero JS.
+   Browsers without support simply skip it (the sticky overlay still works). */
+@keyframes heroRecede {
+  to {
+    transform: scale(0.94);
+    opacity: 0.4;
+  }
+}
+@supports (animation-timeline: scroll()) {
+  .hero-recede {
+    animation: heroRecede linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100vh;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .animate-marquee {
+  .animate-marquee,
+  .hero-recede {
     animation: none;
   }
   .animate-hero-wash {

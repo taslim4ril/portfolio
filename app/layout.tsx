@@ -1,20 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/data";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
+// Inter is the fallback while PP Neue Montreal (self-hosted, see
+// public/fonts/README) loads or if its files aren't present yet.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-});
-
-const display = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -52,9 +48,10 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${display.variable} antialiased`}
+      className={`${inter.variable} antialiased`}
     >
       <body className="grain min-h-dvh">
+        <SmoothScroll />
         <CustomCursor />
         {children}
       </body>

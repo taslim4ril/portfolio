@@ -50,7 +50,7 @@ export default function Intro() {
         transition={{ duration: 0.9, ease: panelEase }}
       >
         <motion.h2
-          className="display flex items-start pb-1.5 text-5xl font-semibold text-accent-ink sm:text-6xl md:text-7xl"
+          className="display flex items-start pb-1.5 text-5xl font-bold text-accent-ink sm:text-6xl md:text-7xl"
           initial="hidden"
           animate="show"
           variants={{
@@ -93,7 +93,7 @@ export default function Intro() {
         transition={{ duration: 0.9, ease: panelEase }}
       >
         <motion.p
-          className="pt-3.5 text-xs uppercase tracking-[0.35em] text-accent-ink/70 sm:text-sm"
+          className="pt-3.5 text-xs font-semibold uppercase tracking-[0.35em] text-accent-ink/70 sm:text-sm"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}

@@ -52,6 +52,7 @@ export type Project = {
   tag: string;
   year: string;
   description: string;
+  image: string;
   accent?: boolean;
 };
 
@@ -64,6 +65,7 @@ export const projects: Project[] = [
     year: "2024",
     description:
       "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
+    image: "/images/work/flowz.webp",
     accent: true,
   },
   {
@@ -74,6 +76,7 @@ export const projects: Project[] = [
     year: "2024",
     description:
       "A personal project exploring how a friendly companion app can make everyday planning feel lighter and more human.",
+    image: "/images/work/gopal.webp",
   },
   {
     slug: "cropgate",
@@ -83,6 +86,7 @@ export const projects: Project[] = [
     year: "2023",
     description:
       "Connecting farmers and buyers through a marketplace that keeps produce, pricing, and logistics transparent end to end.",
+    image: "/images/work/cropgate.webp",
   },
   {
     slug: "plantinerary",
@@ -92,6 +96,7 @@ export const projects: Project[] = [
     year: "2023",
     description:
       "A plant-care planner that schedules watering, light, and feeding so first-time plant parents never lose a leaf.",
+    image: "/images/work/plantinerary.jpg",
   },
   {
     slug: "valco",
@@ -101,6 +106,7 @@ export const projects: Project[] = [
     year: "2023",
     description:
       "Making trust-fund investing approachable with clear onboarding, transparent returns, and confidence-building visuals.",
+    image: "/images/work/valco.jpg",
   },
 ];
 
