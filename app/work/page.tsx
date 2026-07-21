@@ -42,7 +42,7 @@ export default function WorkPage() {
 
           <div className="flex flex-col gap-[4.5px]">
             {projects.map((p) => (
-              <WorkCard key={p.slug} p={p} href="/#contact" />
+              <WorkCard key={p.slug} p={p} />
             ))}
           </div>
         </section>

@@ -132,6 +132,12 @@ html.lenis body {
   line-height: 0.95;
 }
 
+/* Intro loader is hidden before paint when the no-flash gate decides to skip
+   it (see the inline script in layout.tsx). */
+.intro-skip .intro-overlay {
+  display: none !important;
+}
+
 /* Section headers, set in Acorn. Acorn ships no italic, so the previously
    italic half of each header is set in Regular and the other half in Bold. */
 .heading {

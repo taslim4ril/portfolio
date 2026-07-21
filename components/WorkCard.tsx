@@ -6,13 +6,14 @@ import { type Project } from "@/lib/data";
 
 export default function WorkCard({
   p,
-  href = "#contact",
+  href,
 }: {
   p: Project;
-  /** Where the card points. Pass an absolute path from non-home pages. */
+  /** Where the card points. Defaults to the project's case-study page. */
   href?: string;
 }) {
   const [first, ...rest] = p.title.split(" ");
+  const target = href ?? `/work/${p.slug}`;
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [hovering, setHovering] = useState(false);
 
@@ -34,7 +35,7 @@ export default function WorkCard({
   return (
     <a
       ref={cardRef}
-      href={href}
+      href={target}
       onMouseMove={handleMouseMove}
       onMouseEnter={(e) => {
         setHovering(true);

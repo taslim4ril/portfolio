@@ -50,6 +50,18 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} antialiased`}
     >
+      <head>
+        {/* No-flash intro gate: decided before first paint. Skip the loader
+            when arriving from another page on this site (same-origin
+            referrer) or under reduced-motion, so it never flashes on in-app
+            navigation. CSS hides .intro-overlay while html.intro-skip is set. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var s=false;var r=document.referrer;if(r){var o=new URL(r).origin;if(o===location.origin)s=true;}if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)s=true;if(s){document.documentElement.classList.add('intro-skip');window.__introSkip=true;}}catch(e){}})();",
+          }}
+        />
+      </head>
       <body className="grain min-h-dvh">
         <SmoothScroll />
         <CustomCursor />

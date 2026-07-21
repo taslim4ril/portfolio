@@ -13,13 +13,29 @@ const DONE_AT = 2350; // when the overlay unmounts
 const panelEase = [0.83, 0, 0.17, 1] as const; // easeInOutQuint — snappy split
 const riseEase = [0.22, 1, 0.36, 1] as const;
 
+// Module-level so it survives client-side navigation but resets on a real
+// document load. It's only set to true once the intro finishes, so it plays on
+// first load / refresh, yet is skipped when navigating back to home from
+// another page (the home page remounts, but this module is not re-evaluated).
+let introHasPlayed = false;
+
 export default function Intro() {
   const [phase, setPhase] = useState<"in" | "out">("in");
-  const [done, setDone] = useState(false);
+  // If the intro already ran this session, start "done" so it never flashes.
+  const [done, setDone] = useState(introHasPlayed);
 
   useEffect(() => {
-    // Respect reduced-motion: skip the intro entirely.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Skip when: already played in this document, the no-flash gate decided to
+    // skip (same-origin referrer — see layout.tsx), or reduced-motion. The
+    // overlay is already CSS-hidden in those cases, so this just unmounts it
+    // and leaves the scroll unlocked.
+    const gateSkip = (window as { __introSkip?: boolean }).__introSkip === true;
+    if (
+      introHasPlayed ||
+      gateSkip ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      introHasPlayed = true;
       setDone(true);
       return;
     }
@@ -27,6 +43,7 @@ export default function Intro() {
     document.body.style.overflow = "hidden";
     const t1 = setTimeout(() => setPhase("out"), SPLIT_AT);
     const t2 = setTimeout(() => {
+      introHasPlayed = true;
       setDone(true);
       document.body.style.overflow = "";
     }, DONE_AT);
@@ -41,7 +58,7 @@ export default function Intro() {
   if (done) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[100]">
+    <div className="intro-overlay pointer-events-none fixed inset-0 z-[100]">
       {/* Top panel — carries the name, slides up on exit */}
       <motion.div
         className="absolute inset-x-0 top-0 flex h-1/2 items-end justify-center overflow-hidden bg-accent"
