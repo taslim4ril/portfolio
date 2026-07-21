@@ -13,6 +13,9 @@ export default function CustomCursor() {
 
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
+  // Some elements (e.g. work cards) supply their own cursor affordance, so
+  // this one hides entirely rather than stacking two cursors.
+  const [suppressed, setSuppressed] = useState(false);
 
   useEffect(() => {
     // Only on precise pointers that aren't reduced-motion.
@@ -26,9 +29,9 @@ export default function CustomCursor() {
       y.set(e.clientY);
     };
     const onOver = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement)?.closest?.(
-        "a, button, [data-cursor]"
-      );
+      const target = e.target as HTMLElement;
+      setSuppressed(!!target?.closest?.("[data-cursor-hide]"));
+      const el = target?.closest?.("a, button, [data-cursor]");
       setHovering(!!el);
     };
 
@@ -53,7 +56,8 @@ export default function CustomCursor() {
         animate={{
           width: hovering ? 44 : 12,
           height: hovering ? 44 : 12,
-          opacity: hovering ? 0.35 : 1,
+          opacity: suppressed ? 0 : hovering ? 0.35 : 1,
+          scale: suppressed ? 0.4 : 1,
         }}
         transition={{ type: "spring", stiffness: 400, damping: 28 }}
       />

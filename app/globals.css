@@ -29,6 +29,29 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ===== Acorn — used for section headers ===== */
+@font-face {
+  font-family: "Acorn";
+  src: url("/fonts/Acorn-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Acorn";
+  src: url("/fonts/Acorn-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* Core palette — dark, editorial, bold */
@@ -54,6 +77,8 @@
 
   --font-sans: "PP Neue Montreal", var(--font-inter), system-ui, sans-serif;
   --font-display: "PP Neue Montreal", var(--font-inter), system-ui, sans-serif;
+  /* Section headers */
+  --font-heading: "Acorn", "PP Neue Montreal", var(--font-inter), sans-serif;
 
   --radius-xl: 1.25rem;
 }
@@ -107,6 +132,14 @@ html.lenis body {
   line-height: 0.95;
 }
 
+/* Section headers, set in Acorn. Acorn ships no italic, so the previously
+   italic half of each header is set in Regular and the other half in Bold. */
+.heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
 /* Marquee */
 @keyframes marquee {
   from {
@@ -133,21 +166,184 @@ html.lenis body {
   animation: heroWash 1.4s ease-out forwards;
 }
 
-/* Hero recedes as the Selected Work section scrolls over it.
-   CSS scroll-driven animation — composited, runs off the main thread, zero JS.
+/* The pinned section zooms in as it scrolls into view, hits full size for a
+   single instant right as it locks into place, then immediately starts
+   zooming back out as Selected Work scrolls over it — no static hold in
+   between, so motion never stops. One keyframe spans the section's "cover"
+   journey from 0% (first pixel appearing at the bottom of the viewport) to
+   50% (fully covered by the overlay — see the matching -200vh pull on the
+   overlay in page.tsx, timed to arrive exactly as the zoom-out completes).
+   The geometry: this section is 3x the viewport tall, so per the
+   view-timeline spec the entry phase (zooming in) occupies the first 25% of
+   "cover" — which lands at the local 50% keyframe stop within our 0%-50%
+   sub-range. CSS scroll-driven — composited, off the main thread, zero JS.
    Browsers without support simply skip it (the sticky overlay still works). */
-@keyframes heroRecede {
-  to {
-    transform: scale(0.94);
+@keyframes pinZoom {
+  0% {
+    transform: scale(0.78);
     opacity: 0.4;
   }
-}
-@supports (animation-timeline: scroll()) {
-  .hero-recede {
-    animation: heroRecede linear both;
-    animation-timeline: scroll(root block);
-    animation-range: 0 100vh;
+  50% {
+    transform: scale(1);
+    opacity: 1;
   }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+}
+/* The tall outer section owns the timeline. It scrolls normally (only its
+   inner wrapper is sticky), so progress advances the whole time the section
+   is pinned — unlike a timeline on the sticky element itself, which freezes. */
+.pin-track {
+  view-timeline-name: --pinTrack;
+  view-timeline-axis: block;
+}
+@supports (animation-timeline: view()) {
+  /* Only at lg+, matching the breakpoint where the section actually pins.
+     On smaller screens it's a normal section, so there's nothing to zoom. */
+  @media (min-width: 1024px) {
+    .pin-zoom {
+      animation: pinZoom linear both;
+      animation-timeline: --pinTrack;
+      animation-range: cover 0% cover 50%;
+    }
+  }
+}
+
+/* About — words brighten one at a time as the block scrolls through.
+   Scroll-driven, so it's composited and costs nothing per frame.
+   Base state is fully readable, so unsupported browsers just show the text. */
+@keyframes wordReveal {
+  from {
+    opacity: 0.18;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@supports (animation-timeline: view()) {
+  .word-track {
+    view-timeline-name: --wordReveal;
+    view-timeline-axis: block;
+  }
+  .word-reveal {
+    animation: wordReveal linear both;
+    animation-timeline: --wordReveal;
+  }
+}
+
+/* Service cards ease up into place as the What-I-Do section enters view.
+   Each card carries its own view() timeline; the stagger comes from a
+   per-card animation-range set inline. Base state is visible, so browsers
+   without scroll-timeline support just show the cards. */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* The grid itself needs `overflow: hidden` for its rounded corners, but that
+   makes it the cards' nearest scroll container and freezes an anonymous
+   view() timeline. So the timeline is declared on a wrapper OUTSIDE the
+   clipping box and referenced by name; all four cards share it and stagger
+   via their own animation-range. */
+.cards-track {
+  view-timeline-name: --cardsTrack;
+  view-timeline-axis: block;
+}
+@supports (animation-timeline: view()) {
+  .card-in {
+    animation: cardIn cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: --cardsTrack;
+  }
+}
+
+/* Work cards start slightly small and reach full size as they scroll into
+   view. Uses each card's own view() timeline — composited, no JS. Base state
+   is full size, so unsupported browsers just show the cards normally. */
+@keyframes cardRise {
+  from {
+    transform: scale(0.88);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@supports (animation-timeline: view()) {
+  .card-rise {
+    animation: cardRise linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 95%;
+  }
+}
+
+/* Dotted texture used on the What-I-Do card hover */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Soft pixel field behind the contact CTA. Three tiled layers breathing on
+   independent cycles, plus a slow drifting highlight. Each layer is a single
+   element with one background-image, so the whole effect is a handful of
+   composited opacity/transform animations — not hundreds of DOM nodes. */
+@keyframes pixelPulse {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+@keyframes pixelDrift {
+  0% {
+    transform: translate3d(-8%, -6%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(8%, 6%, 0) scale(1.25);
+  }
+  100% {
+    transform: translate3d(-8%, -6%, 0) scale(1.1);
+  }
+}
+.pixel-field {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.55) 1px,
+    transparent 1.7px
+  );
+  will-change: opacity;
+}
+.pixel-field-a {
+  background-size: 26px 26px;
+  animation: pixelPulse 7s ease-in-out infinite;
+}
+.pixel-field-b {
+  background-size: 40px 40px;
+  background-position: 13px 9px;
+  animation: pixelPulse 10s ease-in-out infinite -2.5s;
+}
+.pixel-field-c {
+  background-size: 68px 68px;
+  background-position: 31px 24px;
+  animation: pixelPulse 13s ease-in-out infinite -6s;
+}
+/* Slow-moving highlight so different regions of the field brighten over time */
+.pixel-drift {
+  animation: pixelDrift 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Faint scattered-symbol texture behind the Contact heading. One tiled SVG
+   (like .grain above) — single paint layer, no extra DOM nodes. */
+.symbol-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Ctext x='8' y='26' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%23%3C/text%3E%3Ctext x='58' y='16' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%40%3C/text%3E%3Ctext x='112' y='32' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%2A%3C/text%3E%3Ctext x='142' y='64' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%25%3C/text%3E%3Ctext x='22' y='72' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%40%3C/text%3E%3Ctext x='82' y='84' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%23%3C/text%3E%3Ctext x='132' y='104' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%2A%3C/text%3E%3Ctext x='42' y='114' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%25%3C/text%3E%3Ctext x='100' y='134' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%40%3C/text%3E%3Ctext x='10' y='152' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%23%3C/text%3E%3Ctext x='150' y='144' font-family='monospace' font-size='15' fill='rgba(255,255,255,0.07)'%3E%2A%3C/text%3E%3C/svg%3E");
+  background-size: 160px 160px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -155,11 +351,22 @@ html.lenis body {
     scroll-behavior: auto;
   }
   .animate-marquee,
-  .hero-recede {
+  .pin-zoom,
+  .word-reveal,
+  .card-rise,
+  .card-in,
+  .pixel-drift {
     animation: none;
   }
   .animate-hero-wash {
     animation: none;
     opacity: 1;
+  }
+  /* Hold the pixel field at a calm mid-brightness instead of pulsing */
+  .pixel-field-a,
+  .pixel-field-b,
+  .pixel-field-c {
+    animation: none;
+    opacity: 0.35;
   }
 }

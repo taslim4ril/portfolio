@@ -1,97 +1,54 @@
-import { projects, type Project } from "@/lib/data";
+import { projects } from "@/lib/data";
 import Reveal from "./Reveal";
+import WorkCard from "./WorkCard";
 
-function WorkCard({
-  p,
-  index,
-  ratio,
-}: {
-  p: Project;
-  index: number;
-  ratio: string;
-}) {
-  return (
-    <a href="#contact" className="group block">
-      <div className={`relative overflow-hidden rounded-[20px] bg-[#e0e0dd] ${ratio}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={p.image}
-          alt={`${p.title} — ${p.category}`}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-        <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/85 text-[#141414] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          ↗
-        </span>
-      </div>
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <div className="flex items-baseline gap-3">
-          <span className="text-sm text-[#9a9a97]">
-            {String(index).padStart(2, "0")}.
-          </span>
-          <span className="text-base font-medium text-[#141414] md:text-lg">
-            {p.title}
-          </span>
-        </div>
-        <span className="text-sm text-[#9a9a97]">{p.year}</span>
-      </div>
-    </a>
-  );
-}
+// The homepage teases the first few; the rest live on /work.
+const FEATURED_COUNT = 3;
 
 export default function Projects() {
-  const big = projects.slice(0, 2);
-  const small = projects.slice(2, 5);
+  const featured = projects.slice(0, FEATURED_COUNT);
 
   return (
-    <section id="work" className="bg-[#ededeb] px-6 py-24 text-[#141414] md:py-32">
-      <div className="mx-auto max-w-[1440px]">
-        {/* Header */}
-        <div className="relative mb-14 md:mb-20">
-          <div className="mb-8 flex items-center gap-2 text-sm font-medium text-[#141414] md:absolute md:left-0 md:top-2 md:mb-0">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#141414]" />
-            Project showcase
-          </div>
-
-          <h2
-            className="text-center font-bold leading-[0.9] tracking-tight text-[#141414]"
-            style={{ fontSize: "clamp(2.75rem, 8.5vw, 7.5rem)" }}
-          >
-            Selected Work.
-            <sup className="ml-1 align-super text-[0.2em] font-medium text-[#6a6a67]">
+    // Generous side gutters (~5x the previous), still wider than the page grid.
+    <section id="work" className="px-6 py-24 md:px-[100px] md:py-32">
+      {/* Heading aligned with the card edges */}
+      <Reveal>
+        <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <h2 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
+            <span className="font-normal text-white/90">Selected</span>{" "}
+            <span className="font-bold">Work</span>
+            <sup className="ml-2 align-super text-base font-normal text-muted">
               ({projects.length})
             </sup>
           </h2>
-
-          <div className="mt-8 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-            <p className="max-w-sm text-sm leading-relaxed text-[#5a5a57] md:ml-[24%]">
-              I&apos;ve helped teams across industries turn complex problems into
-              clear, human-centered products. Here are some recent projects.
-            </p>
-            <span className="text-sm text-[#9a9a97]">
-              01—0{projects.length}&reg;
-            </span>
-          </div>
+          <p className="max-w-sm text-sm leading-relaxed text-muted">
+            A mix of client assignments and personal explorations across SaaS,
+            fintech, agritech, and mobile.
+          </p>
         </div>
+      </Reveal>
 
-        {/* Row 1 — two large cards */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {big.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.08}>
-              <WorkCard p={p} index={i + 1} ratio="aspect-[16/10]" />
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Row 2 — three portrait cards */}
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {small.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.08}>
-              <WorkCard p={p} index={i + 3} ratio="aspect-[4/5]" />
-            </Reveal>
-          ))}
-        </div>
+      {/* Cards scroll through in normal flow — no pinning or stacking. */}
+      <div className="flex flex-col gap-[4.5px]">
+        {featured.map((p) => (
+          <WorkCard key={p.slug} p={p} />
+        ))}
       </div>
+
+      {/* See all */}
+      <Reveal delay={0.1}>
+        <div className="mt-16 flex justify-center">
+          <a
+            href="/work"
+            className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.03] px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-colors duration-300 hover:border-white/40 hover:bg-white/10"
+          >
+            See all projects
+            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/30 text-[10px] transition-transform duration-300 group-hover:translate-x-0.5">
+              →
+            </span>
+          </a>
+        </div>
+      </Reveal>
     </section>
   );
 }

@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { site, projects } from "@/lib/data";
+import Logo from "./Logo";
 
 const links = [
   { label: "Work", href: "#work", count: projects.length },
@@ -13,6 +15,12 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // On the home page keep bare hashes so Lenis can smooth-scroll them.
+  // Elsewhere prefix with "/" so they navigate home and then jump.
+  const to = (hash: string) => (isHome ? hash : `/${hash}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,13 +31,15 @@ export default function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="relative mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5">
+      {/* Side gutters match the Selected Work cards so everything lines up. */}
+      <div className="relative flex items-center justify-between px-6 py-5 md:px-[100px]">
         {/* Logo */}
-        <a href="#top" className="flex items-start font-display text-xl font-semibold text-white">
-          Taslim
-          <span className="ml-0.5 mt-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-white/70 text-[8px]">
-            R
-          </span>
+        <a
+          href={to("#top")}
+          aria-label="Taslim Abdulkadir — home"
+          className="transition-transform duration-300 hover:scale-105"
+        >
+          <Logo className="h-10 w-10 md:h-11 md:w-11" />
         </a>
 
         {/* Centered pill nav */}
@@ -41,7 +51,7 @@ export default function Nav() {
           {links.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={to(l.href)}
               className="group flex items-center gap-1 rounded-full px-4 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               {l.label}
@@ -80,7 +90,7 @@ export default function Nav() {
             {links.map((l) => (
               <a
                 key={l.href}
-                href={l.href}
+                href={to(l.href)}
                 onClick={() => setOpen(false)}
                 className="text-base text-white/80 transition-colors hover:text-white"
               >

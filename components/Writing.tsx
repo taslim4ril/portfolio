@@ -3,14 +3,18 @@ import Reveal from "./Reveal";
 
 export default function Writing() {
   return (
-    <section id="writing" className="border-t border-border px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl">
+    // Side gutters match the Selected Work cards so everything lines up.
+    <section
+      id="writing"
+      className="border-t border-border px-6 py-24 md:px-[100px] md:py-32"
+    >
+      <div>
         <Reveal>
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-accent">
             Writing
           </p>
-          <h2 className="display text-4xl font-semibold md:text-5xl">
-            Thoughts on design & craft
+          <h2 className="heading text-4xl font-bold md:text-5xl">
+            Thoughts on design &amp; craft
           </h2>
         </Reveal>
 

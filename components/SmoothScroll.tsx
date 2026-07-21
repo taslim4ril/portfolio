@@ -15,11 +15,13 @@ export default function SmoothScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 1.4,
       // easeOutExpo — quick start, long soft settle
       easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      // Less distance per wheel tick + a longer settle = slower, calmer scroll.
+      wheelMultiplier: 0.7,
+      touchMultiplier: 1.2,
     });
 
     let rafId = 0;

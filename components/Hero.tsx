@@ -1,118 +1,165 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { site } from "@/lib/data";
+import { site, services } from "@/lib/data";
 import Marquee from "./Marquee";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+// Small marks for the services list on the right rail.
+const serviceIcons = [
+  <svg key="a" viewBox="0 0 24 24" fill="none" className="h-full w-full">
+    <circle cx="12" cy="12" r="3.2" fill="currentColor" />
+    <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+      <path d="M5 5l2.8 2.8M16.2 16.2 19 19M19 5l-2.8 2.8M7.8 16.2 5 19" />
+    </g>
+  </svg>,
+  <svg key="b" viewBox="0 0 24 24" fill="none" className="h-full w-full">
+    <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+      <path d="M12 3v18M3 12h18" />
+      <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" opacity="0.5" />
+    </g>
+  </svg>,
+  <svg key="c" viewBox="0 0 24 24" fill="none" className="h-full w-full">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.4" />
+    <path
+      d="M12 3a9 9 0 0 1 0 18 5 5 0 0 1 0-10 4 4 0 0 0 0-8Z"
+      fill="currentColor"
+    />
+  </svg>,
+];
+
 export default function Hero() {
+  const [first, ...restName] = site.name.split(" ");
+
   return (
-    // Pinned: the Selected Work section scrolls up and over this.
     <section
       id="top"
-      className="sticky top-0 z-0 h-dvh overflow-hidden bg-[#0d0d0e]"
+      className="relative flex h-dvh flex-col overflow-hidden bg-black"
     >
-      {/* Inner wrapper carries the scroll-driven recede (keeps transforms off
-          the sticky element itself, which would break pinning). */}
-      <div className="hero-recede relative flex h-full flex-col">
-      {/* ===== Background image ===== */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%]">
+      {/* ===== Portrait ===== */}
+      <div aria-hidden className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* The photo's dark surround is dissolved rather than covered:
+            `screen` blending makes its near-black pixels read as the page's
+            own black (no lifted-rectangle edge), and the radial mask fades
+            the frame's boundary out entirely. Note there's deliberately no
+            brightness filter — lifting the blacks is exactly what made the
+            photo's rectangle visible against the page. */}
         <img
-          src="/images/hero-bg.jpg"
+          src="/images/portrait-hero.jpg"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-bottom"
+          className="absolute left-1/2 top-0 h-full -translate-x-1/2 object-cover object-top contrast-[1.12] mix-blend-screen"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 62% 72% at 50% 40%, #000 52%, transparent 86%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 62% 72% at 50% 40%, #000 52%, transparent 86%)",
+          }}
         />
-        {/* Fade the top of the image into the page */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0e] via-[#0d0d0e]/40 to-transparent" />
+        {/* Bottom scrim only — kept for text legibility. Taller on small
+            screens, where the text block starts higher over the face. */}
+        <div className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-black via-black/90 to-transparent md:h-[45%] md:via-black/85" />
       </div>
 
-      {/* ===== Foreground content ===== */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6">
-        <div className="grid gap-10 pt-36 md:grid-cols-2 md:pt-44 lg:grid-cols-[460px_1fr]">
-          {/* Portrait card */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.15 }}
-          >
-            <div
-              data-cursor
-              className="group relative aspect-[2/1] w-full max-w-[460px] overflow-hidden rounded-2xl border border-white/10 bg-[#141416]"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/portrait.jpg"
-                alt={`${site.name} — ${site.role}`}
-                className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-              />
-              {/* Slight scrim so the overlay labels stay legible */}
-              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/50 to-transparent" />
-              {/* Chrome overlay to echo the reference style */}
-              <span className="absolute left-3 top-3 text-[10px] font-medium uppercase tracking-widest text-white/60">
-                {site.location}
-              </span>
-              <span className="absolute right-3 top-3 text-right text-[9px] leading-tight text-white/50">
-                09:00 WAT
-                <br />
-                Available
-              </span>
-            </div>
-          </motion.div>
+      {/* ===== Left rail — keep scrolling ===== */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease, delay: 0.7 }}
+        className="absolute left-5 top-[32%] z-20 hidden items-center gap-4 lg:flex lg:flex-col"
+      >
+        <span className="text-[10px] uppercase tracking-[0.35em] text-white/45 [writing-mode:vertical-rl]">
+          Keep scrolling
+        </span>
+        <motion.span
+          aria-hidden
+          className="text-white/45"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          ↓
+        </motion.span>
+      </motion.div>
 
-          {/* About text */}
+      {/* ===== Content ===== */}
+      <div className="relative z-10 flex w-full flex-1 flex-col justify-end px-6 pb-10 md:px-[100px]">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          {/* --- Name block --- */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.3 }}
-            className="flex items-start gap-4 md:justify-end"
+            transition={{ duration: 0.9, ease, delay: 0.15 }}
+            /* flex-1 gives the block whatever the rail leaves over, and the
+               container query lets the name size itself to that column (cqi
+               units) instead of the viewport — critical because glyphs that
+               overflow a bg-clip-text box get no background and turn
+               invisible. */
+            className="min-w-0 flex-1 [container-type:inline-size]"
           >
-            <span className="mt-3 shrink-0 text-sm text-white/45">(About me)</span>
-            <h1
-              className="display max-w-[46rem] font-semibold leading-[1.08] text-white"
-              style={{ fontSize: "clamp(2.1rem, 4.6vw, 3.7rem)" }}
-            >
-              I&apos;m {site.name},{" "}
-              <span className="text-white/60">
-                a {site.role} based in {site.location}.
+            <p className="text-xs tracking-[0.2em] text-white/55 md:text-sm">
+              Discover My Creative Journey
+            </p>
+            <h1 className="heading mt-4 font-bold uppercase leading-[0.86] tracking-[-0.02em]">
+              <span
+                className="block text-[#eceades]"
+                style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
+              >
+                {first}
+              </span>
+              <span
+                className="block bg-gradient-to-r from-accent via-accent to-[#7d9e24] bg-clip-text text-transparent"
+                style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
+              >
+                {restName.join(" ")}
               </span>
             </h1>
           </motion.div>
-        </div>
 
-        {/* Bottom meta row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease, delay: 0.5 }}
-          className="mt-auto flex items-center justify-between gap-4 pb-6 pt-16"
-        >
-          <span className="text-xs tracking-widest text-white/50">/ 2026 /</span>
-          <span className="hidden items-center gap-2 text-xs tracking-widest text-white/50 sm:flex">
-            Scroll down
-            <motion.span
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              ↓
-            </motion.span>
-          </span>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-white transition-colors hover:bg-white/10"
+          {/* --- Right rail: services, CTA, bio --- */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.35 }}
+            className="w-full shrink-0 lg:w-[26rem]"
           >
-            Start a project
-            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/30 text-[10px] transition-transform group-hover:translate-x-0.5">
-              ↗
-            </span>
-          </a>
-        </motion.div>
+            {/* Rule above the list mirrors the one under it, so the services
+                sit in a bounded band. */}
+            <ul className="space-y-5 border-t border-white/15 pt-6">
+              {services.slice(0, 3).map((s, i) => (
+                <li key={s.title} className="flex items-center gap-4">
+                  <span className="h-6 w-6 shrink-0 text-white/70">
+                    {serviceIcons[i % serviceIcons.length]}
+                  </span>
+                  <span className="text-lg text-white/90 md:text-xl">
+                    {s.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="#contact"
+              className="group mt-8 flex items-center justify-between border-t border-white/15 pt-6 text-base font-medium uppercase tracking-[0.15em] text-accent transition-colors hover:text-white md:text-lg"
+            >
+              Talk to me
+              <span className="text-2xl transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
+                ↘
+              </span>
+            </a>
+
+            <p className="mt-32 max-w-sm text-base leading-relaxed text-white/55">
+              {site.role} with 5+ years of experience across SaaS, fintech, and
+              agritech — turning complex problems into clear, human-centered
+              digital experiences.
+            </p>
+          </motion.div>
+        </div>
       </div>
 
-        {/* ===== Scrolling text (your existing marquee) ===== */}
-        <Marquee />
-      </div>
+      {/* ===== Scrolling text ===== */}
+      <Marquee />
     </section>
   );
 }

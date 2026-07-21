@@ -17,7 +17,7 @@ export default function Marquee() {
       <div className="animate-marquee flex shrink-0 items-center gap-8 whitespace-nowrap pr-8">
         {items.map((w, i) => (
           <span key={i} className="flex items-center gap-8">
-            <span className="display text-2xl font-medium text-foreground/80 md:text-3xl">
+            <span className="heading text-2xl font-medium text-foreground/80 md:text-3xl">
               {w}
             </span>
             <span className="text-accent">✦</span>

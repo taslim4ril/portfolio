@@ -1,6 +1,7 @@
 import Intro from "@/components/Intro";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import WhatIDo from "@/components/WhatIDo";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Writing from "@/components/Writing";
@@ -14,9 +15,13 @@ export default function Home() {
       <Nav />
       <main className="relative">
         <Hero />
-        {/* Scrolls up and over the pinned hero. Solid background so the hero
-            never shows through, and a higher stacking order than the hero. */}
-        <div className="relative z-10 bg-background">
+        <WhatIDo />
+        {/* Scrolls up and over the pinned What-I-Do section. Solid background
+            so it never shows through, and a higher stacking order. The -200vh
+            pull times its arrival to the exact moment What-I-Do reaches full
+            zoom, so covering + zoom-out happen together — no static hold once
+            the section is in full view, it just keeps moving. */}
+        <div className="relative z-10 bg-background lg:-mt-[200vh]">
           <Projects />
           <About />
           <Writing />

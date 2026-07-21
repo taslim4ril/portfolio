@@ -1,55 +1,98 @@
-import { site, socials } from "@/lib/data";
-import Reveal from "./Reveal";
+import { site } from "@/lib/data";
+
+// First half stays white, second half gets the lime gradient (same treatment
+// as "Abdulkadir" in the hero).
+const WHITE = "Got something exciting in mind?";
+const GREEN = "Let's design it together!";
+
+// Fades the pixel field out toward the edges so it reads as a soft pool of
+// light rather than a hard-edged tile.
+const FIELD_MASK =
+  "radial-gradient(closest-side at 50% 45%, black 15%, rgba(0,0,0,0.55) 45%, transparent 78%)";
 
 export default function Contact() {
+  const whiteWords = WHITE.split(" ");
+  const greenWords = GREEN.split(" ");
+  const total = whiteWords.length + greenWords.length;
+
+  // Per-word reveal window, staggered across the block's pass through view.
+  const range = (i: number) => {
+    const start = 10 + (i / total) * 55;
+    return `cover ${start.toFixed(1)}% cover ${(start + 16).toFixed(1)}%`;
+  };
+
   return (
-    <section id="contact" className="border-t border-border px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <p className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            Contact
-          </p>
-          <h2 className="display max-w-4xl text-4xl font-semibold leading-[1.05] md:text-6xl lg:text-7xl">
-            Have a project in mind? Let&apos;s build something{" "}
-            <span className="text-accent">people love.</span>
-          </h2>
-        </Reveal>
+    <section
+      id="contact"
+      className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 py-32"
+    >
+      {/* ===== Pulsing pixel field ===== */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {/* Drifting wrapper makes different regions brighten over time */}
+        <div
+          className="pixel-drift absolute inset-0"
+          style={{ maskImage: FIELD_MASK, WebkitMaskImage: FIELD_MASK }}
+        >
+          <div className="pixel-field pixel-field-a absolute inset-0" />
+          <div className="pixel-field pixel-field-b absolute inset-0" />
+          <div className="pixel-field pixel-field-c absolute inset-0" />
+        </div>
 
-        <Reveal delay={0.1}>
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <a
-              href={`mailto:${site.email}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
-            >
-              {site.email}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 font-medium transition-colors hover:bg-surface"
-            >
-              WhatsApp
-            </a>
-          </div>
-        </Reveal>
+        {/* Soft ambient glow sitting under the type */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(46% 42% at 50% 45%, rgba(255,255,255,0.06), transparent 72%)",
+          }}
+        />
+      </div>
 
-        <Reveal delay={0.15}>
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-8">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-        </Reveal>
+      {/* ===== Content ===== */}
+      <div className="relative mx-auto w-full max-w-5xl text-center">
+        <p className="mb-10 text-xs uppercase tracking-[0.35em] text-muted">
+          Contact
+        </p>
+
+        <p
+          className="word-track heading mx-auto max-w-4xl font-bold leading-[1.15] tracking-[-0.02em] text-white"
+          style={{ fontSize: "clamp(2.1rem, 5.4vw, 4.4rem)" }}
+        >
+          {whiteWords.map((word, i) => (
+            <span
+              key={`w-${i}`}
+              className="word-reveal"
+              style={{ animationRange: range(i) }}
+            >
+              {word}{" "}
+            </span>
+          ))}
+          {/* Lime-gradient half — same fill as the hero name. The gradient is
+              applied per word (not on a wrapper): the reveal opacity and the
+              bg-clip-text must sit on the same element, or the opacity group
+              swallows the clipped fill and nothing paints. */}
+          {greenWords.map((word, i) => (
+            <span
+              key={`g-${i}`}
+              className="word-reveal bg-gradient-to-r from-accent via-accent to-[#7d9e24] bg-clip-text text-transparent"
+              style={{ animationRange: range(whiteWords.length + i) }}
+            >
+              {word}{" "}
+            </span>
+          ))}
+        </p>
+
+        <div className="mt-14 flex justify-center">
+          <a
+            href={`mailto:${site.email}`}
+            className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.03] px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-colors duration-300 hover:border-white/40 hover:bg-white/10"
+          >
+            Start the project
+            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/30 text-[10px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              ↗
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ export const site = {
   whatsapp: "https://wa.me/2340000000000", // TODO: replace 0000000000 with your number
   headline: "Bridging the gap between technology and human interaction",
   subhead:
-    "I'm a product designer with 4 years of experience turning complex problems into clear, human-centered digital experiences.",
+    "I'm a product designer with 5+ years of experience turning complex problems into clear, human-centered digital experiences.",
   philosophy:
     "Most products don't fail because of bad ideas — they fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
 } as const;
@@ -22,7 +22,7 @@ export const socials = [
 ] as const;
 
 export const stats = [
-  { value: "4+", label: "Years designing" },
+  { value: "5+", label: "Years designing" },
   { value: "20+", label: "Products shipped" },
   { value: "5", label: "Featured case studies" },
 ] as const;
@@ -43,6 +43,11 @@ export const services = [
     description:
       "Turning designs into working products with Framer, Webflow, and friends.",
   },
+  {
+    title: "Design Systems",
+    description:
+      "Reusable components and tokens that keep teams shipping fast and consistent.",
+  },
 ];
 
 export type Project = {
@@ -53,6 +58,10 @@ export type Project = {
   year: string;
   description: string;
   image: string;
+  /** One-line framing shown above the title on the work card. */
+  subtitle: string;
+  /** Pills shown at the top-left of the work card. */
+  tags: string[];
   accent?: boolean;
 };
 
@@ -66,6 +75,8 @@ export const projects: Project[] = [
     description:
       "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
     image: "/images/work/flowz.webp",
+    subtitle: "Process automation platform for busy teams",
+    tags: ["Product Design", "SaaS"],
     accent: true,
   },
   {
@@ -77,6 +88,8 @@ export const projects: Project[] = [
     description:
       "A personal project exploring how a friendly companion app can make everyday planning feel lighter and more human.",
     image: "/images/work/gopal.webp",
+    subtitle: "Companion app for everyday planning",
+    tags: ["Mobile", "UI Design"],
   },
   {
     slug: "cropgate",
@@ -87,6 +100,8 @@ export const projects: Project[] = [
     description:
       "Connecting farmers and buyers through a marketplace that keeps produce, pricing, and logistics transparent end to end.",
     image: "/images/work/cropgate.webp",
+    subtitle: "Marketplace connecting farmers and buyers",
+    tags: ["Product Design", "Web"],
   },
   {
     slug: "plantinerary",
@@ -97,6 +112,8 @@ export const projects: Project[] = [
     description:
       "A plant-care planner that schedules watering, light, and feeding so first-time plant parents never lose a leaf.",
     image: "/images/work/plantinerary.jpg",
+    subtitle: "Plant-care planner for first-time plant parents",
+    tags: ["Mobile", "UX Research"],
   },
   {
     slug: "valco",
@@ -107,6 +124,8 @@ export const projects: Project[] = [
     description:
       "Making trust-fund investing approachable with clear onboarding, transparent returns, and confidence-building visuals.",
     image: "/images/work/valco.jpg",
+    subtitle: "Trust-fund investing made approachable",
+    tags: ["Fintech", "UI Design"],
   },
 ];
 
