@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const COUNT = 55;
+const COUNT = 150;
 /** Furthest a speck shifts when the cursor travels from centre to edge. */
 const PARALLAX = 26;
 
