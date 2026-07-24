@@ -186,7 +186,7 @@ export default function WhatIDo() {
               <span className="font-bold">I Do</span>
             </h2>
             <p className="max-w-sm text-sm leading-relaxed text-muted md:text-right">
-              I craft digital experiences from idea to launch — blending
+              I craft digital experiences from idea to launch, blending
               research, design, and no-code engineering to build products that
               perform.
             </p>

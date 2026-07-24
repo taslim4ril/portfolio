@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { site, services } from "@/lib/data";
 import Marquee from "./Marquee";
 
@@ -32,9 +33,26 @@ const serviceIcons = [
 
 export default function Hero() {
   const [first, ...restName] = site.name.split(" ");
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Drives the portrait as the hero scrolls away: 0 while the hero is parked
+  // at the top, 1 once it has fully scrolled past. Reverses on the way back up.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.55]);
+  const portraitOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const portraitFilter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["blur(0px)", "blur(22px)"],
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative flex h-dvh flex-col overflow-hidden bg-black"
     >
@@ -47,11 +65,20 @@ export default function Hero() {
             the frame's boundary out entirely. Note there's deliberately no
             brightness filter — lifting the blacks is exactly what made the
             photo's rectangle visible against the page. */}
-        <img
+        {/* Scroll-linked: pushes into the face while blurring and fading out,
+            so the portrait dissolves instead of sliding away. Anchored at the
+            mask's centre (50% 40%) so the zoom stays on the face. */}
+        <motion.img
           src="/images/portrait-hero.jpg"
           alt=""
-          className="absolute left-1/2 top-0 h-full -translate-x-1/2 object-cover object-top contrast-[1.12] mix-blend-screen"
+          className="absolute left-1/2 top-0 h-full object-cover object-top contrast-[1.12] mix-blend-screen"
           style={{
+            x: "-50%",
+            scale: portraitScale,
+            opacity: portraitOpacity,
+            filter: portraitFilter,
+            transformOrigin: "50% 40%",
+            willChange: "transform, filter, opacity",
             maskImage:
               "radial-gradient(ellipse 62% 72% at 50% 40%, #000 52%, transparent 86%)",
             WebkitMaskImage:
@@ -144,14 +171,28 @@ export default function Hero() {
               className="group mt-8 flex items-center justify-between border-t border-white/15 pt-6 text-base font-medium uppercase tracking-[0.15em] text-accent transition-colors hover:text-white md:text-lg"
             >
               Talk to me
-              <span className="text-2xl transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
-                ↘
-              </span>
+              {/* Heavy square-capped arrow: shaft on the diagonal, head drawn
+                  as the corner it lands in. Sized to sit level with the cap
+                  height of the label rather than as an inline glyph. */}
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-11 w-11 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1 md:h-12 md:w-12"
+              >
+                <path
+                  d="M6.5 6.5 17.5 17.5M17.5 9v8.5H9"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  strokeLinecap="square"
+                  strokeLinejoin="miter"
+                />
+              </svg>
             </a>
 
             <p className="mt-32 max-w-sm text-base leading-relaxed text-white/55">
               {site.role} with 5+ years of experience across SaaS, fintech, and
-              agritech — turning complex problems into clear, human-centered
+              agritech, turning complex problems into clear, human-centered
               digital experiences.
             </p>
           </motion.div>

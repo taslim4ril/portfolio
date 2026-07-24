@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://taslim-abdul.framer.website"),
-  title: `${site.name} — ${site.role}`,
+  title: `${site.name} | ${site.role}`,
   description: site.subhead,
   keywords: [
     "UI/UX Designer",
