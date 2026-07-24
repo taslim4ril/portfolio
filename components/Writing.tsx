@@ -1,43 +1,36 @@
 import { posts } from "@/lib/data";
 import Reveal from "./Reveal";
+import ArticleRow from "./ArticleRow";
 
 export default function Writing() {
   return (
     // Side gutters match the Selected Work cards so everything lines up.
     <section
-      id="writing"
+      id="articles"
       className="border-t border-border px-6 py-24 md:px-[100px] md:py-32"
     >
       <div>
         <Reveal>
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            Writing
-          </p>
-          <h2 className="heading text-4xl font-bold md:text-5xl">
-            Thoughts on design &amp; craft
-          </h2>
+          {/* Same two-tone heading + description row as What I Do and
+              Selected Work, so this section reads as part of one system. */}
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
+              <span className="font-normal text-white/90">Latest</span>{" "}
+              <span className="font-bold">Articles</span>
+              <sup className="ml-2 align-super text-base font-normal text-muted">
+                ({posts.length})
+              </sup>
+            </h2>
+            <p className="max-w-sm text-sm leading-relaxed text-muted">
+              Thoughts on design, craft, and building products that hold up.
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-12 divide-y divide-border border-y border-border">
           {posts.map((post, i) => (
             <Reveal key={post.title} delay={i * 0.08}>
-              <a
-                href={post.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col gap-3 py-8 transition-colors hover:bg-surface/40 md:flex-row md:items-center md:justify-between md:gap-10 md:px-4"
-              >
-                <div className="max-w-2xl">
-                  <div className="mb-2 text-sm text-muted">{post.date}</div>
-                  <h3 className="display text-2xl font-medium transition-colors group-hover:text-accent md:text-3xl">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 text-muted">{post.excerpt}</p>
-                </div>
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-lg transition-all group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink">
-                  →
-                </span>
-              </a>
+              <ArticleRow post={post} index={i} />
             </Reveal>
           ))}
         </div>

@@ -296,14 +296,196 @@ export const projects: Project[] = [
   {
     slug: "gopal",
     title: "GoPal",
-    category: "Companion App",
+    category: "Digital Banking",
     tag: "Mobile · Personal Project",
     year: "2024",
     description:
-      "A personal project exploring how a friendly companion app can make everyday planning feel lighter and more human.",
+      "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
     image: "/images/work/gopal.webp",
-    subtitle: "Companion app for everyday planning",
-    tags: ["Mobile", "UI Design"],
+    subtitle: "Simplifying banking and encouraging smarter saving",
+    tags: ["Mobile", "Fintech"],
+    caseStudy: {
+      title: "Designing Go Pal",
+      tagline: "Simplifying banking and encouraging smarter saving.",
+      overview:
+        "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
+      meta: [
+        { label: "Role", value: "Product & UI/UX Designer" },
+        { label: "Timeline", value: "1 month" },
+        { label: "Platform", value: "Mobile · Banking App" },
+        { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
+      ],
+      blocks: [
+        {
+          kind: "prose",
+          heading: "Overview",
+          body: [
+            "Go Pal is an online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
+            "With the rise of digital-first banking, users are shifting toward platforms that are fast, intuitive, and entirely mobile. Go Pal responds to this shift by introducing a seamless money-saving feature that fits naturally into users' financial routines — without adding complexity.",
+            "The goal was simple: make saving money feel as easy as spending it.",
+          ],
+        },
+        { kind: "figure", caption: "Go Pal — home & savings overview" },
+        {
+          kind: "list",
+          heading: "The Opportunity",
+          intro: [
+            "Digital banking has evolved — but saving money still feels like a separate, effort-heavy task.",
+            "Through early exploration, a few gaps became clear:",
+          ],
+          items: [
+            "Users could check balances, but lacked real-time clarity and control",
+            "Saving required manual effort or external tools",
+            "Everyday banking actions — sending money, reporting issues — weren't always frictionless",
+          ],
+          outro: [
+            "This raised a key question: how might we make saving a natural part of everyday banking, instead of an extra step?",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "My Role & Scope",
+          intro: [
+            "I led this project as the sole product designer, responsible for:",
+          ],
+          items: [
+            "End-to-end UX design",
+            "Research and synthesis",
+            "Interaction and visual design",
+            "Prototyping and iteration",
+          ],
+          outro: [
+            "Timeline: 1 month, across 3 iterative design cycles based on continuous user feedback.",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "Understanding Users",
+          intro: [
+            "To ground the product in real needs, I conducted interviews with 12 participants across different age groups and financial behaviors.",
+          ],
+          columns: 3,
+          items: [
+            {
+              title: "Who they are",
+              desc: "70% aged 18–45. 30% aged 45+.",
+            },
+            {
+              title: "What they need",
+              desc: "Easier ways to save without juggling multiple apps, and virtual cards for safer, smoother online payments.",
+            },
+            {
+              title: "What they told me",
+              desc: '"Make payments faster" (QR code scanning) · "Everything in one place" (bill payments) · "Help me track my money" (clearer transaction history).',
+            },
+          ],
+          outro: [
+            "Users don't want more features — they want less friction and more control.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "Defining the Experience",
+          intro: ["Based on research, the core experience needed to support:"],
+          items: [
+            "Instant balance visibility for better financial awareness",
+            "Real-time notifications for key account activity",
+            "Fast, seamless transfers between users",
+            "Simple card management, including reporting lost or stolen cards",
+          ],
+          outro: [
+            "But more importantly: the product needed to nudge users toward saving — without forcing behavior change.",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Design Approach",
+          body: [
+            "I focused on embedding saving behaviors directly into everyday interactions.",
+            "Instead of treating saving as a separate feature, I designed it as a natural extension of spending and account management. This led to three key design directions.",
+          ],
+        },
+        {
+          kind: "features",
+          items: [
+            {
+              title: "Making Saving Effortless",
+              desc: "Saving shouldn't require planning — it should happen in the background. I designed one-tap transfers from the main account to savings, flexible saving plans for different goals, and an autosave system (daily, weekly, monthly).",
+              result:
+                "Users build habits passively, without needing constant decision-making.",
+            },
+            {
+              title: "Enabling Seamless Payments",
+              desc: "Online transactions should feel fast, secure, and reliable. I designed a virtual debit card system for online payments, simplified access and management of cards, and clear transaction visibility.",
+              result: "Users gain confidence and speed when making digital payments.",
+            },
+            {
+              title: "Personalizing the Experience",
+              desc: "Different users face different financial challenges. I designed flexible flows that adapt to saving behaviors, simplified navigation for core tasks, and thoughtful handling of edge cases like missed autosave or low balance.",
+              result: "A more inclusive and adaptable banking experience.",
+            },
+          ],
+        },
+        {
+          kind: "list",
+          heading: "Iteration & Refinement",
+          intro: [
+            "Over three iterative cycles, I continuously tested and refined the experience. Each round focused on:",
+          ],
+          items: [
+            "Reducing friction in key flows",
+            "Improving clarity in financial information",
+            "Strengthening user trust and confidence",
+          ],
+          outro: [
+            "This iterative approach ensured the final product was not just functional — but intuitive and user-centered.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "Key Learnings",
+          intro: [
+            "This project pushed me to think beyond features and focus on behavior.",
+          ],
+          items: [
+            "Saving is behavioral, not just functional",
+            "Small UX decisions can significantly impact financial habits",
+            "Designing for edge cases is critical in financial products",
+            "Iteration is essential to uncover what users actually need",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "Outcome",
+          intro: [
+            "Go Pal transforms saving from a conscious effort into a seamless habit. By integrating saving into everyday banking actions, the product:",
+          ],
+          items: [
+            "Reduces friction in financial management",
+            "Encourages consistent saving behavior",
+            "Delivers a more intuitive and engaging banking experience",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "Final Thoughts",
+          body: [
+            "Designing Go Pal reinforced the importance of combining usability with behavioral design.",
+            "By staying close to user needs, embracing feedback, and iterating quickly, I was able to create a product that feels simple on the surface — but is deeply intentional underneath.",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Final Designs",
+          body: [
+            "A closer look at the core screens — home and savings overview, the savings flow, and the virtual card experience.",
+          ],
+        },
+        { kind: "figure", caption: "Home / Savings Overview" },
+        { kind: "figure", caption: "Savings Flow" },
+        { kind: "figure", caption: "Virtual Card Experience" },
+      ],
+    },
   },
   {
     slug: "cropgate",
@@ -348,6 +530,7 @@ export const posts = [
     title: "AI as a designer's tool, not a replacement",
     date: "July 2024",
     href: "https://medium.com/",
+    image: "/images/articles/ai-tool.jpg",
     excerpt:
       "How I fold AI into my process to move faster without losing the craft and judgment that make design matter.",
   },
@@ -355,6 +538,7 @@ export const posts = [
     title: "UI/UX design guidance for Nigerian youth",
     date: "March 2022",
     href: "https://medium.com/",
+    image: "/images/articles/uiux-youth.jpg",
     excerpt:
       "A practical starting point for young designers in Nigeria breaking into product design from scratch.",
   },

@@ -67,19 +67,9 @@ export default function Contact() {
               {word}{" "}
             </span>
           ))}
-          {/* Lime-gradient half — same fill as the hero name. The gradient is
-              applied per word (not on a wrapper): the reveal opacity and the
-              bg-clip-text must sit on the same element, or the opacity group
-              swallows the clipped fill and nothing paints. */}
-          {greenWords.map((word, i) => (
-            <span
-              key={`g-${i}`}
-              className="word-reveal bg-gradient-to-r from-accent via-accent to-[#7d9e24] bg-clip-text text-transparent"
-              style={{ animationRange: range(whiteWords.length + i) }}
-            >
-              {word}{" "}
-            </span>
-          ))}
+          {/* Solid-accent half — plain static color, no scroll-reveal or any
+              other effect, unlike the white half above it. */}
+          <span className="text-accent">{GREEN}</span>
         </p>
 
         <div className="mt-14 flex justify-center">
