@@ -1,4 +1,4 @@
-# Taslim Abdulkadir — Portfolio
+# Taslim Abdulkadir - Portfolio
 
 A bold, modern redesign of my UI/UX design portfolio. Built with Next.js 16, Tailwind CSS v4, and Framer Motion.
 
@@ -20,14 +20,14 @@ npm start        # serve the production build
 
 ## Editing content
 
-All copy lives in one place — **`lib/data.ts`**. Update your name, headline,
+All copy lives in one place - **`lib/data.ts`**. Update your name, headline,
 projects, blog posts, socials, and contact details there and the whole site
 updates. A few TODOs to fill in:
 
-- `site.whatsapp` — replace the placeholder number with your real WhatsApp number.
-- `socials[]` — swap the placeholder URLs for your real profile links.
-- `posts[].href` — point to your actual Medium articles.
-- Project descriptions in `projects[]` — refine the case-study blurbs (some are
+- `site.whatsapp` - replace the placeholder number with your real WhatsApp number.
+- `socials[]` - swap the placeholder URLs for your real profile links.
+- `posts[].href` - point to your actual Medium articles.
+- Project descriptions in `projects[]` - refine the case-study blurbs (some are
   drafted placeholders based on the current site).
 
 ## Design tokens
@@ -61,7 +61,7 @@ lib/
 The site is fully static. Easiest path is [Vercel](https://vercel.com):
 
 1. Push this folder to a GitHub repo.
-2. Import it on Vercel — it auto-detects Next.js. No config needed.
+2. Import it on Vercel - it auto-detects Next.js. No config needed.
 3. (Optional) add your custom domain.
 
 Other hosts that support Next.js (Netlify, Cloudflare Pages) work too.

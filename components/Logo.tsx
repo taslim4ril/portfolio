@@ -1,4 +1,4 @@
-// "TA" monogram — black mark in a white circular badge, traced as SVG from
+// "TA" monogram - black mark in a white circular badge, traced as SVG from
 // the supplied logo so it stays crisp at any size and needs no image request.
 export default function Logo({
   className = "h-10 w-10",

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!project) return {};
   const title = project.caseStudy?.title ?? project.title;
   return {
-    title: `${title} — ${site.name}`,
+    title: `${title} - ${site.name}`,
     description: project.caseStudy?.tagline ?? project.description,
   };
 }
@@ -38,7 +38,7 @@ export default async function CaseStudyPage({ params }: Params) {
         {project.caseStudy ? (
           <CaseStudy project={project} next={next} />
         ) : (
-          /* Case study not written yet — graceful placeholder so links work. */
+          /* Case study not written yet - graceful placeholder so links work. */
           <section className="mx-auto flex min-h-dvh max-w-3xl flex-col justify-center px-6 py-32 text-center md:px-[100px]">
             <span className="text-sm uppercase tracking-[0.25em] text-muted">
               {project.category}

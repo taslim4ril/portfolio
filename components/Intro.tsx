@@ -10,7 +10,7 @@ const NAME = "Taslim";
 const SPLIT_AT = 1350; // when the panels start splitting apart
 const DONE_AT = 2350; // when the overlay unmounts
 
-const panelEase = [0.83, 0, 0.17, 1] as const; // easeInOutQuint — snappy split
+const panelEase = [0.83, 0, 0.17, 1] as const; // easeInOutQuint - snappy split
 const riseEase = [0.22, 1, 0.36, 1] as const;
 
 // Module-level so it survives client-side navigation but resets on a real
@@ -26,7 +26,7 @@ export default function Intro() {
 
   useEffect(() => {
     // Skip when: already played in this document, the no-flash gate decided to
-    // skip (same-origin referrer — see layout.tsx), or reduced-motion. The
+    // skip (same-origin referrer - see layout.tsx), or reduced-motion. The
     // overlay is already CSS-hidden in those cases, so this just unmounts it
     // and leaves the scroll unlocked.
     const gateSkip = (window as { __introSkip?: boolean }).__introSkip === true;
@@ -59,7 +59,7 @@ export default function Intro() {
 
   return (
     <div className="intro-overlay pointer-events-none fixed inset-0 z-[100]">
-      {/* Top panel — carries the name, slides up on exit */}
+      {/* Top panel - carries the name, slides up on exit */}
       <motion.div
         className="absolute inset-x-0 top-0 flex h-1/2 items-end justify-center overflow-hidden bg-accent"
         initial={{ y: 0 }}
@@ -102,7 +102,7 @@ export default function Intro() {
         </motion.h2>
       </motion.div>
 
-      {/* Bottom panel — carries the role, slides down on exit */}
+      {/* Bottom panel - carries the role, slides down on exit */}
       <motion.div
         className="absolute inset-x-0 bottom-0 flex h-1/2 items-start justify-center overflow-hidden bg-accent"
         initial={{ y: 0 }}

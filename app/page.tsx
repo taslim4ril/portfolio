@@ -19,7 +19,7 @@ export default function Home() {
         {/* Scrolls up and over the pinned What-I-Do section. Solid background
             so it never shows through, and a higher stacking order. The -200vh
             pull times its arrival to the exact moment What-I-Do reaches full
-            zoom, so covering + zoom-out happen together — no static hold once
+            zoom, so covering + zoom-out happen together - no static hold once
             the section is in full view, it just keeps moving. */}
         <div className="relative z-10 bg-background lg:-mt-[200vh]">
           <Projects />

@@ -1,9 +1,9 @@
 import { services } from "@/lib/data";
 import Reveal from "./Reveal";
 
-// Dimensional, gradient-filled icons — one per service, in reference order.
+// Dimensional, gradient-filled icons - one per service, in reference order.
 const icons = [
-  /* 01 — Isometric cubes */
+  /* 01 - Isometric cubes */
   <svg key="a" viewBox="0 0 96 96" fill="none" className="h-full w-full">
     <defs>
       <linearGradient id="bi-top-l" x1="0" y1="0" x2="0" y2="1">
@@ -34,7 +34,7 @@ const icons = [
     {/* Four cubes in a tight isometric diamond; the back one is highlighted.
         Each cube: w=14, top half-height=7, body=14. Drawn back-to-front so
         the near cubes correctly occlude the ones behind them. */}
-    {/* back cube — highlighted */}
+    {/* back cube - highlighted */}
     <path d="M48 27 62 34 48 41 34 34Z" fill="url(#bi-top-l)" />
     <path d="M34 34 48 41 48 55 34 48Z" fill="url(#bi-left-l)" />
     <path d="M62 34 48 41 48 55 62 48Z" fill="url(#bi-right-l)" />
@@ -52,7 +52,7 @@ const icons = [
     <path d="M62 51 48 58 48 72 62 65Z" fill="url(#bi-right-d)" />
   </svg>,
 
-  /* 02 — Image panel with diamond badge */
+  /* 02 - Image panel with diamond badge */
   <svg key="b" viewBox="0 0 96 96" fill="none" className="h-full w-full">
     <defs>
       <linearGradient id="ux-panel" x1="0" y1="0" x2="1" y2="1">
@@ -100,7 +100,7 @@ const icons = [
     <path d="M71 21 80 30 71 39 62 30Z" fill="url(#ux-diamond)" />
   </svg>,
 
-  /* 03 — Browser window with molecular lattice */
+  /* 03 - Browser window with molecular lattice */
   <svg key="c" viewBox="0 0 96 96" fill="none" className="h-full w-full">
     <defs>
       <linearGradient id="wd-win" x1="0" y1="0" x2="1" y2="1">
@@ -138,7 +138,7 @@ const icons = [
     <circle cx="36.7" cy="51.5" r="2.7" fill="url(#wd-node)" />
   </svg>,
 
-  /* 04 — Bar chart on a plinth */
+  /* 04 - Bar chart on a plinth */
   <svg key="d" viewBox="0 0 96 96" fill="none" className="h-full w-full">
     <defs>
       <linearGradient id="dm-dark" x1="0" y1="0" x2="0" y2="1">
@@ -172,7 +172,7 @@ export default function WhatIDo() {
       id="services"
       className="pin-track relative bg-background lg:min-h-[300vh]"
     >
-      {/* NOTE: no `overflow-hidden` here — it would become the nearest scroll
+      {/* NOTE: no `overflow-hidden` here - it would become the nearest scroll
           container and freeze the cards' view() entrance timelines. */}
       <div className="flex px-6 py-24 md:px-[132px] md:py-32 lg:sticky lg:top-0 lg:h-dvh lg:items-center">
         {/* Inner wrapper carries the scroll-driven zoom (keeps transforms off
@@ -186,7 +186,7 @@ export default function WhatIDo() {
               <span className="font-bold">I Do</span>
             </h2>
             <p className="max-w-sm text-sm leading-relaxed text-muted md:text-right">
-              I craft digital experiences from idea to launch — blending
+              I craft digital experiences from idea to launch - blending
               research, design, and no-code engineering to build products that
               perform.
             </p>

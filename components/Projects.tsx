@@ -28,7 +28,7 @@ export default function Projects() {
         </div>
       </Reveal>
 
-      {/* Cards scroll through in normal flow — no pinning or stacking. */}
+      {/* Cards scroll through in normal flow - no pinning or stacking. */}
       <div className="flex flex-col gap-[4.5px]">
         {featured.map((p) => (
           <WorkCard key={p.slug} p={p} />
