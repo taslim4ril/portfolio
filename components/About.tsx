@@ -59,9 +59,18 @@ export default function About() {
             })}
           </p>
 
+          {/* Reveal progress. Driven by the same timeline as the words rather
+              than its own, so the bar and the text stay locked together. */}
+          <div
+            aria-hidden
+            className="about-progress relative mt-10 h-[3px] w-40 overflow-hidden rounded-full bg-white/15 md:w-56"
+          >
+            <span className="about-progress-fill block h-full w-full rounded-full bg-accent" />
+          </div>
+
           <a
             href="/about"
-            className="group relative mt-14 inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:border-accent hover:text-accent"
+            className="group relative mt-10 inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:border-accent hover:text-accent"
           >
             Read more about me
             <span

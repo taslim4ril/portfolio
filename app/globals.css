@@ -239,6 +239,36 @@ html.lenis body {
   }
 }
 
+/* About — a slim bar tracking how far through the copy the reader is. It
+   rides the same --wordReveal timeline as the words, so the two can never
+   drift apart; the range matches the span from the first word's start to the
+   last word's finish. */
+@keyframes aboutProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+/* Hidden without scroll-timeline support, where it would just sit empty
+   forever rather than degrading to something meaningful. */
+.about-progress {
+  display: none;
+}
+@supports (animation-timeline: view()) {
+  .about-progress {
+    display: block;
+  }
+  .about-progress-fill {
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: aboutProgress linear both;
+    animation-timeline: --wordReveal;
+    animation-range: cover 34% cover 66%;
+  }
+}
+
 /* Service cards ease up into place as the What-I-Do section enters view.
    Each card carries its own view() timeline; the stagger comes from a
    per-card animation-range set inline. Base state is visible, so browsers

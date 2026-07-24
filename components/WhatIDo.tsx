@@ -162,6 +162,16 @@ const icons = [
   </svg>,
 ];
 
+/* One hue per card, so the four hovers read as distinct instead of sharing a
+   single generic white tint. Alphas stay low: these wash over a near-black
+   surface and only need to suggest the colour, not paint it. */
+const CARD_TINTS = [
+  { glow: "rgba(200, 255, 61, 0.16)", ink: "#c8ff3d" }, // acid lime (brand)
+  { glow: "rgba(61, 209, 255, 0.16)", ink: "#3dd1ff" }, // cyan
+  { glow: "rgba(255, 154, 61, 0.16)", ink: "#ff9a3d" }, // amber
+  { glow: "rgba(181, 125, 255, 0.16)", ink: "#b57dff" }, // violet
+];
+
 export default function WhatIDo() {
   return (
     // The pin/cover effect only runs at lg+, where the 4-column grid fits in a
@@ -197,16 +207,31 @@ export default function WhatIDo() {
             timeline the cards animate against (see .cards-track). */}
         <div className="cards-track mt-14">
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s, i) => (
+          {services.map((s, i) => {
+            const tint = CARD_TINTS[i % CARD_TINTS.length];
+            return (
             <div
               key={s.title}
               /* Staggered left-to-right via a per-card range on its own
-                 view() timeline (all four share the same scroll position). */
-              style={{
-                animationRange: `entry ${6 + i * 7}% entry ${58 + i * 7}%`,
-              }}
-              className="card-in group relative flex min-h-[27rem] flex-col items-center justify-between border-border p-10 text-center transition-colors duration-300 hover:bg-white/[0.03] sm:[&:nth-child(odd)]:border-r lg:border-r lg:last:border-r-0 [&:not(:nth-last-child(-n+1))]:border-b sm:[&:not(:nth-last-child(-n+2))]:border-b lg:border-b-0"
+                 view() timeline (all four share the same scroll position).
+                 --tint-ink carries this card's hue down to the index number. */
+              style={
+                {
+                  animationRange: `entry ${6 + i * 7}% entry ${58 + i * 7}%`,
+                  "--tint-ink": tint.ink,
+                } as React.CSSProperties
+              }
+              className="card-in group relative flex min-h-[27rem] flex-col items-center justify-between border-border p-10 text-center transition-colors duration-300 sm:[&:nth-child(odd)]:border-r lg:border-r lg:last:border-r-0 [&:not(:nth-last-child(-n+1))]:border-b sm:[&:not(:nth-last-child(-n+2))]:border-b lg:border-b-0"
             >
+              {/* Per-card colour wash, rising from the bottom edge. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                  background: `radial-gradient(115% 78% at 50% 100%, ${tint.glow} 0%, transparent 72%)`,
+                }}
+              />
+
               {/* Dotted texture on hover */}
               <span className="dot-grid pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -215,7 +240,7 @@ export default function WhatIDo() {
               </div>
 
               <div className="relative mt-10">
-                <span className="text-xs text-muted">
+                <span className="text-xs text-muted transition-colors duration-300 group-hover:text-[var(--tint-ink)]">
                   /{String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-2 text-xl font-medium text-white">
@@ -226,7 +251,8 @@ export default function WhatIDo() {
                   </p>
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       </div>
