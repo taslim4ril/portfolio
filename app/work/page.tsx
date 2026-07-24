@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import { projects, site } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: `Work — ${site.name}`,
+  title: `Work | ${site.name}`,
   description: `Selected product and UI/UX design projects by ${site.name}.`,
 };
 
@@ -34,7 +34,7 @@ export default function WorkPage() {
                 </h1>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-muted">
-                Every project in one place — client assignments and personal
+                Every project in one place; client assignments and personal
                 explorations across SaaS, fintech, agritech, and mobile.
               </p>
             </div>

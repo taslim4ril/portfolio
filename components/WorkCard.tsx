@@ -51,7 +51,7 @@ export default function WorkCard({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={p.image}
-        alt={`${p.title} — ${p.category}`}
+        alt={`${p.title}: ${p.category}`}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
       />

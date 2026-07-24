@@ -1,4 +1,4 @@
-# Fonts — PP Neue Montreal
+# Fonts: PP Neue Montreal
 
 The site uses **PP Neue Montreal** (by Pangram Pangram), self-hosted from the
 `.otf` files in this folder:

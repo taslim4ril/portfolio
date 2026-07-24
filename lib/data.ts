@@ -11,7 +11,7 @@ export const site = {
   subhead:
     "I'm a product designer with 5+ years of experience turning complex problems into clear, human-centered digital experiences.",
   philosophy:
-    "Most products don't fail because of bad ideas — they fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
+    "Most products don't fail because of bad ideas. They fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
 } as const;
 
 export const socials = [
@@ -122,7 +122,7 @@ export const projects: Project[] = [
         "Designing a smarter way for teams to manage workflows and scale operations.",
       overview:
         "A single platform that brings structure, visibility, and automation to how teams manage and scale their workflows.",
-      // Editable — reasonable defaults derived from the project.
+      // Editable: reasonable defaults derived from the project.
       meta: [
         { label: "Role", value: "Product & UI/UX Designer" },
         { label: "Timeline", value: "2024" },
@@ -135,12 +135,12 @@ export const projects: Project[] = [
           heading: "Bringing Clarity to Broken Workflows",
           body: [
             "As businesses scale, their workflows often become harder to manage.",
-            "What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned. Productivity drops — not because people are not working hard, but because the system itself is inefficient.",
+            "What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned. Productivity drops, not because people are not working hard, but because the system itself is inefficient.",
             "This was the reality I uncovered while speaking with operations managers, team leads, and business owners.",
             "They were not just dealing with inefficiency. They were operating without visibility.",
           ],
         },
-        { kind: "figure", caption: "Flowz — process overview" },
+        { kind: "figure", caption: "Flowz: process overview" },
         {
           kind: "list",
           heading: "The Opportunity",
@@ -214,12 +214,12 @@ export const projects: Project[] = [
           items: [
             {
               title: "Workflow Builder",
-              desc: "Workflows needed to feel visual and easy to control. I designed a drag-and-drop experience that lets users map out processes step by step — defining tasks, deadlines, and dependencies in a clear way.",
+              desc: "Workflows needed to feel visual and easy to control. I designed a drag-and-drop experience that lets users map out processes step by step, defining tasks, deadlines, and dependencies in a clear way.",
               result: "Reduced workflow setup time by 45%",
             },
             {
               title: "Task Automation",
-              desc: "Manual work was slowing teams down. Flowz introduced automation to handle repetitive actions like reminders, approvals, and updates — reducing the need for constant human intervention.",
+              desc: "Manual work was slowing teams down. Flowz introduced automation to handle repetitive actions like reminders, approvals, and updates, reducing the need for constant human intervention.",
               result: "Reduced manual effort by 60%",
             },
             {
@@ -229,7 +229,7 @@ export const projects: Project[] = [
             },
             {
               title: "Analytics Dashboard",
-              desc: "Managers needed more than just data — they needed insight. I designed a dashboard that highlights performance, tracks progress, and surfaces bottlenecks in real time.",
+              desc: "Managers needed more than just data; they needed insight. I designed a dashboard that highlights performance, tracks progress, and surfaces bottlenecks in real time.",
               result: "Decision-making became 50% faster",
             },
           ],
@@ -279,7 +279,7 @@ export const projects: Project[] = [
             { value: "30%", label: "increase in team productivity" },
           ],
           body: [
-            "One logistics company used Flowz to automate report generation and saved over 20 hours every week — letting their team focus on strategic growth instead of repetitive tasks.",
+            "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
           ],
         },
         {
@@ -321,22 +321,22 @@ export const projects: Project[] = [
           heading: "Overview",
           body: [
             "Go Pal is an online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
-            "With the rise of digital-first banking, users are shifting toward platforms that are fast, intuitive, and entirely mobile. Go Pal responds to this shift by introducing a seamless money-saving feature that fits naturally into users' financial routines — without adding complexity.",
+            "With the rise of digital-first banking, users are shifting toward platforms that are fast, intuitive, and entirely mobile. Go Pal responds to this shift by introducing a seamless money-saving feature that fits naturally into users' financial routines, without adding complexity.",
             "The goal was simple: make saving money feel as easy as spending it.",
           ],
         },
-        { kind: "figure", caption: "Go Pal — home & savings overview" },
+        { kind: "figure", caption: "Go Pal: home & savings overview" },
         {
           kind: "list",
           heading: "The Opportunity",
           intro: [
-            "Digital banking has evolved — but saving money still feels like a separate, effort-heavy task.",
+            "Digital banking has evolved; but saving money still feels like a separate, effort-heavy task.",
             "Through early exploration, a few gaps became clear:",
           ],
           items: [
             "Users could check balances, but lacked real-time clarity and control",
             "Saving required manual effort or external tools",
-            "Everyday banking actions — sending money, reporting issues — weren't always frictionless",
+            "Everyday banking actions (sending money, reporting issues) weren't always frictionless",
           ],
           outro: [
             "This raised a key question: how might we make saving a natural part of everyday banking, instead of an extra step?",
@@ -380,7 +380,7 @@ export const projects: Project[] = [
             },
           ],
           outro: [
-            "Users don't want more features — they want less friction and more control.",
+            "Users don't want more features; they want less friction and more control.",
           ],
         },
         {
@@ -394,7 +394,7 @@ export const projects: Project[] = [
             "Simple card management, including reporting lost or stolen cards",
           ],
           outro: [
-            "But more importantly: the product needed to nudge users toward saving — without forcing behavior change.",
+            "But more importantly: the product needed to nudge users toward saving, without forcing behavior change.",
           ],
         },
         {
@@ -410,7 +410,7 @@ export const projects: Project[] = [
           items: [
             {
               title: "Making Saving Effortless",
-              desc: "Saving shouldn't require planning — it should happen in the background. I designed one-tap transfers from the main account to savings, flexible saving plans for different goals, and an autosave system (daily, weekly, monthly).",
+              desc: "Saving shouldn't require planning; it should happen in the background. I designed one-tap transfers from the main account to savings, flexible saving plans for different goals, and an autosave system (daily, weekly, monthly).",
               result:
                 "Users build habits passively, without needing constant decision-making.",
             },
@@ -438,7 +438,7 @@ export const projects: Project[] = [
             "Strengthening user trust and confidence",
           ],
           outro: [
-            "This iterative approach ensured the final product was not just functional — but intuitive and user-centered.",
+            "This iterative approach ensured the final product was not just functional, but intuitive and user-centered.",
           ],
         },
         {
@@ -471,14 +471,14 @@ export const projects: Project[] = [
           heading: "Final Thoughts",
           body: [
             "Designing Go Pal reinforced the importance of combining usability with behavioral design.",
-            "By staying close to user needs, embracing feedback, and iterating quickly, I was able to create a product that feels simple on the surface — but is deeply intentional underneath.",
+            "By staying close to user needs, embracing feedback, and iterating quickly, I was able to create a product that feels simple on the surface, but is deeply intentional underneath.",
           ],
         },
         {
           kind: "prose",
           heading: "Final Designs",
           body: [
-            "A closer look at the core screens — home and savings overview, the savings flow, and the virtual card experience.",
+            "A closer look at the core screens: home and savings overview, the savings flow, and the virtual card experience.",
           ],
         },
         { kind: "figure", caption: "Home / Savings Overview" },
