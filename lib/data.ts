@@ -630,24 +630,6 @@ export const experience: Role[] = [
   },
 ];
 
-export const offerings = [
-  {
-    title: "UX Design",
-    desc: "Enhancing user interaction for intuitive digital experiences.",
-    duration: "2 - 3 weeks",
-  },
-  {
-    title: "Web Design",
-    desc: "Designing user-friendly, visually captivating websites for clients.",
-    duration: "3 - 5 days",
-  },
-  {
-    title: "Product Design",
-    desc: "Conceptualizing and refining innovative product solutions.",
-    duration: "2 weeks +",
-  },
-];
-
 export const testimonials = [
   {
     quote:

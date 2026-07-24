@@ -33,8 +33,10 @@ export default function About() {
             <span className="text-accent">✦</span> About
           </span>
 
-          {/* Scroll-revealed copy */}
-          <p className="relative mx-auto mt-12 max-w-4xl text-center text-2xl leading-[1.35] text-foreground sm:text-3xl md:text-[2.6rem]">
+          {/* Scroll-revealed copy, set in Acorn. Uses the `font-heading`
+              utility rather than `.heading`, which also forces a 0.95
+              line-height built for one-line headers, not a wrapped paragraph. */}
+          <p className="font-heading relative mx-auto mt-12 max-w-4xl text-center text-2xl leading-[1.35] text-foreground sm:text-3xl md:text-[2.6rem]">
             {words.map((word, i) => {
               // A 220vh track puts the pinned window at cover 31%-69%, so the
               // stagger is kept inside that band: every word brightens while

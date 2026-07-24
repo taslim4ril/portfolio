@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { about, experience, offerings, testimonials, site } from "@/lib/data";
+import { about, experience, testimonials, site } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: `About | ${site.name}`,
@@ -96,30 +96,6 @@ export default function AboutPage() {
                     ))}
                   </ul>
                 </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ===== Services ===== */}
-        <section className="px-6 py-16 md:px-[100px]">
-          <Reveal>
-            <h2 className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl">
-              <span className="font-normal text-white/90">What I</span>{" "}
-              <span className="font-bold">Offer</span>
-            </h2>
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {offerings.map((o, i) => (
-              <Reveal key={o.title} delay={i * 0.08}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-surface/60 p-8">
-                  <h3 className="text-xl font-medium text-white">{o.title}</h3>
-                  <p className="mt-3 flex-1 leading-relaxed text-muted">
-                    {o.desc}
-                  </p>
-                  <div className="mt-8 text-sm text-accent">{o.duration}</div>
-                </div>
               </Reveal>
             ))}
           </div>
