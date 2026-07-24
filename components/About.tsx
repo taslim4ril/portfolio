@@ -23,7 +23,9 @@ export default function About() {
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-display text-[18vw] italic leading-none text-white/[0.035] md:text-[13vw]">
+            {/* Set in Acorn, lowercase. No `italic` here: Acorn ships no
+                italic face, so the browser would synthesise a faux oblique. */}
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-heading text-[34vw] leading-none text-white/[0.035] md:text-[24vw]">
               {site.name.split(" ")[0].toLowerCase()}
             </span>
           </span>
