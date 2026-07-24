@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { site, services } from "@/lib/data";
 import Marquee from "./Marquee";
+import DustField from "./DustField";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -43,12 +44,14 @@ export default function Hero() {
   });
 
   const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.55]);
-  const portraitOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const portraitOpacity = useTransform(scrollYProgress, [0, 0.75], [0.8, 0]);
   const portraitFilter = useTransform(
     scrollYProgress,
     [0, 1],
     ["blur(0px)", "blur(22px)"],
   );
+  // Dust rides the same scroll-out, a touch slower so it outlives the photo.
+  const dustOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   return (
     <section
@@ -89,6 +92,16 @@ export default function Hero() {
             screens, where the text block starts higher over the face. */}
         <div className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-black via-black/90 to-transparent md:h-[45%] md:via-black/85" />
       </div>
+
+      {/* Dust sits above the portrait and its scrim but below the copy, so
+          motes float in front of the photo without touching legibility. */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ opacity: dustOpacity }}
+      >
+        <DustField />
+      </motion.div>
 
       {/* ===== Left rail — keep scrolling ===== */}
       <motion.div
