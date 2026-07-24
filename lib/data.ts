@@ -543,3 +543,128 @@ export const posts = [
       "A practical starting point for young designers in Nigeria breaking into product design from scratch.",
   },
 ];
+
+// ===== /about page =====
+
+export const about = {
+  tagline:
+    "Product designer, Framer developer, design guru. I help businesses craft digital experiences that connect, inspire, and elevate their work.",
+  facts: [
+    { value: "5+ years", label: "Experience" },
+    { value: "Lagos, Nigeria", label: "Location" },
+    { value: "Available", label: "Freelance" },
+  ],
+  bio: [
+    "I'm Taslim Abdulkadir, a UI/UX designer with five years of experience helping businesses turn complex ideas into engaging, user-centered designs. My mission is to create ethical, impactful solutions that streamline the journey from concept to launch, empowering businesses to reach their goals without the usual roadblocks.",
+    "Most products don't fail because of bad ideas, they fail because things get complicated too early. I focus on slowing down, understanding the real problem, and designing solutions that make sense to the people using them, not just the people building them.",
+  ],
+} as const;
+
+export type Role = {
+  period: string;
+  company: string;
+  title: string;
+  points: string[];
+};
+
+export const experience: Role[] = [
+  {
+    period: "July 2025 - Present",
+    company: "Guaranty Trust Bank",
+    title: "Product Designer",
+    points: [
+      "Redesigned and optimized the GAPS-Lite mobile platform for SME banking, introducing an intuitive user experience and streamlined navigation, enhancing convenience for on-the-go business banking.",
+      "Redesigned the i-Bank Internet Banking portal, conducting comprehensive user research, including usability testing, surveys, and one-on-one interviews to refine the dashboard and transactional workflows, aiming to improve user task completion rates.",
+      "Crafted a seamless onboarding experience across both GAPS-Lite and i-Bank, aiming to reduce first-session drop-off and increase user activation through interactive guides and contextual tooltips.",
+      "Collaborated closely with engineering, compliance, and marketing to align design strategy with the bank's emphasis on security, regulatory compliance, and brand integrity, keeping multi-factor authentication, real-time transaction monitoring, and the iconic orange identity consistent across digital touchpoints.",
+    ],
+  },
+  {
+    period: "March 2025 - July 2025",
+    company: "AIMA Solutions",
+    title: "Product Designer",
+    points: [
+      "Led and mentored a team of 3 brand and product designers, fostering collaboration, growth, and innovative design solutions.",
+      "Designed and optimized the AIMA resume and cover letter builder, lifting tool adoption 12% in the first 2 months.",
+      "Ran in-depth user research, including surveys and interviews, to refine key product features and drive a 20% increase in customer satisfaction scores.",
+      "Designed a seamless onboarding experience that reduced drop-off and improved activation rates by 18%.",
+      "Worked across engineering and marketing to align design strategy with business objectives.",
+    ],
+  },
+  {
+    period: "April 2024 - March 2025",
+    company: "Revent Technologies",
+    title: "UI/UX Designer",
+    points: [
+      "Led design of a one-of-a-kind workflow process manager, automating key tasks, minimizing manual errors, and improving team collaboration.",
+      "Implemented a scalable design system that cut design turnaround time by 30%, keeping platforms consistent and making new features easier to integrate.",
+      "Established design standards that raised the overall digital experience across products and built a more user-centered culture.",
+      "Introduced process improvements that reduced design-to-development handoff time by 20% and increased design team efficiency by 25%.",
+      "Mentored a team of designers, sharing best practices and building a culture of continuous learning.",
+    ],
+  },
+  {
+    period: "Feb 2023 - April 2024",
+    company: "TradeBuza",
+    title: "Lead Product Designer",
+    points: [
+      "Redesigned the mobile app onboarding experience, reducing drop-off rates by 52%.",
+      "Designed a cash advance feature for the CropGate web app that contributed a 17% increase in revenue.",
+      "Overhauled the Agro-CropGate web application, driving a 30% revenue boost by improving onboarding for farm aggregators.",
+      "Led the Agent mobile app redesign, optimizing communication between farmers, agents, and aggregators and cutting processing time by 23%.",
+      "Helped design an offline mode for the agent app, enabling seamless payments to farmers and saving 20% of transaction time.",
+      "Contributed to ideation and implementation of new solutions, which together lifted customer acquisition by 15%.",
+    ],
+  },
+  {
+    period: "Jan 2021 - Jan 2023",
+    company: "Ikons Systems Technologies",
+    title: "Product Designer",
+    points: [
+      "Designed a fluid design system implemented across all projects, reducing design time by 35%.",
+      "Contributed to Learnify, a web application focused on skill acquisition in cloud computing, Microsoft Azure, and Excel.",
+      "Redesigned the Ikons Academy e-learning platform, improving onboarding and reducing drop-off rates by 30%.",
+      "Designed the Ikons Systems website for bootcamps, masterclasses, and events, plus landing pages that raised lead conversion by 33%.",
+      "Helped design Islamasaservice, a platform connecting tutors with students.",
+    ],
+  },
+];
+
+export const offerings = [
+  {
+    title: "UX Design",
+    desc: "Enhancing user interaction for intuitive digital experiences.",
+    duration: "2 - 3 weeks",
+  },
+  {
+    title: "Web Design",
+    desc: "Designing user-friendly, visually captivating websites for clients.",
+    duration: "3 - 5 days",
+  },
+  {
+    title: "Product Design",
+    desc: "Conceptualizing and refining innovative product solutions.",
+    duration: "2 weeks +",
+  },
+];
+
+export const testimonials = [
+  {
+    quote:
+      "Working with Taslim has been fantastic. His constant availability and willingness to assist make our work so much easier. Having someone like him on our team is a real asset.",
+    name: "Chimdi Nwawueze",
+    company: "TradeBuza Technologies",
+  },
+  {
+    quote:
+      "Taslim is an exceptional product designer, known for his creativity and user-centered approach. He consistently delivers outstanding results and he's very good at transforming ideas into visually appealing and intuitive designs.",
+    name: "Kazeem Adegboyega",
+    company: "Ikons Systems",
+  },
+  {
+    quote:
+      "Collaborating with Taslim is truly exceptional. His unwavering readiness and eagerness to help simplify our tasks considerably. Possessing an individual like him on our crew is a genuine boon.",
+    name: "Jibril Abdulkadir",
+    company: "Field Intelligence",
+  },
+];
