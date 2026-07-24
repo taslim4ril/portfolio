@@ -45,7 +45,7 @@ export default function Hero() {
             `screen` blending makes its near-black pixels read as the page's
             own black (no lifted-rectangle edge), and the radial mask fades
             the frame's boundary out entirely. Note there's deliberately no
-            brightness filter - lifting the blacks is exactly what made the
+            brightness filter — lifting the blacks is exactly what made the
             photo's rectangle visible against the page. */}
         <img
           src="/images/portrait-hero.jpg"
@@ -58,12 +58,12 @@ export default function Hero() {
               "radial-gradient(ellipse 62% 72% at 50% 40%, #000 52%, transparent 86%)",
           }}
         />
-        {/* Bottom scrim only - kept for text legibility. Taller on small
+        {/* Bottom scrim only — kept for text legibility. Taller on small
             screens, where the text block starts higher over the face. */}
         <div className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-black via-black/90 to-transparent md:h-[45%] md:via-black/85" />
       </div>
 
-      {/* ===== Left rail - keep scrolling ===== */}
+      {/* ===== Left rail — keep scrolling ===== */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -93,7 +93,7 @@ export default function Hero() {
             transition={{ duration: 0.9, ease, delay: 0.15 }}
             /* flex-1 gives the block whatever the rail leaves over, and the
                container query lets the name size itself to that column (cqi
-               units) instead of the viewport - critical because glyphs that
+               units) instead of the viewport — critical because glyphs that
                overflow a bg-clip-text box get no background and turn
                invisible. */
             className="min-w-0 flex-1 [container-type:inline-size]"
@@ -151,7 +151,7 @@ export default function Hero() {
 
             <p className="mt-32 max-w-sm text-base leading-relaxed text-white/55">
               {site.role} with 5+ years of experience across SaaS, fintech, and
-              agritech - turning complex problems into clear, human-centered
+              agritech — turning complex problems into clear, human-centered
               digital experiences.
             </p>
           </motion.div>

@@ -10,7 +10,7 @@ export default function About() {
   return (
     // Slightly inset from the Selected Work cards.
     <section id="about" className="px-6 pb-24 md:px-[132px] md:pb-32">
-      {/* NOTE: no `overflow-hidden` here - it would become the nearest scroll
+      {/* NOTE: no `overflow-hidden` here — it would become the nearest scroll
           container and freeze the word-reveal ViewTimeline. The watermark is
           clipped in its own layer below instead. */}
       <div className="rounded-[2.5rem] bg-surface/60 px-6 py-20 md:px-12 md:py-28">

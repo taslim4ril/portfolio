@@ -19,7 +19,7 @@ export default function WorkCard({
 
   // Cursor-follow button: position is driven by real mouse coordinates
   // relative to the card, smoothed with a spring so it trails slightly
-  // rather than snapping - same spring pattern as the global custom cursor.
+  // rather than snapping — same spring pattern as the global custom cursor.
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 350, damping: 32, mass: 0.6 });
@@ -42,7 +42,7 @@ export default function WorkCard({
         handleMouseMove(e);
       }}
       onMouseLeave={() => setHovering(false)}
-      /* Suppresses the global accent cursor - this card supplies its own
+      /* Suppresses the global accent cursor — this card supplies its own
          cursor-following button instead, so showing both would double up. */
       data-cursor-hide
       className="card-rise group relative block h-[76vh] min-h-[500px] overflow-hidden rounded-[2.5rem] bg-surface"
@@ -51,7 +51,7 @@ export default function WorkCard({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={p.image}
-        alt={`${p.title} - ${p.category}`}
+        alt={`${p.title} — ${p.category}`}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
       />
@@ -83,7 +83,7 @@ export default function WorkCard({
         ))}
       </div>
 
-      {/* Cursor-follow "Read case study" button - desktop only (fine
+      {/* Cursor-follow "Read case study" button — desktop only (fine
           pointers), purely decorative, so it never blocks the card's own
           click target. */}
       <motion.div

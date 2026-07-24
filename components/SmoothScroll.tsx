@@ -16,7 +16,7 @@ export default function SmoothScroll() {
 
     const lenis = new Lenis({
       duration: 1.4,
-      // easeOutExpo - quick start, long soft settle
+      // easeOutExpo — quick start, long soft settle
       easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       // Less distance per wheel tick + a longer settle = slower, calmer scroll.

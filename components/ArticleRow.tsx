@@ -42,7 +42,7 @@ export default function ArticleRow({
         handleMouseMove(e);
       }}
       onMouseLeave={() => setHovering(false)}
-      /* Suppresses the global accent cursor - this row supplies its own
+      /* Suppresses the global accent cursor — this row supplies its own
          cursor-following preview instead, same convention as WorkCard. */
       data-cursor-hide
       className="group relative flex flex-col gap-3 py-8 transition-colors hover:bg-surface/40 md:flex-row md:items-center md:justify-between md:gap-10 md:px-4"
@@ -64,7 +64,7 @@ export default function ArticleRow({
         ↗
       </span>
 
-      {/* Cursor-follow preview - image only appears here, on hover, never
+      {/* Cursor-follow preview — image only appears here, on hover, never
           inline in the row. Desktop only (fine pointers), purely decorative,
           so it never blocks the row's own click target. */}
       <motion.div

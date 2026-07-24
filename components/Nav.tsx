@@ -36,7 +36,7 @@ export default function Nav() {
         {/* Logo */}
         <a
           href={to("#top")}
-          aria-label="Taslim Abdulkadir - home"
+          aria-label="Taslim Abdulkadir — home"
           className="transition-transform duration-300 hover:scale-105"
         >
           <Logo className="h-10 w-10 md:h-11 md:w-11" />

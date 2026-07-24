@@ -67,7 +67,7 @@ export default function Contact() {
               {word}{" "}
             </span>
           ))}
-          {/* Solid-accent half - plain static color, no scroll-reveal or any
+          {/* Solid-accent half — plain static color, no scroll-reveal or any
               other effect, unlike the white half above it. */}
           <span className="text-accent">{GREEN}</span>
         </p>
