@@ -1,5 +1,4 @@
-import { site, stats } from "@/lib/data";
-import Reveal from "./Reveal";
+import { site } from "@/lib/data";
 
 const COPY =
   "I help ambitious brands and startups build digital products that stand out and scale. I believe in working smart, building fast, and designing with purpose.";
@@ -82,25 +81,6 @@ export default function About() {
               →
             </span>
           </a>
-        </div>
-      </div>
-
-      {/* Stats live outside the track so their height can't skew its geometry
-          and shift every animation-range above. */}
-      <div className="px-6 pb-24 md:px-[132px] md:pb-32">
-        <div className="grid gap-14 sm:grid-cols-3 sm:gap-10">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08}>
-              <div className="text-center">
-                <div className="border-t border-border pb-8 pt-4 text-sm text-muted">
-                  {s.label}
-                </div>
-                <div className="heading text-[7.5rem] font-bold leading-none tracking-[-0.04em] text-white/90 md:text-[9rem]">
-                  {s.value}
-                </div>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </div>
     </section>

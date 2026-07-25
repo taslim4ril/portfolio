@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { about, experience, testimonials, site } from "@/lib/data";
+import { about, experience, testimonials, stats, site } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: `About | ${site.name}`,
@@ -46,6 +46,24 @@ export default function AboutPage() {
               ))}
             </dl>
           </Reveal>
+        </section>
+
+        {/* ===== Stats ===== */}
+        <section className="px-6 py-16 md:px-[100px]">
+          <div className="grid gap-14 sm:grid-cols-3 sm:gap-10">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.08}>
+                <div className="text-center">
+                  <div className="border-t border-border pb-8 pt-4 text-sm text-muted">
+                    {s.label}
+                  </div>
+                  <div className="heading text-[7.5rem] font-bold leading-none tracking-[-0.04em] text-white/90 md:text-[9rem]">
+                    {s.value}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </section>
 
         {/* ===== Bio ===== */}
