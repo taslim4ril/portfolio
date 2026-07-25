@@ -70,13 +70,18 @@ export default function Hero() {
             photo's rectangle visible against the page. */}
         {/* Scroll-linked: pushes into the face while blurring and fading out,
             so the portrait dissolves instead of sliding away. Anchored at the
-            mask's centre (50% 40%) so the zoom stays on the face. */}
+            mask's centre (50% 40%) so the zoom stays on the face.
+            The y offset nudges the portrait down the frame; the radial mask
+            travels with it, so no hard top edge is exposed. Percentages here
+            resolve against the element's own height, which is the full
+            section, so 6% reads as 6dvh. */}
         <motion.img
           src="/images/portrait-hero.jpg"
           alt=""
           className="absolute left-1/2 top-0 h-full object-cover object-top contrast-[1.12] mix-blend-screen"
           style={{
             x: "-50%",
+            y: "6%",
             scale: portraitScale,
             opacity: portraitOpacity,
             filter: portraitFilter,
