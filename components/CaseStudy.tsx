@@ -188,6 +188,66 @@ function Block({ block }: { block: CaseBlock }) {
         </div>
       );
 
+    case "decisions":
+      return (
+        <div className="mx-auto max-w-5xl space-y-12">
+          <Reveal>
+            <div className="mx-auto max-w-3xl space-y-6">
+              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.intro && (
+                <div className="space-y-5">
+                  <Paragraphs body={block.intro} />
+                </div>
+              )}
+            </div>
+          </Reveal>
+          <div className="space-y-5">
+            {block.items.map((item, i) => (
+              <Reveal key={i} delay={i * 0.05}>
+                <div className="rounded-3xl border border-border bg-surface/60 p-8 md:p-10">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-sm text-muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-2xl font-medium text-white">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <dl className="mt-6 space-y-5">
+                    <div>
+                      <dt className="text-[11px] uppercase tracking-widest text-muted">
+                        The problem
+                      </dt>
+                      <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/60">
+                        {item.problem}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[11px] uppercase tracking-widest text-accent/70">
+                        The decision
+                      </dt>
+                      <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/90">
+                        {item.decision}
+                      </dd>
+                    </div>
+                    {item.note && (
+                      <div className="border-t border-border pt-5">
+                        <dt className="text-[11px] uppercase tracking-widest text-muted">
+                          {item.note.label}
+                        </dt>
+                        <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/60">
+                          {item.note.body}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      );
+
     case "impact":
       return (
         <div className="mx-auto max-w-5xl space-y-10">

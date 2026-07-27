@@ -66,6 +66,16 @@ export const services = [
 export type CaseMetric = { value: string; label: string };
 export type CaseNamed = { title: string; desc: string };
 
+/** A design call, with the reasoning kept attached to it. The closing note is
+ *  labelled per item because what follows a decision is sometimes the cost of
+ *  it and sometimes the reason for it, and those should not read the same. */
+export type CaseDecision = {
+  title: string;
+  problem: string;
+  decision: string;
+  note?: { label: string; body: string };
+};
+
 export type CaseBlock =
   | { kind: "prose"; heading?: string; body: string[] }
   | { kind: "list"; heading?: string; intro?: string[]; items: string[]; outro?: string[] }
@@ -82,6 +92,12 @@ export type CaseBlock =
       heading?: string;
       intro?: string[];
       items: (CaseNamed & { result: string })[];
+    }
+  | {
+      kind: "decisions";
+      heading?: string;
+      intro?: string[];
+      items: CaseDecision[];
     }
   | { kind: "impact"; heading?: string; intro?: string[]; metrics: CaseMetric[]; body?: string[] }
   | { kind: "quote"; heading?: string; body: string[] }
@@ -498,6 +514,219 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "plantinerary",
+    title: "Plantinerary",
+    category: "Travel Planning",
+    tag: "Mobile · Case Study",
+    year: "2023",
+    description:
+      "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
+    image: "/images/work/plantinerary.jpg",
+    subtitle: "Travel planning without seventeen open tabs",
+    tags: ["Product Design", "Travel"],
+    caseStudy: {
+      title: "Plantinerary",
+      tagline:
+        "A travel planner for people who are tired of having seventeen tabs open.",
+      overview:
+        "Travel planning is not an information problem. It is a decision problem. Plantinerary gives travellers a structure to hang their ideas on, then uses light AI assistance to narrow the field instead of widening it.",
+      meta: [
+        { label: "Role", value: "Sole Product Designer" },
+        { label: "Timeline", value: "4 - 5 weeks" },
+        { label: "Type", value: "Self-directed concept" },
+        { label: "Tools", value: "Figma, ChatGPT, Claude" },
+      ],
+      blocks: [
+        {
+          kind: "prose",
+          heading: "Nobody has a shortage of options",
+          body: [
+            "Ask someone to plan a five day trip and watch what happens. They open a booking site, three blogs, two Instagram saved folders, a Notes app, a WhatsApp thread with the friend who went last year, and a Google Doc that will be abandoned by day two.",
+            "None of those tools are broken. They are just all answering the same question: what could I do? Nobody is answering the harder one.",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "How might we",
+          body: [
+            "How might we make saving an idea and scheduling it the same motion?",
+            "The bottleneck is not discovery. It is the distance between “this looks amazing” and “this is what I am actually doing on Tuesday at 2pm.”",
+            "That gap is where the fatigue lives. People collect forty possibilities, feel good for an hour, then freeze when it is time to commit. The trip gets planned in the taxi from the airport.",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Moving fast without guessing",
+          body: [
+            "Four weeks is not enough time for a full research programme, so I used AI deliberately and with limits.",
+            "It was good for pressure testing my assumptions, generating traveller scenarios and edge cases I had not considered: the solo traveller with a rigid flight time, the group trip with three conflicting appetites. It also helped me summarise the patterns I was seeing across reviews, forum threads, and app store complaints.",
+            "It was not good for telling me what real people actually do. Everything it produced was a hypothesis, not a finding. I treated it as a way to get to better questions faster, then checked those questions against real traveller conversations and my own reading of existing products.",
+            "That distinction mattered. It kept the project honest, and it is the same way I would use these tools on a team with a proper research budget.",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "Three patterns worth designing for",
+          columns: 3,
+          items: [
+            {
+              title: "Saving is easy. Sequencing is impossible.",
+              desc: "Every product makes it a one tap job to save a place. Almost none of them help you decide whether it goes on Wednesday morning or Friday afternoon, or whether it is even reachable from the last thing you saved.",
+            },
+            {
+              title: "People think in days, not lists.",
+              desc: "Travellers narrate their plans chronologically: morning we do the market, then lunch nearby, then we are free until dinner. Yet most tools store plans as flat lists of bookmarks. The mental model and the data model do not match.",
+            },
+            {
+              title: "Suggestions get ignored at the wrong moment.",
+              desc: "Recommendations shown during browsing feel like advertising. The same recommendation shown when someone is staring at an empty Thursday afternoon feels like help. Timing changed everything about how a suggestion landed.",
+            },
+          ],
+          outro: [
+            "Travellers do not struggle to find options. They struggle to organise and choose between them.",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "Three verbs",
+          intro: [
+            "I built the product around a sequence rather than a feature list.",
+          ],
+          columns: 3,
+          items: [
+            { title: "Discover", desc: "Find places worth going." },
+            { title: "Plan", desc: "Turn them into a real schedule." },
+            {
+              title: "Experience",
+              desc: "Follow the plan without re-planning it on the ground.",
+            },
+          ],
+          outro: [
+            "Most planning tools do the first two and quietly stop. The third one is where a plan either earns its keep or falls apart, so I treated it as a first class part of the product rather than an afterthought.",
+          ],
+        },
+        {
+          kind: "decisions",
+          heading: "Four decisions that shaped the product",
+          items: [
+            {
+              title: "The itinerary is a timeline, not a list",
+              problem:
+                "A list of saved places tells you nothing about whether your day is realistic.",
+              decision:
+                "Day by day timeline as the primary planning surface, with activities as blocks you drag into place.",
+              note: {
+                label: "The tradeoff",
+                body: "A timeline implies precision, and travellers resist precision. Locking every activity to an exact time makes a plan feel like a work schedule, and people abandon it the moment reality drifts. So the timeline uses loose time bands rather than exact slots, and every trip has an ideas tray for things you want to do but have not committed to a day yet. The structure is there when you want it and out of the way when you do not.",
+              },
+            },
+            {
+              title: "A day you can read in one glance",
+              problem:
+                "Even a well built plan is useless if you have to reconstruct it every morning.",
+              decision:
+                "Each day reads as a single scannable unit. Activities grouped by time of day, colour coded by type, with travel time between stops made visible rather than assumed.",
+              note: {
+                label: "Why it matters",
+                body: "Travel time is the quiet killer of itineraries. Three great choices that sit an hour apart become one great choice and two regrets. Surfacing that at planning time, not at 11am in a taxi, is the difference between a plan that survives and one that does not.",
+              },
+            },
+            {
+              title: "AI that waits its turn",
+              problem:
+                "Recommendation engines are usually designed to fill space. More cards, more scroll, more engagement. That is exactly the overload people are trying to escape.",
+              decision:
+                "Suggestions appear in context and in small numbers. An empty afternoon prompts two or three options that fit the gap, the neighbourhood you are already in, and the length of the trip. Not a feed. Not a carousel. A dismissed suggestion stays dismissed.",
+              note: {
+                label: "The tradeoff",
+                body: "Fewer suggestions means fewer chances to delight someone with an unexpected find. I accepted that. A product that surfaces three relevant things is more useful than one that surfaces thirty and asks you to sort them, and trust is easier to lose than to build.",
+              },
+            },
+            {
+              title: "Saving and planning are the same gesture",
+              problem:
+                "In most products, saving something puts it into a graveyard you never revisit.",
+              decision:
+                "You do not save to a list. You save to a trip, and optionally to a day. The transition from browsing to planning has no seam in it, because that seam is exactly where intent gets lost.",
+            },
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "The principle",
+          body: ["AI supports the decision. It does not make it."],
+        },
+        {
+          kind: "prose",
+          heading: "Where the first version was wrong",
+          body: [
+            "The initial recommendation surface was a card feed on the home screen. It tested badly against my own principle within a day of building it. It looked like a shopping page, it competed with the user's own plan for attention, and it pushed the actual itinerary below the fold. Pulling recommendations out of the home screen and into the empty slots of the timeline was the single biggest improvement in the project.",
+            "The first itinerary builder also required a time for every activity. It felt rigorous and it was quietly hostile. Anything a traveller was unsure about had nowhere to live, so it lived outside the product, which defeated the point. The ideas tray came out of that failure.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What I would test next",
+          intro: [
+            "This is a concept project, so I am not going to claim numbers I did not measure. What I would want to know:",
+          ],
+          items: [
+            "Time to a first complete day. How long from creating a trip to having one day someone would actually follow?",
+            "Plan survival. What proportion of planned activities are still in the itinerary on the day itself?",
+            "Suggestion dismissal rate. A high rate means the context model is wrong, not that people dislike suggestions.",
+            "The ideas tray. Does it become a useful staging area, or the same graveyard as every other save list?",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What I took from it",
+          items: [
+            "Too many choices create friction, not value. Curation is a design act.",
+            "AI assistance is most useful when it is contextual and quiet. Placement is the feature.",
+            "Structure lowers cognitive load, but only if it flexes. Rigid structure gets abandoned.",
+            "A plan is only good if it survives contact with the actual trip.",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Final designs",
+          body: [
+            "A closer look at the core screens: discovery, the itinerary builder, a single day, and suggestions in context.",
+          ],
+        },
+        {
+          kind: "figure",
+          caption:
+            "Home and discovery: browsing that leads somewhere. Every place can be added to a trip in one action.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Trip planner and itinerary builder: the timeline with loose time bands, drag to reorder, and the ideas tray for undecided plans.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Activity breakdown: one day, readable at a glance, with travel time between stops made visible.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "AI recommendations in context: suggestions appearing inside an empty afternoon rather than in a feed competing for attention.",
+        },
+        {
+          kind: "quote",
+          heading: "Closing thought",
+          body: [
+            "The interesting tension in Plantinerary was never technical. It was about control.",
+            "Travellers want to feel like the trip is theirs, and they also want someone to take some of the weight off. Design the assistance too loudly and it feels like being sold to. Design it too quietly and it may as well not exist.",
+            "Getting that balance right is most of the product.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     slug: "cropgate",
     title: "CropGate",
     category: "Agritech",
@@ -508,18 +737,6 @@ export const projects: Project[] = [
     image: "/images/work/cropgate.webp",
     subtitle: "Marketplace connecting farmers and buyers",
     tags: ["Product Design", "Web"],
-  },
-  {
-    slug: "plantinerary",
-    title: "Plantinerary",
-    category: "Plant Care",
-    tag: "Mobile · Case Study",
-    year: "2023",
-    description:
-      "A plant-care planner that schedules watering, light, and feeding so first-time plant parents never lose a leaf.",
-    image: "/images/work/plantinerary.jpg",
-    subtitle: "Plant-care planner for first-time plant parents",
-    tags: ["Mobile", "UX Research"],
   },
   {
     slug: "valco",
