@@ -1,10 +1,14 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { site, services } from "@/lib/data";
+import { site, services, roles } from "@/lib/data";
 import Marquee from "./Marquee";
 import DustField from "./DustField";
+import Scramble, { SCRAMBLE_MS } from "./Scramble";
+
+/** How long a finished role sits still before the next swap begins. */
+const HOLD = 5200;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -33,8 +37,22 @@ const serviceIcons = [
 ];
 
 export default function Hero() {
-  const [first, ...restName] = site.name.split(" ");
   const sectionRef = useRef<HTMLElement>(null);
+
+  const [roleIndex, setRoleIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(
+      () => setRoleIndex((i) => (i + 1) % roles.length),
+      HOLD + SCRAMBLE_MS,
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  // Last word drops to the gradient line, everything before it stays on the
+  // cream line above, mirroring the two-line headline this replaced.
+  const words = roles[roleIndex].split(" ");
+  const roleTail = words[words.length - 1];
+  const roleLead = words.slice(0, -1).join(" ");
 
   // Drives the portrait as the hero scrolls away: 0 while the hero is parked
   // at the top, 1 once it has fully scrolled past. Reverses on the way back up.
@@ -146,19 +164,25 @@ export default function Hero() {
             <p className="text-xs tracking-[0.2em] text-white/55 md:text-sm">
               Discover My Creative Journey
             </p>
+            {/* Sits above the rotating role so the name stays put while the
+                headline cycles. Kept off the cqi scale the h1 uses, which is
+                sized for ~10 characters and would overflow on 17. */}
+            <p className="font-heading mt-3 text-2xl font-medium uppercase tracking-[-0.01em] text-white md:text-3xl">
+              {site.name}
+            </p>
             <h1 className="heading mt-4 font-bold uppercase leading-[0.86] tracking-[-0.02em]">
-              <span
+              <Scramble
+                text={roleLead}
+                trigger={roleIndex}
                 className="block text-[#eceades]"
                 style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
-              >
-                {first}
-              </span>
-              <span
+              />
+              <Scramble
+                text={roleTail}
+                trigger={roleIndex}
                 className="block bg-gradient-to-r from-accent via-accent to-[#7d9e24] bg-clip-text text-transparent"
                 style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
-              >
-                {restName.join(" ")}
-              </span>
+              />
             </h1>
           </motion.div>
 

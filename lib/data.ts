@@ -14,6 +14,16 @@ export const site = {
     "Most products don't fail because of bad ideas. They fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
 } as const;
 
+/** Cycled through by the hero headline. Rendered uppercase by the h1; the
+    last word lands on the gradient line, everything before it on the line
+    above, so each entry needs at least two words. */
+export const roles = [
+  "product designer",
+  "UX/UI designer",
+  "no-code developer",
+  "AI Product designer",
+] as const;
+
 export const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/" },
   { label: "Twitter / X", href: "https://twitter.com/" },
