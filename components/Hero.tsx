@@ -167,7 +167,7 @@ export default function Hero() {
             {/* Sits above the rotating role so the name stays put while the
                 headline cycles. Kept off the cqi scale the h1 uses, which is
                 sized for ~10 characters and would overflow on 17. */}
-            <p className="font-heading mt-3 text-2xl font-medium uppercase tracking-[-0.01em] text-white md:text-3xl">
+            <p className="font-heading mt-3 text-2xl font-medium tracking-[-0.01em] text-white md:text-3xl">
               {site.name}
             </p>
             <h1 className="heading mt-4 font-bold uppercase leading-[0.86] tracking-[-0.02em]">
