@@ -110,15 +110,44 @@ export default function DustField() {
       raf = requestAnimationFrame(frame);
     };
 
+    // The hero scrolls away long before the page ends, and a canvas nobody can
+    // see still costs a full clear and 150 arcs every frame. Park the loop when
+    // it leaves the viewport or the tab goes to the background, and restart the
+    // clock on resume so specks don't lurch on the first frame back.
+    let onScreen = true;
+
+    const start = () => {
+      if (raf) return;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    };
+
+    const stop = () => {
+      if (!raf) return;
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    const sync = () => (onScreen && !document.hidden ? start() : stop());
+
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      sync();
+    });
+
     resize();
+    io.observe(canvas);
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
-    raf = requestAnimationFrame(frame);
+    document.addEventListener("visibilitychange", sync);
+    start();
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      io.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("visibilitychange", sync);
     };
   }, []);
 

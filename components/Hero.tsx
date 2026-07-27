@@ -40,13 +40,29 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
   const [roleIndex, setRoleIndex] = useState(0);
+  const [heroOnScreen, setHeroOnScreen] = useState(true);
+
+  // Each tick re-renders the hero and kicks off a fresh scramble. Left
+  // ungated it keeps doing that from the footer, so the rotator only runs
+  // while the hero is actually on screen.
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) =>
+      setHeroOnScreen(entry.isIntersecting),
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!heroOnScreen) return;
     const id = setInterval(
       () => setRoleIndex((i) => (i + 1) % roles.length),
       HOLD + SCRAMBLE_MS,
     );
     return () => clearInterval(id);
-  }, []);
+  }, [heroOnScreen]);
 
   // Last word drops to the gradient line, everything before it stays on the
   // cream line above, mirroring the two-line headline this replaced.
