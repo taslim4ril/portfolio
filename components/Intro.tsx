@@ -67,7 +67,7 @@ export default function Intro() {
         transition={{ duration: 0.9, ease: panelEase }}
       >
         <motion.h2
-          className="display flex items-start pb-1.5 text-5xl font-bold text-accent-ink sm:text-6xl md:text-7xl"
+          className="heading flex items-start pb-1.5 text-5xl font-bold text-accent-ink sm:text-6xl md:text-7xl"
           initial="hidden"
           animate="show"
           variants={{
