@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/Reveal";
+import ScrambleHeading from "@/components/ScrambleHeading";
 import { projects, site } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -25,13 +26,16 @@ export default function WorkPage() {
                 >
                   <span aria-hidden>←</span> Back home
                 </a>
-                <h1 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
-                  <span className="font-normal text-white/90">All</span>{" "}
-                  <span className="font-bold">Work</span>
+                <ScrambleHeading
+                  as="h1"
+                  lead="All"
+                  bold="Work"
+                  className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
+                >
                   <sup className="ml-2 align-super text-base font-normal text-muted">
                     ({projects.length})
                   </sup>
-                </h1>
+                </ScrambleHeading>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-muted">
                 Every project in one place; client assignments and personal

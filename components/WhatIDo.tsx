@@ -1,5 +1,6 @@
 import { services } from "@/lib/data";
 import Reveal from "./Reveal";
+import ScrambleHeading from "./ScrambleHeading";
 
 // Dimensional, gradient-filled icons — one per service, in reference order.
 const icons = [
@@ -191,10 +192,11 @@ export default function WhatIDo() {
         {/* Heading + intro */}
         <Reveal>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start">
-            <h2 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
-              <span className="font-normal text-white/90">What</span>{" "}
-              <span className="font-bold">I Do</span>
-            </h2>
+            <ScrambleHeading
+              lead="What"
+              bold="I Do"
+              className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
+            />
             <p className="max-w-sm text-sm leading-relaxed text-muted md:text-right">
               I craft digital experiences from idea to launch, blending
               research, design, and no-code engineering to build products that

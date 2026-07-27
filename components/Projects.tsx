@@ -1,6 +1,7 @@
 import { projects } from "@/lib/data";
 import Reveal from "./Reveal";
 import WorkCard from "./WorkCard";
+import ScrambleHeading from "./ScrambleHeading";
 
 // The homepage teases the first few; the rest live on /work.
 const FEATURED_COUNT = 3;
@@ -14,13 +15,15 @@ export default function Projects() {
       {/* Heading aligned with the card edges */}
       <Reveal>
         <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <h2 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
-            <span className="font-normal text-white/90">Selected</span>{" "}
-            <span className="font-bold">Work</span>
+          <ScrambleHeading
+            lead="Selected"
+            bold="Work"
+            className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
+          >
             <sup className="ml-2 align-super text-base font-normal text-muted">
               ({projects.length})
             </sup>
-          </h2>
+          </ScrambleHeading>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
             A mix of client assignments and personal explorations across SaaS,
             fintech, agritech, and mobile.

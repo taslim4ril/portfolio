@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import ScrambleHeading from "@/components/ScrambleHeading";
 import { about, experience, testimonials, stats, site } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -23,10 +24,12 @@ export default function AboutPage() {
             >
               <span aria-hidden>←</span> Back home
             </a>
-            <h1 className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl">
-              <span className="font-normal text-white/90">About</span>{" "}
-              <span className="font-bold">Me</span>
-            </h1>
+            <ScrambleHeading
+              as="h1"
+              lead="About"
+              bold="Me"
+              className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
+            />
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/65">
               {about.tagline}
             </p>
@@ -82,10 +85,11 @@ export default function AboutPage() {
         {/* ===== Experience ===== */}
         <section className="px-6 py-16 md:px-[100px]">
           <Reveal>
-            <h2 className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl">
-              <span className="font-normal text-white/90">Work</span>{" "}
-              <span className="font-bold">Experience</span>
-            </h2>
+            <ScrambleHeading
+              lead="Work"
+              bold="Experience"
+              className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl"
+            />
           </Reveal>
 
           <div className="mt-12 border-t border-border">
@@ -122,10 +126,11 @@ export default function AboutPage() {
         {/* ===== Testimonials ===== */}
         <section className="px-6 py-16 pb-28 md:px-[100px]">
           <Reveal>
-            <h2 className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl">
-              <span className="font-normal text-white/90">Kind</span>{" "}
-              <span className="font-bold">Words</span>
-            </h2>
+            <ScrambleHeading
+              lead="Kind"
+              bold="Words"
+              className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl"
+            />
           </Reveal>
 
           <div className="mt-12 grid gap-5 md:grid-cols-3">
