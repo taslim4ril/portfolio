@@ -101,7 +101,14 @@ export type CaseBlock =
     }
   | { kind: "impact"; heading?: string; intro?: string[]; metrics: CaseMetric[]; body?: string[] }
   | { kind: "quote"; heading?: string; body: string[] }
-  | { kind: "figure"; src?: string; caption?: string };
+  | {
+      kind: "figure";
+      src?: string;
+      /** Short label for what the screen is. */
+      caption?: string;
+      /** What this screen changes about the product, in a line or two. */
+      impact?: string;
+    };
 
 export type CaseStudy = {
   /** Hero title; falls back to the project title if omitted. */
@@ -307,6 +314,48 @@ export const projects: Project[] = [
           body: [
             "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
           ],
+        },
+        {
+          kind: "prose",
+          heading: "Final designs",
+          body: [
+            "The five screens that carry the product, and what each one is actually doing for the people using it.",
+          ],
+        },
+        {
+          kind: "figure",
+          caption:
+            "Workflow builder: processes mapped step by step, with tasks, deadlines, and dependencies laid out as blocks.",
+          impact:
+            "Turns the most intimidating part of the product into something you can see and rearrange. This is what let non-technical users build their own workflows instead of filing a request and waiting.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Automation setup: rules for reminders, approvals, and status updates, started from pre-built templates.",
+          impact:
+            "The templates carry the weight here. Presenting automation as a handful of named actions rather than a configuration screen is what made teams willing to try it at all.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Task detail: comments, mentions, and notifications living inside the task itself.",
+          impact:
+            "Keeps the conversation attached to the work. Removing the trip out to a separate chat tool closed the gap where context kept going missing between handoffs.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Analytics dashboard: throughput, progress, and bottlenecks surfaced in real time.",
+          impact:
+            "Gives managers the visibility the research said they were missing, so status becomes something they read at a glance rather than chase around the team.",
+        },
+        {
+          kind: "figure",
+          caption:
+            "Guided onboarding: a first-run walkthrough with contextual tips.",
+          impact:
+            "The direct answer to early testing, where the full feature set landed as overwhelming. It holds complexity back until someone has a reason to care about it.",
         },
         {
           kind: "quote",

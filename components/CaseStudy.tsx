@@ -28,7 +28,15 @@ function Paragraphs({ body, muted = true }: { body: string[]; muted?: boolean })
   );
 }
 
-function Figure({ src, caption }: { src?: string; caption?: string }) {
+function Figure({
+  src,
+  caption,
+  impact,
+}: {
+  src?: string;
+  caption?: string;
+  impact?: string;
+}) {
   return (
     <Reveal>
       <figure className="mx-auto max-w-5xl">
@@ -57,6 +65,14 @@ function Figure({ src, caption }: { src?: string; caption?: string }) {
           <figcaption className="mt-3 text-center text-sm text-muted">
             {caption}
           </figcaption>
+        )}
+        {/* Kept out of the figcaption so existing captions render unchanged.
+            Narrower than the frame above it, so the note reads as commentary
+            on the screen rather than a second label. */}
+        {impact && (
+          <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-white/45">
+            {impact}
+          </p>
         )}
       </figure>
     </Reveal>
@@ -305,7 +321,9 @@ function Block({ block }: { block: CaseBlock }) {
       );
 
     case "figure":
-      return <Figure src={block.src} caption={block.caption} />;
+      return (
+        <Figure src={block.src} caption={block.caption} impact={block.impact} />
+      );
   }
 }
 
