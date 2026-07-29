@@ -14,11 +14,12 @@ import type { ReactNode } from "react";
 type Variant = "outline" | "solid";
 type Size = "sm" | "md" | "lg";
 
+/** Padding only. The type treatment is shared by every size (see the base
+ *  classes below), so these vary the footprint, never the voice. */
 const SIZES: Record<Size, string> = {
-  sm: "gap-2 px-5 py-2.5 text-sm",
-  md: "gap-3 px-7 py-3.5 text-sm",
-  // Section-level calls to action: smaller type, opened up and set in caps.
-  lg: "gap-3 px-8 py-4 text-xs uppercase tracking-[0.2em]",
+  sm: "gap-2 px-5 py-2.5",
+  md: "gap-3 px-6 py-3.5",
+  lg: "gap-3 px-8 py-4",
 };
 
 const VARIANTS: Record<Variant, { base: string; fill: string }> = {
@@ -74,7 +75,7 @@ export default function Button({
         : null)}
       onClick={onClick}
       /* `isolate` keeps the fill's negative z-index inside the button. */
-      className={`group relative isolate inline-flex items-center justify-center overflow-hidden rounded-full font-medium transition-colors duration-500 ease-out ${SIZES[size]} ${v.base} ${className}`}
+      className={`group relative isolate inline-flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-500 ease-out ${SIZES[size]} ${v.base} ${className}`}
     >
       <span
         aria-hidden

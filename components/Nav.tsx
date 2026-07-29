@@ -7,6 +7,10 @@ import Logo from "./Logo";
 import Button from "./Button";
 
 const links = [
+  // "#top" rather than "/": on the home page `to()` leaves it as a hash so
+  // Lenis smooth-scrolls up, and anywhere else it becomes "/#top", which
+  // navigates home. One entry covers both.
+  { label: "Home", href: "#top" },
   { label: "Work", href: "#work", count: projects.length },
   { label: "About", href: "#about" },
   { label: "Articles", href: "#articles" },
