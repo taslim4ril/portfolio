@@ -83,8 +83,13 @@
   --radius-xl: 1.25rem;
 }
 
-* {
-  border-color: var(--border);
+/* Default border colour. Must live in @layer base: unlayered CSS outranks
+   Tailwind's layered utilities, so as a bare `*` rule this silently beat
+   every border-white/20, border-accent and friend in the codebase. */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 }
 
 /* NOTE: no `scroll-behavior: smooth` and no `overflow-x: hidden` on body.

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { site, projects } from "@/lib/data";
 import Logo from "./Logo";
+import Button from "./Button";
 
 const links = [
   { label: "Work", href: "#work", count: projects.length },
@@ -63,13 +64,14 @@ export default function Nav() {
         </nav>
 
         {/* CTA */}
-        <a
+        <Button
           href={`mailto:${site.email}`}
-          className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/15 md:inline-flex"
+          size="sm"
+          icon="✦"
+          className="hidden md:inline-flex"
         >
-          Let&apos;s talk
-          <span className="text-accent">✦</span>
-        </a>
+          Let&apos;s connect
+        </Button>
 
         {/* Mobile toggle */}
         <button
@@ -100,13 +102,15 @@ export default function Nav() {
                 )}
               </a>
             ))}
-            <a
+            <Button
               href={`mailto:${site.email}`}
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-accent-ink"
+              variant="solid"
+              size="sm"
+              className="mt-2 w-full"
             >
-              Let&apos;s talk
-            </a>
+              Let&apos;s connect
+            </Button>
           </div>
         </div>
       )}

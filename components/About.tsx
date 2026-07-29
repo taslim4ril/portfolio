@@ -1,4 +1,5 @@
 import { site } from "@/lib/data";
+import Button from "./Button";
 
 const COPY =
   "I help ambitious brands and startups build digital products that stand out and scale. I believe in working smart, building fast, and designing with purpose.";
@@ -69,18 +70,9 @@ export default function About() {
             <span className="about-progress-fill block h-full w-full rounded-full bg-accent" />
           </div>
 
-          <a
-            href="/about"
-            className="group relative mt-10 inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:border-accent hover:text-accent"
-          >
+          <Button href="/about" icon="→" className="relative mt-10">
             Read more about me
-            <span
-              aria-hidden
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            >
-              →
-            </span>
-          </a>
+          </Button>
         </div>
       </div>
     </section>

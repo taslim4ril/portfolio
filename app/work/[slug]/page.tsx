@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CaseStudy from "@/components/CaseStudy";
+import Button from "@/components/Button";
 import { projects, site } from "@/lib/data";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -52,12 +53,9 @@ export default async function CaseStudyPage({ params }: Params) {
             <p className="mt-8 text-sm text-muted">
               The full case study is coming soon.
             </p>
-            <a
-              href="/work"
-              className="mx-auto mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
-            >
+            <Button href="/work" className="mx-auto mt-10">
               <span aria-hidden>←</span> Back to all work
-            </a>
+            </Button>
           </section>
         )}
         <Footer />

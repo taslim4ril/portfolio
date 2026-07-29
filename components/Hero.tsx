@@ -228,7 +228,7 @@ export default function Hero() {
               href="#contact"
               className="group mt-8 flex items-center justify-between border-t border-white/15 pt-6 text-base font-medium uppercase tracking-[0.15em] text-accent transition-colors hover:text-white md:text-lg"
             >
-              Talk to me
+              Let&apos;s connect
               {/* Heavy square-capped arrow: shaft on the diagonal, head drawn
                   as the corner it lands in. Sized to sit level with the cap
                   height of the label rather than as an inline glyph. */}
