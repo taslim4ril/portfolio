@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { site, projects } from "@/lib/data";
 import Logo from "./Logo";
-import Button from "./Button";
+import Button, { BUTTON_HEIGHT } from "./Button";
 
 const links = [
   // "#top" rather than "/": on the home page `to()` leaves it as a hash so
@@ -49,7 +49,7 @@ export default function Nav() {
 
         {/* Centered pill nav */}
         <nav
-          className={`absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-white/10 p-1.5 transition-colors md:flex ${
+          className={`absolute left-1/2 top-1/2 hidden ${BUTTON_HEIGHT} -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-white/10 px-1.5 transition-colors md:flex ${
             scrolled ? "bg-black/70 backdrop-blur-xl" : "bg-white/5 backdrop-blur-md"
           }`}
         >
@@ -68,14 +68,14 @@ export default function Nav() {
         </nav>
 
         {/* CTA */}
-        <Button
-          href={`mailto:${site.email}`}
-          size="sm"
-          icon="✦"
-          className="hidden md:inline-flex"
-        >
-          Let&apos;s connect
-        </Button>
+        {/* The wrapper owns the responsive visibility. `hidden` on the button
+            itself collides with the display utility in its own base classes,
+            and lost, so it stayed visible on mobile. */}
+        <span className="hidden md:block">
+          <Button href={`mailto:${site.email}`} size="sm" icon="✦">
+            Let&apos;s connect
+          </Button>
+        </span>
 
         {/* Mobile toggle */}
         <button

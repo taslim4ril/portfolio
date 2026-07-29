@@ -14,13 +14,17 @@ import type { ReactNode } from "react";
 type Variant = "outline" | "solid";
 type Size = "sm" | "md" | "lg";
 
-/** Padding only. The type treatment is shared by every size (see the base
- *  classes below), so these vary the footprint, never the voice. */
+/** Horizontal only. Height is fixed on the base so a button carrying a
+ *  circled icon can't end up taller than one with a bare glyph, which is
+ *  exactly what padding-driven sizing did. */
 const SIZES: Record<Size, string> = {
-  sm: "gap-2 px-5 py-2.5",
-  md: "gap-3 px-6 py-3.5",
-  lg: "gap-3 px-8 py-4",
+  sm: "gap-2 px-5",
+  md: "gap-3 px-6",
+  lg: "gap-3 px-8",
 };
+
+/** Matches the section CTAs, which set the reference height for the site. */
+export const BUTTON_HEIGHT = "h-[3.625rem]";
 
 const VARIANTS: Record<Variant, { base: string; fill: string }> = {
   outline: {
@@ -75,7 +79,7 @@ export default function Button({
         : null)}
       onClick={onClick}
       /* `isolate` keeps the fill's negative z-index inside the button. */
-      className={`group relative isolate inline-flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-500 ease-out ${SIZES[size]} ${v.base} ${className}`}
+      className={`group relative isolate inline-flex ${BUTTON_HEIGHT} items-center justify-center overflow-hidden whitespace-nowrap rounded-full text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-500 ease-out ${SIZES[size]} ${v.base} ${className}`}
     >
       <span
         aria-hidden

@@ -79,7 +79,7 @@ export default function Contact() {
             size="lg"
             icon={<CircleIcon>↗</CircleIcon>}
           >
-            Start the project
+            Start a project
           </Button>
         </div>
       </div>
