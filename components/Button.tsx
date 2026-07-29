@@ -43,7 +43,9 @@ const VARIANTS: Record<Variant, { base: string; fill: string }> = {
  *  tracks the label colour through the hover flip instead of being restyled. */
 export function CircleIcon({ children }: { children: ReactNode }) {
   return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full border border-current/40 text-[10px]">
+    /* Ring firms up alongside the label. `border-box` keeps the 24px footprint
+       whatever the border does, so the button's height never moves. */
+    <span className="flex h-6 w-6 items-center justify-center rounded-full border border-current/40 text-[10px] transition-[border-color,border-width] duration-500 ease-out group-hover:border-2 group-hover:border-current">
       {children}
     </span>
   );
@@ -79,7 +81,12 @@ export default function Button({
         : null)}
       onClick={onClick}
       /* `isolate` keeps the fill's negative z-index inside the button. */
-      className={`group relative isolate inline-flex ${BUTTON_HEIGHT} items-center justify-center overflow-hidden whitespace-nowrap rounded-full text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-500 ease-out ${SIZES[size]} ${v.base} ${className}`}
+      /* Weight comes from text-stroke, not font-weight: bumping the weight
+         would re-measure the label and resize a pill whose height is fixed
+         and whose text can't wrap. Stroke thickens the glyphs in place.
+         Plain `hover:` here rather than `group-hover:` — this element *is*
+         the group, so it isn't its own descendant. */
+      className={`group relative isolate inline-flex ${BUTTON_HEIGHT} items-center justify-center overflow-hidden whitespace-nowrap rounded-full text-xs font-medium uppercase tracking-[0.2em] [-webkit-text-stroke-width:0px] transition-[color,border-color,-webkit-text-stroke-width] duration-500 ease-out hover:[-webkit-text-stroke-width:0.7px] ${SIZES[size]} ${v.base} ${className}`}
     >
       <span
         aria-hidden

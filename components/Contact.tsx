@@ -1,5 +1,6 @@
 import { site } from "@/lib/data";
 import Button, { CircleIcon } from "./Button";
+import SectionBadge from "./SectionBadge";
 
 // First half stays white, second half gets the lime gradient (same treatment
 // as "Abdulkadir" in the hero).
@@ -51,9 +52,9 @@ export default function Contact() {
 
       {/* ===== Content ===== */}
       <div className="relative mx-auto w-full max-w-5xl text-center">
-        <p className="mb-10 text-xs uppercase tracking-[0.35em] text-muted">
-          Contact
-        </p>
+        <div className="mb-10 flex justify-center">
+          <SectionBadge>Contact</SectionBadge>
+        </div>
 
         <p
           className="word-track heading mx-auto max-w-4xl font-bold leading-[1.15] tracking-[-0.02em] text-white"

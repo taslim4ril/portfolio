@@ -1,5 +1,6 @@
 import { site } from "@/lib/data";
 import Button from "./Button";
+import SectionBadge from "./SectionBadge";
 
 const COPY =
   "I help ambitious brands and startups build digital products that stand out and scale. I believe in working smart, building fast, and designing with purpose.";
@@ -31,9 +32,7 @@ export default function About() {
           </span>
 
           {/* Badge */}
-          <span className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-4 py-2 text-sm text-white/80">
-            <span className="text-accent">✦</span> About
-          </span>
+          <SectionBadge className="relative">About</SectionBadge>
 
           {/* Scroll-revealed copy, set in Acorn. Uses the `font-heading`
               utility rather than `.heading`, which also forces a 0.95
