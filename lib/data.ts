@@ -173,11 +173,7 @@ export const projects: Project[] = [
             "They were not just dealing with inefficiency. They were operating without visibility.",
           ],
         },
-        {
-          kind: "figure",
-          src: "/images/work/research-flowchart.png",
-          caption: "The research flow behind the discovery work.",
-        },
+        { kind: "figure", caption: "Flowz: process overview" },
         {
           kind: "list",
           heading: "The Opportunity",
