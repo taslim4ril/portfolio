@@ -40,27 +40,30 @@ function Figure({
   return (
     <Reveal>
       <figure className="mx-auto max-w-5xl">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-border bg-surface">
-          {src ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={src}
-              alt={caption ?? ""}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2.5 text-white/30">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <circle cx="8.5" cy="9" r="1.6" />
-                <path d="M21 15l-5-5L5 21" />
-              </svg>
-              <span className="text-[11px] uppercase tracking-widest">
-                Image placeholder
-              </span>
-            </div>
-          )}
-        </div>
+        {/* A real image sets its own height. These artifacts range from a
+            4:3 phone pair to a 3.9:1 process strip, and cropping them all to
+            16:9 would cut the ends off the wide ones. The placeholder keeps
+            the fixed frame, since it has no aspect of its own. */}
+        {src ? (
+          <div className="overflow-hidden rounded-3xl border border-border bg-surface">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            {/* No `loading="lazy"` here: with h-auto and no width/height
+                attributes an unloaded image is zero-height, so it never
+                reaches the viewport and never loads. */}
+            <img src={src} alt={caption ?? ""} className="block h-auto w-full" />
+          </div>
+        ) : (
+          <div className="relative flex aspect-[16/9] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-3xl border border-border bg-surface text-white/30">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="9" r="1.6" />
+              <path d="M21 15l-5-5L5 21" />
+            </svg>
+            <span className="text-[11px] uppercase tracking-widest">
+              Image placeholder
+            </span>
+          </div>
+        )}
         {caption && (
           <figcaption className="mt-3 text-center text-sm text-muted">
             {caption}

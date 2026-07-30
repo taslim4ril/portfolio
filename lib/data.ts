@@ -173,7 +173,11 @@ export const projects: Project[] = [
             "They were not just dealing with inefficiency. They were operating without visibility.",
           ],
         },
-        { kind: "figure", caption: "Flowz: process overview" },
+        {
+          kind: "figure",
+          src: "/images/work/research-flowchart.png",
+          caption: "The research flow behind the discovery work.",
+        },
         {
           kind: "list",
           heading: "The Opportunity",
@@ -345,6 +349,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
+          src: "/images/work/flowz.webp",
           caption:
             "Analytics dashboard: throughput, progress, and bottlenecks surfaced in real time.",
           impact:
@@ -400,7 +405,16 @@ export const projects: Project[] = [
             "The goal was simple: make saving money feel as easy as spending it.",
           ],
         },
-        { kind: "figure", caption: "Go Pal: home & savings overview" },
+        {
+          kind: "figure",
+          src: "/images/work/gopal.webp",
+          caption: "Go Pal: the home screen the rest of the product hangs off.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/research-flowchart.png",
+          caption: "The research flow: listen, question, then make sense of it.",
+        },
         {
           kind: "list",
           heading: "The Opportunity",
@@ -481,6 +495,12 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "figure",
+          src: "/images/work/gopal-process-steps.png",
+          caption:
+            "The six stages the work moved through, research to final usability test.",
+        },
+        {
           kind: "features",
           items: [
             {
@@ -556,9 +576,21 @@ export const projects: Project[] = [
             "A closer look at the core screens: home and savings overview, the savings flow, and the virtual card experience.",
           ],
         },
-        { kind: "figure", caption: "Home / Savings Overview" },
-        { kind: "figure", caption: "Savings Flow" },
-        { kind: "figure", caption: "Virtual Card Experience" },
+        {
+          kind: "figure",
+          src: "/images/work/gopal-home-savings.png",
+          caption: "Home / Savings Overview",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/gopal-savings-flow.png",
+          caption: "Savings Flow",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/gopal-cards.png",
+          caption: "Virtual Card Experience",
+        },
       ],
     },
   },
