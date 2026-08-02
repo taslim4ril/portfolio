@@ -935,24 +935,3 @@ export const experience: Role[] = [
     ],
   },
 ];
-
-export const testimonials = [
-  {
-    quote:
-      "Working with Taslim has been fantastic. His constant availability and willingness to assist make our work so much easier. Having someone like him on our team is a real asset.",
-    name: "Chimdi Nwawueze",
-    company: "TradeBuza Technologies",
-  },
-  {
-    quote:
-      "Taslim is an exceptional product designer, known for his creativity and user-centered approach. He consistently delivers outstanding results and he's very good at transforming ideas into visually appealing and intuitive designs.",
-    name: "Kazeem Adegboyega",
-    company: "Ikons Systems",
-  },
-  {
-    quote:
-      "Collaborating with Taslim is truly exceptional. His unwavering readiness and eagerness to help simplify our tasks considerably. Possessing an individual like him on our crew is a genuine boon.",
-    name: "Jibril Abdulkadir",
-    company: "Field Intelligence",
-  },
-];

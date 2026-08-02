@@ -3,7 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import ScrambleHeading from "@/components/ScrambleHeading";
-import { about, experience, testimonials, stats, site } from "@/lib/data";
+import { about, experience, stats, site } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: `About | ${site.name}`,
@@ -83,7 +83,9 @@ export default function AboutPage() {
         </section>
 
         {/* ===== Experience ===== */}
-        <section className="px-6 py-16 md:px-[100px]">
+        {/* Last section on the page, so it carries the deeper bottom padding
+            that used to sit on the testimonials below it. */}
+        <section className="px-6 py-16 pb-28 md:px-[100px]">
           <Reveal>
             <ScrambleHeading
               lead="Work"
@@ -118,36 +120,6 @@ export default function AboutPage() {
                     ))}
                   </ul>
                 </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ===== Testimonials ===== */}
-        <section className="px-6 py-16 pb-28 md:px-[100px]">
-          <Reveal>
-            <ScrambleHeading
-              lead="Kind"
-              bold="Words"
-              className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl"
-            />
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 0.08}>
-                <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface/60 p-8">
-                  <span aria-hidden className="text-3xl leading-none text-accent">
-                    &ldquo;
-                  </span>
-                  <blockquote className="mt-4 flex-1 leading-relaxed text-white/75">
-                    {t.quote}
-                  </blockquote>
-                  <figcaption className="mt-8 border-t border-border pt-5">
-                    <div className="font-medium text-white">{t.name}</div>
-                    <div className="mt-1 text-sm text-muted">{t.company}</div>
-                  </figcaption>
-                </figure>
               </Reveal>
             ))}
           </div>
