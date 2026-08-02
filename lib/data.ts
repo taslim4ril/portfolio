@@ -181,13 +181,21 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "figure",
+          src: "/images/work/plantinerary.jpg",
+          caption:
+            "Home: discovery up top, but the itinerary is already on the screen underneath it.",
+          impact:
+            "The argument the whole product rests on. Browsing and planning share one surface, because the moment you send someone elsewhere to save a thing is the moment the intention gets lost.",
+        },
+        {
           kind: "prose",
           heading: "Moving fast without guessing",
           body: [
             "Four weeks is not enough time for a full research programme, so I used AI deliberately and with limits.",
-            "It was good for pressure testing my assumptions, generating traveller scenarios and edge cases I had not considered: the solo traveller with a rigid flight time, the group trip with three conflicting appetites. It also helped me summarise the patterns I was seeing across reviews, forum threads, and app store complaints.",
-            "It was not good for telling me what real people actually do. Everything it produced was a hypothesis, not a finding. I treated it as a way to get to better questions faster, then checked those questions against real traveller conversations and my own reading of existing products.",
-            "That distinction mattered. It kept the project honest, and it is the same way I would use these tools on a team with a proper research budget.",
+            "It was good for pressure testing my assumptions and generating traveller scenarios I had not considered: the solo traveller with a rigid flight time, the group trip with three conflicting appetites. It helped me summarise patterns across reviews, forum threads, and app store complaints.",
+            "It was not good for telling me what real people do. Everything it produced was a hypothesis, not a finding. I treated it as a way to reach better questions faster, then checked those questions against real traveller conversations and my own reading of existing products.",
+            "That distinction kept the project honest, and it is the same way I would use these tools on a team with a proper research budget.",
           ],
         },
         {
@@ -197,15 +205,15 @@ export const projects: Project[] = [
           items: [
             {
               title: "Saving is easy. Sequencing is impossible.",
-              desc: "Every product makes it a one tap job to save a place. Almost none of them help you decide whether it goes on Wednesday morning or Friday afternoon, or whether it is even reachable from the last thing you saved.",
+              desc: "Every product makes it one tap to save a place. Almost none help you decide whether it goes Wednesday morning or Friday afternoon, or whether it is even reachable from the last thing you saved.",
             },
             {
               title: "People think in days, not lists.",
-              desc: "Travellers narrate their plans chronologically: morning we do the market, then lunch nearby, then we are free until dinner. Yet most tools store plans as flat lists of bookmarks. The mental model and the data model do not match.",
+              desc: "Travellers narrate plans chronologically: morning the market, lunch nearby, free until dinner. Yet most tools store plans as flat lists of bookmarks. The mental model and the data model do not match.",
             },
             {
               title: "Suggestions get ignored at the wrong moment.",
-              desc: "Recommendations shown during browsing feel like advertising. The same recommendation shown when someone is staring at an empty Thursday afternoon feels like help. Timing changed everything about how a suggestion landed.",
+              desc: "Recommendations during browsing feel like advertising. The same recommendation shown while someone stares at an empty Thursday feels like help. Timing changed everything.",
             },
           ],
           outro: [
@@ -213,10 +221,19 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "prose",
+          heading: "The brief I would have been given",
+          body: [
+            "There was no client on this one, which meant there was nobody to tell me the idea was too ambitious and nobody to defend it to. Both halves of that are a loss.",
+            "So I wrote the brief I expected to receive, then argued with it. If a travel company had commissioned this, the ask would have been recognisable: better discovery, richer recommendations, more inspiration. That is what the category sells and what users say they want.",
+            "It is also the opposite of what the research pointed at. Every product in this space is already excellent at showing you more. Building another one would have been answering a question nobody was stuck on.",
+          ],
+        },
+        {
           kind: "grid",
           heading: "Three verbs",
           intro: [
-            "I built the product around a sequence rather than a feature list.",
+            "So I built around a sequence rather than a feature list:",
           ],
           columns: 3,
           items: [
@@ -228,8 +245,15 @@ export const projects: Project[] = [
             },
           ],
           outro: [
-            "Most planning tools do the first two and quietly stop. The third one is where a plan either earns its keep or falls apart, so I treated it as a first class part of the product rather than an afterthought.",
+            "Most planning tools do the first two and quietly stop. The third is where a plan either earns its keep or falls apart, so I treated it as a first class part of the product rather than an afterthought.",
           ],
+        },
+        {
+          kind: "figure",
+          caption:
+            "Trip planner: the timeline with loose time bands, drag to reorder, and the ideas tray for undecided plans.",
+          impact:
+            "Where the product does the thing the category avoids. Structure enough to be a real plan, loose enough that a traveller will not abandon it the first time reality drifts.",
         },
         {
           kind: "decisions",
@@ -260,12 +284,12 @@ export const projects: Project[] = [
             {
               title: "AI that waits its turn",
               problem:
-                "Recommendation engines are usually designed to fill space. More cards, more scroll, more engagement. That is exactly the overload people are trying to escape.",
+                "Recommendation engines are designed to fill space. More cards, more scroll, more engagement. That is exactly the overload people are trying to escape.",
               decision:
-                "Suggestions appear in context and in small numbers. An empty afternoon prompts two or three options that fit the gap, the neighbourhood you are already in, and the length of the trip. Not a feed. Not a carousel. A dismissed suggestion stays dismissed.",
+                "Suggestions appear in context and in small numbers. An empty afternoon prompts two or three options that fit the gap, the neighbourhood, and the length of the trip. Not a feed. Not a carousel. A dismissed suggestion stays dismissed.",
               note: {
                 label: "The tradeoff",
-                body: "Fewer suggestions means fewer chances to delight someone with an unexpected find. I accepted that. A product that surfaces three relevant things is more useful than one that surfaces thirty and asks you to sort them, and trust is easier to lose than to build.",
+                body: "Fewer suggestions means fewer chances to delight someone with an unexpected find, and it is the decision a client would most likely have overruled. Engagement metrics reward the feed. I accepted the cost: a product that surfaces three relevant things is more useful than one that surfaces thirty and asks you to sort them, and trust is easier to lose than to build.",
               },
             },
             {
@@ -278,6 +302,13 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "figure",
+          caption:
+            "Activity breakdown: one day, readable at a glance, with travel time between stops made visible.",
+          impact:
+            "The screen that has to survive contact with the actual trip. If this one fails at 9am in an unfamiliar city, none of the planning mattered.",
+        },
+        {
           kind: "quote",
           heading: "The principle",
           body: ["AI supports the decision. It does not make it."],
@@ -286,9 +317,17 @@ export const projects: Project[] = [
           kind: "prose",
           heading: "Where the first version was wrong",
           body: [
-            "The initial recommendation surface was a card feed on the home screen. It tested badly against my own principle within a day of building it. It looked like a shopping page, it competed with the user's own plan for attention, and it pushed the actual itinerary below the fold. Pulling recommendations out of the home screen and into the empty slots of the timeline was the single biggest improvement in the project.",
+            "The initial recommendation surface was a card feed on the home screen. It failed against my own principle within a day of building it. It looked like a shopping page, it competed with the user's own plan for attention, and it pushed the actual itinerary below the fold. Pulling recommendations out of the home screen and into the empty slots of the timeline was the single biggest improvement in the project.",
             "The first itinerary builder also required a time for every activity. It felt rigorous and it was quietly hostile. Anything a traveller was unsure about had nowhere to live, so it lived outside the product, which defeated the point. The ideas tray came out of that failure.",
+            "Both corrections came from the same mistake: I had designed for the plan being finished, when the interesting state is the plan being half-formed.",
           ],
+        },
+        {
+          kind: "figure",
+          caption:
+            "AI recommendations in context: suggestions appearing inside an empty afternoon rather than in a feed competing for attention.",
+          impact:
+            "The fix for the home screen feed. Same recommendations, same engine, different moment, and it stops reading as advertising and starts reading as help.",
         },
         {
           kind: "list",
@@ -312,33 +351,6 @@ export const projects: Project[] = [
             "Structure lowers cognitive load, but only if it flexes. Rigid structure gets abandoned.",
             "A plan is only good if it survives contact with the actual trip.",
           ],
-        },
-        {
-          kind: "prose",
-          heading: "Final designs",
-          body: [
-            "A closer look at the core screens: discovery, the itinerary builder, a single day, and suggestions in context.",
-          ],
-        },
-        {
-          kind: "figure",
-          caption:
-            "Home and discovery: browsing that leads somewhere. Every place can be added to a trip in one action.",
-        },
-        {
-          kind: "figure",
-          caption:
-            "Trip planner and itinerary builder: the timeline with loose time bands, drag to reorder, and the ideas tray for undecided plans.",
-        },
-        {
-          kind: "figure",
-          caption:
-            "Activity breakdown: one day, readable at a glance, with travel time between stops made visible.",
-        },
-        {
-          kind: "figure",
-          caption:
-            "AI recommendations in context: suggestions appearing inside an empty afternoon rather than in a feed competing for attention.",
         },
         {
           kind: "quote",
@@ -380,161 +392,158 @@ export const projects: Project[] = [
       blocks: [
         {
           kind: "prose",
-          heading: "Bringing Clarity to Broken Workflows",
+          heading: "Bringing clarity to broken workflows",
           body: [
-            "As businesses scale, their workflows often become harder to manage.",
-            "What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned. Productivity drops, not because people are not working hard, but because the system itself is inefficient.",
-            "This was the reality I uncovered while speaking with operations managers, team leads, and business owners.",
+            "As businesses scale, their workflows often become harder to manage. What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned.",
+            "Productivity drops, not because people are not working hard, but because the system itself is inefficient. That was the reality I kept hearing from operations managers, team leads, and business owners.",
             "They were not just dealing with inefficiency. They were operating without visibility.",
           ],
         },
-        { kind: "figure", caption: "Flowz: process overview" },
+        {
+          kind: "figure",
+          src: "/images/work/flowz.webp",
+          caption:
+            "The dashboard that became the product's front door: running processes, approvals waiting on you, and execution monitoring in one view.",
+          impact:
+            "The brief asked for a workflow tool. This screen is the argument that what they actually needed was a status answer, available before anyone has to go looking for it.",
+        },
         {
           kind: "list",
-          heading: "The Opportunity",
+          heading: "The brief, and what was missing from it",
           intro: [
-            "Most businesses were relying on a mix of tools to manage workflows. Communication happened in one place, tasks in another, and reporting somewhere else entirely.",
-            "This fragmentation created:",
+            "The request that came to me was specific: build a platform to digitise our workflows. Teams were spread across a chat tool for communication, a tracker for tasks, and spreadsheets for reporting.",
+            "That fragmentation was creating real cost:",
           ],
           items: [
             "Delays in approvals and execution",
-            "Lack of real-time visibility into progress",
+            "No real-time visibility into progress",
             "Poor collaboration across teams",
             "Limited ability to measure performance",
           ],
           outro: [
-            "The opportunity was clear. There was a need for a single platform that could bring structure, visibility, and automation into one seamless experience.",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "A Mission to Simplify How Work Gets Done",
-          intro: [
-            "Flowz Process Manager was built around one core idea: make complex business processes simple, visible, and efficient.",
-            "The goal was not just to digitize workflows. It was to rethink how teams interact with them. I wanted to create a system where:",
-          ],
-          items: [
-            "Workflows are easy to build and understand",
-            "Tasks move forward without constant manual input",
-            "Teams stay aligned without relying on external tools",
-            "Managers can make decisions based on real-time data",
+            "Digitising those workflows would have solved the first problem and none of the others. A faster version of a process nobody can see is still a process nobody can see.",
+            "So I treated the brief as the starting position rather than the specification, and went looking for what the fragmentation was actually costing.",
           ],
         },
         {
           kind: "grid",
-          heading: "Understanding the People Behind the System",
+          heading: "Three people, three different questions",
           intro: [
-            "To design something meaningful, I needed to understand who it was for. Through research, three key user groups emerged:",
+            "Research surfaced three groups, and they were not asking the platform for the same thing:",
           ],
           columns: 3,
           items: [
             {
-              title: "Operations Managers",
-              desc: "Focused on efficiency and identifying bottlenecks.",
+              title: "Operations managers",
+              desc: "Focused on efficiency and finding bottlenecks. They wanted to know where work was stuck, not what everyone was doing.",
             },
             {
-              title: "Team Leads",
-              desc: "Responsible for assigning tasks and tracking progress.",
+              title: "Team leads",
+              desc: "Responsible for assigning work and tracking progress. They needed to move things forward without chasing people for updates.",
             },
             {
-              title: "Business Owners",
-              desc: "Interested in performance, insights, and ROI.",
+              title: "Business owners",
+              desc: "Interested in performance and return. They wanted a number they could trust without asking someone to prepare it.",
             },
           ],
           outro: [
-            "Each group had different goals, but they all needed one thing: a clear view of how work flows across their organization.",
+            "Different goals, one shared need: a clear view of how work moves through the organisation. That became the thing I designed toward, and it is broader than the brief I was handed.",
           ],
         },
         {
           kind: "prose",
-          heading: "Shaping the Experience",
+          heading: "What they asked for, and what they needed",
           body: [
-            "I approached the design with a focus on simplicity and clarity. Instead of overwhelming users with features, I focused on creating a system that feels intuitive from the first interaction.",
-            "Early wireframes explored how workflows could be visualized, how tasks could be structured, and how users could navigate the platform without friction.",
-            "Prototypes were tested with real users, and their feedback guided key refinements across the product.",
+            "The stated requirement was a workflow builder with task assignment and status tracking. Reasonable, and it would have shipped.",
+            "But watching how teams worked made a different problem obvious. The bottleneck was rarely creating the workflow. It was everything around it: the approval sitting in someone's inbox, the update that lived in a chat thread nobody searched, the report assembled by hand every Friday.",
+            "A builder alone would have digitised the easy part and left the expensive part untouched. So I proposed three things that were not in the brief, and had to make the case for each.",
           ],
         },
-        { kind: "figure", caption: "Wireframes & early explorations" },
         {
-          kind: "features",
-          heading: "Building the Core Experience",
-          intro: ["Flowz came together through four key product areas:"],
+          kind: "decisions",
+          heading: "The three additions, and the pushback on each",
+          intro: [
+            "None of these were requested. Two of them were initially resisted, and one of those resistances turned out to be right.",
+          ],
           items: [
             {
-              title: "Workflow Builder",
-              desc: "Workflows needed to feel visual and easy to control. I designed a drag-and-drop experience that lets users map out processes step by step, defining tasks, deadlines, and dependencies in a clear way.",
+              title: "Automation, when the ask was assignment",
+              problem:
+                "The brief covered assigning tasks to people. It did not cover the reminders, approvals, and status updates that were eating the day between those tasks.",
+              decision:
+                "I pushed for automation as a first-class part of the product rather than a later phase, so repetitive actions could move without a person pushing them.",
+              note: {
+                label: "The pushback",
+                body: "The concern was scope and trust: automation is harder to build, harder to explain, and users who do not understand it will not switch it on. That second half was correct, and it changed the design. Instead of a rules engine, automation shipped as a small set of named, pre-built templates. Framing it as a few recognisable actions rather than a configuration surface is what made teams willing to try it.",
+              },
+            },
+            {
+              title: "Collaboration inside the task, not beside it",
+              problem:
+                "Nobody asked for comments or mentions. The assumption was that teams would keep talking in the chat tool they already had.",
+              decision:
+                "I embedded comments, mentions, and notifications directly into the task, so the conversation lives with the work it is about.",
+              note: {
+                label: "Why I pushed for it",
+                body: "Every handoff failure I found in research traced back to context living somewhere other than the work. Keeping the chat tool would have kept the failure. This was the addition that met the least resistance once the research was on the table, because everyone had a story about a decision they could not find later.",
+              },
+            },
+            {
+              title: "An analytics view nobody requested",
+              problem:
+                "Reporting was described as a later phase. Business owners were expected to keep asking someone to pull numbers.",
+              decision:
+                "I designed the dashboard into the first release: throughput, progress, and bottlenecks surfaced in real time.",
+              note: {
+                label: "The tradeoff",
+                body: "This one cost me elsewhere. Building it meant deferring depth in the workflow builder, and I argued that a shallower builder with visibility beats a richer builder without it. Visibility was the actual complaint underneath the brief. The builder was just the thing they knew how to ask for.",
+              },
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Where the first version was wrong",
+          body: [
+            "The first build was too much product. Every capability was visible from the first screen, on the theory that showing the range would demonstrate the value.",
+            "It did the opposite. Early testers described it as overwhelming, and the reaction was strongest among exactly the non-technical users the platform was supposed to bring in. People who could not tell which of nine things to do first did none of them.",
+            "That was the most useful failure in the project. The fix was not fewer features but a slower reveal: guided onboarding, contextual tips at the moment a feature becomes relevant, and simplified default flows. Complexity stays available; it just stops being the first thing you meet.",
+          ],
+        },
+        {
+          kind: "figure",
+          caption:
+            "Guided onboarding: a first-run walkthrough with tips that appear where a feature is used.",
+          impact:
+            "The direct answer to that early testing. It holds complexity back until someone has a reason to care about it, which is what let non-technical teams get past the first session.",
+        },
+        {
+          kind: "features",
+          heading: "What shipped",
+          intro: [
+            "Four areas carried the product, two of them from the original brief and two argued into it:",
+          ],
+          items: [
+            {
+              title: "Workflow builder",
+              desc: "A drag-and-drop canvas for mapping a process step by step, with tasks, deadlines, and dependencies laid out as blocks rather than configured in a form.",
               result: "Reduced workflow setup time by 45%",
             },
             {
-              title: "Task Automation",
-              desc: "Manual work was slowing teams down. Flowz introduced automation to handle repetitive actions like reminders, approvals, and updates, reducing the need for constant human intervention.",
+              title: "Task automation",
+              desc: "Reminders, approvals, and status updates handled by pre-built templates, so the routine parts move without anyone pushing them.",
               result: "Reduced manual effort by 60%",
             },
             {
-              title: "Real-Time Collaboration",
-              desc: "Teams were relying too much on external communication tools. By embedding comments, mentions, and notifications directly into tasks, collaboration became part of the workflow itself.",
+              title: "Real-time collaboration",
+              desc: "Comments, mentions, and notifications living inside the task, so context stays attached to the work instead of scattering into chat.",
               result: "Increased task completion rates by 30%",
             },
             {
-              title: "Analytics Dashboard",
-              desc: "Managers needed more than just data; they needed insight. I designed a dashboard that highlights performance, tracks progress, and surfaces bottlenecks in real time.",
+              title: "Analytics dashboard",
+              desc: "Performance, progress, and bottlenecks surfaced as they happen, rather than assembled on request.",
               result: "Decision-making became 50% faster",
             },
-          ],
-        },
-        {
-          kind: "grid",
-          heading: "Design Decisions That Shaped Flowz",
-          intro: ["Some decisions had a significant impact on the final product:"],
-          columns: 3,
-          items: [
-            {
-              title: "Visual, not technical",
-              desc: "Users interacted better with drag-and-drop structures than with complex configurations.",
-            },
-            {
-              title: "Collaboration within tasks",
-              desc: "Keeping communication tied to tasks reduced context switching and improved clarity.",
-            },
-            {
-              title: "Automation via templates",
-              desc: "Pre-built workflows made automation approachable for non-technical users.",
-            },
-          ],
-        },
-        {
-          kind: "grid",
-          heading: "Overcoming Key Challenges",
-          columns: 2,
-          items: [
-            {
-              title: "Feature complexity vs. usability",
-              desc: "Early versions felt overwhelming. I introduced guided onboarding, contextual tips, and simplified flows to make the experience easier to adopt.",
-            },
-            {
-              title: "Adoption of automation",
-              desc: "Many users were unfamiliar with automation. I addressed this by designing simple templates and breaking automation down into understandable actions.",
-            },
-          ],
-        },
-        {
-          kind: "impact",
-          heading: "The Impact",
-          intro: ["After launch, Flowz delivered measurable improvements:"],
-          metrics: [
-            { value: "60%", label: "reduction in task completion time" },
-            { value: "45%", label: "improvement in workflow transparency" },
-            { value: "30%", label: "increase in team productivity" },
-          ],
-          body: [
-            "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "Final designs",
-          body: [
-            "The five screens that carry the product, and what each one is actually doing for the people using it.",
           ],
         },
         {
@@ -549,7 +558,7 @@ export const projects: Project[] = [
           caption:
             "Automation setup: rules for reminders, approvals, and status updates, started from pre-built templates.",
           impact:
-            "The templates carry the weight here. Presenting automation as a handful of named actions rather than a configuration screen is what made teams willing to try it at all.",
+            "The shape this took because of the pushback. Presenting automation as a handful of named actions rather than a configuration screen is what made teams willing to try it at all.",
         },
         {
           kind: "figure",
@@ -559,26 +568,46 @@ export const projects: Project[] = [
             "Keeps the conversation attached to the work. Removing the trip out to a separate chat tool closed the gap where context kept going missing between handoffs.",
         },
         {
-          kind: "figure",
-          src: "/images/work/flowz.webp",
-          caption:
-            "Analytics dashboard: throughput, progress, and bottlenecks surfaced in real time.",
-          impact:
-            "Gives managers the visibility the research said they were missing, so status becomes something they read at a glance rather than chase around the team.",
+          kind: "grid",
+          heading: "What the decisions came down to",
+          intro: ["Three calls did most of the work:"],
+          columns: 3,
+          items: [
+            {
+              title: "Visual, not technical",
+              desc: "Users interacted far better with drag-and-drop structure than with configuration. The same capability, framed as something you arrange rather than something you set up.",
+            },
+            {
+              title: "Conversation tied to tasks",
+              desc: "Keeping communication attached to the work cut context switching and made decisions findable after the fact.",
+            },
+            {
+              title: "Automation through templates",
+              desc: "Pre-built workflows made automation approachable for people who would never have opened a rules editor.",
+            },
+          ],
         },
         {
-          kind: "figure",
-          caption:
-            "Guided onboarding: a first-run walkthrough with contextual tips.",
-          impact:
-            "The direct answer to early testing, where the full feature set landed as overwhelming. It holds complexity back until someone has a reason to care about it.",
+          kind: "impact",
+          heading: "The impact",
+          intro: ["After launch, the platform delivered measurable improvement:"],
+          metrics: [
+            { value: "60%", label: "reduction in task completion time" },
+            { value: "45%", label: "improvement in workflow transparency" },
+            { value: "30%", label: "increase in team productivity" },
+          ],
+          body: [
+            "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
+            "Worth noting that two of the three numbers above come from the parts nobody asked for.",
+          ],
         },
         {
           kind: "quote",
           heading: "Reflection",
           body: [
             "Good design is not about adding more features. It is about removing friction.",
-            "By focusing on clarity, usability, and real user needs, I was able to transform a complex problem into a simple, scalable solution.",
+            "The harder lesson was about the brief. A client describes the problem in the vocabulary of the solution they already imagined, and taking that literally produces something correct and useless. The job was to hear digitise our workflows and understand it as we cannot see our own work.",
+            "The pushback was part of that, not an obstacle to it. The objection to automation was right about users, and the product is better for having lost that argument.",
           ],
         },
       ],
@@ -611,196 +640,169 @@ export const projects: Project[] = [
           kind: "prose",
           heading: "Overview",
           body: [
-            "Go Pal is an online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
-            "With the rise of digital-first banking, users are shifting toward platforms that are fast, intuitive, and entirely mobile. Go Pal responds to this shift by introducing a seamless money-saving feature that fits naturally into users' financial routines, without adding complexity.",
-            "The goal was simple: make saving money feel as easy as spending it.",
+            "Go Pal is an online banking experience designed to make everyday transactions effortless while helping people build better saving habits.",
+            "Banking has gone mobile-first, but saving has not come with it. It still sits off to the side as a separate, effort-heavy task you are supposed to remember to do.",
+            "The goal was simple to state and hard to build: make saving feel as easy as spending.",
           ],
         },
         {
           kind: "figure",
           src: "/images/work/gopal.webp",
-          caption: "Go Pal: the home screen the rest of the product hangs off.",
+          caption:
+            "Home: balance, quick access to the four things people actually do, and recent activity.",
+          impact:
+            "Everything above the fold is spending. That was the honest starting point, and the whole design problem was getting saving into this screen without shouting.",
+        },
+        {
+          kind: "prose",
+          heading: "Setting my own brief",
+          body: [
+            "This was a self-directed project, so there was no client to hand me requirements and no product owner to argue with. That sounds freeing. It is mostly a trap.",
+            "With nobody to push back, the only thing stopping you shipping your first idea is your willingness to go looking for the objection yourself. So I built the pushback in deliberately: three rounds of testing, each one aimed at finding what I had got wrong rather than confirming what I had got right.",
+            "Everything below that reads as a correction came from those rounds, not from hindsight.",
+          ],
         },
         {
           kind: "figure",
           src: "/images/work/research-flowchart.png",
-          caption: "The research flow: listen, question, then make sense of it.",
-        },
-        {
-          kind: "list",
-          heading: "The Opportunity",
-          intro: [
-            "Digital banking has evolved; but saving money still feels like a separate, effort-heavy task.",
-            "Through early exploration, a few gaps became clear:",
-          ],
-          items: [
-            "Users could check balances, but lacked real-time clarity and control",
-            "Saving required manual effort or external tools",
-            "Everyday banking actions (sending money, reporting issues) weren't always frictionless",
-          ],
-          outro: [
-            "This raised a key question: how might we make saving a natural part of everyday banking, instead of an extra step?",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "My Role & Scope",
-          intro: [
-            "I led this project as the sole product designer, responsible for:",
-          ],
-          items: [
-            "End-to-end UX design",
-            "Research and synthesis",
-            "Interaction and visual design",
-            "Prototyping and iteration",
-          ],
-          outro: [
-            "Timeline: 1 month, across 3 iterative design cycles based on continuous user feedback.",
-          ],
-        },
-        {
-          kind: "grid",
-          heading: "Understanding Users",
-          intro: [
-            "To ground the product in real needs, I conducted interviews with 12 participants across different age groups and financial behaviors.",
-          ],
-          columns: 3,
-          items: [
-            {
-              title: "Who they are",
-              desc: "70% aged 18–45. 30% aged 45+.",
-            },
-            {
-              title: "What they need",
-              desc: "Easier ways to save without juggling multiple apps, and virtual cards for safer, smoother online payments.",
-            },
-            {
-              title: "What they told me",
-              desc: '"Make payments faster" (QR code scanning) · "Everything in one place" (bill payments) · "Help me track my money" (clearer transaction history).',
-            },
-          ],
-          outro: [
-            "Users don't want more features; they want less friction and more control.",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "Defining the Experience",
-          intro: ["Based on research, the core experience needed to support:"],
-          items: [
-            "Instant balance visibility for better financial awareness",
-            "Real-time notifications for key account activity",
-            "Fast, seamless transfers between users",
-            "Simple card management, including reporting lost or stolen cards",
-          ],
-          outro: [
-            "But more importantly: the product needed to nudge users toward saving, without forcing behavior change.",
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "Design Approach",
-          body: [
-            "I focused on embedding saving behaviors directly into everyday interactions.",
-            "Instead of treating saving as a separate feature, I designed it as a natural extension of spending and account management. This led to three key design directions.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/gopal-process-steps.png",
           caption:
-            "The six stages the work moved through, research to final usability test.",
-        },
-        {
-          kind: "features",
-          items: [
-            {
-              title: "Making Saving Effortless",
-              desc: "Saving shouldn't require planning; it should happen in the background. I designed one-tap transfers from the main account to savings, flexible saving plans for different goals, and an autosave system (daily, weekly, monthly).",
-              result:
-                "Users build habits passively, without needing constant decision-making.",
-            },
-            {
-              title: "Enabling Seamless Payments",
-              desc: "Online transactions should feel fast, secure, and reliable. I designed a virtual debit card system for online payments, simplified access and management of cards, and clear transaction visibility.",
-              result: "Users gain confidence and speed when making digital payments.",
-            },
-            {
-              title: "Personalizing the Experience",
-              desc: "Different users face different financial challenges. I designed flexible flows that adapt to saving behaviors, simplified navigation for core tasks, and thoughtful handling of edge cases like missed autosave or low balance.",
-              result: "A more inclusive and adaptable banking experience.",
-            },
-          ],
+            "The research flow: listen, dig deeper, make sense of it, then move to ideas.",
+          impact:
+            "Structuring it this way is what stopped the interviews turning into feature requests. The rule was to keep asking why until people described a behaviour rather than a button.",
         },
         {
           kind: "list",
-          heading: "Iteration & Refinement",
+          heading: "What people asked for",
           intro: [
-            "Over three iterative cycles, I continuously tested and refined the experience. Each round focused on:",
+            "I interviewed 12 participants across different ages and money habits. Asked directly what they wanted, they gave me a feature list:",
           ],
           items: [
-            "Reducing friction in key flows",
-            "Improving clarity in financial information",
-            "Strengthening user trust and confidence",
+            "Faster payments, usually meaning QR scanning",
+            "Everything in one place, usually meaning bill payments",
+            "Better tracking, usually meaning clearer transaction history",
+            "Virtual cards for safer online payments",
           ],
           outro: [
-            "This iterative approach ensured the final product was not just functional, but intuitive and user-centered.",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "Key Learnings",
-          intro: [
-            "This project pushed me to think beyond features and focus on behavior.",
-          ],
-          items: [
-            "Saving is behavioral, not just functional",
-            "Small UX decisions can significantly impact financial habits",
-            "Designing for edge cases is critical in financial products",
-            "Iteration is essential to uncover what users actually need",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "Outcome",
-          intro: [
-            "Go Pal transforms saving from a conscious effort into a seamless habit. By integrating saving into everyday banking actions, the product:",
-          ],
-          items: [
-            "Reduces friction in financial management",
-            "Encourages consistent saving behavior",
-            "Delivers a more intuitive and engaging banking experience",
+            "A reasonable roadmap. It is also, almost entirely, a list of ways to spend money more comfortably.",
           ],
         },
         {
           kind: "quote",
-          heading: "Final Thoughts",
+          heading: "The gap",
           body: [
-            "Designing Go Pal reinforced the importance of combining usability with behavioral design.",
-            "By staying close to user needs, embracing feedback, and iterating quickly, I was able to create a product that feels simple on the surface, but is deeply intentional underneath.",
+            "People asked me to make spending smoother. What they described, when they stopped listing features, was regret about not saving.",
+            "Nobody requested an autosave system. Several described the same failure: money arrives, money leaves, nothing is left at the end of the month, and the intention to save was real the whole time.",
           ],
         },
         {
           kind: "prose",
-          heading: "Final Designs",
+          heading: "What they wanted against what they needed",
           body: [
-            "A closer look at the core screens: home and savings overview, the savings flow, and the virtual card experience.",
+            "Taken literally, the research pointed at a competent payments app. Faster transfers, cleaner history, a virtual card. I could have built exactly that and every participant would have said it was what they asked for.",
+            "But a smoother way to spend money does not help someone who cannot hold on to any. The requests were about friction; the actual problem was behaviour. Those need different products.",
+            "So I kept everything on the list and added the thing nobody named: saving built into the flow of ordinary banking, rather than parked in a section you have to decide to visit.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What that meant in practice",
+          intro: ["The core experience had to support:"],
+          items: [
+            "Instant balance visibility, so financial awareness is passive",
+            "Real-time notifications for anything that matters",
+            "Fast, seamless transfers between people",
+            "Simple card management, including reporting a card lost or stolen",
+          ],
+          outro: [
+            "And underneath all of it, the part I added: the product had to nudge people toward saving without forcing a behaviour change or making them feel managed.",
+          ],
+        },
+        {
+          kind: "features",
+          heading: "Three directions",
+          intro: [
+            "Rather than treating saving as a feature, I designed it as a natural extension of spending and account management.",
+          ],
+          items: [
+            {
+              title: "Making saving effortless",
+              desc: "Saving shouldn't require planning; it should happen in the background. One-tap transfers from the main account, flexible plans for different goals, and an autosave system that runs daily, weekly, or monthly.",
+              result:
+                "Habits build passively, without constant decision-making",
+            },
+            {
+              title: "Enabling seamless payments",
+              desc: "Online transactions should feel fast, secure, and reliable. A virtual debit card, simplified card management, and clear transaction visibility.",
+              result: "Confidence and speed on digital payments",
+            },
+            {
+              title: "Personalising the experience",
+              desc: "Different people face different financial pressures. Flexible flows that adapt to saving behaviour, simplified navigation for core tasks, and deliberate handling of edge cases like a missed autosave or a low balance.",
+              result: "A more inclusive, adaptable banking experience",
+            },
           ],
         },
         {
           kind: "figure",
           src: "/images/work/gopal-home-savings.png",
-          caption: "Home / Savings Overview",
+          caption:
+            "Home and savings side by side: total saved, autosave, and goals with real progress against them.",
+          impact:
+            "The addition nobody requested. Putting named goals against visible progress is what turned saving from an abstract intention into something with a number attached.",
+        },
+        {
+          kind: "prose",
+          heading: "Where testing pushed back",
+          body: [
+            "The first savings flow asked people to set up a plan before they could save anything: name the goal, set the target, choose the frequency. Thorough, and it read as homework. Testers who said they wanted to save did not finish setting up the thing that would let them.",
+            "The correction was Quick Save. One tap, no plan, no commitment, money moved. Plans stayed for people who wanted structure, but they stopped being the toll gate in front of the behaviour I was trying to encourage.",
+            "The second correction was tone. An early version nudged harder, closer to a reminder that you had not saved this week. It tested badly in a way that was easy to miss: nobody said they disliked it, they just stopped opening that part of the app. Encouragement that reads as judgement gets avoided, not argued with.",
+          ],
         },
         {
           kind: "figure",
           src: "/images/work/gopal-savings-flow.png",
-          caption: "Savings Flow",
+          caption:
+            "The savings screen after the rework: Quick Save first, plans below it, goals with visible progress.",
+          impact:
+            "Quick Save sitting above Add New Saving Plan is the whole lesson from testing. The low-commitment action comes first, and the structured one waits for people who want it.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/gopal-process-steps.png",
+          caption:
+            "The six stages the project ran through, from research to final usability testing.",
+          impact:
+            "Three iteration cycles fit inside stages four to six. That repetition is where Quick Save and the softer tone came from.",
         },
         {
           kind: "figure",
           src: "/images/work/gopal-cards.png",
-          caption: "Virtual Card Experience",
+          caption:
+            "Virtual card: details hidden by default, revealed deliberately, with manage and block one tap away.",
+          impact:
+            "Hiding the numbers until asked was a small call that changed how safe the screen feels in public. Block Card sits at the top level because the moment you need it, you are already panicking.",
+        },
+        {
+          kind: "list",
+          heading: "What I took from it",
+          intro: [
+            "This project pushed me to think beyond features and design for behaviour:",
+          ],
+          items: [
+            "Saving is behavioural, not functional. The interface is a habit-forming tool, not a form.",
+            "People describe solutions when asked what they want. The job is hearing the problem underneath.",
+            "Small UX decisions carry real financial consequence, so edge cases are not polish here.",
+            "Iteration is not refinement. It is how you find out your good idea has a toll gate in front of it.",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "Final thoughts",
+          body: [
+            "The feature nobody asked for became the reason the product exists.",
+            "Staying close to what people said, while paying attention to what they actually did, is what separated a competent payments app from something that might change an outcome. Designing without a client means nobody hands you that distinction. You have to go and find it.",
+          ],
         },
       ],
     },
