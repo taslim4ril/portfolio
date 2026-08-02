@@ -7,11 +7,11 @@ export default function Footer() {
       <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
         {/* Left: location + availability */}
         <div>
-          <div className="inline-block rounded-lg border border-border px-4 py-2 text-xs uppercase tracking-widest text-muted">
+          <div className="inline-block rounded-lg border border-border px-4 py-2 text-xs uppercase tracking-[0.2em] text-muted">
             {site.location}
           </div>
 
-          <div className="mt-2 flex items-stretch overflow-hidden rounded-lg border border-border text-xs uppercase tracking-widest text-muted">
+          <div className="mt-2 flex items-stretch overflow-hidden rounded-lg border border-border text-xs uppercase tracking-[0.2em] text-muted">
             <span className="flex items-center border-r border-border px-3 py-2">
               <svg
                 width="14"
@@ -31,7 +31,7 @@ export default function Footer() {
             </span>
           </div>
 
-          <p className="mt-3 text-xs uppercase tracking-widest text-muted/70">
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted/70">
             © {new Date().getFullYear()} {site.name.split(" ")[0]}, all
             rights reserved.
           </p>
@@ -39,7 +39,9 @@ export default function Footer() {
 
         {/* Right: social links + email */}
         <div>
-          <div className="grid grid-cols-2 gap-x-16 gap-y-2 text-sm">
+          {/* Same letterspaced caps as the hero's small type. The uppercase
+              is CSS only, so the mailto address itself is untouched. */}
+          <div className="grid grid-cols-2 gap-x-12 gap-y-2.5 text-xs uppercase tracking-[0.2em] md:text-sm">
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -54,7 +56,7 @@ export default function Footer() {
           </div>
           <a
             href={`mailto:${site.email}`}
-            className="mt-4 block text-sm text-muted transition-colors hover:text-foreground"
+            className="mt-5 block text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-foreground md:text-sm"
           >
             {site.email}
           </a>
