@@ -91,7 +91,11 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex h-dvh flex-col overflow-hidden bg-black"
+      /* Locked to the viewport from md up, where the two-column layout fits.
+         Below that everything stacks into a single column and pinning the
+         height only squeezes it, so mobile takes the viewport as a floor and
+         grows past it when the content needs the room. */
+      className="relative flex min-h-dvh flex-col overflow-hidden bg-black md:h-dvh"
     >
       {/* ===== Portrait ===== */}
       <div aria-hidden className="absolute inset-0">
@@ -163,7 +167,9 @@ export default function Hero() {
       </motion.div>
 
       {/* ===== Content ===== */}
-      <div className="relative z-10 flex w-full flex-1 flex-col justify-end px-6 pb-10 md:px-[100px]">
+      {/* Top padding clears the fixed nav on mobile, where the stack starts at
+          the top of the section instead of being pushed down by spare height. */}
+      <div className="relative z-10 flex w-full flex-1 flex-col justify-end px-6 pb-10 pt-28 md:px-[100px] md:pt-0">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           {/* --- Name block --- */}
           <motion.div
@@ -248,7 +254,9 @@ export default function Hero() {
               </svg>
             </a>
 
-            <p className="mt-32 max-w-sm text-base leading-relaxed text-white/55">
+            {/* The wide gap is deliberate on desktop, where it drops the bio to
+                the baseline of the name column. Stacked, it's just a hole. */}
+            <p className="mt-10 max-w-sm text-base leading-relaxed text-white/55 md:mt-32">
               {site.role} with 5+ years of experience across SaaS, fintech, and
               agritech, turning complex problems into clear, human-centered
               digital experiences.
