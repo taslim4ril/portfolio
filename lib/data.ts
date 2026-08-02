@@ -25,10 +25,12 @@ export const roles = [
 ] as const;
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "Twitter / X", href: "https://twitter.com/" },
-  { label: "Medium", href: "https://medium.com/" },
-  { label: "Instagram", href: "https://instagram.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/taslimabdulkadir/" },
+  // x.com rather than the twitter.com the old site also linked: both resolve
+  // to the same handle, and this one matches the label.
+  { label: "Twitter / X", href: "https://x.com/therealbiodun_" },
+  { label: "Medium", href: "https://medium.com/@taslim.designx" },
+  { label: "Instagram", href: "https://www.instagram.com/therealbiodun_" },
 ] as const;
 
 export const stats = [
