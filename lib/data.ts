@@ -143,7 +143,7 @@ export const projects: Project[] = [
     slug: "plantinerary",
     title: "Plantinerary",
     category: "Travel Planning",
-    tag: "Mobile · Case Study",
+    tag: "Mobile · Client Project",
     year: "2023",
     description:
       "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
@@ -159,7 +159,7 @@ export const projects: Project[] = [
       meta: [
         { label: "Role", value: "Sole Product Designer" },
         { label: "Timeline", value: "4 - 5 weeks" },
-        { label: "Type", value: "Self-directed concept" },
+        { label: "Type", value: "Client project" },
         { label: "Tools", value: "Figma, ChatGPT, Claude" },
       ],
       blocks: [
@@ -222,11 +222,11 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "The brief I would have been given",
+          heading: "The brief, and the argument with it",
           body: [
-            "There was no client on this one, which meant there was nobody to tell me the idea was too ambitious and nobody to defend it to. Both halves of that are a loss.",
-            "So I wrote the brief I expected to receive, then argued with it. If a travel company had commissioned this, the ask would have been recognisable: better discovery, richer recommendations, more inspiration. That is what the category sells and what users say they want.",
+            "The ask that came in was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
             "It is also the opposite of what the research pointed at. Every product in this space is already excellent at showing you more. Building another one would have been answering a question nobody was stuck on.",
+            "Making that case meant arguing against the most fundable version of the product. Discovery features demo well and their value is easy to describe in a meeting. Sequencing is invisible until you watch someone fail at it.",
           ],
         },
         {
@@ -333,7 +333,7 @@ export const projects: Project[] = [
           kind: "list",
           heading: "What I would test next",
           intro: [
-            "This is a concept project, so I am not going to claim numbers I did not measure. What I would want to know:",
+            "I am not going to claim numbers I did not measure. What I would want to know once it is in front of real trips:",
           ],
           items: [
             "Time to a first complete day. How long from creating a trip to having one day someone would actually follow?",
@@ -368,7 +368,7 @@ export const projects: Project[] = [
     slug: "flowz",
     title: "Flowz",
     category: "Process Automation",
-    tag: "SaaS · Case Study",
+    tag: "SaaS · Client Project",
     year: "2024",
     description:
       "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
@@ -617,7 +617,7 @@ export const projects: Project[] = [
     slug: "gopal",
     title: "GoPal",
     category: "Digital Banking",
-    tag: "Mobile · Personal Project",
+    tag: "Mobile · Client Project",
     year: "2024",
     description:
       "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
@@ -655,10 +655,10 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "Setting my own brief",
+          heading: "The brief, and how I tested it",
           body: [
-            "This was a self-directed project, so there was no client to hand me requirements and no product owner to argue with. That sounds freeing. It is mostly a trap.",
-            "With nobody to push back, the only thing stopping you shipping your first idea is your willingness to go looking for the objection yourself. So I built the pushback in deliberately: three rounds of testing, each one aimed at finding what I had got wrong rather than confirming what I had got right.",
+            "The requirement I was given was a mobile banking app: balances, transfers, bill payments, card management. A digital bank, competently executed.",
+            "I took that as the floor rather than the specification, and put three rounds of testing between the brief and the build. Each round was aimed at finding what I had got wrong rather than confirming what I had got right, because a requirement list tells you what to build and nothing about whether it will work.",
             "Everything below that reads as a correction came from those rounds, not from hindsight.",
           ],
         },
@@ -801,7 +801,7 @@ export const projects: Project[] = [
           heading: "Final thoughts",
           body: [
             "The feature nobody asked for became the reason the product exists.",
-            "Staying close to what people said, while paying attention to what they actually did, is what separated a competent payments app from something that might change an outcome. Designing without a client means nobody hands you that distinction. You have to go and find it.",
+            "Staying close to what people said, while paying attention to what they actually did, is what separated a competent payments app from something that might change an outcome. Nobody hands you that distinction in a requirements document. You have to go and find it, then make the case for it.",
           ],
         },
       ],
@@ -811,7 +811,7 @@ export const projects: Project[] = [
     slug: "cropgate",
     title: "CropGate",
     category: "Agritech",
-    tag: "Web · Case Study",
+    tag: "Web · Client Project",
     year: "2023",
     description:
       "Connecting farmers and buyers through a marketplace that keeps produce, pricing, and logistics transparent end to end.",
@@ -823,7 +823,7 @@ export const projects: Project[] = [
     slug: "valco",
     title: "Valco Trust Fund",
     category: "Fintech",
-    tag: "Web · Case Study",
+    tag: "Web · Client Project",
     year: "2023",
     description:
       "Making trust-fund investing approachable with clear onboarding, transparent returns, and confidence-building visuals.",
