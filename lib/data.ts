@@ -527,6 +527,37 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "prose",
+          heading: "Final designs",
+          body: [
+            "The comparisons above are sized to be read against each other. Here the finished screens sit at full width, where the detail is actually legible.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-dashboard-new.png",
+          caption:
+            "Dashboard: account selector, balance with a hide toggle, and the four most-used actions beside it.",
+          impact:
+            "The eye toggle sits on the balance rather than in settings, because internet banking gets opened in offices and shared spaces. Hiding your own balance should cost one tap, not a trip through preferences.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-transfer-new.png",
+          caption:
+            "Transfer: search across name, phone, or account number, with saved beneficiaries grouped alphabetically.",
+          impact:
+            "Each avatar carries a small bank badge, so the destination institution is visible before selection rather than confirmed a screen later. Sending to the right person at the wrong bank is a common and expensive mistake.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-history-new.png",
+          caption:
+            "Transaction history: period presets with a custom range, and a statement that generates only once the selection is valid.",
+          impact:
+            "Generate stays disabled until the range is complete, so the failure is prevented rather than reported. The empty state names what it is waiting for, which is the difference between a screen that looks broken and one that looks ready.",
+        },
+        {
           kind: "list",
           heading: "What I would measure",
           intro: [
@@ -543,7 +574,7 @@ export const projects: Project[] = [
           kind: "quote",
           heading: "Reflection",
           body: [
-            "Redesigning a bank is mostly an exercise in what you are not allowed to change.",
+            "Redesigning a banking solution is mostly an exercise in what you are not allowed to change.",
             "The steps that frustrated customers were, in almost every case, the steps protecting them. The work was not removing friction but making necessary friction legible, so a customer waiting on a security check understands they are being protected rather than obstructed.",
             "That constraint made the design better. Given a free hand I would have tried to shorten the flow, and shipped something faster and less trustworthy.",
           ],
