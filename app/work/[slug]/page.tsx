@@ -3,61 +3,48 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CaseStudy from "@/components/CaseStudy";
-import Button from "@/components/Button";
 import { projects, site } from "@/lib/data";
 
 type Params = { params: Promise<{ slug: string }> };
 
-// Prerender a static page for every project slug.
+// Prerender a static page for every project that actually has a case study.
+// The rest have nothing to render, so they fall through to the 404 below and
+// there's nothing worth building ahead of time.
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projects.filter((p) => p.caseStudy).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) return {};
-  const title = project.caseStudy?.title ?? project.title;
+  const study = projects.find((p) => p.slug === slug)?.caseStudy;
+  if (!study) return {};
   return {
-    title: `${title} | ${site.name}`,
-    description: project.caseStudy?.tagline ?? project.description,
+    title: `${study.title} | ${site.name}`,
+    description: study.tagline,
   };
 }
 
 export default async function CaseStudyPage({ params }: Params) {
   const { slug } = await params;
-  const index = projects.findIndex((p) => p.slug === slug);
+
+  // Walk only the projects that have a case study, so "next project" can't
+  // hand the reader on to a slug that now 404s.
+  const written = projects.filter((p) => p.caseStudy);
+  const index = written.findIndex((p) => p.slug === slug);
+
+  // Unknown slug, or a project whose case study isn't written yet. Both are
+  // "there is no page here", so both get the 404 rather than a stub that
+  // promises content.
   if (index === -1) notFound();
 
-  const project = projects[index];
-  const next = projects[(index + 1) % projects.length];
+  const project = written[index];
+  const next = written[(index + 1) % written.length];
 
   return (
     <>
       <Nav />
       <main className="relative bg-background">
-        {project.caseStudy ? (
-          <CaseStudy project={project} next={next} />
-        ) : (
-          /* Case study not written yet; graceful placeholder so links work. */
-          <section className="mx-auto flex min-h-dvh max-w-3xl flex-col justify-center px-6 py-32 text-center md:px-[100px]">
-            <span className="text-sm uppercase tracking-[0.25em] text-muted">
-              {project.category}
-            </span>
-            <h1 className="heading mt-6 text-5xl font-bold text-white md:text-6xl">
-              {project.title}
-            </h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">
-              {project.description}
-            </p>
-            <p className="mt-8 text-sm text-muted">
-              The full case study is coming soon.
-            </p>
-            <Button href="/work" className="mx-auto mt-10">
-              <span aria-hidden>←</span> Back to all work
-            </Button>
-          </section>
-        )}
+        <CaseStudy project={project} next={next} />
         <Footer />
       </main>
     </>
