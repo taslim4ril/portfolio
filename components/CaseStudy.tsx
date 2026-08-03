@@ -207,6 +207,74 @@ function Block({ block }: { block: CaseBlock }) {
         </div>
       );
 
+    case "compare":
+      return (
+        <div className="mx-auto max-w-5xl space-y-12">
+          <Reveal>
+            <div className="mx-auto max-w-3xl space-y-6">
+              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.intro && (
+                <div className="space-y-5">
+                  <Paragraphs body={block.intro} />
+                </div>
+              )}
+            </div>
+          </Reveal>
+          <div className="space-y-14">
+            {block.items.map((item, i) => (
+              <Reveal key={i} delay={i * 0.05}>
+                <figure>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {(
+                      [
+                        ["Before", item.beforeSrc],
+                        ["After", item.afterSrc],
+                      ] as const
+                    ).map(([side, src]) => (
+                      <div key={side}>
+                        <div className="mb-2.5 text-[11px] uppercase tracking-widest text-muted">
+                          {side}
+                        </div>
+                        {src ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={src}
+                            alt={`${item.label}, ${side.toLowerCase()}`}
+                            loading="lazy"
+                            className="block h-auto w-full rounded-2xl border border-border bg-surface"
+                          />
+                        ) : (
+                          <div className="flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-surface text-white/25">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+                              <rect x="3" y="3" width="18" height="18" rx="2" />
+                              <circle cx="8.5" cy="9" r="1.6" />
+                              <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                            <span className="text-[10px] uppercase tracking-widest">
+                              {side} placeholder
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {/* Description sits under the pair, not between the frames,
+                      so the two are compared before they're explained. */}
+                  <figcaption className="mx-auto mt-6 max-w-3xl">
+                    <span className="block text-sm font-medium text-white">
+                      {item.label}
+                    </span>
+                    <span className="mt-2 block text-sm leading-relaxed text-white/55">
+                      {item.caption}
+                    </span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      );
+
     case "decisions":
       return (
         <div className="mx-auto max-w-5xl space-y-12">
@@ -373,13 +441,26 @@ export default function CaseStudy({
 
         {/* Cover */}
         <Reveal delay={0.1}>
-          <div className="relative mt-14 aspect-[16/9] overflow-hidden rounded-[2rem] border border-border bg-surface md:mt-16">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.image}
-              alt={project.title}
-              className="h-full w-full object-cover"
-            />
+          <div className="relative mt-14 flex aspect-[16/9] items-center justify-center overflow-hidden rounded-[2rem] border border-border bg-surface md:mt-16">
+            {project.image ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex flex-col items-center gap-2.5 text-white/25">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="9" r="1.6" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
+                <span className="text-[11px] uppercase tracking-widest">
+                  Cover image placeholder
+                </span>
+              </div>
+            )}
           </div>
         </Reveal>
 

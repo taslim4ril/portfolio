@@ -47,14 +47,28 @@ export default function WorkCard({
       data-cursor-hide
       className="card-rise group relative block h-[76vh] min-h-[500px] overflow-hidden rounded-[2.5rem] bg-surface"
     >
-      {/* Image */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={p.image}
-        alt={`${p.title}: ${p.category}`}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-      />
+      {/* Image. Optional: a project can exist before its shots do, and a
+          broken image icon reads worse than an honest empty frame. */}
+      {p.image ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={p.image}
+          alt={`${p.title}: ${p.category}`}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+        />
+      ) : (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 bg-surface-2 text-white/25">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="9" r="1.6" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          <span className="text-[11px] uppercase tracking-widest">
+            Image placeholder
+          </span>
+        </div>
+      )}
       {/* Legibility scrims */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85" />
 

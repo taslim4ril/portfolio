@@ -110,6 +110,21 @@ export type CaseBlock =
       caption?: string;
       /** What this screen changes about the product, in a line or two. */
       impact?: string;
+    }
+  /** A before/after pair. Both frames sit side by side with the description
+   *  underneath them, so the comparison reads before the explanation does. */
+  | {
+      kind: "compare";
+      heading?: string;
+      intro?: string[];
+      items: {
+        /** What screen is being compared. */
+        label: string;
+        beforeSrc?: string;
+        afterSrc?: string;
+        /** Sits under the pair: what changed and why it mattered. */
+        caption: string;
+      }[];
     };
 
 export type CaseStudy = {
@@ -128,7 +143,9 @@ export type Project = {
   tag: string;
   year: string;
   description: string;
-  image: string;
+  /** Omit while a project is still waiting on its shots; the card falls back
+   *  to the same empty frame the case study figures use. */
+  image?: string;
   /** One-line framing shown above the title on the work card. */
   subtitle: string;
   /** Pills shown at the top-left of the work card. */
@@ -359,6 +376,169 @@ export const projects: Project[] = [
             "The interesting tension in Plantinerary was never technical. It was about control.",
             "Travellers want to feel like the trip is theirs, and they also want someone to take some of the weight off. Design the assistance too loudly and it feels like being sold to. Design it too quietly and it may as well not exist.",
             "Getting that balance right is most of the product.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "ibank",
+    title: "GTBank i-Bank",
+    category: "Internet Banking",
+    tag: "Web · Client Project",
+    year: "2025",
+    description:
+      "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
+    subtitle: "Internet banking rebuilt around task completion",
+    tags: ["Product Design", "Fintech"],
+    caseStudy: {
+      title: "GTBank i-Bank",
+      tagline:
+        "Redesigning an internet banking portal without breaking the things a bank cannot break.",
+      overview:
+        "i-Bank worked. Customers could do everything the bank offered, provided they already knew where it was. The redesign rebuilt the dashboard and transactional workflows around task completion, inside constraints that are not negotiable in retail banking.",
+      meta: [
+        { label: "Role", value: "Product Designer" },
+        { label: "Client", value: "Guaranty Trust Bank" },
+        { label: "Platform", value: "Web · Internet Banking" },
+        { label: "Deliverables", value: "Research, UX, UI, Testing" },
+      ],
+      blocks: [
+        {
+          kind: "prose",
+          heading: "A portal that worked, for people who already knew it",
+          body: [
+            "Internet banking portals age in a particular way. Features get added, each one reasonable on its own, each one earning a place in the navigation. Nothing is ever removed, because everything is used by somebody.",
+            "What you end up with is a product that can do everything and helps with nothing. Customers who had used i-Bank for years moved through it fine. Everyone else was navigating a filing cabinet.",
+            "The redesign started from a question the feature list could not answer: what is a customer actually here to finish, and how much is standing between them and finishing it?",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Finding out where it actually broke",
+          body: [
+            "I ran usability testing, surveys, and one-on-one interviews rather than relying on the support tickets already in hand. Tickets tell you what made someone angry enough to call. They are silent about the customer who gave up quietly, and that was the group the redesign existed for.",
+            "Watching sessions changed what I thought the problem was. People were not confused by individual screens. They were losing the thread between them: starting a transfer, being sent somewhere to confirm something, and arriving back without a clear sense of whether the thing had happened.",
+            "Task completion was the metric that mattered, and the failures were in the joins rather than the parts.",
+          ],
+        },
+        {
+          kind: "compare",
+          heading: "What changed on screen",
+          intro: [
+            "Three comparisons carry most of the redesign. In each case the old screen is not badly made; it is organised around what the bank offers rather than what the customer came to do.",
+          ],
+          items: [
+            {
+              label: "Dashboard",
+              caption:
+                "The old dashboard led with everything the portal could do, weighting each option equally. The redesign leads with account position and the handful of actions that make up most sessions, and moves the rest behind a clear second level. The change is not visual density but hierarchy: the first screen now answers where do I stand and what can I do next, instead of listing the estate.",
+            },
+            {
+              label: "Transfer flow",
+              caption:
+                "The original flow was correct and unaccompanied, sending customers through authentication and confirmation steps without telling them where they were in the sequence. The redesign keeps every one of those steps, since none are optional, and adds the state customers were missing: what stage this is, what happens next, and an unambiguous confirmation at the end. Nothing was removed from the process. What changed is that it now narrates itself.",
+            },
+            {
+              label: "Transaction history",
+              caption:
+                "History was a dense table that answered what happened to my account but not did my payment go through, which is the question people actually arrive with. The redesign separates recent activity from full history, gives each entry a clear status rather than leaving it implied by its presence in a list, and makes the filters usable without knowing the date range in advance.",
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "What was asked for, and what it needed",
+          body: [
+            "The brief was a redesign of the dashboard and transactional workflows. Read narrowly, that is a visual refresh and some reorganised navigation, and it would have shipped.",
+            "The research pointed somewhere less convenient. If customers were losing the thread between steps, then reskinning the steps would leave the problem exactly where it was. What the portal needed was feedback and orientation, which are not layout problems.",
+            "So I argued for two things beyond the brief, and one of them ran straight into constraints that outrank design.",
+          ],
+        },
+        {
+          kind: "decisions",
+          heading: "The additions, and what pushed back",
+          intro: [
+            "In retail banking, the pushback is not a matter of taste. Security and compliance set the boundary, and the design works inside it.",
+          ],
+          items: [
+            {
+              title: "Transaction status the brief did not mention",
+              problem:
+                "The brief covered the dashboard and the workflows that move money. It said nothing about what a customer sees afterwards, which is where most of the uncertainty in the sessions actually sat.",
+              decision:
+                "I pushed for status to be explicit on every transaction rather than inferred from its presence in a list, and for recent activity to be separated from full history.",
+              note: {
+                label: "Why I pushed for it",
+                body: "A customer who is not sure whether a transfer completed does the same thing every time: they try again, or they call. Both are expensive, and neither shows up as a failed task in the workflow the redesign was scoped around. Fixing the flow without fixing what follows it would have moved the confusion rather than removing it.",
+              },
+            },
+            {
+              title: "More visible feedback through authentication",
+              problem:
+                "Multi-factor authentication is where customers most often lost their place, and where they were least sure whether their money had moved.",
+              decision:
+                "I designed clearer state and progress through the authentication and confirmation sequence, so customers always knew what stage they were at.",
+              note: {
+                label: "The constraint",
+                body: "This is where design stops being the deciding voice. Multi-factor authentication and real-time transaction monitoring are not steps that can be streamlined for elegance, and how much a screen may reveal about a transaction's state is a compliance question before it is a UX one. Working with engineering and compliance, the answer was not fewer steps but better narration of the steps that must exist. That constraint improved the work: it forced the fix to be clarity rather than removal, which is the more durable version anyway.",
+              },
+            },
+            {
+              title: "Holding the brand inside the redesign",
+              problem:
+                "A redesign is the easiest moment to quietly drift away from an established identity, and this one is among the most recognisable in Nigerian banking.",
+              decision:
+                "I kept the bank's identity consistent across every touchpoint the redesign covered, treating it as a fixed input rather than something to modernise.",
+              note: {
+                label: "The tradeoff",
+                body: "Some interface decisions would have been easier with a freer palette. But customers read that identity as a signal they are in the right place, on the correct site, which in banking is a security cue as much as a brand one. Consistency was worth more than the visual latitude I gave up.",
+              },
+            },
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "The three constraints everything sat inside",
+          intro: [
+            "Every decision in this project had to satisfy all three at once. Anything that failed one of them was not a design option, however well it tested:",
+          ],
+          columns: 3,
+          items: [
+            {
+              title: "Security",
+              desc: "Multi-factor authentication and real-time transaction monitoring are load-bearing. The design accommodates them; it does not negotiate with them.",
+            },
+            {
+              title: "Regulatory compliance",
+              desc: "What can be shown, when, and to whom is set outside the design process. Working with compliance early is cheaper than redesigning around a rejection late.",
+            },
+            {
+              title: "Brand integrity",
+              desc: "A recognisable identity held consistently across digital touchpoints, because in banking, looking correct is part of being trusted.",
+            },
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What I would measure",
+          intro: [
+            "The redesign is aimed at outcomes I would want held to numbers rather than asserted:",
+          ],
+          items: [
+            "Task completion rate on transfers, the metric the whole redesign is pointed at",
+            "Drop-off inside the authentication sequence, where sessions were being lost",
+            "Repeat attempts on the same transfer, the clearest signal that status is not landing",
+            "Support contact volume on how do I, which should fall if orientation improved",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "Reflection",
+          body: [
+            "Redesigning a bank is mostly an exercise in what you are not allowed to change.",
+            "The steps that frustrated customers were, in almost every case, the steps protecting them. The work was not removing friction but making necessary friction legible, so a customer waiting on a security check understands they are being protected rather than obstructed.",
+            "That constraint made the design better. Given a free hand I would have tried to shorten the flow, and shipped something faster and less trustworthy.",
           ],
         },
       ],
