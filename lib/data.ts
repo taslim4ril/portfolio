@@ -435,21 +435,21 @@ export const projects: Project[] = [
               beforeSrc: "/images/work/ibank-dashboard-old.png",
               afterSrc: "/images/work/ibank-dashboard-new.png",
               caption:
-                "The old dashboard led with everything the portal could do, weighting each option equally. The redesign leads with account position and the handful of actions that make up most sessions, and moves the rest behind a clear second level. The change is not visual density but hierarchy: the first screen now answers where do I stand and what can I do next, instead of listing the estate.",
+                "Before, eight accounts sat in a paged carousel showing three at a time, with balances masked by default, so the first thing a customer saw was a row of hidden numbers they had to page through. Nothing next to the money did anything; every action lived in the left nav. Below that, Payments for Trade took the lower half of the screen, a section most retail customers never touch. After, one account is chosen from a dropdown and its balance is the largest thing on the page, with the four actions that make up most sessions sitting directly beside it. The promo moved out of the right rail into a Don't miss band underneath. The smallest change matters most: the old empty state read No Record - No frequent records, which sounds like you have no transactions, where the new one reads You are yet to select a tab, which correctly says the screen is waiting on you.",
             },
             {
               label: "Transfer flow",
               beforeSrc: "/images/work/ibank-transfer-old.png",
               afterSrc: "/images/work/ibank-transfer-new.png",
               caption:
-                "The original flow was correct and unaccompanied, sending customers through authentication and confirmation steps without telling them where they were in the sequence. The redesign keeps every one of those steps, since none are optional, and adds the state customers were missing: what stage this is, what happens next, and an unambiguous confirmation at the end. Nothing was removed from the process. What changed is that it now narrates itself.",
+                "Before, the screen was titled Other Banks, so the customer had already committed to a destination type before arriving. It then asked for the rail (Instant or NEFT), then Saved or New, and defaulted to New: a blank account number field as the first thing you meet. You had to know the digits before you could begin. The right rail carried an empty Frequent Transfers panel and a video about updating your account details, and the bottom two thirds of the page were empty. After, it is one Account transfer screen with no upfront choice of rail or bank. It opens on people you have paid before, listed alphabetically with their bank and account number visible, and a search that accepts a name or phone number as readily as an account number. View Transfer Success Rates is the addition I would defend hardest: interbank transfers in Nigeria fail often enough that knowing which banks are currently settling is worth more than any layout change on this screen.",
             },
             {
               label: "Transaction history",
               beforeSrc: "/images/work/ibank-history-old.png",
               afterSrc: "/images/work/ibank-history-new.png",
               caption:
-                "History was a dense table that answered what happened to my account but not did my payment go through, which is the question people actually arrive with. The redesign separates recent activity from full history, gives each entry a clear status rather than leaving it implied by its presence in a list, and makes the filters usable without knowing the date range in advance.",
+                "Before, four inputs stood between the customer and any result: account, start date, end date typed as DD/MM/YYYY, plus Amount and Remarks filters that most people do not need on a first look. Results arrived as dense rows carrying full reference strings, and a third of the width went to an account officer card and a help centre advert. After, the period is a row of preset chips (current week, last week, current month, last month), so the common case is one tap and the date fields only matter if you choose Custom period. The balance sits behind a mask on a screen people often open in public. Generate stays disabled until the selection is valid, and the empty state says what it is waiting for rather than leaving a blank panel.",
             },
           ],
         },
