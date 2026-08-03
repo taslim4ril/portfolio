@@ -389,6 +389,7 @@ export const projects: Project[] = [
     year: "2025",
     description:
       "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
+    image: "/images/work/ibank.jpg",
     subtitle: "Internet banking rebuilt around task completion",
     tags: ["Product Design", "Fintech"],
     caseStudy: {
@@ -431,16 +432,22 @@ export const projects: Project[] = [
           items: [
             {
               label: "Dashboard",
+              beforeSrc: "/images/work/ibank-dashboard-old.png",
+              afterSrc: "/images/work/ibank-dashboard-new.png",
               caption:
                 "The old dashboard led with everything the portal could do, weighting each option equally. The redesign leads with account position and the handful of actions that make up most sessions, and moves the rest behind a clear second level. The change is not visual density but hierarchy: the first screen now answers where do I stand and what can I do next, instead of listing the estate.",
             },
             {
               label: "Transfer flow",
+              beforeSrc: "/images/work/ibank-transfer-old.png",
+              afterSrc: "/images/work/ibank-transfer-new.png",
               caption:
                 "The original flow was correct and unaccompanied, sending customers through authentication and confirmation steps without telling them where they were in the sequence. The redesign keeps every one of those steps, since none are optional, and adds the state customers were missing: what stage this is, what happens next, and an unambiguous confirmation at the end. Nothing was removed from the process. What changed is that it now narrates itself.",
             },
             {
               label: "Transaction history",
+              beforeSrc: "/images/work/ibank-history-old.png",
+              afterSrc: "/images/work/ibank-history-new.png",
               caption:
                 "History was a dense table that answered what happened to my account but not did my payment go through, which is the question people actually arrive with. The redesign separates recent activity from full history, gives each entry a clear status rather than leaving it implied by its presence in a list, and makes the filters usable without knowing the date range in advance.",
             },
