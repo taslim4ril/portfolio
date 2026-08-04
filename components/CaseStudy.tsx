@@ -146,6 +146,20 @@ function Block({ block }: { block: CaseBlock }) {
             {block.items.map((item, i) => (
               <Reveal key={i} delay={i * 0.06}>
                 <div className="h-full rounded-2xl border border-border bg-surface/60 p-7">
+                  {/* Fixed 56px circle. Logos arrive as squares, circles and
+                      transparent PNGs with wildly different padding, so the
+                      frame owns the size and `object-contain` keeps each mark
+                      whole inside it rather than cropping to fill. */}
+                  {item.logo && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={item.logo}
+                      alt=""
+                      aria-hidden
+                      loading="lazy"
+                      className="mb-5 h-14 w-14 shrink-0 rounded-full bg-white object-contain"
+                    />
+                  )}
                   <h3 className="text-xl font-medium text-white">{item.title}</h3>
                   <p className="mt-3 text-base leading-relaxed text-white/60">
                     {item.desc}

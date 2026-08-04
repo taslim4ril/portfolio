@@ -66,7 +66,13 @@ export const services = [
 // A case study is an ordered list of blocks so every project follows the same
 // structure. Add a `caseStudy` to a project and its /work/[slug] page fills in.
 export type CaseMetric = { value: string; label: string };
-export type CaseNamed = { title: string; desc: string };
+export type CaseNamed = {
+  title: string;
+  desc: string;
+  /** Optional mark for the item, shown in a fixed circular frame so a set of
+   *  logos with different shapes and padding still line up. */
+  logo?: string;
+};
 
 /** A design call, with the reasoning kept attached to it. The closing note is
  *  labelled per item because what follows a decision is sometimes the cost of
@@ -219,6 +225,39 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "prose",
+          heading: "What I had instead of a research budget",
+          body: [
+            "I should be straight about the constraint, because it shaped the work. There was no participant panel, no recruitment, no incentive budget, and four weeks. This problem deserves a diary study. Trip planning happens over weeks, in gaps, across a phone and a laptop and a group chat, and the only honest way to see it is to watch it happen over time. I could not do that.",
+            "So I did the two things that were available. I mined what travellers had already written down without being asked: app store reviews, Reddit and forum threads, the comments under itinerary blog posts. Unprompted complaints are not a substitute for interviews, but they have one quality interviews often lack, which is that nobody was being polite.",
+            "And I ran a structured teardown of the products people already use. Competitive analysis has a bad reputation because it usually means a slide of logos and a feature checklist. Treated as a method, with a specific question you are trying to answer, it earns its place. My question was narrow: at what exact moment does each of these products hand the work back to the user?",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "Three products, three different places it breaks",
+          columns: 3,
+          items: [
+            {
+              title: "Airbnb",
+              desc: "The best executed save in the category. Wishlists are quick, beautiful, shareable, and still a list you never convert. If the strongest version of saving still leaves you with an unplanned trip, saving was never the bottleneck. It also set the bar for the explore screen: photography leads, chrome gets out of the way.",
+            },
+            {
+              title: "Wanderlog",
+              desc: "The one product that genuinely does sequencing. Day by day plans, a map beside them, reservations pulled in from your inbox. It is also unmistakably a tool, and it asks you to arrive already decided. The value is real but it sits behind a setup cost, which is fine for the person who plans spreadsheets for fun and fatal for everyone else.",
+            },
+            {
+              title: "TripAdvisor",
+              desc: "The opposite failure. Enormous data, rankings, and reviews, with all the synthesis left to you. More information raises your confidence in a single choice and lowers it about the trip as a whole, because nothing on the screen knows what else you already picked.",
+            },
+          ],
+          outro: [
+            "Lined up like that, the gap stopped being the one I assumed. It is not that nobody plans days. Wanderlog plans days extremely well. It is that the products which help you decide never hand you a day, and the product that gives you a day expects you to show up already decided.",
+            "Nobody owns the handoff. That is a smaller, less impressive sounding opportunity than inventing a new way to plan a trip, and it is the one that was actually open.",
+            "The caveat I kept in front of me: competitive analysis tells you what exists, not what people need. It is very good at showing you the shape of a gap and very bad at telling you whether anyone wants it filled. Everything it produced went into the pile marked hypothesis, next to the AI output.",
+          ],
+        },
+        {
           kind: "grid",
           heading: "Three patterns worth designing for",
           columns: 3,
@@ -250,6 +289,48 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "decisions",
+          heading: "Where I got pushed back",
+          intro: [
+            "Three of these came back at me hard. One of them I lost, and it improved the product.",
+          ],
+          items: [
+            {
+              title: "“Discovery is the product”",
+              problem:
+                "I was arguing that the planner was the centre of gravity. The response was that nobody downloads a travel app to look at a schedule. They download it because they want to go somewhere, and the first screen has to sell that.",
+              decision:
+                "I stopped treating this as an either or. The explore surface stayed rich, full bleed, and genuinely seductive. What changed is where it leads. Every destination screen ends in a single action that creates a trip, so desire has somewhere to go the moment it appears.",
+              note: {
+                label: "This one I lost, and it was right",
+                body: "My first structure buried exploration a level down, because I had decided discovery was the overserved part of the category. That was true of the market and false of the person holding the phone. Wanting to go somewhere comes before planning to go somewhere, and a product that opens on an empty itinerary is asking for commitment it has not earned yet. The explore screens exist because I was overruled.",
+              },
+            },
+            {
+              title: "“Can you not just look at what Airbnb does?”",
+              problem:
+                "With no research budget, the reasonable suggestion was to skip the study and copy the leaders. They have spent more on this than we ever will, so their patterns must be right.",
+              decision:
+                "I did look, closely, and used it. But I framed the teardown as a search for where each product stops helping rather than a list of patterns to lift, and I said plainly which conclusions were evidence and which were guesses.",
+              note: {
+                label: "Why the distinction mattered",
+                body: "Copying the leaders in this category would have produced a fourth excellent discovery app. Every pattern worth stealing was built to solve a problem those companies actually have, which is inventory and booking volume, not the problem a traveller has on a Tuesday with an unplanned Thursday. Borrowing the craft while rejecting the priorities was the whole point of doing the analysis properly.",
+              },
+            },
+            {
+              title: "“Nobody talks to a travel app”",
+              problem:
+                "The assistant was the least popular thing I proposed. The objection was fair: voice and chat interfaces in consumer apps have a long history of being demoed once and never opened again.",
+              decision:
+                "I made it summoned rather than surfaced. Clara has no feed, no proactive prompts, and no badge. It sits behind one input and does nothing until you ask, which means it costs a user nothing if they never touch it.",
+              note: {
+                label: "The unresolved risk",
+                body: "I cannot prove this one. An assistant nobody opens is dead weight in the interface, and the honest position is that this is the feature most likely to be wrong. What I would watch is not how many people try it, which will be high out of novelty, but how many come back to it in week two, and whether the ones who do plan faster than the ones who do not.",
+              },
+            },
+          ],
+        },
+        {
           kind: "grid",
           heading: "Three verbs",
           intro: [
@@ -270,10 +351,11 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
+          src: "/images/work/plantinerary-itinerary.webp",
           caption:
-            "Trip planner: the timeline with loose time bands, drag to reorder, and the ideas tray for undecided plans.",
+            "The itinerary. Trips split into ongoing and completed on the left; one trip opened into day chips and an hour ruler on the right.",
           impact:
-            "Where the product does the thing the category avoids. Structure enough to be a real plan, loose enough that a traveller will not abandon it the first time reality drifts.",
+            "This is the screen the whole argument was about. Reservations are counted, the days are chips you tab between rather than a scroll you get lost in, and every entry carries its time and its place, so the distance between the hotel and the skate park is on the screen at planning time instead of being discovered in a taxi. Two details do most of the work: the green line marking where you currently are in the day, and the amber flag against the one entry that has a problem. A plan that can tell you something is wrong is a plan you keep opening.",
         },
         {
           kind: "decisions",
@@ -322,11 +404,22 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "prose",
+          heading: "Explore: swipe, tap, and the trip exists",
+          body: [
+            "The explore surface is the half of the product I was talked into, and it ended up carrying more weight than the half I argued for. Its job is narrow. Show one place at a time, well enough that someone wants to go, and put the thing that turns wanting into planning directly under it.",
+            "So it is one destination per screen, full bleed, photograph first. A name, a rating, how far away it is, and a short description that tells you what kind of trip this would be rather than reciting facts. Nothing competes for the eye, because a grid of eight destinations is a comparison task and comparison is where people stall.",
+            "Navigation is two gestures and nothing else. Swipe up for the next place. Tap to plan this one. There is no filter bar, no sort, no map toggle, no bottom tabs fighting for room. Back sits top left, the heart top right, and when you reach the end of the set the prompt changes to Back to top so you are never scrolling into nothing. Someone can go through twenty destinations with a thumb, at a bus stop, without reading a single control label.",
+            "The tap is the important part. Plan new trip does not open a form. It creates the trip and drops you into the itinerary with the destination and dates already filled, which is the seam every other product in the category leaves open. In most apps the gap between deciding and planning is a save, a menu, and a blank screen. Here it is one button, and the plan is already started before enthusiasm has a chance to wear off.",
+          ],
+        },
+        {
           kind: "figure",
+          src: "/images/work/plantinerary-explore.webp",
           caption:
-            "Activity breakdown: one day, readable at a glance, with travel time between stops made visible.",
+            "Explore: one destination to a screen, with Swipe Up to see Next at the foot of each and Plan new trip sitting directly under the description.",
           impact:
-            "The screen that has to survive contact with the actual trip. If this one fails at 9am in an unfamiliar city, none of the planning mattered.",
+            "The competitive teardown is visible here. The photography-led card is a lesson from Airbnb, the single-destination focus is a correction of the endless-possibility feed, and the description is written to help you decide rather than to rank anything. Third screen shows the end of the set: the same prompt becomes Back to top, so the pattern stays consistent and the loop closes.",
         },
         {
           kind: "quote",
@@ -343,11 +436,23 @@ export const projects: Project[] = [
           ],
         },
         {
+          kind: "prose",
+          heading: "Clara, the part that came last",
+          body: [
+            "Contextual suggestions solved the empty afternoon. They did not solve the sentence people actually say out loud, which is some version of: I have four days in Lisbon in October, I hate early mornings, sort it out.",
+            "That request has too many variables for a suggestion slot and too few for a form. It is a conversation, so I designed one. Clara is a travel assistant that sits behind a single input and does the planning work you would otherwise do by opening six tabs.",
+            "What it is for, concretely. Building a first draft itinerary from a sentence, so the blank trip you just created has something in it to react to, which is a far easier task than authoring from nothing. Filling a specific gap on request, in the language you would actually use, like something indoors on Thursday afternoon because it will be raining. Reworking a day when reality moves, which is the moment plans usually die: a delayed flight should not mean rebuilding an itinerary by hand. And answering the questions that sit around a trip rather than inside it, the visa rule, the opening hours, whether that neighbourhood is walkable at night.",
+            "The design rules were the same ones the rest of the product runs on, just harder to hold. Clara never speaks first. There is no badge, no proactive tip, no card in the timeline suggesting you ask it something. It writes into the itinerary rather than replying with a paragraph you then have to transcribe, because an assistant that produces text you have to re-enter has moved the work rather than done it. And every change it makes is a proposal you accept, not an edit that has already happened, which keeps the principle intact: the plan stays yours.",
+            "The input carries three affordances, and each one is a different mode of asking. The plus attaches context, a booking confirmation or a screenshot of a recommendation somebody sent you, so Clara can read it into the plan instead of you retyping it. The microphone is for the moment you are actually travelling and typing is not realistic. And the greeting uses your name and asks a question rather than announcing a feature, because the fastest way to make an empty input intimidating is to leave someone guessing what it accepts.",
+          ],
+        },
+        {
           kind: "figure",
+          src: "/images/work/plantinerary-clara.webp",
           caption:
-            "AI recommendations in context: suggestions appearing inside an empty afternoon rather than in a feed competing for attention.",
+            "Clara: one orb, one question, and a single input with attach, dictate, and voice mode. Nothing else on the screen.",
           impact:
-            "The fix for the home screen feed. Same recommendations, same engine, different moment, and it stops reading as advertising and starts reading as help.",
+            "The restraint is the design. An assistant this capable is under enormous pressure to advertise itself with suggestion chips, example prompts, and a scrolling list of things it can do, all of which turn a calm surface into a menu. Hi John, where are we going today does the same job in seven words: it tells you the thing accepts plain language, and it puts the first move back with you.",
         },
         {
           kind: "list",
