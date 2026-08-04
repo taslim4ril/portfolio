@@ -199,7 +199,10 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/plantinerary.jpg",
+          /* A different shot of the same screen than the card thumbnail uses,
+             so the case study doesn't open by repeating the image the reader
+             just clicked. */
+          src: "/images/work/plantinerary-home.jpg",
           caption:
             "Home: discovery up top, but the itinerary is already on the screen underneath it.",
           impact:
