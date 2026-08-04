@@ -167,9 +167,11 @@ const icons = [
    single generic white tint. Alphas stay low: these wash over a near-black
    surface and only need to suggest the colour, not paint it. */
 const CARD_TINTS = [
-  { glow: "rgba(200, 255, 61, 0.16)", ink: "#c8ff3d" }, // acid lime (brand)
+  { glow: "rgba(251, 146, 60, 0.16)", ink: "#fb923c" }, // warm orange (brand)
   { glow: "rgba(61, 209, 255, 0.16)", ink: "#3dd1ff" }, // cyan
-  { glow: "rgba(255, 154, 61, 0.16)", ink: "#ff9a3d" }, // amber
+  // Was amber, two degrees of hue off the brand orange once that stopped
+  // being lime. Rose keeps the four hues visibly apart.
+  { glow: "rgba(255, 93, 143, 0.16)", ink: "#ff5d8f" }, // rose
   { glow: "rgba(181, 125, 255, 0.16)", ink: "#b57dff" }, // violet
 ];
 

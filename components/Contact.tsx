@@ -2,10 +2,10 @@ import { site } from "@/lib/data";
 import Button, { CircleIcon } from "./Button";
 import SectionBadge from "./SectionBadge";
 
-// First half stays white, second half gets the lime gradient (same treatment
+// First half stays white, second half gets the accent colour (same treatment
 // as "Abdulkadir" in the hero).
 const WHITE = "Got something exciting in mind?";
-const GREEN = "Let's design it together!";
+const ACCENT = "Let's design it together!";
 
 // Fades the pixel field out toward the edges so it reads as a soft pool of
 // light rather than a hard-edged tile.
@@ -14,8 +14,8 @@ const FIELD_MASK =
 
 export default function Contact() {
   const whiteWords = WHITE.split(" ");
-  const greenWords = GREEN.split(" ");
-  const total = whiteWords.length + greenWords.length;
+  const accentWords = ACCENT.split(" ");
+  const total = whiteWords.length + accentWords.length;
 
   // Per-word reveal window, staggered across the block's pass through view.
   const range = (i: number) => {
@@ -71,7 +71,7 @@ export default function Contact() {
           ))}
           {/* Solid-accent half — plain static color, no scroll-reveal or any
               other effect, unlike the white half above it. */}
-          <span className="text-accent">{GREEN}</span>
+          <span className="text-accent">{ACCENT}</span>
         </p>
 
         <div className="mt-14 flex justify-center">

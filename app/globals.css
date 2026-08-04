@@ -61,7 +61,11 @@
   --foreground: #f4f4ef;
   --muted: #9a9a9f;
   --border: #26262a;
-  --accent: #c8ff3d; /* acid lime */
+  /* Warm orange. Chosen so no channel sits at 255: a maxed red gets stretched
+     on wide-gamut (P3) displays and reads radioactive, while anything darker
+     muddies toward brown on dim or low-quality panels. This lands at L* 70,
+     8.7:1 against the background, and holds its hue on both. */
+  --accent: #fb923c;
   --accent-ink: #0a0a0b;
 }
 

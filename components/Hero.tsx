@@ -202,7 +202,10 @@ export default function Hero() {
               <Scramble
                 text={roleTail}
                 trigger={roleIndex}
-                className="block bg-gradient-to-r from-accent via-accent to-[#7d9e24] bg-clip-text text-transparent"
+                /* Terminus is the accent at ~62% of each channel, the same
+                   darkening the lime gradient used, so it deepens without
+                   drifting off-hue. */
+                className="block bg-gradient-to-r from-accent via-accent to-[#9c5b25] bg-clip-text text-transparent"
                 style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
               />
             </h1>

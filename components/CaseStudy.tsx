@@ -193,7 +193,7 @@ function Block({ block }: { block: CaseBlock }) {
                     </p>
                   </div>
                   <div className="rounded-2xl bg-accent/10 px-6 py-5 md:min-w-[13rem]">
-                    <div className="text-[11px] uppercase tracking-widest text-accent/70">
+                    <div className="text-[11px] uppercase tracking-widest text-accent/80">
                       Result
                     </div>
                     <div className="mt-1 text-lg font-medium text-accent">
@@ -310,7 +310,7 @@ function Block({ block }: { block: CaseBlock }) {
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-[11px] uppercase tracking-widest text-accent/70">
+                      <dt className="text-[11px] uppercase tracking-widest text-accent/80">
                         The decision
                       </dt>
                       <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/90">
