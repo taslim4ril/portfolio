@@ -240,14 +240,17 @@ export const projects: Project[] = [
           items: [
             {
               title: "Airbnb",
+              logo: "/images/logos/airbnb.webp",
               desc: "The best executed save in the category. Wishlists are quick, beautiful, shareable, and still a list you never convert. If the strongest version of saving still leaves you with an unplanned trip, saving was never the bottleneck. It also set the bar for the explore screen: photography leads, chrome gets out of the way.",
             },
             {
               title: "Wanderlog",
+              logo: "/images/logos/wanderlog.webp",
               desc: "The one product that genuinely does sequencing. Day by day plans, a map beside them, reservations pulled in from your inbox. It is also unmistakably a tool, and it asks you to arrive already decided. The value is real but it sits behind a setup cost, which is fine for the person who plans spreadsheets for fun and fatal for everyone else.",
             },
             {
               title: "TripAdvisor",
+              logo: "/images/logos/tripadvisor.webp",
               desc: "The opposite failure. Enormous data, rankings, and reviews, with all the synthesis left to you. More information raises your confidence in a single choice and lowers it about the trip as a whole, because nothing on the screen knows what else you already picked.",
             },
           ],
