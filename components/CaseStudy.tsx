@@ -3,6 +3,8 @@ import Reveal from "./Reveal";
 
 /* ---------- block renderers ---------- */
 
+/* No spinning mark here on purpose. A case study runs eight or nine of these
+   headings down one page, and that many turning starbursts fights the read. */
 function Heading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="heading text-3xl font-bold leading-[1.05] text-white md:text-[2.6rem]">

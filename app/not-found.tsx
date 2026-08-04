@@ -40,10 +40,13 @@ export default function NotFound() {
         <section className="relative flex flex-1 flex-col items-center justify-center px-6 py-32 text-center md:px-[100px]">
           <SectionBadge>Error 404</SectionBadge>
 
+          {/* No mark: the dust field is already the moving thing on this
+              page, and a second one competes with it. */}
           <ScrambleHeading
             as="h1"
             lead="Oops,"
             bold="let's bring you back"
+            mark={false}
             className="heading mt-10 max-w-3xl text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl"
           />
 

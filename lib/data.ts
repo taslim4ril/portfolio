@@ -164,7 +164,7 @@ export const projects: Project[] = [
     year: "2023",
     description:
       "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
-    image: "/images/work/plantinerary.jpg",
+    image: "/images/work/plantinerary.webp",
     subtitle: "Travel planning without seventeen open tabs",
     tags: ["Product Design", "Travel"],
     caseStudy: {
@@ -202,7 +202,7 @@ export const projects: Project[] = [
           /* A different shot of the same screen than the card thumbnail uses,
              so the case study doesn't open by repeating the image the reader
              just clicked. */
-          src: "/images/work/plantinerary-home.jpg",
+          src: "/images/work/plantinerary-home.webp",
           caption:
             "Home: discovery up top, but the itinerary is already on the screen underneath it.",
           impact:
@@ -392,7 +392,7 @@ export const projects: Project[] = [
     year: "2025",
     description:
       "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
-    image: "/images/work/ibank.jpg",
+    image: "/images/work/ibank.webp",
     subtitle: "Internet banking rebuilt around task completion",
     tags: ["Product Design", "Fintech"],
     caseStudy: {
@@ -435,22 +435,22 @@ export const projects: Project[] = [
           items: [
             {
               label: "Dashboard",
-              beforeSrc: "/images/work/ibank-dashboard-old.png",
-              afterSrc: "/images/work/ibank-dashboard-new.png",
+              beforeSrc: "/images/work/ibank-dashboard-old.webp",
+              afterSrc: "/images/work/ibank-dashboard-new.webp",
               caption:
                 "Before, eight accounts sat in a paged carousel showing three at a time, with balances masked by default, so the first thing a customer saw was a row of hidden numbers they had to page through. Nothing next to the money did anything; every action lived in the left nav. Below that, Payments for Trade took the lower half of the screen, a section most retail customers never touch. After, one account is chosen from a dropdown and its balance is the largest thing on the page, with the four actions that make up most sessions sitting directly beside it. The promo moved out of the right rail into a Don't miss band underneath. The smallest change matters most: the old empty state read No Record - No frequent records, which sounds like you have no transactions, where the new one reads You are yet to select a tab, which correctly says the screen is waiting on you.",
             },
             {
               label: "Transfer flow",
-              beforeSrc: "/images/work/ibank-transfer-old.png",
-              afterSrc: "/images/work/ibank-transfer-new.png",
+              beforeSrc: "/images/work/ibank-transfer-old.webp",
+              afterSrc: "/images/work/ibank-transfer-new.webp",
               caption:
                 "Before, the screen was titled Other Banks, so the customer had already committed to a destination type before arriving. It then asked for the rail (Instant or NEFT), then Saved or New, and defaulted to New: a blank account number field as the first thing you meet. You had to know the digits before you could begin. The right rail carried an empty Frequent Transfers panel and a video about updating your account details, and the bottom two thirds of the page were empty. After, it is one Account transfer screen with no upfront choice of rail or bank. It opens on people you have paid before, listed alphabetically with their bank and account number visible, and a search that accepts a name or phone number as readily as an account number. View Transfer Success Rates is the addition I would defend hardest: interbank transfers in Nigeria fail often enough that knowing which banks are currently settling is worth more than any layout change on this screen.",
             },
             {
               label: "Transaction history",
-              beforeSrc: "/images/work/ibank-history-old.png",
-              afterSrc: "/images/work/ibank-history-new.png",
+              beforeSrc: "/images/work/ibank-history-old.webp",
+              afterSrc: "/images/work/ibank-history-new.webp",
               caption:
                 "Before, four inputs stood between the customer and any result: account, start date, end date typed as DD/MM/YYYY, plus Amount and Remarks filters that most people do not need on a first look. Results arrived as dense rows carrying full reference strings, and a third of the width went to an account officer card and a help centre advert. After, the period is a row of preset chips (current week, last week, current month, last month), so the common case is one tap and the date fields only matter if you choose Custom period. The balance sits behind a mask on a screen people often open in public. Generate stays disabled until the selection is valid, and the empty state says what it is waiting for rather than leaving a blank panel.",
             },
@@ -538,7 +538,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/ibank-dashboard-new.png",
+          src: "/images/work/ibank-dashboard-new.webp",
           caption:
             "Dashboard: account selector, balance with a hide toggle, and the four most-used actions beside it.",
           impact:
@@ -546,7 +546,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/ibank-transfer-new.png",
+          src: "/images/work/ibank-transfer-new.webp",
           caption:
             "Transfer: search across name, phone, or account number, with saved beneficiaries grouped alphabetically.",
           impact:
@@ -554,7 +554,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/ibank-history-new.png",
+          src: "/images/work/ibank-history-new.webp",
           caption:
             "Transaction history: period presets with a custom range, and a statement that generates only once the selection is valid.",
           impact:
@@ -622,7 +622,9 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz.webp",
+          /* Straight-on rather than the angled shot the card uses: at this
+             size the dashboard has to be readable, not just recognisable. */
+          src: "/images/work/flowz-mockup.webp",
           caption:
             "The dashboard that became the product's front door: running processes, approvals waiting on you, and execution monitoring in one view.",
           impact:
@@ -770,7 +772,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-builder.png",
+          src: "/images/work/flowz-builder.webp",
           caption:
             "The builder: one Start node on an open canvas, with the step picker showing what a process is made of. Send Request, Receive Message and Publish Message up top, Decisions and Evaluate under Logic.",
           impact:
@@ -778,7 +780,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-task-setup.png",
+          src: "/images/work/flowz-task-setup.webp",
           caption:
             "Setting up a step. Name, description, who it goes to, and the form it carries. Typing a single letter filters the form list down to Leave Request, HR Survey, New Hire, Finance Survey.",
           impact:
@@ -793,7 +795,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-collaborators.png",
+          src: "/images/work/flowz-collaborators.webp",
           caption:
             "Creating a new flow: approvers named at the top, a category, a save as template toggle, and collaborators invited by email with a permission level attached.",
           impact:
@@ -809,7 +811,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-monitor.png",
+          src: "/images/work/flowz-monitor.webp",
           caption:
             "Monitor: one run of one process, marked Failed, showing the path it actually took and the 23 activities underneath it on a timeline.",
           impact:
@@ -825,7 +827,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-dashboard.png",
+          src: "/images/work/flowz-dashboard.webp",
           caption:
             "Dashboard: running, completed, running with errors, average completion time, published, awaiting approval. The approvals queue sits to the right of the tiles.",
           impact:
@@ -833,7 +835,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/flowz-analytics.png",
+          src: "/images/work/flowz-analytics.webp",
           caption:
             "Execution over the year, with a red failure line drawn across the same axis as the volume bars, plus a live activity feed and the total process inventory.",
           impact:
@@ -1016,7 +1018,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/gopal-home-savings.png",
+          src: "/images/work/gopal-home-savings.webp",
           caption:
             "Home and savings side by side: total saved, autosave, and goals with real progress against them.",
           impact:
@@ -1033,7 +1035,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/gopal-savings-flow.png",
+          src: "/images/work/gopal-savings-flow.webp",
           caption:
             "The savings screen after the rework: Quick Save first, plans below it, goals with visible progress.",
           impact:
@@ -1049,7 +1051,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/gopal-cards.png",
+          src: "/images/work/gopal-cards.webp",
           caption:
             "Virtual card: details hidden by default, revealed deliberately, with manage and block one tap away.",
           impact:
@@ -1099,7 +1101,7 @@ export const projects: Project[] = [
     year: "2023",
     description:
       "Making trust-fund investing approachable with clear onboarding, transparent returns, and confidence-building visuals.",
-    image: "/images/work/valco.jpg",
+    image: "/images/work/valco.webp",
     subtitle: "Trust-fund investing made approachable",
     tags: ["Fintech", "UI Design"],
   },
@@ -1110,7 +1112,7 @@ export const posts = [
     title: "AI as a designer's tool, not a replacement",
     date: "July 2024",
     href: "https://medium.com/",
-    image: "/images/articles/ai-tool.jpg",
+    image: "/images/articles/ai-tool.webp",
     excerpt:
       "How I fold AI into my process to move faster without losing the craft and judgment that make design matter.",
   },
@@ -1118,7 +1120,7 @@ export const posts = [
     title: "UI/UX design guidance for Nigerian youth",
     date: "March 2022",
     href: "https://medium.com/",
-    image: "/images/articles/uiux-youth.jpg",
+    image: "/images/articles/uiux-youth.webp",
     excerpt:
       "A practical starting point for young designers in Nigeria breaking into product design from scratch.",
   },

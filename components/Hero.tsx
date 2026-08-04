@@ -114,7 +114,7 @@ export default function Hero() {
             resolve against the element's own height, which is the full
             section, so 6% reads as 6dvh. */}
         <motion.img
-          src="/images/portrait-hero.jpg"
+          src="/images/portrait-hero.webp"
           alt=""
           className="absolute left-1/2 top-0 h-full object-cover object-top contrast-[1.12] mix-blend-screen"
           style={{
