@@ -732,13 +732,6 @@ export const projects: Project[] = [
           ],
         },
         {
-          kind: "figure",
-          caption:
-            "Guided onboarding: a first-run walkthrough with tips that appear where a feature is used.",
-          impact:
-            "The direct answer to that early testing. It holds complexity back until someone has a reason to care about it, which is what let non-technical teams get past the first session.",
-        },
-        {
           kind: "features",
           heading: "What shipped",
           intro: [
@@ -768,25 +761,83 @@ export const projects: Project[] = [
           ],
         },
         {
-          kind: "figure",
-          caption:
-            "Workflow builder: processes mapped step by step, with tasks, deadlines, and dependencies laid out as blocks.",
-          impact:
-            "Turns the most intimidating part of the product into something you can see and rearrange. This is what let non-technical users build their own workflows instead of filing a request and waiting.",
+          kind: "prose",
+          heading: "The product, screen by screen",
+          body: [
+            "Four bullet points is a tidy way to summarise a platform and a useless way to understand one. So here is the actual thing, in roughly the order a new operations lead meets it.",
+            "Watch what each screen refuses to make you leave it for. That restraint is the whole design.",
+          ],
         },
         {
           kind: "figure",
+          src: "/images/work/flowz-builder.png",
           caption:
-            "Automation setup: rules for reminders, approvals, and status updates, started from pre-built templates.",
+            "The builder: one Start node on an open canvas, with the step picker showing what a process is made of. Send Request, Receive Message and Publish Message up top, Decisions and Evaluate under Logic.",
           impact:
-            "The shape this took because of the pushback. Presenting automation as a handful of named actions rather than a configuration screen is what made teams willing to try it at all.",
+            "Every item in that list is a technical primitive wearing an ordinary name. Send Request is an HTTP call. Evaluate runs Python or TypeScript against your data. Naming them for what they accomplish rather than what they are is most of the reason a team lead opens this screen a second time. Note what sits in the top right too: Save, Invite, Deploy. A process is something you ship, and you are never building it alone.",
         },
         {
           kind: "figure",
+          src: "/images/work/flowz-task-setup.png",
           caption:
-            "Task detail: comments, mentions, and notifications living inside the task itself.",
+            "Setting up a step. Name, description, who it goes to, and the form it carries. Typing a single letter filters the form list down to Leave Request, HR Survey, New Hire, Finance Survey.",
           impact:
-            "Keeps the conversation attached to the work. Removing the trip out to a separate chat tool closed the gap where context kept going missing between handoffs.",
+            "The field worth pausing on is Delegate, sitting directly under Assignee. Someone thought about the Tuesday the assignee is on leave, which is exactly the case that breaks a paper process and the reason work quietly reverts to email. Attaching an existing form rather than authoring a new one is the same instinct: most steps are not new, they are a thing your company already does, written down.",
+        },
+        {
+          kind: "prose",
+          heading: "Who signs it off, and who gets to look",
+          body: [
+            "Permissions are the least glamorous screen in any operations tool and the first thing that stops adoption dead. If getting a colleague access means filing a ticket with IT, the process leaves the platform and reappears in a group chat.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-collaborators.png",
+          caption:
+            "Creating a new flow: approvers named at the top, a category, a save as template toggle, and collaborators invited by email with a permission level attached.",
+          impact:
+            "Approval and access get decided while the process is being built, not requested afterwards. The permission dropdown next to the invite field is small and does a lot of work: inviting someone and deciding what they can do with it is one action, so nobody ends up over-permissioned because narrowing it later was too much effort. Save process as template is how the second department starts in a minute instead of a morning.",
+        },
+        {
+          kind: "prose",
+          heading: "The screen nobody asks for until the first failure",
+          body: [
+            "Status tracking was in the brief. Watching an automated run fail was not. Automation gets sold on the days it works, and every demo shows a process completing.",
+            "But an automated process that fails silently is worse than a manual one, because at least a manual one has a person waiting on it who will eventually ask. The first time a run dies at 2am, the only questions anyone has are which run, whose, and how far did it get.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-monitor.png",
+          caption:
+            "Monitor: one run of one process, marked Failed, showing the path it actually took and the 23 activities underneath it on a timeline.",
+          impact:
+            "The Failed badge sits above the things you need the moment you see it. A copyable instance ID, start and end time, duration, and the name of whoever kicked it off. The activity list shows which steps passed before it stopped, so you land on the broken one instead of reading the whole process again. This screen answers all three questions without a support ticket, and it is the one operations teams ended up living in.",
+        },
+        {
+          kind: "prose",
+          heading: "Numbers that point at something",
+          body: [
+            "This was the addition I argued hardest for, which made it the one I could least afford to get wrong. The default failure mode of a dashboard is a wall of numbers that leaves a manager feeling informed without telling them to do anything.",
+            "So I held it to a single test. Can you look at this for ten seconds and know what needs your attention today?",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-dashboard.png",
+          caption:
+            "Dashboard: running, completed, running with errors, average completion time, published, awaiting approval. The approvals queue sits to the right of the tiles.",
+          impact:
+            "Running Processes with Errors is a tile, at the same size and weight as the numbers that flatter you. Most dashboards put failure three clicks in. And the approvals queue turns the page from a report into a to do list, because the most common reason a workflow stalls is not a bug, it is a person who has not clicked yes yet.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-analytics.png",
+          caption:
+            "Execution over the year, with a red failure line drawn across the same axis as the volume bars, plus a live activity feed and the total process inventory.",
+          impact:
+            "The legend names real automations rather than abstract categories, so the chart reads as your own work rather than someone else's telemetry. Putting failures on the same axis as volume is the part that makes it diagnostic instead of decorative: a spike in March means nothing on its own, but a spike with the red line climbing under it is a process that broke as soon as it got busy.",
         },
         {
           kind: "grid",
