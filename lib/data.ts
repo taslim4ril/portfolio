@@ -284,6 +284,25 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
+          heading: "Who, why, how, and a biro",
+          body: [
+            "Underneath all of that, the research was really three questions asked over and over, of every pattern I found and every feature anyone proposed. They are not sophisticated questions. They are just uncomfortable to answer honestly.",
+            "Who. Not a persona with a stock photo and an age range, but a specific person in a specific bind. The solo traveller with a flight time they cannot move. The group of four with three different appetites and one weekend between them. Every time the answer came back as travellers, it meant I had not looked closely enough yet.",
+            "Why. Why would this person open Plantinerary instead of the browser tabs that are already working well enough? Well enough is the real competitor in this category, and it is a far tougher one than Airbnb, because it costs nothing and nobody has to be convinced to keep it.",
+            "How. Not how the feature would work, but how the thing actually gets done on a Tuesday, on a phone, with somebody talking at you. Most of the failures I found in other products were features that answered why beautifully and were never asked how.",
+            "And then paper. Every screen in this case study started as biro in a lined notebook, and stayed there longer than was comfortable, because paper is the cheapest possible place to be wrong.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/plantinerary-sketch.webp",
+          caption:
+            "A page of the ideation: the list screen at the top, an on click arrow across to Details page, and the details page worked out underneath.",
+          impact:
+            "What makes sketching useful is everything a drawing refuses to answer. There is no type scale here, no colour, no spacing, so the only things left to argue about are what the screen is for and the order in which it says it. Notice that the flow is annotated before the layout is: on click, then details page, then a note at the foot that the call to action has to be prominent. That note outlived every iteration. The hero image, the column of thumbnails, the row of stars, the one filled button at the bottom. The explore screens that shipped are this drawing with better photography, which is the point of doing it in ink first. If the idea does not hold up as a bad drawing, it is not going to be rescued by a good render.",
+        },
+        {
+          kind: "prose",
           heading: "The brief, and the argument with it",
           body: [
             "The ask that came in was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
