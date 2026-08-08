@@ -152,8 +152,16 @@ export type Project = {
   /** Omit while a project is still waiting on its shots; the card falls back
    *  to the same empty frame the case study figures use. */
   image?: string;
-  /** One-line framing shown above the title on the work card. */
+  /** Short label above the title on the work card. Two or three words. */
   subtitle: string;
+  /** The proof line under the title on the work card. Numbers in it are
+   *  picked out in the accent colour, so write it with the figure first.
+   *
+   *  Every one of these has to survive someone clicking through to the case
+   *  study, so only Flowz carries measured outcomes. The rest state scope:
+   *  what was built and at what size, which is countable and checkable.
+   *  A project with no case study gets no metric. */
+  metric?: string;
   /** Pills shown at the top-left of the work card. */
   tags: string[];
   accent?: boolean;
@@ -171,7 +179,9 @@ export const projects: Project[] = [
     description:
       "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
     image: "/images/work/plantinerary.webp",
-    subtitle: "Travel planning without seventeen open tabs",
+    subtitle: "Travel planner",
+    metric:
+      "Collapses a 7-tool planning ritual into 1 surface, across 3 shipped flows in 5 weeks",
     tags: ["Product Design", "Travel"],
     caseStudy: {
       title: "Plantinerary",
@@ -520,7 +530,9 @@ export const projects: Project[] = [
     description:
       "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
     image: "/images/work/ibank.webp",
-    subtitle: "Internet banking rebuilt around task completion",
+    subtitle: "Bank redesign",
+    metric:
+      "3 core journeys rebuilt and 6 screens redrawn, with 0 steps removed from the compliance path",
     tags: ["Product Design", "Fintech"],
     caseStudy: {
       title: "GTBank i-Bank",
@@ -721,7 +733,9 @@ export const projects: Project[] = [
     description:
       "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
     image: "/images/work/flowz.webp",
-    subtitle: "Process automation platform for busy teams",
+    subtitle: "Process automation platform",
+    metric:
+      "60% less time per task, 45% more workflow visibility, and 20 hours a week back for one logistics team",
     tags: ["Product Design", "SaaS"],
     accent: true,
     caseStudy: {
@@ -1023,7 +1037,9 @@ export const projects: Project[] = [
     description:
       "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
     image: "/images/work/gopal.webp",
-    subtitle: "Simplifying banking and encouraging smarter saving",
+    subtitle: "Digital banking app",
+    metric:
+      "12 user interviews and 3 iteration cycles inside a 1-month build",
     tags: ["Mobile", "Fintech"],
     caseStudy: {
       title: "Designing Go Pal",
@@ -1217,7 +1233,7 @@ export const projects: Project[] = [
     description:
       "Connecting farmers and buyers through a marketplace that keeps produce, pricing, and logistics transparent end to end.",
     image: "/images/work/cropgate.webp",
-    subtitle: "Marketplace connecting farmers and buyers",
+    subtitle: "Agritech marketplace",
     tags: ["Product Design", "Web"],
   },
   {
@@ -1229,7 +1245,7 @@ export const projects: Project[] = [
     description:
       "Making trust-fund investing approachable with clear onboarding, transparent returns, and confidence-building visuals.",
     image: "/images/work/valco.webp",
-    subtitle: "Trust-fund investing made approachable",
+    subtitle: "Trust-fund investing",
     tags: ["Fintech", "UI Design"],
   },
 ];

@@ -119,10 +119,38 @@ export default function WorkCard({
 
       {/* Title block */}
       <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10">
-        <p className="text-sm text-white/70">{p.subtitle}</p>
-        <h3 className="heading mt-2 text-4xl font-medium leading-none text-white sm:text-5xl md:text-6xl">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+          {p.subtitle}
+        </p>
+        <h3 className="heading mt-3 text-4xl font-medium leading-none text-white sm:text-5xl md:text-6xl">
           {first} <span className="text-white/45">{rest.join(" ")}</span>
         </h3>
+        {p.metric && (
+          /* The proof line. Sits under the title behind a hairline so it
+             reads as evidence for the name above it rather than more
+             description, and it is capped in width so it never runs under
+             the meta list on the opposite corner. */
+          <div className="mt-5 max-w-lg border-t border-white/20 pt-4">
+            <p className="flex items-start gap-2.5 text-sm leading-relaxed text-white/70">
+              <span aria-hidden className="mt-[0.3rem] text-[0.6rem] text-accent">
+                ✦
+              </span>
+              <span>
+                {/* Figures are picked out in the accent so the claim is
+                    scannable before it is read. */}
+                {p.metric.split(/(\d[\d,.%-]*)/g).map((part, i) =>
+                  /^\d/.test(part) ? (
+                    <strong key={i} className="font-medium text-accent">
+                      {part}
+                    </strong>
+                  ) : (
+                    part
+                  ),
+                )}
+              </span>
+            </p>
+          </div>
+        )}
       </div>
     </a>
   );
