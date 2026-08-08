@@ -31,6 +31,20 @@ export default function Footer() {
             </span>
           </div>
 
+          {/* A free proof point: the site is the work, so say who built it
+              and leave the source one click away. */}
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted/70">
+            This site is Next.js, built and deployed by me.{" "}
+            <a
+              href={site.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted underline underline-offset-4 transition-colors hover:text-foreground"
+            >
+              Source on GitHub
+            </a>
+          </p>
+
           <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted/70">
             © {new Date().getFullYear()} {site.name.split(" ")[0]}, all
             rights reserved.

@@ -82,6 +82,26 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* ===== Influence ===== */}
+        <section className="px-6 py-16 md:px-[100px]">
+          <Reveal>
+            <ScrambleHeading
+              lead="The part that isn't"
+              bold="the file"
+              className="heading text-3xl leading-none text-white sm:text-4xl md:text-5xl"
+            />
+          </Reveal>
+          <div className="mt-12 max-w-3xl space-y-6">
+            {about.influence.body.map((paragraph, i) => (
+              <Reveal key={i} delay={i * 0.08}>
+                <p className="text-lg leading-relaxed text-white/65 md:text-xl">
+                  {paragraph}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
         {/* ===== Experience ===== */}
         {/* Last section on the page, so it carries the deeper bottom padding
             that used to sit on the testimonials below it. */}

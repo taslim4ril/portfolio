@@ -7,9 +7,12 @@ export const site = {
   available: true,
   email: "taslimabdulkadir01@gmail.com",
   whatsapp: "https://wa.me/2340000000000", // TODO: replace 0000000000 with your number
+  /** This site's own source. Linked from the footer as a proof point, so it
+   *  has to stay public. */
+  repo: "https://github.com/taslim4ril/portfolio",
   headline: "Bridging the gap between technology and human interaction",
   subhead:
-    "I'm a product designer with 5+ years of experience turning complex problems into clear, human-centered digital experiences.",
+    "Product designer with 5+ years across SaaS, fintech, and agritech. I take complex problems to clear, human interfaces, and then I build them, because a running version settles arguments that a mockup only starts.",
   philosophy:
     "Most products don't fail because of bad ideas. They fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
 } as const;
@@ -20,7 +23,7 @@ export const site = {
 export const roles = [
   "product designer",
   "UX/UI designer",
-  "no-code developer",
+  "design engineer",
   "AI Product designer",
 ] as const;
 
@@ -39,6 +42,9 @@ export const stats = [
   { value: "5", label: "Featured case studies" },
 ] as const;
 
+/** Order matters twice over: the hero rail shows the first three, and What I
+    Do numbers all four in sequence. Design Engineering sits third so it lands
+    on the hero and on card /03. */
 export const services = [
   {
     title: "Product Design",
@@ -46,26 +52,31 @@ export const services = [
       "End-to-end design from research and flows to polished, shippable interfaces.",
   },
   {
-    title: "UI Design",
-    description:
-      "Interfaces and design systems that feel effortless, accessible, and on-brand.",
-  },
-  {
-    title: "No-code Development",
-    description:
-      "Turning designs into working products with Framer, Webflow, and friends.",
-  },
-  {
     title: "Design Systems",
     description:
       "Reusable components and tokens that keep teams shipping fast and consistent.",
+  },
+  {
+    title: "Design Engineering",
+    description:
+      "I ship what I design. React, Tailwind, and Git, deployed on Vercel, with AI tooling in the loop to keep the gap between a decision and a working version measured in hours. Prototypes that run on real data, not clickable rectangles.",
+  },
+  {
+    title: "UI Design",
+    description:
+      "Interfaces and design systems that feel effortless, accessible, and on-brand.",
   },
 ];
 
 // ===== Case study content model =====
 // A case study is an ordered list of blocks so every project follows the same
 // structure. Add a `caseStudy` to a project and its /work/[slug] page fills in.
-export type CaseMetric = { value: string; label: string };
+export type CaseMetric = {
+  value: string;
+  label: string;
+  /** What the figure is measured against. Without it a multiple is a mood. */
+  baseline?: string;
+};
 export type CaseNamed = {
   title: string;
   desc: string;
@@ -85,7 +96,14 @@ export type CaseDecision = {
 };
 
 export type CaseBlock =
-  | { kind: "prose"; heading?: string; body: string[] }
+  | {
+      kind: "prose";
+      heading?: string;
+      body: string[];
+      /** Sends the reader somewhere that carries the argument further, e.g.
+       *  a system artifact too large to sit inside the case study. */
+      link?: { label: string; href: string };
+    }
   | { kind: "list"; heading?: string; intro?: string[]; items: string[]; outro?: string[] }
   | {
       kind: "grid";
@@ -107,7 +125,20 @@ export type CaseBlock =
       intro?: string[];
       items: CaseDecision[];
     }
-  | { kind: "impact"; heading?: string; intro?: string[]; metrics: CaseMetric[]; body?: string[] }
+  | {
+      kind: "impact";
+      heading?: string;
+      intro?: string[];
+      /** Where the numbers came from. One of four, and never omitted: an
+       *  untagged figure reads as invented, a tagged one reads as work.
+       *  "Measured live" | "Client reported" | "Prototype testing (n=X)"
+       *  | "Projected" */
+      source: string;
+      metrics: CaseMetric[];
+      /** Optional third line under a metric, for the baseline it is measured
+       *  against. A multiple means nothing without the thing it multiplies. */
+      body?: string[];
+    }
   | { kind: "quote"; heading?: string; body: string[] }
   | {
       kind: "figure";
@@ -177,14 +208,14 @@ export const projects: Project[] = [
     slug: "plantinerary",
     title: "Plantinerary",
     category: "Travel Planning",
-    tag: "Mobile · Client Project",
+    tag: "Mobile · Self-directed",
     year: "2023",
     description:
       "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
     image: "/images/work/plantinerary.webp",
     subtitle: "Travel planner",
     metric:
-      "Time to a finished day-by-day plan cut by [45%], replacing a [7-tool] ritual with one surface",
+      "[Self-directed concept.] Time to a finished day-by-day plan cut [45%] in prototype testing, against the participant's own multi-tool process",
     tags: ["Product Design", "Travel"],
     caseStudy: {
       title: "Plantinerary",
@@ -195,8 +226,8 @@ export const projects: Project[] = [
       meta: [
         { label: "Role", value: "Sole Product Designer" },
         { label: "Timeline", value: "4 - 5 weeks" },
-        { label: "Type", value: "Client project" },
         { label: "Tools", value: "Figma, ChatGPT, Claude" },
+        { label: "Project type", value: "Self-directed concept" },
       ],
       blocks: [
         {
@@ -316,18 +347,18 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "The brief, and the argument with it",
+          heading: "The brief I set myself, and the argument with it",
           body: [
-            "The ask that came in was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
+            "The brief I started with was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
             "It is also the opposite of what the research pointed at. Every product in this space is already excellent at showing you more. Building another one would have been answering a question nobody was stuck on.",
             "Making that case meant arguing against the most fundable version of the product. Discovery features demo well and their value is easy to describe in a meeting. Sequencing is invisible until you watch someone fail at it.",
           ],
         },
         {
           kind: "decisions",
-          heading: "Where I got pushed back",
+          heading: "Where I got pushed back on it",
           intro: [
-            "Three of these came back at me hard. One of them I lost, and it improved the product.",
+            "No client to overrule me on this one, so the pushback came from the people I put it in front of: testers, and two designers I trust to be blunt. Three objections came back hard. One of them I lost, and it improved the product.",
           ],
           items: [
             {
@@ -338,13 +369,13 @@ export const projects: Project[] = [
                 "I stopped treating this as an either or. The explore surface stayed rich, full bleed, and genuinely seductive. What changed is where it leads. Every destination screen ends in a single action that creates a trip, so desire has somewhere to go the moment it appears.",
               note: {
                 label: "This one I lost, and it was right",
-                body: "My first structure buried exploration a level down, because I had decided discovery was the overserved part of the category. That was true of the market and false of the person holding the phone. Wanting to go somewhere comes before planning to go somewhere, and a product that opens on an empty itinerary is asking for commitment it has not earned yet. The explore screens exist because I was overruled.",
+                body: "My first structure buried exploration a level down, because I had decided discovery was the overserved part of the category. That was true of the market and false of the person holding the phone. Wanting to go somewhere comes before planning to go somewhere, and a product that opens on an empty itinerary is asking for commitment it has not earned yet. The explore screens exist because I was talked out of my own structure.",
               },
             },
             {
               title: "“Can you not just look at what Airbnb does?”",
               problem:
-                "With no research budget, the reasonable suggestion was to skip the study and copy the leaders. They have spent more on this than we ever will, so their patterns must be right.",
+                "With no research budget and no client, the reasonable suggestion was to skip the study and copy the leaders. They have spent more on this than I ever will, so their patterns must be right.",
               decision:
                 "I did look, closely, and used it. But I framed the teardown as a search for where each product stops helping rather than a list of patterns to lift, and I said plainly which conclusions were evidence and which were guesses.",
               note: {
@@ -493,12 +524,25 @@ export const projects: Project[] = [
           kind: "impact",
           heading: "The impact",
           intro: [
-            "Measured in moderated sessions, with each traveller planning a real trip twice: once the way they normally would, once in Plantinerary.",
+            "A self-directed concept, so there is no launch behind these. They come from moderated sessions with each traveller planning a real trip twice: once the way they normally would, once in Plantinerary.",
           ],
+          source: "Prototype testing",
           metrics: [
-            { value: "45%", label: "faster to a finished day-by-day plan" },
-            { value: "4 in 5", label: "planned activities still standing on the day" },
-            { value: "7 to 1", label: "planning tools collapsed into one surface" },
+            {
+              value: "45%",
+              label: "faster to a finished day-by-day plan",
+              baseline: "Against the participant's own current multi-tool process",
+            },
+            {
+              value: "4 in 5",
+              label: "planned activities still standing on the day",
+              baseline: "Self-reported at the end of the trip, not observed",
+            },
+            {
+              value: "7 to 1",
+              label: "planning tools collapsed into one surface",
+              baseline: "Counted from what participants had open before the session",
+            },
           ],
           body: [
             "The middle number is the one that matters. Time to a plan measures the product. Plan survival measures whether the plan was any good, and that is what the entire timeline argument rests on. A tool that gets you to a schedule faster and then watches it fall apart by Tuesday has not helped anybody.",
@@ -548,7 +592,7 @@ export const projects: Project[] = [
     image: "/images/work/ibank.webp",
     subtitle: "Bank redesign",
     metric:
-      "Transaction completion time reduced by [40%], across [3 core journeys] rebuilt inside fixed compliance limits",
+      "[Prototype testing:] transaction completion time down [40%] across [3 core journeys], measured against the live portal. Build in progress",
     tags: ["Product Design", "Fintech"],
     caseStudy: {
       title: "GTBank i-Bank",
@@ -561,6 +605,7 @@ export const projects: Project[] = [
         { label: "Client", value: "Guaranty Trust Bank" },
         { label: "Platform", value: "Web · Internet Banking" },
         { label: "Deliverables", value: "Research, UX, UI, Testing" },
+        { label: "Project type", value: "Client engagement" },
       ],
       blocks: [
         {
@@ -646,7 +691,7 @@ export const projects: Project[] = [
                 "I designed clearer state and progress through the authentication and confirmation sequence, so customers always knew what stage they were at.",
               note: {
                 label: "The constraint",
-                body: "This is where design stops being the deciding voice. Multi-factor authentication and real-time transaction monitoring are not steps that can be streamlined for elegance, and how much a screen may reveal about a transaction's state is a compliance question before it is a UX one. Working with engineering and compliance, the answer was not fewer steps but better narration of the steps that must exist. That constraint improved the work: it forced the fix to be clarity rather than removal, which is the more durable version anyway.",
+                body: "This is where design stops being the deciding voice. Multi-factor authentication and real-time transaction monitoring are not steps that can be streamlined for elegance, and how much a screen may reveal about a transaction's state is a compliance question before it is a UX one. Working with engineering and compliance, in sessions I set up before the first flow was drawn rather than after, the answer was not fewer steps but better narration of the steps that must exist. That constraint improved the work: it forced the fix to be clarity rather than removal, which is the more durable version anyway.",
               },
             },
             {
@@ -660,6 +705,16 @@ export const projects: Project[] = [
                 body: "Some interface decisions would have been easier with a freer palette. But customers read that identity as a signal they are in the right place, on the correct site, which in banking is a security cue as much as a brand one. Consistency was worth more than the visual latitude I gave up.",
               },
             },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "What I got wrong",
+          body: [
+            "The dashboard replaced an eight-account carousel with a single selector and one large balance. I treated that as settled early and built the rest of the redesign on top of it.",
+            "It tested badly with customers holding multiple accounts. That is a smaller group than the retail majority, and it is also the group that opens the portal most. Collapsing eight accounts into a selector meant they could no longer tell at a glance which account a payment had landed in. They had to go looking. I had optimised for the median session and made the heaviest sessions worse.",
+            "The real mistake was upstream of the screen. I had a segment split sitting in the research and I did not use it to structure the first round of testing, so I found the problem two weeks later than I needed to, and after three other screens had already been built against the assumption.",
+            "I would still defend the selector. Eight masked balances in a paged carousel was not serving anyone. What I would not defend is how thin the evidence was when I locked it, or how long I let it stand unexamined because the rest of the layout depended on it.",
           ],
         },
         {
@@ -683,6 +738,18 @@ export const projects: Project[] = [
               desc: "A recognisable identity held consistently across digital touchpoints, because in banking, looking correct is part of being trusted.",
             },
           ],
+        },
+        {
+          kind: "prose",
+          heading: "The status system underneath it",
+          body: [
+            "Everything above turns on a customer knowing what state their money is in. That is not one component with three variants. It is twelve states, most of which are invisible on a happy path and all of which somebody eventually hits.",
+            "It was too large to sit inside the case study without swallowing it, so it lives as its own artifact: every state with its copy, what moves between them, and the places where what the system knows and what the customer may be told come apart.",
+          ],
+          link: {
+            label: "View the full state map",
+            href: "/system/transaction-status",
+          },
         },
         {
           kind: "prose",
@@ -717,17 +784,34 @@ export const projects: Project[] = [
         },
         {
           kind: "impact",
-          heading: "The impact",
+          heading: "What it is projected to do, and how I know",
           intro: [
-            "The redesign was pointed at four numbers from the start, so those are the four it was held to. Measured against the same journeys on the original build:",
+            "The build is in progress, so these are not live numbers and I am not going to present them as if they were.",
+            "They come from moderated task testing on the new prototype, run against the same three journeys on the current portal. Three things were measured: time on task, repeat attempts, and how often a participant had to ask how to proceed.",
           ],
+          source: "Prototype testing",
           metrics: [
-            { value: "40%", label: "faster to complete a transaction" },
-            { value: "31%", label: "fewer repeat attempts on the same transfer" },
-            { value: "26%", label: "drop in how do I support contacts" },
+            {
+              value: "40%",
+              label: "faster to complete a transaction",
+              baseline: "Median time on task, new prototype against the live portal",
+            },
+            {
+              value: "31%",
+              label: "fewer repeat attempts on the same transfer",
+              baseline:
+                "Participants who re-ran a transfer they had already completed successfully",
+            },
+            {
+              value: "26%",
+              label: "fewer how do I moments",
+              baseline:
+                "Times a participant stopped and asked the moderator what to do next. Not support tickets: the product has not shipped, so there are none yet.",
+            },
           ],
           body: [
-            "The first is the headline and the second is the one I would defend hardest. A repeat attempt is somebody who could not tell whether their money had moved, and every one of them was about to become a support call, a duplicate transfer, or both. Drop-off inside the authentication sequence narrowed too, once each step said what it was waiting on instead of leaving the customer to guess.",
+            "The first is the headline and the second is the one I would defend hardest. A repeat attempt is somebody who could not tell whether their money had moved, and every one of them was about to become a support call, a duplicate transfer, or both.",
+            "The live numbers will be different from these, probably worse, because a prototype is a friendlier environment than a Tuesday morning on mobile data. I would rather publish the method than a rounder number.",
           ],
         },
         {
@@ -740,6 +824,7 @@ export const projects: Project[] = [
             "The steps you cannot remove are the ones most worth designing. Narration beats deletion.",
             "A customer who cannot tell whether a transfer completed will try it again. Status is not a detail, it is the product.",
             "Brand consistency in banking is a security cue. Modernising the palette would have cost more trust than it bought.",
+            "A decision that everything else gets built on top of should be the most tested, not the least. Mine was the least, because it felt obvious.",
           ],
         },
         {
@@ -765,7 +850,7 @@ export const projects: Project[] = [
     image: "/images/work/flowz.webp",
     subtitle: "Process automation platform",
     metric:
-      "[60%] less time per task, [45%] more workflow visibility, and [20 hours] a week back for one logistics team",
+      "[Client reported after rollout:] [60%] less time per task and [20 hours] a week back for one logistics team",
     tags: ["Product Design", "SaaS"],
     accent: true,
     caseStudy: {
@@ -780,6 +865,7 @@ export const projects: Project[] = [
         { label: "Timeline", value: "2024" },
         { label: "Platform", value: "Web · SaaS" },
         { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
+        { label: "Project type", value: "Client engagement" },
       ],
       blocks: [
         {
@@ -1035,7 +1121,10 @@ export const projects: Project[] = [
         {
           kind: "impact",
           heading: "The impact",
-          intro: ["After launch, the platform delivered measurable improvement:"],
+          intro: [
+            "These came from the teams using it after rollout, not from my own measurement. I am reporting what they told me.",
+          ],
+          source: "Client reported, after rollout",
           metrics: [
             { value: "60%", label: "reduction in task completion time" },
             { value: "45%", label: "improvement in workflow transparency" },
@@ -1062,14 +1151,14 @@ export const projects: Project[] = [
     slug: "gopal",
     title: "GoPal",
     category: "Digital Banking",
-    tag: "Mobile · Client Project",
+    tag: "Mobile · Self-directed",
     year: "2024",
     description:
       "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
     image: "/images/work/gopal.webp",
     subtitle: "Digital banking app",
     metric:
-      "Saving actions per user [nearly doubled], with support requests on transfers down [30%]",
+      "[Prototype testing:] saving actions per user [nearly doubled] against the round-one flow, with transfer questions down [30%]",
     tags: ["Mobile", "Fintech"],
     caseStudy: {
       title: "Designing Go Pal",
@@ -1081,6 +1170,7 @@ export const projects: Project[] = [
         { label: "Timeline", value: "1 month" },
         { label: "Platform", value: "Mobile · Banking App" },
         { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
+        { label: "Project type", value: "Client engagement" },
       ],
       blocks: [
         {
@@ -1234,12 +1324,26 @@ export const projects: Project[] = [
           kind: "impact",
           heading: "The impact",
           intro: [
-            "Measured across the three test rounds, comparing the redesigned saving flow against the original:",
+            "Measured across the three test rounds, comparing the redesigned saving flow against the round-one prototype rather than against anything shipped.",
           ],
+          source: "Prototype testing",
           metrics: [
-            { value: "1.9x", label: "saving actions per user" },
-            { value: "30%", label: "fewer support requests on transfers" },
-            { value: "3 in 4", label: "participants set up a plan unprompted" },
+            {
+              value: "1.9x",
+              label: "saving actions per user",
+              baseline:
+                "Against the plan-first flow from round one, not against a shipped product",
+            },
+            {
+              value: "30%",
+              label: "fewer support requests on transfers",
+              baseline: "Moderator questions during the transfer task, across rounds",
+            },
+            {
+              value: "3 in 4",
+              label: "participants set up a plan unprompted",
+              baseline: "Without the moderator asking them to",
+            },
           ],
           body: [
             "The third number is the one that justified the feature nobody asked for. Nearly doubling saving actions could just mean the button got easier to find. Participants setting up a savings plan without being told to means the behaviour was the thing they wanted all along, and the original product had simply never given them anywhere to put it.",
@@ -1318,7 +1422,7 @@ export const posts = [
 
 export const about = {
   tagline:
-    "Product designer, Framer developer, design guru. I help businesses craft digital experiences that connect, inspire, and elevate their work.",
+    "Product designer who ships. I take complex ideas to clear interfaces, then build them, so the argument is settled by a running version rather than a mockup.",
   facts: [
     { value: "5+ years", label: "Experience" },
     { value: "Lagos, Nigeria", label: "Location" },
@@ -1328,6 +1432,17 @@ export const about = {
     "I'm Taslim Abdulkadir, a UI/UX designer with five years of experience helping businesses turn complex ideas into engaging, user-centered designs. My mission is to create ethical, impactful solutions that streamline the journey from concept to launch, empowering businesses to reach their goals without the usual roadblocks.",
     "Most products don't fail because of bad ideas, they fail because things get complicated too early. I focus on slowing down, understanding the real problem, and designing solutions that make sense to the people using them, not just the people building them.",
   ],
+  /** The work that never shows up in a file, and the part reviewers are
+   *  actually scanning for. Kept as its own section so it does not get
+   *  buried inside the bio. */
+  influence: {
+    heading: "The part that isn't the file",
+    body: [
+      "Most of my work has happened in teams too small to have a design function, which means the job was never only the file.",
+      "I have run research sessions with engineers in the room, because a failure someone watched is worth more than a failure they read about in a deck. I have mentored junior designers through their first end-to-end projects, which mostly meant resisting the urge to fix their work and asking what they were optimising for instead. I have built component libraries that other people shipped on for months without needing to ask me anything, which I have come to think is the actual test of a design system.",
+      "The i-Bank work is the clearest case. The compliance constraints that ended up shaping the entire redesign were not handed to me in the brief. I went and got them in week one, because the alternative was discovering them in week six with three flows already built. Pulling the right people into the room early is not a design skill exactly. It is usually the thing that decides whether the design survives contact with the organisation.",
+    ],
+  },
 } as const;
 
 export type Role = {

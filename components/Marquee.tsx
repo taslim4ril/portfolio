@@ -6,7 +6,7 @@ export default function Marquee() {
     "UI Design",
     "UX Research",
     "Design Systems",
-    "No-code",
+    "Front-end",
     "Prototyping",
   ];
   void services;

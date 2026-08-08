@@ -1,5 +1,6 @@
 import type { CaseBlock, Project } from "@/lib/data";
 import Reveal from "./Reveal";
+import Button, { CircleIcon } from "./Button";
 
 /* ---------- block renderers ---------- */
 
@@ -94,6 +95,15 @@ function Block({ block }: { block: CaseBlock }) {
             <div className="space-y-5">
               <Paragraphs body={block.body} />
             </div>
+            {block.link && (
+              <Button
+                href={block.link.href}
+                size="md"
+                icon={<CircleIcon>→</CircleIcon>}
+              >
+                {block.link.label}
+              </Button>
+            )}
           </div>
         </Reveal>
       );
@@ -364,6 +374,16 @@ function Block({ block }: { block: CaseBlock }) {
               )}
             </div>
           </Reveal>
+          {/* The source tag sits above the numbers, not in a footnote under
+              them. A reader should know what kind of evidence this is before
+              they read the first figure, not after. */}
+          <Reveal>
+            <div className="mx-auto max-w-3xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.07] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.18em] text-accent">
+                <span aria-hidden>✦</span> {block.source}
+              </span>
+            </div>
+          </Reveal>
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-6">
             {block.metrics.map((m, i) => (
               <Reveal key={i} delay={i * 0.08}>
@@ -372,6 +392,11 @@ function Block({ block }: { block: CaseBlock }) {
                     {m.value}
                   </div>
                   <div className="mt-3 text-base text-white/60">{m.label}</div>
+                  {m.baseline && (
+                    <div className="mt-2 text-sm leading-relaxed text-white/40">
+                      {m.baseline}
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
