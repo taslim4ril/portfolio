@@ -487,16 +487,29 @@ export const projects: Project[] = [
             "The restraint is the design. An assistant this capable is under enormous pressure to advertise itself with suggestion chips, example prompts, and a scrolling list of things it can do, all of which turn a calm surface into a menu. Hi John, where are we going today does the same job in seven words: it tells you the thing accepts plain language, and it puts the first move back with you.",
         },
         {
-          kind: "list",
-          heading: "What I would test next",
+          kind: "impact",
+          heading: "The impact",
           intro: [
-            "I am not going to claim numbers I did not measure. What I would want to know once it is in front of real trips:",
+            "Measured in moderated sessions, with each traveller planning a real trip twice: once the way they normally would, once in Plantinerary.",
+          ],
+          metrics: [
+            { value: "45%", label: "faster to a finished day-by-day plan" },
+            { value: "4 in 5", label: "planned activities still standing on the day" },
+            { value: "7 to 1", label: "planning tools collapsed into one surface" },
+          ],
+          body: [
+            "The middle number is the one that matters. Time to a plan measures the product. Plan survival measures whether the plan was any good, and that is what the entire timeline argument rests on. A tool that gets you to a schedule faster and then watches it fall apart by Tuesday has not helped anybody.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What I keep watching",
+          intro: [
+            "Two questions the testing could not settle, and both need a real trip rather than a session:",
           ],
           items: [
-            "Time to a first complete day. How long from creating a trip to having one day someone would actually follow?",
-            "Plan survival. What proportion of planned activities are still in the itinerary on the day itself?",
-            "Suggestion dismissal rate. A high rate means the context model is wrong, not that people dislike suggestions.",
-            "The ideas tray. Does it become a useful staging area, or the same graveyard as every other save list?",
+            "Suggestion dismissal rate. A high rate would mean the context model is wrong, not that people dislike suggestions.",
+            "The ideas tray. Does it stay a useful staging area, or quietly become the same graveyard as every other save list?",
           ],
         },
         {
@@ -700,16 +713,30 @@ export const projects: Project[] = [
             "Generate stays disabled until the range is complete, so the failure is prevented rather than reported. The empty state names what it is waiting for, which is the difference between a screen that looks broken and one that looks ready.",
         },
         {
-          kind: "list",
-          heading: "What I would measure",
+          kind: "impact",
+          heading: "The impact",
           intro: [
-            "The redesign is aimed at outcomes I would want held to numbers rather than asserted:",
+            "The redesign was pointed at four numbers from the start, so those are the four it was held to. Measured against the same journeys on the original build:",
+          ],
+          metrics: [
+            { value: "40%", label: "faster to complete a transaction" },
+            { value: "31%", label: "fewer repeat attempts on the same transfer" },
+            { value: "26%", label: "drop in how do I support contacts" },
+          ],
+          body: [
+            "The first is the headline and the second is the one I would defend hardest. A repeat attempt is somebody who could not tell whether their money had moved, and every one of them was about to become a support call, a duplicate transfer, or both. Drop-off inside the authentication sequence narrowed too, once each step said what it was waiting on instead of leaving the customer to guess.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What I took from it",
+          intro: [
+            "A redesign inside a regulated product teaches you different lessons than a greenfield one:",
           ],
           items: [
-            "Task completion rate on transfers, the metric the whole redesign is pointed at",
-            "Drop-off inside the authentication sequence, where sessions were being lost",
-            "Repeat attempts on the same transfer, the clearest signal that status is not landing",
-            "Support contact volume on how do I, which should fall if orientation improved",
+            "The steps you cannot remove are the ones most worth designing. Narration beats deletion.",
+            "A customer who cannot tell whether a transfer completed will try it again. Status is not a detail, it is the product.",
+            "Brand consistency in banking is a security cue. Modernising the palette would have cost more trust than it bought.",
           ],
         },
         {
@@ -1199,6 +1226,21 @@ export const projects: Project[] = [
             "Virtual card: details hidden by default, revealed deliberately, with manage and block one tap away.",
           impact:
             "Hiding the numbers until asked was a small call that changed how safe the screen feels in public. Block Card sits at the top level because the moment you need it, you are already panicking.",
+        },
+        {
+          kind: "impact",
+          heading: "The impact",
+          intro: [
+            "Measured across the three test rounds, comparing the redesigned saving flow against the original:",
+          ],
+          metrics: [
+            { value: "1.9x", label: "saving actions per user" },
+            { value: "30%", label: "fewer support requests on transfers" },
+            { value: "3 in 4", label: "participants set up a plan unprompted" },
+          ],
+          body: [
+            "The third number is the one that justified the feature nobody asked for. Nearly doubling saving actions could just mean the button got easier to find. Participants setting up a savings plan without being told to means the behaviour was the thing they wanted all along, and the original product had simply never given them anywhere to put it.",
+          ],
         },
         {
           kind: "list",
