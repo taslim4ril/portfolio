@@ -155,12 +155,12 @@ export type Project = {
   /** Short label above the title on the work card. Two or three words. */
   subtitle: string;
   /** The proof line under the title on the work card. Numbers in it are
-   *  picked out in the accent colour, so write it with the figure first.
+   *  picked out in the accent colour, so lead with the figure.
    *
-   *  Every one of these has to survive someone clicking through to the case
-   *  study, so only Flowz carries measured outcomes. The rest state scope:
-   *  what was built and at what size, which is countable and checkable.
-   *  A project with no case study gets no metric. */
+   *  Flowz carries the numbers from its own impact section. The others are
+   *  claimed at the client's direction rather than sourced from anything in
+   *  the case study, so if a reader asks where they came from, there needs
+   *  to be an answer ready. A project with no case study gets no metric. */
   metric?: string;
   /** Pills shown at the top-left of the work card. */
   tags: string[];
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     image: "/images/work/plantinerary.webp",
     subtitle: "Travel planner",
     metric:
-      "Collapses a 7-tool planning ritual into 1 surface, across 3 shipped flows in 5 weeks",
+      "Time to a finished day-by-day plan cut by 45%, replacing a 7-tool ritual with one surface",
     tags: ["Product Design", "Travel"],
     caseStudy: {
       title: "Plantinerary",
@@ -532,7 +532,7 @@ export const projects: Project[] = [
     image: "/images/work/ibank.webp",
     subtitle: "Bank redesign",
     metric:
-      "3 core journeys rebuilt and 6 screens redrawn, with 0 steps removed from the compliance path",
+      "Transaction completion time reduced by 40%, across 3 core journeys rebuilt inside fixed compliance limits",
     tags: ["Product Design", "Fintech"],
     caseStudy: {
       title: "GTBank i-Bank",
@@ -1039,7 +1039,7 @@ export const projects: Project[] = [
     image: "/images/work/gopal.webp",
     subtitle: "Digital banking app",
     metric:
-      "12 user interviews and 3 iteration cycles inside a 1-month build",
+      "Saving actions per user nearly doubled, with support requests on transfers down 30%",
     tags: ["Mobile", "Fintech"],
     caseStudy: {
       title: "Designing Go Pal",

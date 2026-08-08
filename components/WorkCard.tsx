@@ -138,7 +138,9 @@ export default function WorkCard({
               <span>
                 {/* Figures are picked out in the accent so the claim is
                     scannable before it is read. */}
-                {p.metric.split(/(\d[\d,.%-]*)/g).map((part, i) =>
+                {/* Digits and a trailing % only. Sweeping up the comma after
+                    a figure leaves an orange comma hanging in the sentence. */}
+                {p.metric.split(/(\d[\d,.]*%?)/g).map((part, i) =>
                   /^\d/.test(part) ? (
                     <strong key={i} className="font-medium text-accent">
                       {part}
