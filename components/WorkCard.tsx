@@ -137,11 +137,15 @@ export default function WorkCard({
               </span>
               <span>
                 {/* Figures are picked out in the accent so the claim is
-                    scannable before it is read. */}
-                {/* Digits and a trailing % only. Sweeping up the comma after
-                    a figure leaves an orange comma hanging in the sentence. */}
-                {p.metric.split(/(\d[\d,.]*%?)/g).map((part, i) =>
-                  /^\d/.test(part) ? (
+                    scannable before it is read. The spans are marked in the
+                    copy with [brackets] rather than sniffed out by a regex:
+                    a figure carries a different number of words each time
+                    (7-tool, 3 core journeys, 20 hours), and guessing at that
+                    gets it wrong somewhere every time. */}
+                {/* Odd indices are the captured groups, i.e. the bracketed
+                    spans; even indices are the plain text between them. */}
+                {p.metric.split(/\[([^\]]+)\]/g).map((part, i) =>
+                  i % 2 === 1 ? (
                     <strong key={i} className="font-medium text-accent">
                       {part}
                     </strong>
