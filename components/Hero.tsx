@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { site, services, roles } from "@/lib/data";
-import Marquee from "./Marquee";
+import { site, roles } from "@/lib/data";
 import DustField from "./DustField";
 import Scramble, { SCRAMBLE_MS } from "./Scramble";
 
@@ -11,30 +10,6 @@ import Scramble, { SCRAMBLE_MS } from "./Scramble";
 const HOLD = 5200;
 
 const ease = [0.22, 1, 0.36, 1] as const;
-
-// Small marks for the services list on the right rail.
-const serviceIcons = [
-  <svg key="a" viewBox="0 0 24 24" fill="none" className="h-full w-full">
-    <circle cx="12" cy="12" r="3.2" fill="currentColor" />
-    <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
-      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-      <path d="M5 5l2.8 2.8M16.2 16.2 19 19M19 5l-2.8 2.8M7.8 16.2 5 19" />
-    </g>
-  </svg>,
-  <svg key="b" viewBox="0 0 24 24" fill="none" className="h-full w-full">
-    <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
-      <path d="M12 3v18M3 12h18" />
-      <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" opacity="0.5" />
-    </g>
-  </svg>,
-  <svg key="c" viewBox="0 0 24 24" fill="none" className="h-full w-full">
-    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.4" />
-    <path
-      d="M12 3a9 9 0 0 1 0 18 5 5 0 0 1 0-10 4 4 0 0 0 0-8Z"
-      fill="currentColor"
-    />
-  </svg>,
-];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -99,7 +74,6 @@ export default function Hero() {
     >
       {/* ===== Portrait ===== */}
       <div aria-hidden className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         {/* The photo's dark surround is dissolved rather than covered:
             `screen` blending makes its near-black pixels read as the page's
             own black (no lifted-rectangle edge), and the radial mask fades
@@ -183,13 +157,10 @@ export default function Hero() {
                invisible. */
             className="min-w-0 flex-1 [container-type:inline-size]"
           >
-            <p className="text-xs tracking-[0.2em] text-white/55 md:text-sm">
-              Discover My Creative Journey
-            </p>
             {/* Sits above the rotating role so the name stays put while the
                 headline cycles. Kept off the cqi scale the h1 uses, which is
                 sized for ~10 characters and would overflow on 17. */}
-            <p className="font-heading mt-3 text-2xl font-medium tracking-[-0.01em] text-white md:text-3xl">
+            <p className="font-heading text-2xl font-medium tracking-[-0.01em] text-white md:text-3xl">
               {site.name}
             </p>
             <h1 className="heading mt-4 font-bold uppercase leading-[0.86] tracking-[-0.02em]">
@@ -211,27 +182,19 @@ export default function Hero() {
             </h1>
           </motion.div>
 
-          {/* --- Right rail: services, CTA, bio --- */}
+          {/* --- Right rail: bio, then the CTA under it --- */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.35 }}
             className="w-full shrink-0 lg:w-[26rem]"
           >
-            {/* Rule above the list mirrors the one under it, so the services
-                sit in a bounded band. */}
-            <ul className="space-y-5 border-t border-white/15 pt-6">
-              {services.slice(0, 3).map((s, i) => (
-                <li key={s.title} className="flex items-center gap-4">
-                  <span className="h-6 w-6 shrink-0 text-white/70">
-                    {serviceIcons[i % serviceIcons.length]}
-                  </span>
-                  <span className="text-lg text-white/90 md:text-xl">
-                    {s.title}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            {/* The wide top margin is deliberate on desktop, where it drops the
+                rail to the baseline of the name column. Stacked, it's a hole,
+                so it only applies from lg up. */}
+            <p className="max-w-sm border-t border-white/15 pt-6 text-base leading-relaxed text-white/55 lg:mt-24">
+              {site.subhead}
+            </p>
 
             <a
               href="#contact"
@@ -256,20 +219,9 @@ export default function Hero() {
                 />
               </svg>
             </a>
-
-            {/* The wide gap is deliberate on desktop, where it drops the bio to
-                the baseline of the name column. Stacked, it's just a hole. */}
-            <p className="mt-10 max-w-sm text-base leading-relaxed text-white/55 md:mt-32">
-              {site.role} with 5+ years of experience across SaaS, fintech, and
-              agritech, turning complex problems into clear, human-centered
-              digital experiences.
-            </p>
           </motion.div>
         </div>
       </div>
-
-      {/* ===== Scrolling text ===== */}
-      <Marquee />
     </section>
   );
 }

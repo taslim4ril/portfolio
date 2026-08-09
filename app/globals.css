@@ -173,19 +173,6 @@ html.lenis body {
   line-height: 0.95;
 }
 
-/* Marquee */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee {
-  animation: marquee 28s linear infinite;
-}
-
 /* Hero backdrop */
 @keyframes heroWash {
   from {
