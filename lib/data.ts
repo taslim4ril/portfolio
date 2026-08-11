@@ -95,7 +95,7 @@ export type CaseDecision = {
   note?: { label: string; body: string };
 };
 
-export type CaseBlock =
+type CaseBlockContent =
   | {
       kind: "prose";
       heading?: string;
@@ -163,6 +163,12 @@ export type CaseBlock =
         caption: string;
       }[];
     };
+
+/** Any block can carry an `anchor`, which renders as the element's id. One
+ *  block per case study is anchored `final-design`, which is what the skip
+ *  link under the cover image jumps to. Intersected rather than repeated on
+ *  each member: `kind` still narrows, and a new block kind gets it for free. */
+export type CaseBlock = CaseBlockContent & { anchor?: string };
 
 export type CaseStudy = {
   /** Hero title; falls back to the project title if omitted. */
@@ -386,6 +392,7 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
+          anchor: "final-design",
           heading: "The product, screen by screen",
           body: [
             "Four bullet points is a tidy way to summarise a platform and a useless way to understand one. So here is the actual thing, in roughly the order a new operations lead meets it.",
@@ -725,6 +732,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
+          anchor: "final-design",
           src: "/images/work/plantinerary-itinerary.webp",
           caption:
             "The itinerary. Trips split into ongoing and completed on the left; one trip opened into day chips and an hour ruler on the right.",
@@ -1061,6 +1069,7 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
+          anchor: "final-design",
           heading: "Final designs",
           body: [
             "The comparisons above are sized to be read against each other. Here the finished screens sit at full width, where the detail is actually legible.",
@@ -1281,6 +1290,7 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
+          anchor: "final-design",
           src: "/images/work/gopal-home-savings.webp",
           caption:
             "Home and savings side by side: total saved, autosave, and goals with real progress against them.",

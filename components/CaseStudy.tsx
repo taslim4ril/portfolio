@@ -441,6 +441,10 @@ function Block({ block }: { block: CaseBlock }) {
 
 /* ---------- page ---------- */
 
+/** The block each case study marks as its finished work. One per study, and
+ *  the id the skip link under the cover jumps to. */
+const FINAL_ANCHOR = "final-design";
+
 export default function CaseStudy({
   project,
   next,
@@ -449,6 +453,7 @@ export default function CaseStudy({
   next: Project;
 }) {
   const cs = project.caseStudy!;
+  const hasFinal = cs.blocks.some((b) => b.anchor === FINAL_ANCHOR);
 
   return (
     <article>
@@ -505,6 +510,23 @@ export default function CaseStudy({
           </div>
         </Reveal>
 
+        {/* Not everyone arrives to read nine sections. This is the exit for a
+            recruiter with four minutes: the cover, then straight to the work
+            that shipped. It sits under the image rather than above it so the
+            page still opens on the project, not on a shortcut out of it. */}
+        {hasFinal && (
+          <Reveal delay={0.12}>
+            <Button
+              href={`#${FINAL_ANCHOR}`}
+              size="md"
+              icon={<CircleIcon>↓</CircleIcon>}
+              className="mt-8"
+            >
+              Skip to the final design
+            </Button>
+          </Reveal>
+        )}
+
         {/* Meta */}
         <Reveal delay={0.15}>
           <dl className="mt-12 grid grid-cols-2 gap-8 border-y border-border py-10 md:grid-cols-4">
@@ -522,9 +544,18 @@ export default function CaseStudy({
 
       {/* ===== Body ===== */}
       <div className="space-y-20 px-6 py-20 md:space-y-28 md:px-[100px] md:py-28">
-        {cs.blocks.map((block, i) => (
-          <Block key={i} block={block} />
-        ))}
+        {/* Anchored blocks get a wrapper purely to hang the id on. The
+            scroll margin clears the fixed nav, so the landing block starts
+            below the pill instead of behind it. */}
+        {cs.blocks.map((block, i) =>
+          block.anchor ? (
+            <div key={i} id={block.anchor} className="scroll-mt-28">
+              <Block block={block} />
+            </div>
+          ) : (
+            <Block key={i} block={block} />
+          ),
+        )}
       </div>
 
       {/* ===== Next project ===== */}

@@ -41,6 +41,9 @@ export default function SmoothScroll() {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
+      // Offset stays 0: Lenis reads the target's own `scroll-margin-top`, so
+      // clearing the fixed nav is a `scroll-mt-*` on the target, not a nav
+      // height duplicated in here.
       lenis.scrollTo(target as HTMLElement, { offset: 0 });
     };
     document.addEventListener("click", onClick);
