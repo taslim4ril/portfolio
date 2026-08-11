@@ -205,6 +205,314 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "flowz",
+    title: "Flowz",
+    category: "Process Automation",
+    tag: "SaaS · Client Project",
+    year: "2024",
+    description:
+      "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
+    image: "/images/work/flowz.webp",
+    subtitle: "Process automation platform",
+    metric:
+      "[Client reported after rollout:] [60%] less time per task and [20 hours] a week back for one logistics team",
+    tags: ["Product Design", "SaaS"],
+    accent: true,
+    caseStudy: {
+      title: "Flowz Process Manager",
+      tagline:
+        "Designing a smarter way for teams to manage workflows and scale operations.",
+      overview:
+        "A single platform that brings structure, visibility, and automation to how teams manage and scale their workflows.",
+      // Editable: reasonable defaults derived from the project.
+      meta: [
+        { label: "Role", value: "Product & UI/UX Designer" },
+        { label: "Timeline", value: "2024" },
+        { label: "Platform", value: "Web · SaaS" },
+        { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
+        { label: "Project type", value: "Client engagement" },
+      ],
+      blocks: [
+        {
+          kind: "prose",
+          heading: "Bringing clarity to broken workflows",
+          body: [
+            "As businesses scale, their workflows often become harder to manage. What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned.",
+            "Productivity drops, not because people are not working hard, but because the system itself is inefficient. That was the reality I kept hearing from operations managers, team leads, and business owners.",
+            "They were not just dealing with inefficiency. They were operating without visibility.",
+          ],
+        },
+        {
+          kind: "figure",
+          /* Straight-on rather than the angled shot the card uses: at this
+             size the dashboard has to be readable, not just recognisable. */
+          src: "/images/work/flowz-mockup.webp",
+          caption:
+            "The dashboard that became the product's front door: running processes, approvals waiting on you, and execution monitoring in one view.",
+          impact:
+            "The brief asked for a workflow tool. This screen is the argument that what they actually needed was a status answer, available before anyone has to go looking for it.",
+        },
+        {
+          kind: "list",
+          heading: "The brief, and what was missing from it",
+          intro: [
+            "The request that came to me was specific: build a platform to digitise our workflows. Teams were spread across a chat tool for communication, a tracker for tasks, and spreadsheets for reporting.",
+            "That fragmentation was creating real cost:",
+          ],
+          items: [
+            "Delays in approvals and execution",
+            "No real-time visibility into progress",
+            "Poor collaboration across teams",
+            "Limited ability to measure performance",
+          ],
+          outro: [
+            "Digitising those workflows would have solved the first problem and none of the others. A faster version of a process nobody can see is still a process nobody can see.",
+            "So I treated the brief as the starting position rather than the specification, and went looking for what the fragmentation was actually costing.",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "Three people, three different questions",
+          intro: [
+            "Research surfaced three groups, and they were not asking the platform for the same thing:",
+          ],
+          columns: 3,
+          items: [
+            {
+              title: "Operations managers",
+              desc: "Focused on efficiency and finding bottlenecks. They wanted to know where work was stuck, not what everyone was doing.",
+            },
+            {
+              title: "Team leads",
+              desc: "Responsible for assigning work and tracking progress. They needed to move things forward without chasing people for updates.",
+            },
+            {
+              title: "Business owners",
+              desc: "Interested in performance and return. They wanted a number they could trust without asking someone to prepare it.",
+            },
+          ],
+          outro: [
+            "Different goals, one shared need: a clear view of how work moves through the organisation. That became the thing I designed toward, and it is broader than the brief I was handed.",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "What they asked for, and what they needed",
+          body: [
+            "The stated requirement was a workflow builder with task assignment and status tracking. Reasonable, and it would have shipped.",
+            "But watching how teams worked made a different problem obvious. The bottleneck was rarely creating the workflow. It was everything around it: the approval sitting in someone's inbox, the update that lived in a chat thread nobody searched, the report assembled by hand every Friday.",
+            "A builder alone would have digitised the easy part and left the expensive part untouched. So I proposed three things that were not in the brief, and had to make the case for each.",
+          ],
+        },
+        {
+          kind: "decisions",
+          heading: "The three additions, and the pushback on each",
+          intro: [
+            "None of these were requested. Two of them were initially resisted, and one of those resistances turned out to be right.",
+          ],
+          items: [
+            {
+              title: "Automation, when the ask was assignment",
+              problem:
+                "The brief covered assigning tasks to people. It did not cover the reminders, approvals, and status updates that were eating the day between those tasks.",
+              decision:
+                "I pushed for automation as a first-class part of the product rather than a later phase, so repetitive actions could move without a person pushing them.",
+              note: {
+                label: "The pushback",
+                body: "The concern was scope and trust: automation is harder to build, harder to explain, and users who do not understand it will not switch it on. That second half was correct, and it changed the design. Instead of a rules engine, automation shipped as a small set of named, pre-built templates. Framing it as a few recognisable actions rather than a configuration surface is what made teams willing to try it.",
+              },
+            },
+            {
+              title: "Collaboration inside the task, not beside it",
+              problem:
+                "Nobody asked for comments or mentions. The assumption was that teams would keep talking in the chat tool they already had.",
+              decision:
+                "I embedded comments, mentions, and notifications directly into the task, so the conversation lives with the work it is about.",
+              note: {
+                label: "Why I pushed for it",
+                body: "Every handoff failure I found in research traced back to context living somewhere other than the work. Keeping the chat tool would have kept the failure. This was the addition that met the least resistance once the research was on the table, because everyone had a story about a decision they could not find later.",
+              },
+            },
+            {
+              title: "An analytics view nobody requested",
+              problem:
+                "Reporting was described as a later phase. Business owners were expected to keep asking someone to pull numbers.",
+              decision:
+                "I designed the dashboard into the first release: throughput, progress, and bottlenecks surfaced in real time.",
+              note: {
+                label: "The tradeoff",
+                body: "This one cost me elsewhere. Building it meant deferring depth in the workflow builder, and I argued that a shallower builder with visibility beats a richer builder without it. Visibility was the actual complaint underneath the brief. The builder was just the thing they knew how to ask for.",
+              },
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Where the first version was wrong",
+          body: [
+            "The first build was too much product. Every capability was visible from the first screen, on the theory that showing the range would demonstrate the value.",
+            "It did the opposite. Early testers described it as overwhelming, and the reaction was strongest among exactly the non-technical users the platform was supposed to bring in. People who could not tell which of nine things to do first did none of them.",
+            "That was the most useful failure in the project. The fix was not fewer features but a slower reveal: guided onboarding, contextual tips at the moment a feature becomes relevant, and simplified default flows. Complexity stays available; it just stops being the first thing you meet.",
+          ],
+        },
+        {
+          kind: "features",
+          heading: "What shipped",
+          intro: [
+            "Four areas carried the product, two of them from the original brief and two argued into it:",
+          ],
+          items: [
+            {
+              title: "Workflow builder",
+              desc: "A drag-and-drop canvas for mapping a process step by step, with tasks, deadlines, and dependencies laid out as blocks rather than configured in a form.",
+              result: "Reduced workflow setup time by 45%",
+            },
+            {
+              title: "Task automation",
+              desc: "Reminders, approvals, and status updates handled by pre-built templates, so the routine parts move without anyone pushing them.",
+              result: "Reduced manual effort by 60%",
+            },
+            {
+              title: "Real-time collaboration",
+              desc: "Comments, mentions, and notifications living inside the task, so context stays attached to the work instead of scattering into chat.",
+              result: "Increased task completion rates by 30%",
+            },
+            {
+              title: "Analytics dashboard",
+              desc: "Performance, progress, and bottlenecks surfaced as they happen, rather than assembled on request.",
+              result: "Decision-making became 50% faster",
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "The product, screen by screen",
+          body: [
+            "Four bullet points is a tidy way to summarise a platform and a useless way to understand one. So here is the actual thing, in roughly the order a new operations lead meets it.",
+            "Watch what each screen refuses to make you leave it for. That restraint is the whole design.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-builder.webp",
+          caption:
+            "The builder: one Start node on an open canvas, with the step picker showing what a process is made of. Send Request, Receive Message and Publish Message up top, Decisions and Evaluate under Logic.",
+          impact:
+            "Every item in that list is a technical primitive wearing an ordinary name. Send Request is an HTTP call. Evaluate runs Python or TypeScript against your data. Naming them for what they accomplish rather than what they are is most of the reason a team lead opens this screen a second time. Note what sits in the top right too: Save, Invite, Deploy. A process is something you ship, and you are never building it alone.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-task-setup.webp",
+          caption:
+            "Setting up a step. Name, description, who it goes to, and the form it carries. Typing a single letter filters the form list down to Leave Request, HR Survey, New Hire, Finance Survey.",
+          impact:
+            "The field worth pausing on is Delegate, sitting directly under Assignee. Someone thought about the Tuesday the assignee is on leave, which is exactly the case that breaks a paper process and the reason work quietly reverts to email. Attaching an existing form rather than authoring a new one is the same instinct: most steps are not new, they are a thing your company already does, written down.",
+        },
+        {
+          kind: "prose",
+          heading: "Who signs it off, and who gets to look",
+          body: [
+            "Permissions are the least glamorous screen in any operations tool and the first thing that stops adoption dead. If getting a colleague access means filing a ticket with IT, the process leaves the platform and reappears in a group chat.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-collaborators.webp",
+          caption:
+            "Creating a new flow: approvers named at the top, a category, a save as template toggle, and collaborators invited by email with a permission level attached.",
+          impact:
+            "Approval and access get decided while the process is being built, not requested afterwards. The permission dropdown next to the invite field is small and does a lot of work: inviting someone and deciding what they can do with it is one action, so nobody ends up over-permissioned because narrowing it later was too much effort. Save process as template is how the second department starts in a minute instead of a morning.",
+        },
+        {
+          kind: "prose",
+          heading: "The screen nobody asks for until the first failure",
+          body: [
+            "Status tracking was in the brief. Watching an automated run fail was not. Automation gets sold on the days it works, and every demo shows a process completing.",
+            "But an automated process that fails silently is worse than a manual one, because at least a manual one has a person waiting on it who will eventually ask. The first time a run dies at 2am, the only questions anyone has are which run, whose, and how far did it get.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-monitor.webp",
+          caption:
+            "Monitor: one run of one process, marked Failed, showing the path it actually took and the 23 activities underneath it on a timeline.",
+          impact:
+            "The Failed badge sits above the things you need the moment you see it. A copyable instance ID, start and end time, duration, and the name of whoever kicked it off. The activity list shows which steps passed before it stopped, so you land on the broken one instead of reading the whole process again. This screen answers all three questions without a support ticket, and it is the one operations teams ended up living in.",
+        },
+        {
+          kind: "prose",
+          heading: "Numbers that point at something",
+          body: [
+            "This was the addition I argued hardest for, which made it the one I could least afford to get wrong. The default failure mode of a dashboard is a wall of numbers that leaves a manager feeling informed without telling them to do anything.",
+            "So I held it to a single test. Can you look at this for ten seconds and know what needs your attention today?",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-dashboard.webp",
+          caption:
+            "Dashboard: running, completed, running with errors, average completion time, published, awaiting approval. The approvals queue sits to the right of the tiles.",
+          impact:
+            "Running Processes with Errors is a tile, at the same size and weight as the numbers that flatter you. Most dashboards put failure three clicks in. And the approvals queue turns the page from a report into a to do list, because the most common reason a workflow stalls is not a bug, it is a person who has not clicked yes yet.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/flowz-analytics.webp",
+          caption:
+            "Execution over the year, with a red failure line drawn across the same axis as the volume bars, plus a live activity feed and the total process inventory.",
+          impact:
+            "The legend names real automations rather than abstract categories, so the chart reads as your own work rather than someone else's telemetry. Putting failures on the same axis as volume is the part that makes it diagnostic instead of decorative: a spike in March means nothing on its own, but a spike with the red line climbing under it is a process that broke as soon as it got busy.",
+        },
+        {
+          kind: "grid",
+          heading: "What the decisions came down to",
+          intro: ["Three calls did most of the work:"],
+          columns: 3,
+          items: [
+            {
+              title: "Visual, not technical",
+              desc: "Users interacted far better with drag-and-drop structure than with configuration. The same capability, framed as something you arrange rather than something you set up.",
+            },
+            {
+              title: "Conversation tied to tasks",
+              desc: "Keeping communication attached to the work cut context switching and made decisions findable after the fact.",
+            },
+            {
+              title: "Automation through templates",
+              desc: "Pre-built workflows made automation approachable for people who would never have opened a rules editor.",
+            },
+          ],
+        },
+        {
+          kind: "impact",
+          heading: "The impact",
+          intro: [
+            "These came from the teams using it after rollout, not from my own measurement. I am reporting what they told me.",
+          ],
+          source: "Client reported, after rollout",
+          metrics: [
+            { value: "60%", label: "reduction in task completion time" },
+            { value: "45%", label: "improvement in workflow transparency" },
+            { value: "30%", label: "increase in team productivity" },
+          ],
+          body: [
+            "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
+            "Worth noting that two of the three numbers above come from the parts nobody asked for.",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "Reflection",
+          body: [
+            "Good design is not about adding more features. It is about removing friction.",
+            "The harder lesson was about the brief. A client describes the problem in the vocabulary of the solution they already imagined, and taking that literally produces something correct and useless. The job was to hear digitise our workflows and understand it as we cannot see our own work.",
+            "The pushback was part of that, not an obstacle to it. The objection to automation was right about users, and the product is better for having lost that argument.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     slug: "plantinerary",
     title: "Plantinerary",
     category: "Travel Planning",
@@ -834,314 +1142,6 @@ export const projects: Project[] = [
             "Redesigning a banking solution is mostly an exercise in what you are not allowed to change.",
             "The steps that frustrated customers were, in almost every case, the steps protecting them. The work was not removing friction but making necessary friction legible, so a customer waiting on a security check understands they are being protected rather than obstructed.",
             "That constraint made the design better. Given a free hand I would have tried to shorten the flow, and shipped something faster and less trustworthy.",
-          ],
-        },
-      ],
-    },
-  },
-  {
-    slug: "flowz",
-    title: "Flowz",
-    category: "Process Automation",
-    tag: "SaaS · Client Project",
-    year: "2024",
-    description:
-      "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
-    image: "/images/work/flowz.webp",
-    subtitle: "Process automation platform",
-    metric:
-      "[Client reported after rollout:] [60%] less time per task and [20 hours] a week back for one logistics team",
-    tags: ["Product Design", "SaaS"],
-    accent: true,
-    caseStudy: {
-      title: "Flowz Process Manager",
-      tagline:
-        "Designing a smarter way for teams to manage workflows and scale operations.",
-      overview:
-        "A single platform that brings structure, visibility, and automation to how teams manage and scale their workflows.",
-      // Editable: reasonable defaults derived from the project.
-      meta: [
-        { label: "Role", value: "Product & UI/UX Designer" },
-        { label: "Timeline", value: "2024" },
-        { label: "Platform", value: "Web · SaaS" },
-        { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
-        { label: "Project type", value: "Client engagement" },
-      ],
-      blocks: [
-        {
-          kind: "prose",
-          heading: "Bringing clarity to broken workflows",
-          body: [
-            "As businesses scale, their workflows often become harder to manage. What once felt simple starts to break down. Tasks get lost across tools, approvals take longer than expected, and teams struggle to stay aligned.",
-            "Productivity drops, not because people are not working hard, but because the system itself is inefficient. That was the reality I kept hearing from operations managers, team leads, and business owners.",
-            "They were not just dealing with inefficiency. They were operating without visibility.",
-          ],
-        },
-        {
-          kind: "figure",
-          /* Straight-on rather than the angled shot the card uses: at this
-             size the dashboard has to be readable, not just recognisable. */
-          src: "/images/work/flowz-mockup.webp",
-          caption:
-            "The dashboard that became the product's front door: running processes, approvals waiting on you, and execution monitoring in one view.",
-          impact:
-            "The brief asked for a workflow tool. This screen is the argument that what they actually needed was a status answer, available before anyone has to go looking for it.",
-        },
-        {
-          kind: "list",
-          heading: "The brief, and what was missing from it",
-          intro: [
-            "The request that came to me was specific: build a platform to digitise our workflows. Teams were spread across a chat tool for communication, a tracker for tasks, and spreadsheets for reporting.",
-            "That fragmentation was creating real cost:",
-          ],
-          items: [
-            "Delays in approvals and execution",
-            "No real-time visibility into progress",
-            "Poor collaboration across teams",
-            "Limited ability to measure performance",
-          ],
-          outro: [
-            "Digitising those workflows would have solved the first problem and none of the others. A faster version of a process nobody can see is still a process nobody can see.",
-            "So I treated the brief as the starting position rather than the specification, and went looking for what the fragmentation was actually costing.",
-          ],
-        },
-        {
-          kind: "grid",
-          heading: "Three people, three different questions",
-          intro: [
-            "Research surfaced three groups, and they were not asking the platform for the same thing:",
-          ],
-          columns: 3,
-          items: [
-            {
-              title: "Operations managers",
-              desc: "Focused on efficiency and finding bottlenecks. They wanted to know where work was stuck, not what everyone was doing.",
-            },
-            {
-              title: "Team leads",
-              desc: "Responsible for assigning work and tracking progress. They needed to move things forward without chasing people for updates.",
-            },
-            {
-              title: "Business owners",
-              desc: "Interested in performance and return. They wanted a number they could trust without asking someone to prepare it.",
-            },
-          ],
-          outro: [
-            "Different goals, one shared need: a clear view of how work moves through the organisation. That became the thing I designed toward, and it is broader than the brief I was handed.",
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "What they asked for, and what they needed",
-          body: [
-            "The stated requirement was a workflow builder with task assignment and status tracking. Reasonable, and it would have shipped.",
-            "But watching how teams worked made a different problem obvious. The bottleneck was rarely creating the workflow. It was everything around it: the approval sitting in someone's inbox, the update that lived in a chat thread nobody searched, the report assembled by hand every Friday.",
-            "A builder alone would have digitised the easy part and left the expensive part untouched. So I proposed three things that were not in the brief, and had to make the case for each.",
-          ],
-        },
-        {
-          kind: "decisions",
-          heading: "The three additions, and the pushback on each",
-          intro: [
-            "None of these were requested. Two of them were initially resisted, and one of those resistances turned out to be right.",
-          ],
-          items: [
-            {
-              title: "Automation, when the ask was assignment",
-              problem:
-                "The brief covered assigning tasks to people. It did not cover the reminders, approvals, and status updates that were eating the day between those tasks.",
-              decision:
-                "I pushed for automation as a first-class part of the product rather than a later phase, so repetitive actions could move without a person pushing them.",
-              note: {
-                label: "The pushback",
-                body: "The concern was scope and trust: automation is harder to build, harder to explain, and users who do not understand it will not switch it on. That second half was correct, and it changed the design. Instead of a rules engine, automation shipped as a small set of named, pre-built templates. Framing it as a few recognisable actions rather than a configuration surface is what made teams willing to try it.",
-              },
-            },
-            {
-              title: "Collaboration inside the task, not beside it",
-              problem:
-                "Nobody asked for comments or mentions. The assumption was that teams would keep talking in the chat tool they already had.",
-              decision:
-                "I embedded comments, mentions, and notifications directly into the task, so the conversation lives with the work it is about.",
-              note: {
-                label: "Why I pushed for it",
-                body: "Every handoff failure I found in research traced back to context living somewhere other than the work. Keeping the chat tool would have kept the failure. This was the addition that met the least resistance once the research was on the table, because everyone had a story about a decision they could not find later.",
-              },
-            },
-            {
-              title: "An analytics view nobody requested",
-              problem:
-                "Reporting was described as a later phase. Business owners were expected to keep asking someone to pull numbers.",
-              decision:
-                "I designed the dashboard into the first release: throughput, progress, and bottlenecks surfaced in real time.",
-              note: {
-                label: "The tradeoff",
-                body: "This one cost me elsewhere. Building it meant deferring depth in the workflow builder, and I argued that a shallower builder with visibility beats a richer builder without it. Visibility was the actual complaint underneath the brief. The builder was just the thing they knew how to ask for.",
-              },
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "Where the first version was wrong",
-          body: [
-            "The first build was too much product. Every capability was visible from the first screen, on the theory that showing the range would demonstrate the value.",
-            "It did the opposite. Early testers described it as overwhelming, and the reaction was strongest among exactly the non-technical users the platform was supposed to bring in. People who could not tell which of nine things to do first did none of them.",
-            "That was the most useful failure in the project. The fix was not fewer features but a slower reveal: guided onboarding, contextual tips at the moment a feature becomes relevant, and simplified default flows. Complexity stays available; it just stops being the first thing you meet.",
-          ],
-        },
-        {
-          kind: "features",
-          heading: "What shipped",
-          intro: [
-            "Four areas carried the product, two of them from the original brief and two argued into it:",
-          ],
-          items: [
-            {
-              title: "Workflow builder",
-              desc: "A drag-and-drop canvas for mapping a process step by step, with tasks, deadlines, and dependencies laid out as blocks rather than configured in a form.",
-              result: "Reduced workflow setup time by 45%",
-            },
-            {
-              title: "Task automation",
-              desc: "Reminders, approvals, and status updates handled by pre-built templates, so the routine parts move without anyone pushing them.",
-              result: "Reduced manual effort by 60%",
-            },
-            {
-              title: "Real-time collaboration",
-              desc: "Comments, mentions, and notifications living inside the task, so context stays attached to the work instead of scattering into chat.",
-              result: "Increased task completion rates by 30%",
-            },
-            {
-              title: "Analytics dashboard",
-              desc: "Performance, progress, and bottlenecks surfaced as they happen, rather than assembled on request.",
-              result: "Decision-making became 50% faster",
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "The product, screen by screen",
-          body: [
-            "Four bullet points is a tidy way to summarise a platform and a useless way to understand one. So here is the actual thing, in roughly the order a new operations lead meets it.",
-            "Watch what each screen refuses to make you leave it for. That restraint is the whole design.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-builder.webp",
-          caption:
-            "The builder: one Start node on an open canvas, with the step picker showing what a process is made of. Send Request, Receive Message and Publish Message up top, Decisions and Evaluate under Logic.",
-          impact:
-            "Every item in that list is a technical primitive wearing an ordinary name. Send Request is an HTTP call. Evaluate runs Python or TypeScript against your data. Naming them for what they accomplish rather than what they are is most of the reason a team lead opens this screen a second time. Note what sits in the top right too: Save, Invite, Deploy. A process is something you ship, and you are never building it alone.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-task-setup.webp",
-          caption:
-            "Setting up a step. Name, description, who it goes to, and the form it carries. Typing a single letter filters the form list down to Leave Request, HR Survey, New Hire, Finance Survey.",
-          impact:
-            "The field worth pausing on is Delegate, sitting directly under Assignee. Someone thought about the Tuesday the assignee is on leave, which is exactly the case that breaks a paper process and the reason work quietly reverts to email. Attaching an existing form rather than authoring a new one is the same instinct: most steps are not new, they are a thing your company already does, written down.",
-        },
-        {
-          kind: "prose",
-          heading: "Who signs it off, and who gets to look",
-          body: [
-            "Permissions are the least glamorous screen in any operations tool and the first thing that stops adoption dead. If getting a colleague access means filing a ticket with IT, the process leaves the platform and reappears in a group chat.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-collaborators.webp",
-          caption:
-            "Creating a new flow: approvers named at the top, a category, a save as template toggle, and collaborators invited by email with a permission level attached.",
-          impact:
-            "Approval and access get decided while the process is being built, not requested afterwards. The permission dropdown next to the invite field is small and does a lot of work: inviting someone and deciding what they can do with it is one action, so nobody ends up over-permissioned because narrowing it later was too much effort. Save process as template is how the second department starts in a minute instead of a morning.",
-        },
-        {
-          kind: "prose",
-          heading: "The screen nobody asks for until the first failure",
-          body: [
-            "Status tracking was in the brief. Watching an automated run fail was not. Automation gets sold on the days it works, and every demo shows a process completing.",
-            "But an automated process that fails silently is worse than a manual one, because at least a manual one has a person waiting on it who will eventually ask. The first time a run dies at 2am, the only questions anyone has are which run, whose, and how far did it get.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-monitor.webp",
-          caption:
-            "Monitor: one run of one process, marked Failed, showing the path it actually took and the 23 activities underneath it on a timeline.",
-          impact:
-            "The Failed badge sits above the things you need the moment you see it. A copyable instance ID, start and end time, duration, and the name of whoever kicked it off. The activity list shows which steps passed before it stopped, so you land on the broken one instead of reading the whole process again. This screen answers all three questions without a support ticket, and it is the one operations teams ended up living in.",
-        },
-        {
-          kind: "prose",
-          heading: "Numbers that point at something",
-          body: [
-            "This was the addition I argued hardest for, which made it the one I could least afford to get wrong. The default failure mode of a dashboard is a wall of numbers that leaves a manager feeling informed without telling them to do anything.",
-            "So I held it to a single test. Can you look at this for ten seconds and know what needs your attention today?",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-dashboard.webp",
-          caption:
-            "Dashboard: running, completed, running with errors, average completion time, published, awaiting approval. The approvals queue sits to the right of the tiles.",
-          impact:
-            "Running Processes with Errors is a tile, at the same size and weight as the numbers that flatter you. Most dashboards put failure three clicks in. And the approvals queue turns the page from a report into a to do list, because the most common reason a workflow stalls is not a bug, it is a person who has not clicked yes yet.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/flowz-analytics.webp",
-          caption:
-            "Execution over the year, with a red failure line drawn across the same axis as the volume bars, plus a live activity feed and the total process inventory.",
-          impact:
-            "The legend names real automations rather than abstract categories, so the chart reads as your own work rather than someone else's telemetry. Putting failures on the same axis as volume is the part that makes it diagnostic instead of decorative: a spike in March means nothing on its own, but a spike with the red line climbing under it is a process that broke as soon as it got busy.",
-        },
-        {
-          kind: "grid",
-          heading: "What the decisions came down to",
-          intro: ["Three calls did most of the work:"],
-          columns: 3,
-          items: [
-            {
-              title: "Visual, not technical",
-              desc: "Users interacted far better with drag-and-drop structure than with configuration. The same capability, framed as something you arrange rather than something you set up.",
-            },
-            {
-              title: "Conversation tied to tasks",
-              desc: "Keeping communication attached to the work cut context switching and made decisions findable after the fact.",
-            },
-            {
-              title: "Automation through templates",
-              desc: "Pre-built workflows made automation approachable for people who would never have opened a rules editor.",
-            },
-          ],
-        },
-        {
-          kind: "impact",
-          heading: "The impact",
-          intro: [
-            "These came from the teams using it after rollout, not from my own measurement. I am reporting what they told me.",
-          ],
-          source: "Client reported, after rollout",
-          metrics: [
-            { value: "60%", label: "reduction in task completion time" },
-            { value: "45%", label: "improvement in workflow transparency" },
-            { value: "30%", label: "increase in team productivity" },
-          ],
-          body: [
-            "One logistics company used Flowz to automate report generation and saved over 20 hours every week, letting their team focus on strategic growth instead of repetitive tasks.",
-            "Worth noting that two of the three numbers above come from the parts nobody asked for.",
-          ],
-        },
-        {
-          kind: "quote",
-          heading: "Reflection",
-          body: [
-            "Good design is not about adding more features. It is about removing friction.",
-            "The harder lesson was about the brief. A client describes the problem in the vocabulary of the solution they already imagined, and taking that literally produces something correct and useless. The job was to hear digitise our workflows and understand it as we cannot see our own work.",
-            "The pushback was part of that, not an obstacle to it. The objection to automation was right about users, and the product is better for having lost that argument.",
           ],
         },
       ],
