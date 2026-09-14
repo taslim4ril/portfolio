@@ -865,20 +865,6 @@ export const projects: Project[] = [
         },
         {
           kind: "list",
-          heading: "What I am still unsure about",
-          intro: [
-            "Open questions rather than a summary, because this is a concept and pretending otherwise would be the wrong ending.",
-          ],
-          items: [
-            "The assistant's replies sit as plain text on the background, with only your own words in bubbles, so long answers stay readable. I am still not sure that is right. Cards would be easier to scan and less chatty, and I have not found the case that settles it.",
-            "There is no path for a meeting you did not organise beyond writing the request. In a big company that is the most common case of all, and it deserves its own flow rather than one sentence.",
-            "I have not designed the notification the other people get. Half the trust in a change like this lives on the other four phones, and so far I have only designed one of them.",
-            "The auto-decline message is a setting with no wording behind it yet, which is exactly the mistake this project was built to argue against.",
-            "Showing your hours as a week grid is the thing I would test first. It looks good and it may simply be harder to edit than five plain rows.",
-          ],
-        },
-        {
-          kind: "list",
           heading: "What I learned",
           items: [
             "The interesting part of an AI feature is not what it can do. It is where you make it stop.",
