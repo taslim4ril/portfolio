@@ -558,9 +558,9 @@ export const projects: Project[] = [
           kind: "figure",
           src: "/images/work/caldeck-calendar.webp",
           caption:
-            "Thursday. Six meetings, and a hatched block at the end of the day that is not a meeting at all.",
+            "The front door: a read of the day, four things you might want, and the two threads you left open yesterday.",
           impact:
-            "Focus Time is drawn in the same hatching the calendar already uses for tentative and unavailable, because that is exactly what it is — time that is already spoken for. Product Sync at 11:00 is the meeting the rest of this page moves, and it sits against that block. The conflict is on the screen before anyone has asked the assistant anything.",
+            "A blank chat is the fastest way to lose a busy person, and it is the single thing every general assistant in the teardown gets wrong for this use case. So the screen answers before it asks. One line on the state of the day, the four errands as chips, and — the part I care most about — the two threads that were interrupted yesterday, because most mornings the right next move is the one that got cut off rather than a new one. The accent appears three times here and nowhere else on the screen.",
         },
         {
           kind: "list",
@@ -663,9 +663,9 @@ export const projects: Project[] = [
           kind: "figure",
           src: "/images/work/caldeck-two-doors.webp",
           caption:
-            "Left: the sheet raised over the calendar for one errand. Right: Assistant as a destination, opening on a read of the day.",
+            "The two doors side by side. Assistant as a place you go on the left; the day itself on the right, with the assistant one tap away.",
           impact:
-            "The blank chat is the fastest way to lose a busy person — it is the single thing every general assistant gets wrong for this use case — so the destination answers before it asks. One line on the state of the day, the four quick actions as chips, and the two threads left unfinished yesterday. Continuity beats novelty most mornings: the right next move is usually the one that got interrupted. The accent appears three times on that screen and nowhere else.",
+            "Thursday carries six meetings and a hatched block at the end of it that is not a meeting at all. Focus Time is drawn in the same hatching the calendar already uses for tentative and unavailable, because that is exactly what it is: time already spoken for. Product Sync at 11:00 is the meeting the rest of this page moves, and it sits against that block — so the conflict is on screen before anyone has asked the assistant anything. Ask assistant raises a sheet over this day for one errand; the switcher in the top corner opens the other door entirely.",
         },
         {
           kind: "decisions",
