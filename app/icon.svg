@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Same mark as components/Logo.tsx. The transform reproduces what the
+       component gets from CSS there: the monogram sized to 58% of the badge,
+       centred, and nudged 2% down. 0.2230769 is 58/260, the scale that fits
+       the 250x260 artwork into a 58-unit square. -->
+  <circle cx="50" cy="50" r="50" fill="#ffffff"/>
+  <g transform="translate(22.1154 22.16) scale(0.2230769)" fill="#141414">
+    <rect x="20" y="18" width="116" height="44"/>
+    <rect x="55" y="62" width="41" height="180"/>
+    <path fill-rule="evenodd" d="M139 82 L163 82 L235 242 L96 242 Z M150 150 L181 216 L119 216 Z"/>
+  </g>
+</svg>
