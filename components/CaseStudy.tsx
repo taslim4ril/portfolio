@@ -6,11 +6,26 @@ import Button, { CircleIcon } from "./Button";
 
 /* No spinning mark here on purpose. A case study runs eight or nine of these
    headings down one page, and that many turning starbursts fights the read. */
-function Heading({ children }: { children: React.ReactNode }) {
+function Heading({
+  children,
+  kicker,
+}: {
+  children: React.ReactNode;
+  /** Numbered section label, e.g. "04 · RESEARCH". Gives a long study a spine
+   *  the reader can keep their place in. */
+  kicker?: string;
+}) {
   return (
-    <h2 className="heading text-3xl font-bold leading-[1.05] text-white md:text-[2.6rem]">
-      {children}
-    </h2>
+    <div className="space-y-3">
+      {kicker && (
+        <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-accent">
+          {kicker}
+        </p>
+      )}
+      <h2 className="heading text-3xl font-bold leading-[1.05] text-white md:text-[2.6rem]">
+        {children}
+      </h2>
+    </div>
   );
 }
 
@@ -35,10 +50,18 @@ function Figure({
   src,
   caption,
   impact,
+  figure,
+  plain = false,
 }: {
   src?: string;
   caption?: string;
   impact?: string;
+  /** Figure number. Printed ahead of the caption so the body copy can refer
+   *  to a diagram by name instead of by "the picture above". */
+  figure?: number;
+  /** Diagrams are drawn on the page's own surface and already carry their
+   *  own padding, so they skip the framed card the screenshots sit in. */
+  plain?: boolean;
 }) {
   return (
     <Reveal>
@@ -48,13 +71,28 @@ function Figure({
             16:9 would cut the ends off the wide ones. The placeholder keeps
             the fixed frame, since it has no aspect of its own. */}
         {src ? (
-          <div className="overflow-hidden rounded-3xl border border-border bg-surface">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            {/* No `loading="lazy"` here: with h-auto and no width/height
-                attributes an unloaded image is zero-height, so it never
-                reaches the viewport and never loads. */}
-            <img src={src} alt={caption ?? ""} className="block h-auto w-full" />
-          </div>
+          plain ? (
+            /* Diagrams carry text at a fixed size inside a 1200-wide canvas.
+               Scaled to a phone that lands around 3px, so below md they hold
+               their own width and pan instead, bleeding to the screen edge so
+               the whole drawing is reachable. */
+            <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-visible md:px-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={caption ?? ""}
+                className="block h-auto w-full min-w-[1100px] md:min-w-0"
+              />
+            </div>
+          ) : (
+            <div className="overflow-hidden rounded-3xl border border-border bg-surface">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* No `loading="lazy"` here: with h-auto and no width/height
+                  attributes an unloaded image is zero-height, so it never
+                  reaches the viewport and never loads. */}
+              <img src={src} alt={caption ?? ""} className="block h-auto w-full" />
+            </div>
+          )
         ) : (
           <div className="relative flex aspect-[16/9] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-3xl border border-border bg-surface text-white/30">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -69,6 +107,11 @@ function Figure({
         )}
         {caption && (
           <figcaption className="mt-3 text-center text-sm text-muted">
+            {figure != null && (
+              <span className="font-medium text-white/80">
+                Figure {figure}.{" "}
+              </span>
+            )}
             {caption}
           </figcaption>
         )}
@@ -91,7 +134,7 @@ function Block({ block }: { block: CaseBlock }) {
       return (
         <Reveal>
           <div className="mx-auto max-w-3xl space-y-6">
-            {block.heading && <Heading>{block.heading}</Heading>}
+            {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
             <div className="space-y-5">
               <Paragraphs body={block.body} />
             </div>
@@ -112,7 +155,7 @@ function Block({ block }: { block: CaseBlock }) {
       return (
         <Reveal>
           <div className="mx-auto max-w-3xl space-y-6">
-            {block.heading && <Heading>{block.heading}</Heading>}
+            {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
             {block.intro && (
               <div className="space-y-5">
                 <Paragraphs body={block.intro} />
@@ -140,7 +183,7 @@ function Block({ block }: { block: CaseBlock }) {
         <div className="mx-auto max-w-5xl space-y-10">
           <Reveal>
             <div className="mx-auto max-w-3xl space-y-6">
-              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
               {block.intro && (
                 <div className="space-y-5">
                   <Paragraphs body={block.intro} />
@@ -193,7 +236,7 @@ function Block({ block }: { block: CaseBlock }) {
         <div className="mx-auto max-w-5xl space-y-12">
           <Reveal>
             <div className="mx-auto max-w-3xl space-y-6">
-              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
               {block.intro && (
                 <div className="space-y-5">
                   <Paragraphs body={block.intro} />
@@ -238,7 +281,7 @@ function Block({ block }: { block: CaseBlock }) {
         <div className="mx-auto max-w-5xl space-y-12">
           <Reveal>
             <div className="mx-auto max-w-3xl space-y-6">
-              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
               {block.intro && (
                 <div className="space-y-5">
                   <Paragraphs body={block.intro} />
@@ -306,7 +349,7 @@ function Block({ block }: { block: CaseBlock }) {
         <div className="mx-auto max-w-5xl space-y-12">
           <Reveal>
             <div className="mx-auto max-w-3xl space-y-6">
-              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
               {block.intro && (
                 <div className="space-y-5">
                   <Paragraphs body={block.intro} />
@@ -366,7 +409,7 @@ function Block({ block }: { block: CaseBlock }) {
         <div className="mx-auto max-w-5xl space-y-10">
           <Reveal>
             <div className="mx-auto max-w-3xl space-y-6">
-              {block.heading && <Heading>{block.heading}</Heading>}
+              {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
               {block.intro && (
                 <div className="space-y-5">
                   <Paragraphs body={block.intro} />
@@ -434,7 +477,13 @@ function Block({ block }: { block: CaseBlock }) {
 
     case "figure":
       return (
-        <Figure src={block.src} caption={block.caption} impact={block.impact} />
+        <Figure
+          src={block.src}
+          caption={block.caption}
+          impact={block.impact}
+          figure={block.figure}
+          plain={block.plain}
+        />
       );
   }
 }
