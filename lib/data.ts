@@ -560,8 +560,8 @@ export const projects: Project[] = [
           kicker: "01 · Overview",
           heading: "What CalDeck is",
           body: [
-            "CalDeck is a calendar. It does what a calendar has to do — day, week and month views, event details, invites, search, reminders, notifications, account sync. None of that is interesting to write about, because the category settled those questions years ago and the job was to meet the standard rather than argue with it.",
-            "What is worth writing about is the assistant built into it. That is the part with no settled answer, and the part where a wrong decision costs a user something real. So this study covers one layer of the product rather than all of it, and goes deep on one errand inside that layer instead of taking a shallow tour of everything.",
+            "CalDeck is a calendar — day, week and month views, event details, invites, search, reminders, sync. The category settled those questions years ago, so the job there was to meet the standard rather than argue with it.",
+            "What is worth writing about is the assistant built into it. This study covers that one layer, and goes deep on one errand inside it rather than touring everything.",
           ],
         },
         {
@@ -575,317 +575,221 @@ export const projects: Project[] = [
           src: "/images/diagrams/caldeck-scope.svg",
           figure: 1,
           plain: true,
-          caption:
-            "The whole product, and the slice this study argues about.",
+          caption: "The whole product, and the slice this study argues about.",
         },
         {
           kind: "prose",
           kicker: "02 · Identifying the problem",
           heading: "A twenty-minute job that should take twenty seconds",
           body: [
-            "Moving one meeting is not hard. It is just slow. You open the calendar. You work out who else is in the room. You pick a time. The time clashes with something of your own, so you pick again. Then you write a note explaining yourself and send it. Twenty minutes later the meeting has moved and you have lost your morning.",
-            "Every big app has tried to fix this. The AI assistants can understand what you ask for. The calendars can see everyone's free time. So why does it still take twenty minutes? That is the question I started with, and it is why I spent the first week using other apps instead of drawing screens.",
-            "One thing up front. CalDeck is a personal project. There was no client and no brief but my own, and nobody has tested it yet. So there are no results at the bottom of this page. What there is instead is a review of what already exists, one job followed all the way through, and an honest list of what I still do not know.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-calendar.webp",
-          figure: 2,
-          caption:
-            "The front door: how your day is going, four things you might want to do, and the two you left unfinished yesterday.",
-          impact:
-            "An empty chat box is the fastest way to lose a busy person, and it is the one thing every general AI assistant gets wrong here. So this screen answers before it asks. One line on how the day looks, four common jobs as buttons, and the two things you left open yesterday. That last part matters most. On a busy morning the thing you want is usually the thing that got interrupted, not something new.",
-        },
-        {
-          kind: "prose",
-          kicker: "03 · Defining the problem",
-          heading: "The question I was actually answering",
-          body: [
-            "Once the problem was clear, it needed narrowing into something a screen can answer. The whole of the design comes back to one question, and I kept it written at the top of the file the entire time.",
-            "How can the assistant take the hard part of rescheduling off someone without taking away control of a change that reaches four other people?",
-            "Both halves matter. An assistant that acts on its own demos beautifully and loses you the first time it moves the wrong meeting. An assistant that asks permission for everything is safe and quietly useless, because the person goes back to doing it by hand. The design lives in the narrow space between those two failures.",
+            "Moving one meeting is not hard. It is just slow. You open the calendar, work out who else is in the room, pick a time, find it clashes with something of your own, pick again, then write a note explaining yourself. Twenty minutes later the meeting has moved and you have lost your morning.",
+            "Every big app has tried to fix this. The assistants understand what you ask for, the calendars can see everyone's free time, and it still takes twenty minutes. That question is why I spent the first week using other apps instead of drawing screens.",
+            "One thing up front: CalDeck is a personal project. No client, no brief but my own, and nobody has tested it. There are no results at the bottom of this page.",
           ],
         },
         {
           kind: "list",
           kicker: "03 · Defining the problem",
-          heading: "The rules I set before drawing",
+          heading: "The question, and the rules under it",
           intro: [
-            "Six rules, written before the first screen and kept visible while I worked so that every decision had something to answer to.",
+            "The whole design comes back to one question, which I kept written at the top of the file: how can the assistant take the hard part of rescheduling off someone without taking away control of a change that reaches four other people?",
+            "Both halves matter. An assistant that acts alone demos beautifully and loses you the first time it moves the wrong meeting. One that asks permission for everything is safe and quietly useless. Five rules kept me in the space between.",
           ],
           items: [
-            "The calendar is the product. The assistant is a layer on top of it, and it never becomes a place you have to get out of.",
-            "The assistant can read anything but decide nothing. It can rank options, write the message and chase replies. It cannot send.",
-            "Every suggestion shows the reason for it, on the same line as the suggestion.",
+            "The calendar is the product. The assistant is a layer on top of it, and never becomes a place you have to get out of.",
+            "The assistant can read anything but decide nothing. It ranks, drafts and chases replies. It cannot send.",
+            "Every suggestion shows its reason, on the same line as the suggestion.",
             "Every path ends at the same review screen, including the ones that go wrong.",
-            "Missing information is a real screen, not an error. If the app cannot see someone's calendar, it says so clearly instead of guessing.",
-            "Phone first. The desktop scheduling grid already works. It does not survive the trip to a small screen.",
-          ],
-          outro: [
-            "What I got wrong was the shape of the work. I wrote this as one smooth path with a bit of error handling bolted on. The research changed my mind. The error handling is the product. Anyone can show three free slots on a quiet Tuesday. The reason this job is still slow is the meeting that starts in twelve minutes, the person at another company whose calendar you cannot see, and the weekly meeting that quietly rewrites eleven future weeks.",
-          ],
-        },
-        {
-          kind: "grid",
-          kicker: "04 · Defining the problem",
-          heading: "Who it is for",
-          intro: [
-            "These are not real people from a study. I had no one to interview. This is a model I built from the app review and from how calendars behave, so that my decisions had something to be tested against.",
-          ],
-          columns: 3,
-          items: [
-            {
-              title: "The organiser",
-              desc: "Moves meetings for a living. Runs most of the meetings in their day and reschedules a few every week. They are the only person here who will ever open the assistant on purpose. Their question is not which slot is free. It is which slot causes the least trouble, and they need the answer while walking.",
-            },
-            {
-              title: "The maker",
-              desc: "Has two hours of real work to do and a calendar that keeps eating them. They do not want a scheduling assistant. They want a bodyguard. Focus Time exists for this person, and every meeting move has to treat their protected hours as a real limit.",
-            },
-            {
-              title: "The outsider",
-              desc: "Works at another company, on a calendar nobody here can see. Every decision in this flow affects them, and they show up in none of the data. Designing for them is mostly about being honest with everyone else that they cannot be seen.",
-            },
+            "Missing information is a real screen, not an error. If the app cannot see a calendar, it says so instead of guessing.",
           ],
         },
         {
           kind: "list",
-          kicker: "04 · Defining the problem",
+          kicker: "03 · Defining the problem",
           heading: "The stories I designed against",
           intro: [
-            "Each one is small enough to build and specific enough to fail. When a screen could not serve one of these, that was the signal to change the screen rather than the story.",
+            "No participants to interview, so these came from the app review and from how calendars behave. Each is small enough to build and specific enough to fail.",
           ],
           items: [
-            "As the organiser, I want to move one meeting without opening four calendars, so that I can do it between other meetings rather than after them.",
-            "As the organiser, I want to see why a time was suggested, so that I can overrule it without second-guessing myself.",
-            "As the organiser, I want to know what a change will cost other people before I send it, not after.",
-            "As the maker, I want my deep-work hours treated as real commitments, so that I decide once instead of defending them every week.",
-            "As the maker, I want to pause that protection during a hard week without giving it up, so that the setting survives launch week.",
-            "As anyone, I want to know when the app cannot see something, so that I can tell the difference between a confident answer and a guess.",
+            "As the organiser, I want to move one meeting without opening four calendars, so I can do it between other meetings rather than after them.",
+            "As the organiser, I want to see why a time was suggested, so I can overrule it without second-guessing myself.",
+            "As the organiser, I want to know what a change costs other people before I send it, not after.",
+            "As the maker, I want my deep-work hours treated as real commitments, so I decide once instead of defending them every week.",
+            "As anyone, I want to know when the app cannot see something, so I can tell a confident answer from a guess.",
           ],
         },
         {
           kind: "prose",
-          kicker: "05 · Research",
+          kicker: "04 · Research",
           heading: "Using AI to attack my own thinking",
           body: [
-            "I used ChatGPT and Claude the way you would use a sharp colleague who has no stake in the outcome: to widen the problem, find the cases I had not thought of, and argue against the calls I had already made. I did not take the output as an answer. Most of the value was in what I threw away.",
-            "The pattern in what I rejected turned out to be the most useful finding of the whole project. Almost every suggestion I did not keep was too autonomous — auto-accept the best slot, auto-decline the clashing meeting, quietly notify everyone. Each was defensible on its own and each moved a decision away from the person who would have to apologise for it.",
-            "That is where the rule came from. Where checking is cheap, the assistant can just act and show its work. Where an action reaches other people, the value is in the preparation and not the execution. So the assistant does everything needed to reach a decision, and the decision stays with the user.",
-            "The other thing AI was genuinely good at was context. It could not reason about CalDeck from a generic description of an assistant — it needed to know what the calendar could see, what actions existed, and where the limits were. Feeding it that turned vague advice into specific arguments, and it is what separated what the assistant could suggest from what the product should be allowed to commit.",
+            "I used ChatGPT and Claude the way you would use a sharp colleague with no stake in the outcome: to widen the problem, find cases I had missed, and argue against calls I had already made. Most of the value was in what I threw away.",
+            "The pattern in the rejects became the rule the product runs on. Almost everything I dropped was too autonomous — auto-accept the best slot, auto-decline the clash, quietly notify everyone. Each was defensible alone, and each moved a decision away from the person who would have to apologise for it. Where checking is cheap, the assistant can act and show its work. Where an action reaches other people, the value is in the preparation, not the execution.",
           ],
         },
         {
           kind: "grid",
-          kicker: "06 · Research",
+          kicker: "05 · Research",
           heading: "Competitive analysis",
           intro: [
-            "I used each of these for the same job: move a weekly meeting with four people, one of them at another company. For each app I wrote down the exact moment it handed the work back to me. Two are AI assistants, three are calendars, and one avoids the problem completely.",
+            "I used each of these for the same job: move a weekly meeting with four people, one at another company. For each I wrote down the exact moment it handed the work back to me.",
           ],
           columns: 3,
           items: [
             {
               title: "ChatGPT",
               logo: "/images/logos/chatgpt.webp",
-              desc: "By far the best at understanding what you type. Ask it to move your sync to the afternoon and say Priya has to be there, and it gets that Priya is a hard requirement. But the answer comes back as text. There is no calendar to check it against, and it cannot draw four people's free time as a picture. It can tell you a slot is free. It cannot show you the gap.",
+              desc: "The best at understanding what you type — it gets that Priya has to be there is a hard requirement. But the answer is text. It can tell you a slot is free; it cannot show you the gap.",
             },
             {
               title: "Google Gemini",
               logo: "/images/logos/gemini.webp",
-              desc: "The closest link to a real calendar here. It will create the event from a sentence without leaving Google. What it will not do is explain itself. You get a time, not a reason. And when the time is wrong you are back in the calendar fixing it by hand, without any of the information the assistant just had.",
+              desc: "The closest link to a real calendar. It will create the event from a sentence. It will not explain itself — you get a time, not a reason, and fixing it drops you back into the calendar with none of the context.",
             },
             {
               title: "Apple Calendar",
               logo: "/images/logos/apple-calendar.webp",
-              desc: "I copied its craft, not its brain. The time grid, blocks sized to how long a meeting lasts, the diagonal stripes for time that is unconfirmed. CalDeck borrows all of it. Its scheduling help is almost nothing. It shows you a clash and leaves you to sort it out.",
+              desc: "I copied its craft, not its brain. The time grid, blocks sized to duration, stripes for unconfirmed time. Its scheduling help is almost nothing: it shows a clash and leaves you to it.",
             },
             {
               title: "Microsoft Teams",
               logo: "/images/logos/microsoft-teams.webp",
-              desc: "The most serious attempt at the hard part. It knows when everyone is free, finds rooms, and suggests times with a reason attached. But it looks like a spreadsheet. On a phone the grid turns into something you scroll rather than read. And the person from another company is just an empty column with no advice next to it.",
+              desc: "The most serious attempt at the hard part — free time, rooms, suggestions with reasons. But it looks like a spreadsheet, and on a phone it becomes something you scroll rather than read.",
             },
             {
               title: "Google Calendar",
               logo: "/images/logos/google-calendar.webp",
-              desc: "What most people actually compare you to. Find a time works well inside one company and gets much weaker outside it. That is the part I kept noticing. A suggestion based on full information and a suggestion based on a guess look exactly the same.",
+              desc: "What most people compare you to. Find a time works inside one company and weakens outside it. A suggestion built on full information and one built on a guess look identical.",
             },
             {
               title: "Calendly",
               logo: "/images/logos/calendly.webp",
-              desc: "It solves the problem by skipping it. Send a link and let the other person pick. That is genuinely the right answer for booking something new with someone outside your company. It is no help here, where the meeting already exists and four people already agreed to it once.",
+              desc: "Solves the problem by skipping it: send a link, let them pick. Right answer for a new meeting, no help here, where the meeting exists and four people already said yes.",
             },
           ],
           outro: [
-            "Put side by side, the split is clear. The AI assistants understand what you say but cannot see your day. The calendars can see your day but cannot understand what you say. Nothing does both at the moment you actually decide. That is why the job still ends with a person doing the maths.",
-            "Two smaller gaps mattered more to me. First, almost nothing explains itself while you are choosing. Teams and Google will tell you a slot is free. Only Teams tells you why, and only in a view that does not fit on a phone. Second, not one of the six treats I cannot see this person's calendar as a screen worth designing. It is a blank column, an empty result, or a confident answer built on nothing.",
-            "One warning I kept in mind the whole time. Looking at other apps tells you what exists. It does not tell you what people need. It is good at showing you the shape of a gap and bad at telling you whether anyone wants it filled. Everything above is a guess until someone watches a real person try it, and that has not happened yet.",
+            "The split is clean. The assistants understand what you say but cannot see your day. The calendars see your day but cannot understand what you say. Nothing does both at the moment you decide, which is why the job still ends with a person doing the maths.",
+            "Two smaller gaps mattered more. Almost nothing explains itself while you are choosing. And not one of the six treats I cannot see this person's calendar as a screen worth designing — it is a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
+            "The caveat: this tells you what exists, not what people need. All of it is a guess until someone watches a real person try.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-landscape.svg",
-          figure: 3,
+          figure: 2,
           plain: true,
           caption:
-            "The split that shaped the project. The assistants understand the request, the calendars can see the day, and the top-right corner is empty.",
-        },
-        {
-          kind: "grid",
-          kicker: "07 · Research",
-          heading: "What the research changed",
-          intro: [
-            "Six findings, and what each one turned into. I kept this list open while designing so every screen had something to answer to.",
-          ],
-          columns: 3,
-          items: [
-            {
-              title: "Assistants read the sentence. Calendars read the day.",
-              desc: "Built both into one surface, so the decision gets made where the day is still visible instead of in a chat window next to it.",
-            },
-            {
-              title: "Only Teams explains its suggestions, and only on a big screen.",
-              desc: "Moved the reason onto the same line as the time. It survives a phone, which a free-time grid does not.",
-            },
-            {
-              title: "Nobody designs for the calendar you cannot see.",
-              desc: "Drew it instead: a striped column that says no access, and a poll in place of a booking when the data is missing.",
-            },
-            {
-              title: "Every app hides what moving a repeating meeting will do.",
-              desc: "Each option states what it will affect before you pick it, and an untouched week keeps its old time.",
-            },
-            {
-              title: "Most of what I rejected from AI was too autonomous.",
-              desc: "Turned that into the rule the product runs on: the assistant prepares the decision, the user owns it.",
-            },
-            {
-              title: "Calendly works by handing the problem to the other person.",
-              desc: "Right answer for a new meeting, wrong one here. Kept the flow for a meeting that already exists and already has four yeses.",
-            },
-          ],
+            "The split that shaped the project. The top-right corner is empty.",
         },
         {
           kind: "prose",
-          kicker: "08 · Strategy",
+          kicker: "06 · Strategy",
           heading: "The user journey",
           body: [
-            "Before drawing screens I mapped what has to happen when someone asks to move a meeting: read the request, work out which meeting, check four calendars against the focus hours, rank what is left, show the cost of the choice, and stop for a decision.",
-            "Treating it as one journey rather than a set of screens is what exposed the branches early. It also meant the hard parts were found before anything was styled, which is the only reason the edge cases in this study look designed rather than patched.",
+            "Before drawing screens I mapped what has to happen: read the request, work out which meeting, check four calendars against the focus hours, rank what is left, show the cost of the choice, and stop for a decision. Treating it as one journey rather than a set of screens is what exposed the branches early, before anything was styled.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-journey.svg",
-          figure: 4,
+          figure: 3,
           plain: true,
-          caption:
-            "Six stages, three lanes. Stage 5 is the one that cannot be skipped.",
+          caption: "Six stages, three lanes. Stage 5 is the one that cannot be skipped.",
         },
         {
           kind: "prose",
-          kicker: "09 · Strategy",
-          heading: "How the screens connect",
+          kicker: "07 · Strategy",
+          heading: "How the screens hold together",
           body: [
-            "A calendar with an assistant bolted on fails if the two are designed as separate products that share a logo. So I worked out the connections before styling any single screen.",
-            "The rule is that the calendar is home and everything returns to it. Two doors lead into the assistant, both paths meet at the same options and the same review, and whatever happens — send, cancel, swipe away — you land back on the day you started from. A card about a specific meeting always carries a way back into the calendar with that meeting already open.",
+            "A calendar with an assistant bolted on fails if the two are designed as separate products that share a logo. The rule is that the calendar is home and everything returns to it. Two doors lead in, both paths meet at the same options and the same review, and whatever happens you land back on the day you started from.",
             "Focus Time is the one screen that is read rather than visited. The meeting flow consults it as a rule and never sends you there mid-errand, which is what keeps a settings screen from interrupting a job.",
+            "Inside each screen the same three questions get answered in the same order: what am I looking at, what has the assistant done, and what do I have to decide. The work carries the most weight, the assistant sits underneath it, and the decision is the clearest thing on screen even though it uses the fewest words.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-screenflow.svg",
-          figure: 5,
+          figure: 4,
           plain: true,
           caption:
             "Two ways in, one path through, one way back, and one screen that is only ever read.",
         },
         {
-          kind: "prose",
-          kicker: "10 · Strategy",
-          heading: "Information hierarchy",
-          body: [
-            "Every screen answers the same three questions in the same order: what am I looking at, what has the assistant done, and what do I have to decide. Fixing that order is what lets someone read a screen they have never seen the way they read the last one.",
-            "The work itself carries the most weight. The assistant sits underneath it, deliberately quieter than the thing it is helping with. And the decision is the clearest element on the screen, even though it uses the fewest words. Proposed changes lead with the outcome and keep the detail below it for anyone who wants it.",
-          ],
-        },
-        {
           kind: "figure",
           src: "/images/diagrams/caldeck-hierarchy.svg",
-          figure: 6,
+          figure: 5,
           plain: true,
           caption:
             "Three questions, ranked by weight. The assistant is the quiet one on purpose.",
         },
         {
           kind: "prose",
-          kicker: "11 · Strategy",
+          kicker: "08 · Strategy",
           heading: "Two ways in",
           body: [
-            "There are two ways to reach the assistant, and keeping them separate was my first real decision. A floating button on the calendar opens a sheet. That is for one job, about the day you are already looking at, with the calendar still visible behind it. A switch at the top opens Assistant as a full screen. That is a place you go, with its own history, for bigger questions that cover your calendar, email, tasks and goals.",
-            "It was tempting to build one thing and call it both, which is roughly what Gemini does. I did not, because they need opposite things. A quick job should never cost you your view of the day. A long conversation should not be squeezed into a sheet.",
-            "The switch sits in the same place in both. Whatever got you here is also the way back.",
+            "A floating button on the calendar opens a sheet: one job, about the day you are already looking at, calendar still visible behind it. A switch at the top opens Assistant as a full screen — a place you go, for bigger questions across calendar, email and tasks. Building one thing and calling it both was tempting, but a quick job should never cost you your view of the day, and a long conversation should not be squeezed into a sheet.",
+            "Both doors also accept a typed sentence, which is the one thing ChatGPT does better than any calendar. The reply says out loud how it read you — afternoon means after 1 PM, has to be there means required — and makes each reading tappable, so a wrong guess gets fixed on the spot.",
           ],
         },
         {
           kind: "figure",
           src: "/images/work/caldeck-two-doors.webp",
-          figure: 7,
+          figure: 6,
           caption:
-            "The two ways in, side by side. Assistant as a full screen on the left. Your day on the right, with the assistant one tap away.",
+            "The two ways in. Assistant as a full screen on the left, your day on the right with the assistant one tap away.",
           impact:
-            "Thursday has six meetings and a striped block at the end that is not a meeting at all. Focus Time uses the same stripes the calendar already uses for unconfirmed time, because that is what it is: time that is already spoken for. Product Sync at 11:00 is the meeting the rest of this page moves, and it sits right against that block. So the clash is on screen before you ask the assistant anything.",
+            "An empty chat box is the fastest way to lose a busy person, so the assistant opens on a read of the day and the two threads you left unfinished. On the right, Focus Time uses the same stripes the calendar already uses for unconfirmed time, and Product Sync at 11:00 sits right against that block — so the clash is on screen before you ask anything.",
         },
         {
           kind: "decisions",
-          kicker: "12 · Strategy",
+          kicker: "09 · Strategy",
           heading: "Four big decisions",
           intro: [
-            "Each of these had a cheaper option that I can still argue for. Writing the argument against my own choice is the only way I know to tell a real decision from a habit.",
+            "Each had a cheaper option I can still argue for. Writing the argument against my own choice is the only way I know to tell a real decision from a habit.",
           ],
           items: [
             {
               title: "A chat, not a step-by-step form",
               problem:
-                "Moving a meeting has a fixed set of steps in a fixed order. That is the textbook case for a step-by-step form, which would have been quicker to build and easier to explain.",
+                "Moving a meeting has fixed steps in a fixed order — the textbook case for a form, which would have been quicker to build.",
               decision:
-                "I made it a conversation over the calendar instead. Each choice becomes a message. Each answer arrives as a card. Nothing gets replaced, so you end up with a record of every decision the assistant made for you. The calendar stays behind the sheet the whole time, which is what makes swiping down to quit cost nothing.",
+                "A conversation over the calendar instead. Each choice becomes a message, each answer a card, nothing gets replaced. You end up with a record of every decision the assistant made for you, and the calendar stays behind the sheet so swiping down to quit costs nothing.",
               note: {
                 label: "The cost",
-                body: "A conversation is longer than a form and it scrolls. Someone doing this for the fortieth time does not want the history. They want three taps. The collapsed bar only partly answers that.",
+                body: "A conversation scrolls. Someone doing this for the fortieth time wants three taps, not the history.",
               },
             },
             {
               title: "One best option, never two",
               problem:
-                "The ranking is a judgement made without full information. Marking one slot as best claims more confidence than the data really supports. The safe design shows the options evenly and lets you weigh them up.",
+                "The ranking is a judgement made without full information. Badging one slot claims more confidence than the data supports.",
               decision:
-                "One slot gets the badge, and every slot shows the reason it was picked. Two competing recommendations are not a recommendation. They hand the comparison back to the person who asked you to do it for them. The reason is what makes the badge something you can argue with rather than just obey.",
+                "One badge, and every slot shows why it was picked. Two competing recommendations are not a recommendation — they hand the comparison back to the person who asked you to do it. The reason is what makes the badge arguable rather than obeyed.",
               note: {
                 label: "The cost",
-                body: "When the badge is wrong it is wrong loudly, and it teaches people to trust it without checking. That is the trade. A confident app that is sometimes confidently wrong, against a neutral one that is reliably useless.",
+                body: "When the badge is wrong it is wrong loudly, and it teaches people to trust it without checking.",
               },
             },
             {
               title: "The assistant stops before sending",
               problem:
-                "The demo everyone wants is the one where you say move my sync and it is done. Every step between asking and finishing is friction, and a competitor will happily remove it.",
+                "The demo everyone wants is you say move my sync and it is done. Every step between is friction a competitor will remove.",
               decision:
-                "Nothing goes out without you pressing send. Every path ends at a review screen with the old time crossed out next to the new one, the list of people, and a message you can edit. After sending, Undo stays available while you are still waiting on replies.",
+                "Nothing goes out without you pressing send. Every path ends at a review screen with the old time crossed out next to the new one and a message you can edit. Undo stays live while replies are outstanding.",
               note: {
                 label: "Why",
-                body: "The expensive mistake here is not a bad suggestion. It is a good suggestion that reached four other calendars before anyone read it. A bad suggestion costs one tap. A bad send costs four apologies.",
+                body: "A bad suggestion costs one tap. A bad send costs four apologies.",
               },
             },
             {
               title: "Draw what you cannot see",
               problem:
-                "None of the six apps do this, which is usually a sign it is not worth doing. It also means admitting the app cannot see something at the exact moment you want an answer.",
+                "None of the six apps do this, which usually means it is not worth doing. It also means admitting the app is blind at the moment you want an answer.",
               decision:
-                "The person at another company gets a striped column that says no access, using the same stripes the calendar already uses for unconfirmed time. The recommended next step stops being a booking and becomes a poll, with the possible times held as tentative so your own calendar does not fill up while you wait.",
+                "The person at another company gets a striped column reading no access, in the language the calendar already uses for unconfirmed time. The recommendation becomes a poll instead of a booking, with times held tentative so your own calendar does not fill up while you wait.",
               note: {
                 label: "The cost",
-                body: "It makes the app look less capable than the ones that guess. A confident wrong answer demos better than an honest I do not know. I think it loses the user for good the second time it happens.",
+                body: "A confident wrong answer demos better than an honest I do not know. I think it loses the user the second time it happens.",
               },
             },
           ],
@@ -893,212 +797,115 @@ export const projects: Project[] = [
         {
           kind: "prose",
           anchor: "final-design",
-          kicker: "13 · Design",
+          kicker: "10 · Design",
           heading: "Moving a meeting",
           body: [
-            "It opens by asking which meeting should move, and it is honest about its own limits straight away. You run two of today's three meetings, so the third can only ever be a request written to the other company. That is the Calendly problem showing up inside the product rather than as a separate app.",
-            "Then it offers three ranked times, each with the reason it was picked. Ignore the ranking and it does not just warn you. It draws the clash on a strip of the real afternoon, names the person who would be double-booked, and offers to move her meeting too.",
+            "It opens by asking which meeting should move, and is honest about its limits straight away: you run two of today's three, so the third can only be a request written to the other company. Then three ranked times, each with its reason. Ignore the ranking and it does not just warn you — it draws the clash on a strip of the real afternoon, names who would be double-booked, and offers to move her meeting too.",
+            "Pick your own time instead and the free-time bar stays live underneath it, striped column included. If the slot lands inside your focus hours it says what that costs — thirty minutes off Monday's deep work — then lets you do it anyway. The repeat question does the same, stating that it moves 11 future events and 3 have clashes before you choose rather than after.",
           ],
         },
         {
           kind: "figure",
           src: "/images/work/caldeck-choose-rank.webp",
-          figure: 8,
+          figure: 7,
           caption:
             "Which meeting moves, the three times that work, and what happens when you ignore the ranking.",
           impact:
-            "All 4 free and nearest to the usual weekly slot are the two reasons Teams gives you inside a scheduling grid. I brought them out onto the same line as the time so they still work on a phone. The third screen is the part none of the six apps do. Instead of blocking your choice or letting it through silently, it draws the clash at the size of the real afternoon and turns the fix into one more button.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-picker-scope.webp",
-          figure: 9,
-          caption:
-            "None of those, let me pick: the time picker with everyone's free time underneath, and the repeat question that follows.",
-          impact:
-            "The free-time bar updates as you move the time, including the striped column for the person nobody can see. The warning underneath is the Focus Time setting doing its job from the other side of the app. 9:30 is inside a protected window, and booking there cuts Monday's deep work down to thirty minutes. It tells you the cost, then lets you do it anyway. The repeat question is where every calendar I tested quietly causes damage, so each option states what it will affect — moves 11 future events, 3 have clashes — before you choose it, not after.",
+            "All 4 free and nearest to the usual weekly slot are the reasons Teams buries in a grid; here they sit on the same line as the time so they survive a phone. The third screen is what none of the six do: it draws the clash at the size of the real afternoon and turns the fix into one more button.",
         },
         {
           kind: "prose",
-          kicker: "14 · Design",
+          kicker: "11 · Design",
           heading: "Where the AI stops",
           body: [
-            "Every path in this flow ends in the same place, including the ones that go wrong. A review screen. It shows the old time crossed out next to the new one, the list of people and whether they are free, and a message written for you that you can edit before it goes.",
-            "This one screen is the whole argument of the project. The assistant has read four calendars, ranked three times, caught a double booking, checked a focus window, and written a sentence explaining the change. It still has not done the one thing you cannot take back. After you send, Undo stays available while replies are outstanding, because the moment you find out a change was wrong is usually the moment someone answers.",
+            "Every path ends in the same place, including the ones that go wrong: a review screen showing the old time crossed out next to the new one, who is free, and a message written for you that you can edit.",
+            "This one screen is the whole argument. The assistant has read four calendars, ranked three times, caught a double booking, checked a focus window and written the explanation. It still has not done the one thing you cannot take back. Undo stays available while replies are outstanding, because the moment you learn a change was wrong is usually the moment someone answers.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-boundary.svg",
-          figure: 10,
+          figure: 8,
           plain: true,
-          caption:
-            "The assistant does everything up to the line. The one step past it is yours.",
+          caption: "The assistant does everything up to the line. The step past it is yours.",
         },
         {
           kind: "figure",
           src: "/images/work/caldeck-review-send.webp",
-          figure: 11,
+          figure: 9,
           caption:
             "Check it before anything moves, then the sent screen with Undo still available and one reply outstanding.",
           impact:
-            "The old time is crossed out rather than deleted, so you can see what changed. The warning about the focus window follows the decision all the way to this screen instead of disappearing three steps earlier. And the confirmation does not pretend the job is done. It says one person is outside the company and has not replied, and promises to come back when she does.",
+            "The old time is crossed out rather than deleted, so the change is legible as a change. The confirmation does not pretend the job is done: one person is outside the company and has not replied.",
         },
         {
           kind: "quote",
           heading: "The rule",
           body: [
             "It reads everything and decides nothing.",
-            "An assistant that can send is a colleague you did not hire and cannot correct. An assistant that stops at the review screen is a very fast first draft. The second one is more useful, even though it looks less impressive in a demo.",
+            "An assistant that can send is a colleague you did not hire and cannot correct. One that stops at the review screen is a very fast first draft — more useful, even though it demos worse.",
           ],
         },
         {
           kind: "prose",
-          kicker: "15 · Design",
+          kicker: "12 · Design",
           heading: "When things go wrong",
           body: [
-            "This is the part the research pointed me at, and the part I most wanted to design. Moving a meeting is easy while everyone is free and the meeting is next week. It is worth building for the few times a year when it is neither.",
-            "Inside fifteen minutes of the meeting, the whole flow changes shape. Suggestions are useless because nobody is looking at their calendar, they are looking at the door. So it becomes three blunt options. The default drops to a short delay rather than a new time. And the assistant sends a push notification and a chat message, instead of trusting a calendar update to arrive in time. The wording says the real cost out loud: three people are already walking to a room.",
-            "Free time across two companies usually cannot be read. A confident suggestion built on missing information is worse than an honest one. So the person at the other company gets the striped column, and the recommendation becomes a poll instead of a booking.",
-            "And moving a meeting is not finished when the invite goes out. It is finished when the room agrees. The assistant watches the replies and only comes back when someone saying no actually threatens the point of the meeting. Then it says what it thinks in plain words — I would not run this without him — so you can disagree with it.",
+            "This is the part the research pointed at, and the part I most wanted to design. Moving a meeting is easy while everyone is free and it is next week. It is worth building for the few times a year when it is neither.",
+            "Inside fifteen minutes the whole flow changes shape. Nobody is looking at their calendar, they are looking at the door — so it becomes three blunt options, the default drops to a short delay, and the assistant escalates to push and chat. The wording says the cost out loud: three people are already walking to a room. Further out, the series move gives every affected week its own row, and an untouched week keeps its old time rather than being double-booked.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-branches.svg",
-          figure: 12,
+          figure: 10,
           plain: true,
           caption:
             "Four things go wrong. Each changes the shape of the screen, and each still ends at the same review step.",
         },
         {
-          kind: "figure",
-          src: "/images/work/caldeck-edges.webp",
-          figure: 13,
-          caption:
-            "Twelve minutes to go, a person nobody can see, and one no that matters more than the two yeses.",
-          impact:
-            "Three different failures, three different shapes of screen. What they share is that none of them is an error message. Each one keeps things moving by offering the next real decision, and each says the cost of the option it recommends, not just the benefit.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-series.webp",
-          figure: 14,
-          caption:
-            "Moving the whole repeating series, week by week — and the sheet at rest afterwards, still holding the reply it is waiting on.",
-          impact:
-            "This and all following is where calendars quietly do damage, because one tap hides ten future clashes. So every affected week gets its own row and its own fix, and the safe default is written on the screen: a week you leave alone keeps its old time instead of being double-booked. You can still move the whole series without checking all eleven, but nothing gets destroyed silently. Afterwards the sheet shrinks to a bar instead of closing, because the next thing you want is to look at the day you just changed.",
-        },
-        {
           kind: "prose",
-          kicker: "16 · Design",
+          kicker: "13 · Design",
           heading: "Focus Time",
           body: [
-            "This is the second job, and it exists because of the first. The meeting flow keeps warning about focus hours, and a warning only means something if the thing it points at is real. Focus Time answers one question — when should this person be left alone — and the whole meeting flow treats the answer as a limit.",
-            "An empty settings screen that asks you to describe your own working pattern puts the work on the person least able to describe it. So the empty state arrives with a suggestion already made from what the app has seen: you do most of your writing between 9 and 11, and Wednesdays are your quietest day. It is worded as something you can accept in one tap or turn down. And the promise is about what happens next, not about features — no new invites land there without asking you.",
-            "Once it is set, the settings screen doubles as a quiet report on whether it is working. 8h 45m held this week, two invites turned away, and stripes over the hours you have already given up to meetings. Below that sit the only three choices that matter: how long a block has to be to be worth having, what happens to invites that land in one, and who can book you anyway. That last one is the escape hatch that stops the feature becoming a wall.",
+            "The second job exists because of the first. The meeting flow keeps warning about focus hours, and a warning only means something if the thing it points at is real. So the switch is a rule the scheduling logic enforces, not a hint the assistant interprets — off means the event is never offered as movable.",
+            "An empty settings screen that asks you to describe your own working pattern puts the work on the person least able to describe it. So it arrives with a suggestion already made from what the app has seen, worded as something you accept in one tap. Once set, the screen doubles as a quiet report on whether it is working: hours held this week, invites turned away, and stripes over the time you have already given up.",
           ],
-        },
-        {
-          kind: "figure",
-          src: "/images/diagrams/caldeck-focus-rule.svg",
-          figure: 15,
-          plain: true,
-          caption:
-            "The switch is a rule the product enforces, not a hint the assistant interprets.",
         },
         {
           kind: "figure",
           src: "/images/work/caldeck-focus.webp",
-          figure: 16,
+          figure: 11,
           caption:
-            "Empty, set up, and editing one day. Your hours are shown as a week, because that is the shape they have.",
+            "Empty, set up, and editing one day. Your hours read as a week, because that is the shape they have.",
           impact:
-            "Five expandable time rows would have been the obvious build. A five-column week can be read in a second, and it lets the stripes do a second job: this is what you have already given away. Editing one day happens in a sheet over that week rather than a new screen, so you keep your place and can see the shape you are changing. Two blocks a day are allowed because real deep work gets split by lunch and standups.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-focus-states.webp",
-          figure: 17,
-          caption:
-            "Paused for launch week, and the same screen when the app has been refused access to your calendar.",
-          impact:
-            "Pausing is the honest alternative to giving up on the feature during a hard week, so it is a proper state with an end date rather than an off switch. The card says what the pause has cost so far, which is the only argument for turning it back on that is not nagging. A refused permission is treated the same way: a normal screen, not an error. It stays usable and is specific about what you lose — colleagues still see you as free. Splitting it into what still works and what does not gives you an accurate picture and a reason to allow access later.",
+            "Five expandable time rows would have been the obvious build. A five-column week is read in a second, and it lets the stripes carry a second meaning: this is what you have already given away.",
         },
         {
           kind: "prose",
-          kicker: "17 · Design",
-          heading: "Typing instead of tapping",
-          body: [
-            "The buttons are a shortcut past the empty chat box, not the only way in. Someone who already knows what they want will type it faster than they can find it. And the sentence will be vague in the normal ways: push my sync to the afternoon, priya has to be there.",
-            "This is the one thing ChatGPT does better than any calendar, so I borrowed it and added the missing part. The reply says out loud how it read your sentence — afternoon means after 1 PM, has to be there means required — and makes each reading tappable. A wrong guess gets fixed on the spot instead of argued with in paragraphs. Both ways in then meet at the same review and send screens, so there is one flow to trust rather than two that drift apart.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-typed.webp",
-          figure: 18,
-          caption:
-            "The same job from one sentence, with the assistant's reading of it made editable.",
-          impact:
-            "Saying how it read your sentence is the cheapest way to earn trust in the whole app. It costs one line of text and it turns the assistant from something that guesses into something that shows its work.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/caldeck-conversation.webp",
-          figure: 19,
-          caption:
-            "One question about the week, answered across three parts of the app at once.",
-          impact:
-            "Asking what am I behind on brings back an email draft, a task with its goal attached, and a calendar clash, each as a card you can act on without leaving the conversation. Every card says where it came from — EMAIL, TASK — because a suggestion with an unclear source does not get trusted twice. This is the argument for Assistant being a place rather than a sheet. The quick job is about today. This is about the week.",
-        },
-        {
-          kind: "grid",
-          kicker: "18 · Handoff",
-          heading: "Three rules I followed",
-          columns: 3,
-          items: [
-            {
-              title: "Show your work",
-              desc: "A suggestion without a reason attached is a guess in nicer type. Every time, every warning and every reading of a sentence carries the line that explains it, close enough to take in at a glance.",
-            },
-            {
-              title: "Say the cost first",
-              desc: "Moves 11 future events, 3 have clashes. Cuts Monday's deep work to thirty minutes. One more update to two people who already said yes. The cost belongs on the button, not in the undo.",
-            },
-            {
-              title: "Stop before sending",
-              desc: "The assistant is allowed to be wrong, because everything it does can be undone right up to one clearly marked step. That limit is what lets the rest of it be confident.",
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          kicker: "19 · Testing",
+          kicker: "14 · Testing",
           heading: "What I would measure",
           body: [
-            "Nothing here has been tested, so there is no results section. What I can do is say in advance what would count as working, because a target written before the build is harder to argue with afterwards than one picked to fit the outcome.",
-            "Four numbers, each able to fail on its own. The one I would watch first is how often people accept the top suggestion. Too low and the ranking is not earning its badge. Above ninety per cent and people have stopped reading, which is the same failure wearing a better number.",
+            "Nothing here has been tested, so there is no results section. What I can do is say in advance what would count as working, because a target written before the build is harder to argue with than one picked to fit the outcome.",
+            "The one I would watch first is how often people accept the top suggestion. Too low and the ranking is not earning its badge. Above ninety per cent and people have stopped reading, which is the same failure wearing a better number.",
           ],
         },
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-targets.svg",
-          figure: 20,
+          figure: 12,
           plain: true,
           caption: "Targets set before building, not results measured after.",
         },
         {
           kind: "list",
-          kicker: "20 · Overview",
+          kicker: "15 · Overview",
           heading: "What I learned",
           items: [
             "The interesting part of an AI feature is not what it can do. It is where you make it stop.",
-            "Six apps can all be good and still leave the same gap, because each one only solved the half of the problem its own platform handed it.",
-            "Things that go wrong are not small variations on the normal path. Inside fifteen minutes the whole flow changes shape, and designing that shape is the real work.",
+            "Six apps can all be good and still leave the same gap, because each solved the half of the problem its own platform handed it.",
+            "Things that go wrong are not small variations on the normal path. Inside fifteen minutes the flow changes shape, and designing that shape is the real work.",
             "What you cannot see is worth drawing. Hiding missing information behind a confident answer is how assistants lose people for good.",
-            "AI is most useful as the colleague who disagrees with you. The pattern in what I rejected taught me more than anything I kept.",
-            "Mapping the journey before the screens is what let the connections be designed rather than discovered.",
           ],
         },
         {
@@ -1106,7 +913,7 @@ export const projects: Project[] = [
           heading: "Last thought",
           body: [
             "You judge an assistant by what it refuses to do for you.",
-            "No numbers on this one, because there is nothing to measure yet. If it ever gets built, the first thing I would watch is how often people ignore the top suggestion. That one number is the whole product's report card.",
+            "No numbers on this one, because there is nothing to measure yet. If it gets built, the first thing I would watch is how often people ignore the top suggestion. That ratio is the whole product's report card.",
           ],
         },
       ],
