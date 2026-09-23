@@ -95,6 +95,8 @@ export type CaseDecision = {
   note?: { label: string; body: string };
 };
 
+export type CaseRating = { rating: "yes" | "partly" | "no"; note?: string };
+
 type CaseBlockContent =
   | {
       kind: "prose";
@@ -140,6 +142,26 @@ type CaseBlockContent =
       body?: string[];
     }
   | { kind: "quote"; heading?: string; body: string[] }
+  /** A real table, for comparisons a diagram would only decorate. A cell is
+   *  plain text or a rating, which renders as a labelled dot so the grid can
+   *  be scanned down a column before any sentence is read. */
+  | {
+      kind: "table";
+      heading?: string;
+      intro?: string[];
+      columns: string[];
+      rows: {
+        cells: (string | CaseRating)[];
+        /** Mark shown beside the first cell, same frame as the grid logos. */
+        logo?: string;
+        /** Tints the row. Used for the thing being compared against the rest. */
+        highlight?: boolean;
+      }[];
+      /** Numbered separately from figures: "Table 1." */
+      table?: number;
+      caption?: string;
+      outro?: string[];
+    }
   | {
       kind: "figure";
       src?: string;
@@ -568,12 +590,6 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/diagrams/caldeck-legend.svg",
-          plain: true,
-          caption: "How to read the diagrams in this study.",
-        },
-        {
-          kind: "figure",
           src: "/images/diagrams/caldeck-scope.svg",
           figure: 1,
           plain: true,
@@ -629,58 +645,106 @@ export const projects: Project[] = [
           ],
         },
         {
-          kind: "grid",
+          kind: "table",
           kicker: "05 · Research",
           heading: "Competitive analysis",
           intro: [
             "I used each of these for the same job: move a weekly meeting with four people, one at another company. For each I wrote down the exact moment it handed the work back to me.",
           ],
-          columns: 3,
-          items: [
+          columns: [
+            "App",
+            "Understands what you type",
+            "Sees everyone's free time",
+            "Explains its pick",
+            "Admits what it cannot see",
+            "Where it handed the work back",
+          ],
+          rows: [
             {
-              title: "ChatGPT",
               logo: "/images/logos/chatgpt.webp",
-              desc: "The best at understanding what you type — it gets that Priya has to be there is a hard requirement. But the answer is text. It can tell you a slot is free; it cannot show you the gap.",
+              cells: [
+                "ChatGPT",
+                { rating: "yes" },
+                { rating: "no" },
+                { rating: "partly", note: "In text" },
+                { rating: "no" },
+                "Its answer is text. It can say a slot is free but cannot show you the gap.",
+              ],
             },
             {
-              title: "Google Gemini",
               logo: "/images/logos/gemini.webp",
-              desc: "The closest link to a real calendar. It will create the event from a sentence. It will not explain itself — you get a time, not a reason, and fixing it drops you back into the calendar with none of the context.",
+              cells: [
+                "Google Gemini",
+                { rating: "yes" },
+                { rating: "partly", note: "Your calendar" },
+                { rating: "no" },
+                { rating: "no" },
+                "Books a time without saying why. Fixing it means starting again in the calendar.",
+              ],
             },
             {
-              title: "Apple Calendar",
               logo: "/images/logos/apple-calendar.webp",
-              desc: "I copied its craft, not its brain. The time grid, blocks sized to duration, stripes for unconfirmed time. Its scheduling help is almost nothing: it shows a clash and leaves you to it.",
+              cells: [
+                "Apple Calendar",
+                { rating: "no" },
+                { rating: "partly", note: "Your calendar" },
+                { rating: "no" },
+                { rating: "no" },
+                "Beautiful craft, which I borrowed. It shows a clash and leaves you to solve it.",
+              ],
             },
             {
-              title: "Microsoft Teams",
               logo: "/images/logos/microsoft-teams.webp",
-              desc: "The most serious attempt at the hard part — free time, rooms, suggestions with reasons. But it looks like a spreadsheet, and on a phone it becomes something you scroll rather than read.",
+              cells: [
+                "Microsoft Teams",
+                { rating: "partly", note: "Needs Copilot" },
+                { rating: "yes" },
+                { rating: "yes" },
+                { rating: "no" },
+                "The reasons are there, but in a grid you scroll on a phone rather than read.",
+              ],
             },
             {
-              title: "Google Calendar",
               logo: "/images/logos/google-calendar.webp",
-              desc: "What most people compare you to. Find a time works inside one company and weakens outside it. A suggestion built on full information and one built on a guess look identical.",
+              cells: [
+                "Google Calendar",
+                { rating: "no" },
+                { rating: "partly", note: "Inside one company" },
+                { rating: "no" },
+                { rating: "no" },
+                "A time based on a guess looks exactly like one based on full information.",
+              ],
             },
             {
-              title: "Calendly",
               logo: "/images/logos/calendly.webp",
-              desc: "Solves the problem by skipping it: send a link, let them pick. Right answer for a new meeting, no help here, where the meeting exists and four people already said yes.",
+              cells: [
+                "Calendly",
+                { rating: "no" },
+                { rating: "partly", note: "Your free time" },
+                { rating: "no" },
+                { rating: "no" },
+                "Great for a new meeting. No help moving one four people already accepted.",
+              ],
+            },
+            {
+              highlight: true,
+              cells: [
+                "CalDeck, the aim",
+                { rating: "yes" },
+                { rating: "partly", note: "Says so when it cannot" },
+                { rating: "yes" },
+                { rating: "yes" },
+                "It does not. It stops at the review screen, and sending is yours.",
+              ],
             },
           ],
+          table: 1,
+          caption: "My own reading after using each app for the same job. CalDeck's row is what it was designed to do, not a test result.",
           outro: [
             "The split is clean. The assistants understand what you say but cannot see your day. The calendars see your day but cannot understand what you say. Nothing does both at the moment you decide, which is why the job still ends with a person doing the maths.",
-            "Two smaller gaps mattered more. Almost nothing explains itself while you are choosing. And not one of the six treats I cannot see this person's calendar as a screen worth designing — it is a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
+            "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar — you get a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
             "The caveat: this tells you what exists, not what people need. All of it is a guess until someone watches a real person try.",
           ],
-        },
-        {
-          kind: "figure",
-          src: "/images/diagrams/caldeck-landscape.svg",
-          figure: 2,
-          plain: true,
-          caption:
-            "The split that shaped the project. The top-right corner is empty.",
         },
         {
           kind: "prose",
@@ -693,7 +757,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-journey.svg",
-          figure: 3,
+          figure: 2,
           plain: true,
           caption: "Six stages, three lanes. Stage 5 is the one that cannot be skipped.",
         },
@@ -710,7 +774,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-screenflow.svg",
-          figure: 4,
+          figure: 3,
           plain: true,
           caption:
             "Two ways in, one path through, one way back, and one screen that is only ever read.",
@@ -718,7 +782,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-hierarchy.svg",
-          figure: 5,
+          figure: 4,
           plain: true,
           caption:
             "Three questions, ranked by weight. The assistant is the quiet one on purpose.",
@@ -735,7 +799,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/work/caldeck-two-doors.webp",
-          figure: 6,
+          figure: 5,
           caption:
             "The two ways in. Assistant as a full screen on the left, your day on the right with the assistant one tap away.",
           impact:
@@ -808,7 +872,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/work/caldeck-choose-rank.webp",
-          figure: 7,
+          figure: 6,
           caption:
             "Which meeting moves, the three times that work, and what happens when you ignore the ranking.",
           impact:
@@ -825,15 +889,8 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/diagrams/caldeck-boundary.svg",
-          figure: 8,
-          plain: true,
-          caption: "The assistant does everything up to the line. The step past it is yours.",
-        },
-        {
-          kind: "figure",
           src: "/images/work/caldeck-review-send.webp",
-          figure: 9,
+          figure: 7,
           caption:
             "Check it before anything moves, then the sent screen with Undo still available and one reply outstanding.",
           impact:
@@ -853,16 +910,44 @@ export const projects: Project[] = [
           heading: "When things go wrong",
           body: [
             "This is the part the research pointed at, and the part I most wanted to design. Moving a meeting is easy while everyone is free and it is next week. It is worth building for the few times a year when it is neither.",
-            "Inside fifteen minutes the whole flow changes shape. Nobody is looking at their calendar, they are looking at the door — so it becomes three blunt options, the default drops to a short delay, and the assistant escalates to push and chat. The wording says the cost out loud: three people are already walking to a room. Further out, the series move gives every affected week its own row, and an untouched week keeps its old time rather than being double-booked.",
+            "Each of the four below changes the shape of the screen, not just the wording. All four still end at the same review step.",
           ],
         },
         {
-          kind: "figure",
-          src: "/images/diagrams/caldeck-branches.svg",
-          figure: 10,
-          plain: true,
-          caption:
-            "Four things go wrong. Each changes the shape of the screen, and each still ends at the same review step.",
+          kind: "table",
+          columns: ["What goes wrong", "How the screen changes", "What the assistant does"],
+          rows: [
+            {
+              cells: [
+                "It starts in 12 minutes",
+                "Three blunt options replace the list, and the default drops to a short delay. Nobody is looking at their calendar, they are looking at the door.",
+                "Escalates to push and chat, and says the cost out loud: three people are already walking to a room.",
+              ],
+            },
+            {
+              cells: [
+                "Someone says no",
+                "Nothing changes unless that person was required.",
+                "Only interrupts you when the no actually matters. Otherwise it updates the count.",
+              ],
+            },
+            {
+              cells: [
+                "Someone is at another company",
+                "Their column is striped and labelled no access, the same look the calendar uses for unconfirmed time.",
+                "Offers a poll instead of a booking, and holds the times as tentative so your calendar does not fill up while you wait.",
+              ],
+            },
+            {
+              cells: [
+                "The whole series moves",
+                "Every affected week gets its own row.",
+                "Says it moves 11 future events and 3 have clashes before you choose. An untouched week keeps its old time rather than being double-booked.",
+              ],
+            },
+          ],
+          table: 2,
+          caption: "The four cases the normal path never reaches.",
         },
         {
           kind: "prose",
@@ -876,7 +961,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/work/caldeck-focus.webp",
-          figure: 11,
+          figure: 8,
           caption:
             "Empty, set up, and editing one day. Your hours read as a week, because that is the shape they have.",
           impact:
@@ -888,15 +973,43 @@ export const projects: Project[] = [
           heading: "What I would measure",
           body: [
             "Nothing here has been tested, so there is no results section. What I can do is say in advance what would count as working, because a target written before the build is harder to argue with than one picked to fit the outcome.",
-            "The one I would watch first is how often people accept the top suggestion. Too low and the ranking is not earning its badge. Above ninety per cent and people have stopped reading, which is the same failure wearing a better number.",
           ],
         },
         {
-          kind: "figure",
-          src: "/images/diagrams/caldeck-targets.svg",
-          figure: 12,
-          plain: true,
-          caption: "Targets set before building, not results measured after.",
+          kind: "table",
+          columns: ["What I would measure", "Target", "Why it matters"],
+          rows: [
+            {
+              cells: [
+                "Top suggestion accepted",
+                "55–70%",
+                "Too low and the ranking is not earning its badge. Above 90% and people have stopped reading, which is the same failure wearing a better number.",
+              ],
+            },
+            {
+              cells: [
+                "Finished without leaving the day",
+                "70–85%",
+                "The whole point is never losing sight of the day you are looking at.",
+              ],
+            },
+            {
+              cells: [
+                "Sends undone within an hour",
+                "Under 5%",
+                "A send that gets undone means the review screen did not do its job.",
+              ],
+            },
+            {
+              cells: [
+                "Focus Time set up in week one",
+                "40–55%",
+                "The meeting flow depends on it. Without it, the focus warnings point at nothing.",
+              ],
+            },
+          ],
+          table: 3,
+          caption: "Targets set before building. Not results — nothing has been tested.",
         },
         {
           kind: "list",

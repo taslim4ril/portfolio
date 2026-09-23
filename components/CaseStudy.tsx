@@ -1,4 +1,4 @@
-import type { CaseBlock, Project } from "@/lib/data";
+import type { CaseBlock, CaseRating, Project } from "@/lib/data";
 import Reveal from "./Reveal";
 import Button, { CircleIcon } from "./Button";
 
@@ -65,7 +65,9 @@ function Figure({
 }) {
   return (
     <Reveal>
-      <figure className="mx-auto max-w-5xl">
+      {/* Diagrams get a little more width than screenshots: their text is
+          set inside the drawing, so every extra pixel of width is type size. */}
+      <figure className={`mx-auto ${plain ? "max-w-6xl" : "max-w-5xl"}`}>
         {/* A real image sets its own height. These artifacts range from a
             4:3 phone pair to a 3.9:1 process strip, and cropping them all to
             16:9 would cut the ends off the wide ones. The placeholder keeps
@@ -125,6 +127,34 @@ function Figure({
         )}
       </figure>
     </Reveal>
+  );
+}
+
+/* A dot carries the rating so a column can be scanned before it is read; the
+   word beside it is there for anyone who cannot tell the fills apart. */
+function Rating({ rating, note }: CaseRating) {
+  const label = { yes: "Yes", partly: "Partly", no: "No" }[rating];
+  const dot = {
+    yes: "bg-accent",
+    partly: "bg-[linear-gradient(90deg,var(--accent)_50%,transparent_50%)] ring-1 ring-inset ring-accent",
+    no: "ring-1 ring-inset ring-white/25",
+  }[rating];
+  return (
+    <span className="block">
+      <span
+        className={`flex items-center gap-2.5 font-medium ${
+          rating === "no" ? "text-white/40" : "text-white/90"
+        }`}
+      >
+        <span aria-hidden className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} />
+        {label}
+      </span>
+      {note && (
+        <span className="mt-1 block whitespace-normal text-sm leading-snug text-white/45">
+          {note}
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -473,6 +503,116 @@ function Block({ block }: { block: CaseBlock }) {
             ))}
           </div>
         </Reveal>
+      );
+
+    case "table":
+      return (
+        <div className="mx-auto max-w-5xl space-y-10">
+          {(block.heading || block.intro) && (
+            <Reveal>
+              <div className="mx-auto max-w-3xl space-y-6">
+                {block.heading && <Heading kicker={block.kicker}>{block.heading}</Heading>}
+                {block.intro && (
+                  <div className="space-y-5">
+                    <Paragraphs body={block.intro} />
+                  </div>
+                )}
+              </div>
+            </Reveal>
+          )}
+          <Reveal>
+            <figure>
+              {/* Same bleed-and-pan as the diagrams: a comparison squeezed to
+                  phone width wraps every cell to one word per line. */}
+              <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:px-0">
+                <div
+                  className={`overflow-hidden rounded-2xl border border-border ${
+                    block.columns.length > 3 ? "min-w-[820px]" : "min-w-[640px]"
+                  }`}
+                >
+                  <table className="w-full border-collapse text-left">
+                    <thead>
+                      <tr className="bg-surface">
+                        {block.columns.map((c, i) => (
+                          <th
+                            key={i}
+                            scope="col"
+                            className="px-5 py-4 align-bottom text-[11px] font-medium uppercase tracking-widest text-muted"
+                          >
+                            {c}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {block.rows.map((row, ri) => (
+                        <tr
+                          key={ri}
+                          className={`border-t border-border ${
+                            row.highlight ? "bg-accent/[0.08]" : "bg-surface/40"
+                          }`}
+                        >
+                          {row.cells.map((cell, ci) =>
+                            ci === 0 ? (
+                              <th
+                                key={ci}
+                                scope="row"
+                                className={`min-w-[12rem] px-5 py-5 align-top text-base font-medium ${
+                                  row.highlight ? "text-accent" : "text-white"
+                                }`}
+                              >
+                                <span className="flex items-center gap-3">
+                                  {row.logo && (
+                                    /* eslint-disable-next-line @next/next/no-img-element */
+                                    <img
+                                      src={row.logo}
+                                      alt=""
+                                      aria-hidden
+                                      loading="lazy"
+                                      className="h-8 w-8 shrink-0 rounded-full bg-white object-contain"
+                                    />
+                                  )}
+                                  {typeof cell === "string" ? cell : null}
+                                </span>
+                              </th>
+                            ) : (
+                              /* Ratings hold one line, so the prose column
+                                 gets whatever width is left instead of
+                                 every column wrapping to the same share. */
+                              <td
+                                key={ci}
+                                className={`px-5 py-5 align-top text-[15px] leading-relaxed text-white/65 ${
+                                  typeof cell === "string" && cell.length > 40 ? "min-w-[15rem]" : "whitespace-nowrap"
+                                }`}
+                              >
+                                {typeof cell === "string" ? cell : <Rating {...cell} />}
+                              </td>
+                            )
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              {block.caption && (
+                <figcaption className="mt-3 text-center text-sm text-muted">
+                  {block.table != null && (
+                    <span className="font-medium text-white/80">Table {block.table}. </span>
+                  )}
+                  {block.caption}
+                </figcaption>
+              )}
+            </figure>
+          </Reveal>
+          {block.outro && (
+            <Reveal>
+              <div className="mx-auto max-w-3xl space-y-5">
+                <Paragraphs body={block.outro} />
+              </div>
+            </Reveal>
+          )}
+        </div>
       );
 
     case "figure":
