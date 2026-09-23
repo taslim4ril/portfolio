@@ -547,7 +547,7 @@ export const projects: Project[] = [
       tagline:
         "An assistant that reads everything and decides nothing. It suggests. You send.",
       overview:
-        "CalDeck is a complete calendar — days, weeks, months, events, invites, search. That part is a solved problem and I designed it to the standard the category expects. This study is about the part that is not solved: the assistant living inside it, the job of moving a meeting, and the four places that job falls apart.",
+        "A full calendar app with an AI assistant built in. The assistant does the slow part of scheduling — checking calendars, spotting clashes, ranking times, writing the message — then stops so you make the call.",
       meta: [
         { label: "Role", value: "Sole Product Designer" },
         { label: "Project type", value: "Self-directed concept" },
@@ -560,8 +560,10 @@ export const projects: Project[] = [
           kicker: "01 · Overview",
           heading: "What CalDeck is",
           body: [
-            "CalDeck is a calendar — day, week and month views, event details, invites, search, reminders, sync. The category settled those questions years ago, so the job there was to meet the standard rather than argue with it.",
-            "What is worth writing about is the assistant built into it. This study covers that one layer, and goes deep on one errand inside it rather than touring everything.",
+            "CalDeck is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
+            "What sets it apart is the AI assistant built into it. You ask in plain words — move my sync, find a time for the four of us, keep my mornings free — and it does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
+            "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
+            "It is a personal project. I designed it alone, with no client, and it has not been tested with users yet — so there are no results at the end, only what I would measure.",
           ],
         },
         {
@@ -584,7 +586,6 @@ export const projects: Project[] = [
           body: [
             "Moving one meeting is not hard. It is just slow. You open the calendar, work out who else is in the room, pick a time, find it clashes with something of your own, pick again, then write a note explaining yourself. Twenty minutes later the meeting has moved and you have lost your morning.",
             "Every big app has tried to fix this. The assistants understand what you ask for, the calendars can see everyone's free time, and it still takes twenty minutes. That question is why I spent the first week using other apps instead of drawing screens.",
-            "One thing up front: CalDeck is a personal project. No client, no brief but my own, and nobody has tested it. There are no results at the bottom of this page.",
           ],
         },
         {
@@ -899,7 +900,7 @@ export const projects: Project[] = [
         },
         {
           kind: "list",
-          kicker: "15 · Overview",
+          kicker: "15 · Reflection",
           heading: "What I learned",
           items: [
             "The interesting part of an AI feature is not what it can do. It is where you make it stop.",
