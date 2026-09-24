@@ -48,12 +48,15 @@ function Paragraphs({ body, muted = true }: { body: string[]; muted?: boolean })
 
 function Figure({
   src,
+  mobileSrc,
   caption,
   impact,
   figure,
   plain = false,
 }: {
   src?: string;
+  /** Portrait diagram for screens under lg. */
+  mobileSrc?: string;
   caption?: string;
   impact?: string;
   /** Figure number. Printed ahead of the caption so the body copy can refer
@@ -74,18 +77,19 @@ function Figure({
             the fixed frame, since it has no aspect of its own. */}
         {src ? (
           plain ? (
-            /* Diagrams carry text at a fixed size inside a 1200-wide canvas.
-               Scaled to a phone that lands around 3px, so below md they hold
-               their own width and pan instead, bleeding to the screen edge so
-               the whole drawing is reachable. */
-            <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-visible md:px-0">
+            /* Diagrams carry text at a fixed size inside a 1200-wide canvas,
+               which a phone would shrink past reading. Below lg the portrait
+               redraw takes over instead, capped so a tablet does not blow
+               it up to poster size. */
+            <picture className="block">
+              {mobileSrc && <source media="(min-width: 1024px)" srcSet={src} />}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={src}
+                src={mobileSrc ?? src}
                 alt={caption ?? ""}
-                className="block h-auto w-full min-w-[1100px] md:min-w-0"
+                className={`mx-auto block h-auto w-full ${mobileSrc ? "max-w-[480px] lg:max-w-none" : ""}`}
               />
-            </div>
+            </picture>
           ) : (
             <div className="overflow-hidden rounded-3xl border border-border bg-surface">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -522,78 +526,130 @@ function Block({ block }: { block: CaseBlock }) {
           )}
           <Reveal>
             <figure>
-              {/* Same bleed-and-pan as the diagrams: a comparison squeezed to
-                  phone width wraps every cell to one word per line. */}
-              <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:px-0">
-                <div
-                  className={`overflow-hidden rounded-2xl border border-border ${
-                    block.columns.length > 3 ? "min-w-[820px]" : "min-w-[640px]"
-                  }`}
-                >
-                  <table className="w-full border-collapse text-left">
-                    <thead>
-                      <tr className="bg-surface">
-                        {block.columns.map((c, i) => (
-                          <th
-                            key={i}
-                            scope="col"
-                            className="px-5 py-4 align-bottom text-[11px] font-medium uppercase tracking-widest text-muted"
+              {/* Below lg each row becomes a card: a comparison squeezed to
+                  phone width wraps every cell to a word per line, and panning
+                  sideways hides the columns you are comparing against. */}
+              {/* Six columns need about 870px, which lg does not guarantee. */}
+              <div className={`space-y-3 ${block.columns.length > 3 ? "xl:hidden" : "lg:hidden"}`}>
+                {block.rows.map((row, ri) => {
+                  const [first, ...rest] = row.cells;
+                  return (
+                    <div
+                      key={ri}
+                      className={`rounded-2xl border p-5 ${
+                        row.highlight
+                          ? "border-accent/40 bg-accent/[0.08]"
+                          : "border-border bg-surface/60"
+                      }`}
+                    >
+                      <div
+                        className={`flex items-center gap-3 text-lg font-medium ${
+                          row.highlight ? "text-accent" : "text-white"
+                        }`}
+                      >
+                        {row.logo && (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={row.logo}
+                            alt=""
+                            aria-hidden
+                            loading="lazy"
+                            className="h-8 w-8 shrink-0 rounded-full bg-white object-contain"
+                          />
+                        )}
+                        {typeof first === "string" ? first : null}
+                      </div>
+                      {/* Ratings pair up two to a row; sentences take the
+                          full width so they are not wrapped to a sliver. */}
+                      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
+                        {rest.map((cell, ci) => (
+                          <div
+                            key={ci}
+                            className={
+                              typeof cell === "string" && cell.length > 24 ? "col-span-2" : ""
+                            }
                           >
-                            {c}
-                          </th>
+                            <dt className="text-[11px] uppercase tracking-widest text-muted">
+                              {block.columns[ci + 1]}
+                            </dt>
+                            <dd className="mt-1.5 text-[15px] leading-relaxed text-white/70">
+                              {typeof cell === "string" ? cell : <Rating {...cell} />}
+                            </dd>
+                          </div>
                         ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {block.rows.map((row, ri) => (
-                        <tr
-                          key={ri}
-                          className={`border-t border-border ${
-                            row.highlight ? "bg-accent/[0.08]" : "bg-surface/40"
-                          }`}
+                      </dl>
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                className={`hidden overflow-hidden rounded-2xl border border-border ${
+                  block.columns.length > 3 ? "xl:block" : "lg:block"
+                }`}
+              >
+                <table className="w-full border-collapse text-left">
+                  <thead>
+                    <tr className="bg-surface">
+                      {block.columns.map((c, i) => (
+                        <th
+                          key={i}
+                          scope="col"
+                          className="px-5 py-4 align-bottom text-[11px] font-medium uppercase tracking-widest text-muted"
                         >
-                          {row.cells.map((cell, ci) =>
-                            ci === 0 ? (
-                              <th
-                                key={ci}
-                                scope="row"
-                                className={`min-w-[12rem] px-5 py-5 align-top text-base font-medium ${
-                                  row.highlight ? "text-accent" : "text-white"
-                                }`}
-                              >
-                                <span className="flex items-center gap-3">
-                                  {row.logo && (
-                                    /* eslint-disable-next-line @next/next/no-img-element */
-                                    <img
-                                      src={row.logo}
-                                      alt=""
-                                      aria-hidden
-                                      loading="lazy"
-                                      className="h-8 w-8 shrink-0 rounded-full bg-white object-contain"
-                                    />
-                                  )}
-                                  {typeof cell === "string" ? cell : null}
-                                </span>
-                              </th>
-                            ) : (
-                              /* Ratings hold one line, so the prose column
-                                 gets whatever width is left instead of
-                                 every column wrapping to the same share. */
-                              <td
-                                key={ci}
-                                className={`px-5 py-5 align-top text-[15px] leading-relaxed text-white/65 ${
-                                  typeof cell === "string" && cell.length > 40 ? "min-w-[15rem]" : "whitespace-nowrap"
-                                }`}
-                              >
-                                {typeof cell === "string" ? cell : <Rating {...cell} />}
-                              </td>
-                            )
-                          )}
-                        </tr>
+                          {c}
+                        </th>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.rows.map((row, ri) => (
+                      <tr
+                        key={ri}
+                        className={`border-t border-border ${
+                          row.highlight ? "bg-accent/[0.08]" : "bg-surface/40"
+                        }`}
+                      >
+                        {row.cells.map((cell, ci) =>
+                          ci === 0 ? (
+                            <th
+                              key={ci}
+                              scope="row"
+                              className={`min-w-[12rem] px-5 py-5 align-top text-base font-medium ${
+                                row.highlight ? "text-accent" : "text-white"
+                              }`}
+                            >
+                              <span className="flex items-center gap-3">
+                                {row.logo && (
+                                  /* eslint-disable-next-line @next/next/no-img-element */
+                                  <img
+                                    src={row.logo}
+                                    alt=""
+                                    aria-hidden
+                                    loading="lazy"
+                                    className="h-8 w-8 shrink-0 rounded-full bg-white object-contain"
+                                  />
+                                )}
+                                {typeof cell === "string" ? cell : null}
+                              </span>
+                            </th>
+                          ) : (
+                            /* Ratings hold one line, so the prose column
+                               gets whatever width is left instead of
+                               every column wrapping to the same share. */
+                            <td
+                              key={ci}
+                              className={`px-5 py-5 align-top text-[15px] leading-relaxed text-white/65 ${
+                                typeof cell === "string" && cell.length > 40 ? "min-w-[15rem]" : "whitespace-nowrap"
+                              }`}
+                            >
+                              {typeof cell === "string" ? cell : <Rating {...cell} />}
+                            </td>
+                          )
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
               {block.caption && (
                 <figcaption className="mt-3 text-center text-sm text-muted">
@@ -619,6 +675,7 @@ function Block({ block }: { block: CaseBlock }) {
       return (
         <Figure
           src={block.src}
+          mobileSrc={block.mobileSrc}
           caption={block.caption}
           impact={block.impact}
           figure={block.figure}

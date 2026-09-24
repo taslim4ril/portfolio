@@ -172,6 +172,9 @@ type CaseBlockContent =
       /** Numbered so the body copy can point at a specific figure. Numbering
        *  runs across screenshots and diagrams together, in page order. */
       figure?: number;
+      /** Portrait version of a diagram, served below the lg breakpoint. A
+       *  wide drawing scaled to a phone shrinks its text past reading. */
+      mobileSrc?: string;
       /** Drop the framed card. Diagrams are drawn on the page surface with
        *  their own padding, so the frame would double up. */
       plain?: boolean;
@@ -591,6 +594,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-scope.svg",
+          mobileSrc: "/images/diagrams/caldeck-scope-mobile.svg",
           figure: 1,
           plain: true,
           caption: "The whole product, and the slice this study argues about.",
@@ -757,6 +761,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-journey.svg",
+          mobileSrc: "/images/diagrams/caldeck-journey-mobile.svg",
           figure: 2,
           plain: true,
           caption: "Six stages, three lanes. Stage 5 is the one that cannot be skipped.",
@@ -774,6 +779,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-screenflow.svg",
+          mobileSrc: "/images/diagrams/caldeck-screenflow-mobile.svg",
           figure: 3,
           plain: true,
           caption:
@@ -782,6 +788,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/diagrams/caldeck-hierarchy.svg",
+          mobileSrc: "/images/diagrams/caldeck-hierarchy-mobile.svg",
           figure: 4,
           plain: true,
           caption:
