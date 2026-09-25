@@ -786,15 +786,6 @@ export const projects: Project[] = [
             "Two ways in, one path through, one way back, and one screen that is only ever read.",
         },
         {
-          kind: "figure",
-          src: "/images/diagrams/caldeck-hierarchy.svg",
-          mobileSrc: "/images/diagrams/caldeck-hierarchy-mobile.svg",
-          figure: 4,
-          plain: true,
-          caption:
-            "Three questions, ranked by weight. The assistant is the quiet one on purpose.",
-        },
-        {
           kind: "prose",
           kicker: "08 · Strategy",
           heading: "Two ways in",
@@ -806,7 +797,7 @@ export const projects: Project[] = [
         {
           kind: "figure",
           src: "/images/work/caldeck-two-doors.webp",
-          figure: 5,
+          figure: 4,
           caption:
             "The two ways in. Assistant as a full screen on the left, your day on the right with the assistant one tap away.",
           impact:
@@ -878,12 +869,19 @@ export const projects: Project[] = [
         },
         {
           kind: "figure",
-          src: "/images/work/caldeck-choose-rank.webp",
-          figure: 6,
-          caption:
-            "Which meeting moves, the three times that work, and what happens when you ignore the ranking.",
+          src: "/images/work/caldeck-start-pick.webp",
+          figure: 5,
+          caption: "Where the job starts, and which meeting moves.",
           impact:
-            "All 4 free and nearest to the usual weekly slot are the reasons Teams buries in a grid; here they sit on the same line as the time so they survive a phone. The third screen is what none of the six do: it draws the clash at the size of the real afternoon and turns the fix into one more button.",
+            "The assistant opens on a read of the day instead of an empty box, with Reschedule Meeting already flagged as one conflict today. The next screen offers only the meetings that are easiest to move, and is honest that the Vendor call belongs to Northwind, so it can only draft the ask.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/caldeck-rank-clash.webp",
+          figure: 6,
+          caption: "The three times that work, and what happens when you ignore the ranking.",
+          impact:
+            "All 4 free and nearest to the usual weekly slot are the reasons Teams buries in a grid. Here they sit on the same line as the time, so they survive a phone. The second screen is what none of the six apps do: it draws the clash on the real afternoon and turns the fix into one more button.",
         },
         {
           kind: "prose",
