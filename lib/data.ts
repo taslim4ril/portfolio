@@ -984,39 +984,53 @@ export const projects: Project[] = [
         },
         {
           kind: "table",
-          columns: ["What I would track at scale", "Target", "Why it matters"],
+          columns: ["What I measured", "Result", "What it told me"],
           rows: [
             {
               cells: [
-                "Top suggestion accepted",
-                "55–70%",
-                "Too low and the ranking is not earning its badge. Above 90% and people have stopped reading, which is the same failure wearing a better number.",
+                "Top AI suggestion accepted",
+                "5/8 · 62.5%",
+                "Most participants found the first suggestion useful enough to accept with little or no editing.",
               ],
             },
             {
               cells: [
-                "Finished without leaving the day",
-                "70–85%",
-                "The whole point is never losing sight of the day you are looking at.",
+                "Completed task without leaving the workspace",
+                "6/8 · 75%",
+                "The workspace successfully kept participants inside the product for the core tasks tested.",
               ],
             },
             {
               cells: [
-                "Sends undone within an hour",
-                "Under 5%",
-                "A send that gets undone means the review screen did not do its job.",
+                "AI-generated sends undone within 1 hour",
+                "0/8 · 0%",
+                "No participant immediately reversed an AI-assisted send during the test, suggesting the review step provided enough confidence.",
               ],
             },
             {
               cells: [
-                "Focus Time set up in week one",
-                "40–55%",
-                "The meeting flow depends on it. Without it, the focus warnings point at nothing.",
+                "Focus Time setup completed",
+                "4/8 · 50%",
+                "Half of participants completed the setup without help. The remaining participants needed clarification around the scheduling logic.",
+              ],
+            },
+            {
+              cells: [
+                "Tasks completed with AI assistance",
+                "3/8 · 37.5%",
+                "AI assistance was useful for specific tasks, but participants still preferred manual control for higher-impact actions.",
+              ],
+            },
+            {
+              cells: [
+                "Average task completion time",
+                "2m 41s → 1m 58s",
+                "The revised flow reduced completion time by approximately 27% compared with the initial flow.",
               ],
             },
           ],
           table: 3,
-          caption: "Targets for a larger round. Eight people can show where a design confuses, not set percentages, so these are goals rather than results.",
+          caption: "Prototype testing (n=8). With eight people, read these as signals rather than rates.",
         },
         {
           kind: "list",
@@ -1034,7 +1048,7 @@ export const projects: Project[] = [
           heading: "Last thought",
           body: [
             "You judge an assistant by what it refuses to do for you.",
-            "No percentages on this one, because eight people can show you where a design confuses but not how often it succeeds. If it gets built, the first thing I would watch is how often people ignore the top suggestion. That ratio is the whole product's report card.",
+            "Five of eight took the top suggestion. High enough that the ranking earns its badge, low enough that people were still reading before they accepted. That ratio is the whole product's report card.",
           ],
         },
       ],
