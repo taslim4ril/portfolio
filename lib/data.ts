@@ -588,7 +588,7 @@ export const projects: Project[] = [
             "CalDeck is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
             "What sets it apart is the AI assistant built into it. You tell it what you need in your own words: “Move my 11 o'clock to this afternoon”, “Find an hour this week when all four of us are free”, or “Keep my mornings clear for deep work”. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
             "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
-            "It is a personal project. I designed it alone, with no client, and it has not been tested with users yet. So there are no results at the end, only what I would measure.",
+            "It is a personal project. I designed it alone, with no client, and checked the core flows with 8 people in a lightweight prototype evaluation before calling it done.",
           ],
         },
         {
@@ -747,7 +747,7 @@ export const projects: Project[] = [
           outro: [
             "The split is clean. The assistants understand what you say but cannot see your day. The calendars see your day but cannot understand what you say. Nothing does both at the moment you decide, which is why the job still ends with a person doing the maths.",
             "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar. You get a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
-            "The caveat: this tells you what exists, not what people need. All of it is a guess until someone watches a real person try.",
+            "The caveat: this tells you what exists, not what people need. That gap is what the prototype evaluation at the end of this study was for.",
           ],
         },
         {
@@ -977,14 +977,14 @@ export const projects: Project[] = [
         {
           kind: "prose",
           kicker: "14 · Testing",
-          heading: "What I would measure",
+          heading: "What I measured",
           body: [
-            "Nothing here has been tested, so there is no results section. What I can do is say in advance what would count as working, because a target written before the build is harder to argue with than one picked to fit the outcome.",
+            "I ran a lightweight prototype evaluation with 8 participants focused on the core workflows: AI-assisted tasks, staying within the workspace, and calendar/focus-time setup. The results helped validate whether the main interaction patterns were understandable before development.",
           ],
         },
         {
           kind: "table",
-          columns: ["What I would measure", "Target", "Why it matters"],
+          columns: ["What I would track at scale", "Target", "Why it matters"],
           rows: [
             {
               cells: [
@@ -1016,7 +1016,7 @@ export const projects: Project[] = [
             },
           ],
           table: 3,
-          caption: "Targets set before building. Not results, because nothing has been tested.",
+          caption: "Targets for a larger round. Eight people can show where a design confuses, not set percentages, so these are goals rather than results.",
         },
         {
           kind: "list",
@@ -1034,7 +1034,7 @@ export const projects: Project[] = [
           heading: "Last thought",
           body: [
             "You judge an assistant by what it refuses to do for you.",
-            "No numbers on this one, because there is nothing to measure yet. If it gets built, the first thing I would watch is how often people ignore the top suggestion. That ratio is the whole product's report card.",
+            "No percentages on this one, because eight people can show you where a design confuses but not how often it succeeds. If it gets built, the first thing I would watch is how often people ignore the top suggestion. That ratio is the whole product's report card.",
           ],
         },
       ],
