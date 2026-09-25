@@ -586,7 +586,7 @@ export const projects: Project[] = [
           heading: "What CalDeck is",
           body: [
             "CalDeck is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
-            "What sets it apart is the AI assistant built into it. You ask in plain words, like move my sync, find a time for the four of us, or keep my mornings free. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
+            "What sets it apart is the AI assistant built into it. You tell it what you need in your own words: “Move my 11 o'clock to this afternoon”, “Find an hour this week when all four of us are free”, or “Keep my mornings clear for deep work”. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
             "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
             "It is a personal project. I designed it alone, with no client, and it has not been tested with users yet. So there are no results at the end, only what I would measure.",
           ],
