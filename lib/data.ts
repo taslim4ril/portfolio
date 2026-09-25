@@ -556,7 +556,7 @@ export const projects: Project[] = [
   },
   {
     slug: "caldeck",
-    title: "CalDeck",
+    title: "CalDeck AI",
     category: "Calendar AI",
     tag: "Mobile · Self-directed",
     year: "2026",
@@ -568,7 +568,7 @@ export const projects: Project[] = [
       "[Self-directed concept.] [6 apps] reviewed, one meeting move designed start to finish, and the [4 ways it breaks]",
     tags: ["Product Design", "AI"],
     caseStudy: {
-      title: "CalDeck",
+      title: "CalDeck AI",
       tagline:
         "An assistant that reads everything and decides nothing. It suggests. You send.",
       overview:
@@ -583,9 +583,9 @@ export const projects: Project[] = [
         {
           kind: "prose",
           kicker: "01 · Overview",
-          heading: "What CalDeck is",
+          heading: "What CalDeck AI is",
           body: [
-            "CalDeck is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
+            "CalDeck AI is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
             "What sets it apart is the AI assistant built into it. You tell it what you need in your own words: “Move my 11 o'clock to this afternoon”, “Find an hour this week when all four of us are free”, or “Keep my mornings clear for deep work”. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
             "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
             "It is a personal project. I designed it alone, with no client, and checked the core flows with 8 people in a lightweight prototype evaluation before calling it done.",
@@ -733,7 +733,7 @@ export const projects: Project[] = [
             {
               highlight: true,
               cells: [
-                "CalDeck, the aim",
+                "CalDeck AI, the aim",
                 { rating: "yes" },
                 { rating: "partly", note: "Says so when it cannot" },
                 { rating: "yes" },
@@ -743,10 +743,10 @@ export const projects: Project[] = [
             },
           ],
           table: 1,
-          caption: "My own reading after using each app for the same job. CalDeck's row is what it was designed to do, not a test result.",
+          caption: "My own reading after using each app for the same job. CalDeck AI's row is what it was designed to do, not a test result.",
           outro: [
             "The split is clean. The assistants understand what you say but cannot see your day. The calendars see your day but cannot understand what you say. Nothing does both at the moment you decide, which is why the job still ends with a person doing the maths.",
-            "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar. You get a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
+            "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar. You get a blank column, or a confident answer built on nothing. Both became things CalDeck AI had to do.",
             "The caveat: this tells you what exists, not what people need. That gap is what the prototype evaluation at the end of this study was for.",
           ],
         },
