@@ -629,7 +629,7 @@ export const projects: Project[] = [
           kicker: "03 · Defining the problem",
           heading: "The stories I designed against",
           intro: [
-            "No participants to interview, so these came from the app review and from how calendars behave. Each is small enough to build and specific enough to fail.",
+            "These came from the app reviews and from my own assumptions about how busy people use a calendar, which I expanded and pushed against with ChatGPT and Claude. Each is small enough to build and specific enough to fail.",
           ],
           items: [
             "As the organiser, I want to move one meeting without opening four calendars, so I can do it between other meetings rather than after them.",
