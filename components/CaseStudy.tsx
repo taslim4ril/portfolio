@@ -566,13 +566,22 @@ function Block({ block }: { block: CaseBlock }) {
                           <div
                             key={ci}
                             className={
-                              typeof cell === "string" && cell.length > 24 ? "col-span-2" : ""
+                              (typeof cell === "string" && cell.length > 24) ||
+                              block.emphasis === ci + 1
+                                ? "col-span-2"
+                                : ""
                             }
                           >
                             <dt className="text-[11px] uppercase tracking-widest text-muted">
                               {block.columns[ci + 1]}
                             </dt>
-                            <dd className="mt-1.5 text-[15px] leading-relaxed text-white/70">
+                            <dd
+                              className={
+                                block.emphasis === ci + 1
+                                  ? "heading mt-1 text-3xl font-bold tracking-tight text-accent"
+                                  : "mt-1.5 text-[15px] leading-relaxed text-white/70"
+                              }
+                            >
                               {typeof cell === "string" ? cell : <Rating {...cell} />}
                             </dd>
                           </div>
@@ -638,8 +647,14 @@ function Block({ block }: { block: CaseBlock }) {
                                every column wrapping to the same share. */
                             <td
                               key={ci}
-                              className={`px-5 py-5 align-top text-[15px] leading-relaxed text-white/65 ${
-                                typeof cell === "string" && cell.length > 40 ? "min-w-[15rem]" : "whitespace-nowrap"
+                              className={`px-5 py-5 align-top ${
+                                block.emphasis === ci
+                                  ? "heading whitespace-nowrap text-2xl font-bold tracking-tight text-accent"
+                                  : `text-[15px] leading-relaxed text-white/65 ${
+                                      typeof cell === "string" && cell.length > 40
+                                        ? "min-w-[15rem]"
+                                        : "whitespace-nowrap"
+                                    }`
                               }`}
                             >
                               {typeof cell === "string" ? cell : <Rating {...cell} />}

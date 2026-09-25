@@ -159,6 +159,9 @@ type CaseBlockContent =
       }[];
       /** Numbered separately from figures: "Table 1." */
       table?: number;
+      /** Index of a column that holds the headline figure. Its cells render
+       *  large and in the accent, so a results table reads number first. */
+      emphasis?: number;
       caption?: string;
       outro?: string[];
     }
@@ -983,6 +986,7 @@ export const projects: Project[] = [
         {
           kind: "table",
           columns: ["What I measured", "Result", "What it told me"],
+          emphasis: 1,
           rows: [
             {
               cells: [
