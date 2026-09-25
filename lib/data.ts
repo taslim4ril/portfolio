@@ -611,7 +611,7 @@ export const projects: Project[] = [
         {
           kind: "list",
           kicker: "03 · Defining the problem",
-          heading: "The question, and the rules under it",
+          heading: "One question, five rules",
           intro: [
             "The whole design comes back to one question, which I kept written at the top of the file: how can the assistant take the hard part of rescheduling off someone without taking away control of a change that reaches four other people?",
             "Both halves matter. An assistant that acts alone demos beautifully and loses you the first time it moves the wrong meeting. One that asks permission for everything is safe and quietly useless. Five rules kept me in the space between.",
