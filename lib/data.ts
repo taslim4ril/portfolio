@@ -240,7 +240,7 @@ export type Project = {
   /** Pills shown at the top-left of the work card. */
   tags: string[];
   accent?: boolean;
-  /** Full case study — when present, /work/[slug] renders the story. */
+  /** Full case study. When present, /work/[slug] renders the story. */
   caseStudy?: CaseStudy;
 };
 
@@ -561,7 +561,7 @@ export const projects: Project[] = [
     tag: "Mobile · Self-directed",
     year: "2026",
     description:
-      "A full calendar app with an AI assistant built into it. The case study follows the assistant through one job — moving a meeting — and every place that job breaks.",
+      "A full calendar app with an AI assistant built into it. The case study follows the assistant through one job, moving a meeting, and every place that job breaks.",
     image: "/images/work/caldeck.webp",
     subtitle: "Calendar AI assistant",
     metric:
@@ -572,7 +572,7 @@ export const projects: Project[] = [
       tagline:
         "An assistant that reads everything and decides nothing. It suggests. You send.",
       overview:
-        "A full calendar app with an AI assistant built in. The assistant does the slow part of scheduling — checking calendars, spotting clashes, ranking times, writing the message — then stops so you make the call.",
+        "A full calendar app with an AI assistant built in. The assistant does the slow part of scheduling: checking calendars, spotting clashes, ranking times and writing the message. Then it stops so you make the call.",
       meta: [
         { label: "Role", value: "Sole Product Designer" },
         { label: "Project type", value: "Self-directed concept" },
@@ -586,9 +586,9 @@ export const projects: Project[] = [
           heading: "What CalDeck is",
           body: [
             "CalDeck is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
-            "What sets it apart is the AI assistant built into it. You ask in plain words — move my sync, find a time for the four of us, keep my mornings free — and it does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
+            "What sets it apart is the AI assistant built into it. You ask in plain words, like move my sync, find a time for the four of us, or keep my mornings free. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
             "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
-            "It is a personal project. I designed it alone, with no client, and it has not been tested with users yet — so there are no results at the end, only what I would measure.",
+            "It is a personal project. I designed it alone, with no client, and it has not been tested with users yet. So there are no results at the end, only what I would measure.",
           ],
         },
         {
@@ -645,7 +645,7 @@ export const projects: Project[] = [
           heading: "Using AI to attack my own thinking",
           body: [
             "I used ChatGPT and Claude the way you would use a sharp colleague with no stake in the outcome: to widen the problem, find cases I had missed, and argue against calls I had already made. Most of the value was in what I threw away.",
-            "The pattern in the rejects became the rule the product runs on. Almost everything I dropped was too autonomous — auto-accept the best slot, auto-decline the clash, quietly notify everyone. Each was defensible alone, and each moved a decision away from the person who would have to apologise for it. Where checking is cheap, the assistant can act and show its work. Where an action reaches other people, the value is in the preparation, not the execution.",
+            "The pattern in the rejects became the rule the product runs on. Almost everything I dropped was too autonomous: auto-accept the best slot, auto-decline the clash, quietly notify everyone. Each was defensible alone, and each moved a decision away from the person who would have to apologise for it. Where checking is cheap, the assistant can act and show its work. Where an action reaches other people, the value is in the preparation, not the execution.",
           ],
         },
         {
@@ -746,7 +746,7 @@ export const projects: Project[] = [
           caption: "My own reading after using each app for the same job. CalDeck's row is what it was designed to do, not a test result.",
           outro: [
             "The split is clean. The assistants understand what you say but cannot see your day. The calendars see your day but cannot understand what you say. Nothing does both at the moment you decide, which is why the job still ends with a person doing the maths.",
-            "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar — you get a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
+            "Two columns mattered more than the rest. Almost nothing explains itself while you are choosing, and not one of the six admits when it cannot see someone's calendar. You get a blank column, or a confident answer built on nothing. Both became things CalDeck had to do.",
             "The caveat: this tells you what exists, not what people need. All of it is a guess until someone watches a real person try.",
           ],
         },
@@ -799,8 +799,8 @@ export const projects: Project[] = [
           kicker: "08 · Strategy",
           heading: "Two ways in",
           body: [
-            "A floating button on the calendar opens a sheet: one job, about the day you are already looking at, calendar still visible behind it. A switch at the top opens Assistant as a full screen — a place you go, for bigger questions across calendar, email and tasks. Building one thing and calling it both was tempting, but a quick job should never cost you your view of the day, and a long conversation should not be squeezed into a sheet.",
-            "Both doors also accept a typed sentence, which is the one thing ChatGPT does better than any calendar. The reply says out loud how it read you — afternoon means after 1 PM, has to be there means required — and makes each reading tappable, so a wrong guess gets fixed on the spot.",
+            "A floating button on the calendar opens a sheet: one job, about the day you are already looking at, calendar still visible behind it. A switch at the top opens Assistant as a full screen. That is a place you go, for bigger questions across calendar, email and tasks. Building one thing and calling it both was tempting, but a quick job should never cost you your view of the day, and a long conversation should not be squeezed into a sheet.",
+            "Both doors also accept a typed sentence, which is the one thing ChatGPT does better than any calendar. The reply says out loud how it read you (afternoon means after 1 PM, has to be there means required) and makes each reading tappable, so a wrong guess gets fixed on the spot.",
           ],
         },
         {
@@ -810,7 +810,7 @@ export const projects: Project[] = [
           caption:
             "The two ways in. Assistant as a full screen on the left, your day on the right with the assistant one tap away.",
           impact:
-            "An empty chat box is the fastest way to lose a busy person, so the assistant opens on a read of the day and the two threads you left unfinished. On the right, Focus Time uses the same stripes the calendar already uses for unconfirmed time, and Product Sync at 11:00 sits right against that block — so the clash is on screen before you ask anything.",
+            "An empty chat box is the fastest way to lose a busy person, so the assistant opens on a read of the day and the two threads you left unfinished. On the right, Focus Time uses the same stripes the calendar already uses for unconfirmed time, and Product Sync at 11:00 sits right against that block, so the clash is on screen before you ask anything.",
         },
         {
           kind: "decisions",
@@ -823,7 +823,7 @@ export const projects: Project[] = [
             {
               title: "A chat, not a step-by-step form",
               problem:
-                "Moving a meeting has fixed steps in a fixed order — the textbook case for a form, which would have been quicker to build.",
+                "Moving a meeting has fixed steps in a fixed order. That is the textbook case for a form, which would have been quicker to build.",
               decision:
                 "A conversation over the calendar instead. Each choice becomes a message, each answer a card, nothing gets replaced. You end up with a record of every decision the assistant made for you, and the calendar stays behind the sheet so swiping down to quit costs nothing.",
               note: {
@@ -836,7 +836,7 @@ export const projects: Project[] = [
               problem:
                 "The ranking is a judgement made without full information. Badging one slot claims more confidence than the data supports.",
               decision:
-                "One badge, and every slot shows why it was picked. Two competing recommendations are not a recommendation — they hand the comparison back to the person who asked you to do it. The reason is what makes the badge arguable rather than obeyed.",
+                "One badge, and every slot shows why it was picked. Two competing recommendations are not a recommendation. They hand the comparison back to the person who asked you to do it. The reason is what makes the badge arguable rather than obeyed.",
               note: {
                 label: "The cost",
                 body: "When the badge is wrong it is wrong loudly, and it teaches people to trust it without checking.",
@@ -872,8 +872,8 @@ export const projects: Project[] = [
           kicker: "10 · Design",
           heading: "Moving a meeting",
           body: [
-            "It opens by asking which meeting should move, and is honest about its limits straight away: you run two of today's three, so the third can only be a request written to the other company. Then three ranked times, each with its reason. Ignore the ranking and it does not just warn you — it draws the clash on a strip of the real afternoon, names who would be double-booked, and offers to move her meeting too.",
-            "Pick your own time instead and the free-time bar stays live underneath it, striped column included. If the slot lands inside your focus hours it says what that costs — thirty minutes off Monday's deep work — then lets you do it anyway. The repeat question does the same, stating that it moves 11 future events and 3 have clashes before you choose rather than after.",
+            "It opens by asking which meeting should move, and is honest about its limits straight away: you run two of today's three, so the third can only be a request written to the other company. Then three ranked times, each with its reason. Ignore the ranking and it does not just warn you. It draws the clash on a strip of the real afternoon, names who would be double-booked, and offers to move her meeting too.",
+            "Pick your own time instead and the free-time bar stays live underneath it, striped column included. If the slot lands inside your focus hours it says what that costs, thirty minutes off Monday's deep work, then lets you do it anyway. The repeat question does the same, stating that it moves 11 future events and 3 have clashes before you choose rather than after.",
           ],
         },
         {
@@ -908,7 +908,7 @@ export const projects: Project[] = [
           heading: "The rule",
           body: [
             "It reads everything and decides nothing.",
-            "An assistant that can send is a colleague you did not hire and cannot correct. One that stops at the review screen is a very fast first draft — more useful, even though it demos worse.",
+            "An assistant that can send is a colleague you did not hire and cannot correct. One that stops at the review screen is a very fast first draft. It is more useful, even though it demos worse.",
           ],
         },
         {
@@ -961,7 +961,7 @@ export const projects: Project[] = [
           kicker: "13 · Design",
           heading: "Focus Time",
           body: [
-            "The second job exists because of the first. The meeting flow keeps warning about focus hours, and a warning only means something if the thing it points at is real. So the switch is a rule the scheduling logic enforces, not a hint the assistant interprets — off means the event is never offered as movable.",
+            "The second job exists because of the first. The meeting flow keeps warning about focus hours, and a warning only means something if the thing it points at is real. So the switch is a rule the scheduling logic enforces, not a hint the assistant interprets. Off means the event is never offered as movable.",
             "An empty settings screen that asks you to describe your own working pattern puts the work on the person least able to describe it. So it arrives with a suggestion already made from what the app has seen, worded as something you accept in one tap. Once set, the screen doubles as a quiet report on whether it is working: hours held this week, invites turned away, and stripes over the time you have already given up.",
           ],
         },
@@ -1016,7 +1016,7 @@ export const projects: Project[] = [
             },
           ],
           table: 3,
-          caption: "Targets set before building. Not results — nothing has been tested.",
+          caption: "Targets set before building. Not results, because nothing has been tested.",
         },
         {
           kind: "list",
