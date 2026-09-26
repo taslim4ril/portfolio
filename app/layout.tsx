@@ -14,7 +14,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://taslim-abdul.framer.website"),
+  // The preview image (app/opengraph-image.jpg) is served from this origin,
+  // so it has to be the live domain or every shared link loses its picture.
+  metadataBase: new URL("https://taslimabdul.vercel.app"),
   title: `${site.name} | ${site.role}`,
   description: site.subhead,
   keywords: [
@@ -31,6 +33,7 @@ export const metadata: Metadata = {
     description: site.subhead,
     type: "website",
     locale: "en_US",
+    siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
