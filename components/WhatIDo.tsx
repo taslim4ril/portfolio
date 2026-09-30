@@ -163,17 +163,9 @@ const icons = [
   </svg>,
 ];
 
-/* One hue per card, so the four hovers read as distinct instead of sharing a
-   single generic white tint. Alphas stay low: these wash over a near-black
-   surface and only need to suggest the colour, not paint it. */
-const CARD_TINTS = [
-  { glow: "rgba(251, 146, 60, 0.16)", ink: "#fb923c" }, // warm orange (brand)
-  { glow: "rgba(61, 209, 255, 0.16)", ink: "#3dd1ff" }, // cyan
-  // Was amber, two degrees of hue off the brand orange once that stopped
-  // being lime. Rose keeps the four hues visibly apart.
-  { glow: "rgba(255, 93, 143, 0.16)", ink: "#ff5d8f" }, // rose
-  { glow: "rgba(181, 125, 255, 0.16)", ink: "#b57dff" }, // violet
-];
+/* One accent for every card. Four hover hues (orange, cyan, rose, violet)
+   were the only place the site stopped being a single-colour palette. */
+const TINT = { glow: "rgba(251, 146, 60, 0.16)", ink: "#fb923c" };
 
 export default function WhatIDo() {
   return (
@@ -193,16 +185,17 @@ export default function WhatIDo() {
         <div className="pin-zoom w-full">
         {/* Heading + intro */}
         <Reveal>
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start">
+          {/* Stacked, not split: Selected Work below already uses the
+              heading-left, paragraph-right header. */}
+          <div className="flex flex-col gap-5">
             <ScrambleHeading
               lead="What"
               bold="I Do"
               className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
             />
-            <p className="max-w-sm text-sm leading-relaxed text-muted md:text-right">
-              I craft digital experiences from idea to launch, blending
-              research, design, and no-code engineering to build products that
-              perform.
+            <p className="max-w-xl text-base leading-relaxed text-muted">
+              Four ways into the same job: find the problem underneath the
+              brief, then ship something that solves it.
             </p>
           </div>
         </Reveal>
@@ -212,7 +205,7 @@ export default function WhatIDo() {
         <div className="cards-track mt-14">
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => {
-            const tint = CARD_TINTS[i % CARD_TINTS.length];
+            const tint = TINT;
             return (
             <div
               key={s.title}

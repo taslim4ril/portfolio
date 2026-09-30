@@ -12,9 +12,7 @@ export default function Writing() {
     >
       <div>
         <Reveal>
-          {/* Same two-tone heading + description row as What I Do and
-              Selected Work, so this section reads as part of one system. */}
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
             <ScrambleHeading
               lead="Latest"
               bold="Articles"
@@ -24,9 +22,6 @@ export default function Writing() {
                 ({posts.length})
               </sup>
             </ScrambleHeading>
-            <p className="max-w-sm text-sm leading-relaxed text-muted">
-              Thoughts on design, craft, and building products that hold up.
-            </p>
           </div>
         </Reveal>
 

@@ -3,7 +3,7 @@ import Button from "./Button";
 import SectionBadge from "./SectionBadge";
 
 const COPY =
-  "I help ambitious brands and startups build digital products that stand out and scale. I believe in working smart, building fast, and designing with purpose.";
+  "I design for the problem underneath the brief, then build enough of it that nobody has to imagine how it works. Most of my work sits where the stakes are real: people's money, their time, and their trust.";
 
 export default function About() {
   const words = COPY.split(" ");

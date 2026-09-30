@@ -1,49 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { site, roles } from "@/lib/data";
+import { site } from "@/lib/data";
 import DustField from "./DustField";
-import Scramble, { SCRAMBLE_MS } from "./Scramble";
-
-/** How long a finished role sits still before the next swap begins. */
-const HOLD = 5200;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [heroOnScreen, setHeroOnScreen] = useState(true);
-
-  // Each tick re-renders the hero and kicks off a fresh scramble. Left
-  // ungated it keeps doing that from the footer, so the rotator only runs
-  // while the hero is actually on screen.
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) =>
-      setHeroOnScreen(entry.isIntersecting),
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!heroOnScreen) return;
-    const id = setInterval(
-      () => setRoleIndex((i) => (i + 1) % roles.length),
-      HOLD + SCRAMBLE_MS,
-    );
-    return () => clearInterval(id);
-  }, [heroOnScreen]);
-
-  // Last word drops to the gradient line, everything before it stays on the
-  // cream line above, mirroring the two-line headline this replaced.
-  const words = roles[roleIndex].split(" ");
-  const roleTail = words[words.length - 1];
-  const roleLead = words.slice(0, -1).join(" ");
 
   // Drives the portrait as the hero scrolls away: 0 while the hero is parked
   // at the top, 1 once it has fully scrolled past. Reverses on the way back up.
@@ -54,11 +19,6 @@ export default function Hero() {
 
   const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.55]);
   const portraitOpacity = useTransform(scrollYProgress, [0, 0.75], [0.8, 0]);
-  const portraitFilter = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["blur(0px)", "blur(22px)"],
-  );
   // Dust rides the same scroll-out, a touch slower so it outlives the photo.
   const dustOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
@@ -96,9 +56,8 @@ export default function Hero() {
             y: "6%",
             scale: portraitScale,
             opacity: portraitOpacity,
-            filter: portraitFilter,
             transformOrigin: "50% 40%",
-            willChange: "transform, filter, opacity",
+            willChange: "transform, opacity",
             maskImage:
               "radial-gradient(ellipse 62% 72% at 50% 40%, #000 52%, transparent 86%)",
             WebkitMaskImage:
@@ -120,26 +79,6 @@ export default function Hero() {
         <DustField />
       </motion.div>
 
-      {/* ===== Left rail — keep scrolling ===== */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease, delay: 0.7 }}
-        className="absolute left-5 top-[32%] z-20 hidden items-center gap-4 lg:flex lg:flex-col"
-      >
-        <span className="text-[10px] uppercase tracking-[0.35em] text-white/45 [writing-mode:vertical-rl]">
-          Keep scrolling
-        </span>
-        <motion.span
-          aria-hidden
-          className="text-white/45"
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          ↓
-        </motion.span>
-      </motion.div>
-
       {/* ===== Content ===== */}
       {/* Top padding clears the fixed nav on mobile, where the stack starts at
           the top of the section instead of being pushed down by spare height. */}
@@ -157,28 +96,27 @@ export default function Hero() {
                invisible. */
             className="min-w-0 flex-1 [container-type:inline-size]"
           >
-            {/* Sits above the rotating role so the name stays put while the
-                headline cycles. Kept off the cqi scale the h1 uses, which is
-                sized for ~10 characters and would overflow on 17. */}
-            <p className="font-heading text-2xl font-medium tracking-[-0.01em] text-white md:text-3xl">
-              {site.name}
-            </p>
-            <h1 className="heading mt-4 font-bold uppercase leading-[0.86] tracking-[-0.02em]">
-              <Scramble
-                text={roleLead}
-                trigger={roleIndex}
-                className="block text-[#eceades]"
+            <h1 className="heading font-bold uppercase leading-[0.86] tracking-[-0.02em]">
+              {/* The name reads first, in sentence case, off the cqi scale
+                  the title uses (that scale is sized for ~10 characters). */}
+              <span className="mb-4 block font-heading text-2xl font-medium normal-case tracking-[-0.01em] text-white md:text-3xl">
+                {site.name}
+                <span className="sr-only">, </span>
+              </span>
+              <span
+                className="block text-[#eceade]"
                 style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
-              />
-              <Scramble
-                text={roleTail}
-                trigger={roleIndex}
-                /* Terminus is the accent at ~62% of each channel, the same
-                   darkening the lime gradient used, so it deepens without
-                   drifting off-hue. */
-                className="block bg-gradient-to-r from-accent via-accent to-[#9c5b25] bg-clip-text text-transparent"
+              >
+                Product
+              </span>
+              {/* Flat accent: a gradient on the biggest type on the page was
+                  the one place the palette stopped being a single colour. */}
+              <span
+                className="block text-accent"
                 style={{ fontSize: "clamp(2.5rem, 16cqi, 10rem)" }}
-              />
+              >
+                Designer
+              </span>
             </h1>
           </motion.div>
 

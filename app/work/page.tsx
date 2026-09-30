@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WorkCard from "@/components/WorkCard";
@@ -15,17 +16,17 @@ export default function WorkPage() {
   return (
     <>
       <Nav />
-      <main className="relative bg-background">
+      <main id="main" tabIndex={-1} className="relative bg-background">
         <section className="px-6 pb-24 pt-36 md:px-[100px] md:pb-32 md:pt-44">
           <Reveal>
             <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <a
+                <Link
                   href="/"
                   className="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
                 >
                   <span aria-hidden>←</span> Back home
-                </a>
+                </Link>
                 <ScrambleHeading
                   as="h1"
                   lead="All"
@@ -38,8 +39,8 @@ export default function WorkPage() {
                 </ScrambleHeading>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-muted">
-                Every project in one place; client assignments and personal
-                explorations across SaaS, fintech, agritech, and mobile.
+                Five case studies: in-house and client work in banking and
+                SaaS, and two self-directed studies in AI-assisted planning.
               </p>
             </div>
           </Reveal>

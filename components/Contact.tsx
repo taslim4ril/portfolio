@@ -4,8 +4,8 @@ import SectionBadge from "./SectionBadge";
 
 // First half stays white, second half gets the accent colour (same treatment
 // as "Abdulkadir" in the hero).
-const WHITE = "Got something exciting in mind?";
-const ACCENT = "Let's design it together!";
+const WHITE = "Working on something hard?";
+const ACCENT = "Let's talk it through.";
 
 // Fades the pixel field out toward the edges so it reads as a soft pool of
 // light rather than a hard-edged tile.
@@ -80,7 +80,7 @@ export default function Contact() {
             size="lg"
             icon={<CircleIcon>↗</CircleIcon>}
           >
-            Start a project
+            Email me
           </Button>
         </div>
       </div>

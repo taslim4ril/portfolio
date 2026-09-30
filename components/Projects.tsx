@@ -26,8 +26,8 @@ export default function Projects() {
             </sup>
           </ScrambleHeading>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            A mix of client assignments and personal explorations across SaaS,
-            fintech, agritech, and mobile.
+            In-house and client work in banking and SaaS, plus two
+            self-directed studies in AI-assisted planning.
           </p>
         </div>
       </Reveal>
