@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Intro />
       <Nav />
-      <main className="relative">
+      <main id="main" tabIndex={-1} className="relative">
         <Hero />
         <WhatIDo />
         {/* Scrolls up and over the pinned What-I-Do section. Solid background

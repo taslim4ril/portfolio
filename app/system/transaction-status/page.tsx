@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -69,16 +70,16 @@ export default function TransactionStatusPage() {
   return (
     <>
       <Nav />
-      <main className="relative bg-background">
+      <main id="main" tabIndex={-1} className="relative bg-background">
         {/* ===== Intro ===== */}
         <section className="px-6 pb-8 pt-36 md:px-[100px] md:pt-44">
           <Reveal>
-            <a
+            <Link
               href="/work/ibank"
               className="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
             >
               <span aria-hidden>←</span> Back to the i-Bank case study
-            </a>
+            </Link>
             <SectionBadge className="mb-6 block w-fit">
               Design system artifact
             </SectionBadge>
@@ -136,7 +137,7 @@ export default function TransactionStatusPage() {
                       {s.name}
                     </h3>
                     {s.terminal && (
-                      <span className="rounded-full border border-white/15 px-2.5 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-white/45">
+                      <span className="rounded-full border border-white/15 px-2.5 py-0.5 text-[0.65rem] uppercase tracking-[0.15em] text-white/60">
                         Terminal
                       </span>
                     )}
@@ -195,7 +196,7 @@ export default function TransactionStatusPage() {
                   {["From", "On", "To"].map((h) => (
                     <th
                       key={h}
-                      className="px-6 py-4 text-[0.7rem] uppercase tracking-[0.18em] text-white/45"
+                      className="px-6 py-4 text-[0.7rem] uppercase tracking-[0.18em] text-white/60"
                     >
                       {h}
                     </th>
@@ -225,7 +226,7 @@ export default function TransactionStatusPage() {
                         />
                         {byId[t.to].name}
                         {byId[t.to].terminal && (
-                          <span className="text-[0.65rem] uppercase tracking-[0.15em] text-white/35">
+                          <span className="text-[0.65rem] uppercase tracking-[0.15em] text-white/60">
                             terminal
                           </span>
                         )}
@@ -249,7 +250,7 @@ export default function TransactionStatusPage() {
               <Reveal key={i}>
                 <div className="grid gap-6 bg-background p-7 md:grid-cols-2 md:gap-10 md:p-9">
                   <div>
-                    <p className="text-[0.7rem] uppercase tracking-[0.18em] text-white/40">
+                    <p className="text-[0.7rem] uppercase tracking-[0.18em] text-white/60">
                       System state
                     </p>
                     <p className="mt-3 text-sm leading-relaxed text-white/70">
@@ -286,7 +287,7 @@ export default function TransactionStatusPage() {
                   {["State", "Message", "Second line"].map((h) => (
                     <th
                       key={h}
-                      className="px-6 py-4 text-[0.7rem] uppercase tracking-[0.18em] text-white/45"
+                      className="px-6 py-4 text-[0.7rem] uppercase tracking-[0.18em] text-white/60"
                     >
                       {h}
                     </th>
@@ -303,7 +304,7 @@ export default function TransactionStatusPage() {
                       {s.copy}
                     </td>
                     <td className="px-6 py-4 align-top text-sm leading-relaxed text-white/55">
-                      {s.detail ?? "—"}
+                      {s.detail ?? "None"}
                     </td>
                   </tr>
                 ))}
@@ -325,7 +326,7 @@ export default function TransactionStatusPage() {
             {emptyStates.map((e) => (
               <Reveal key={e.screen}>
                 <div className="h-full bg-background p-7">
-                  <p className="text-[0.7rem] uppercase tracking-[0.18em] text-white/40">
+                  <p className="text-[0.7rem] uppercase tracking-[0.18em] text-white/60">
                     {e.screen}
                   </p>
                   <p className="mt-4 text-[0.95rem] font-medium text-white">

@@ -20,7 +20,7 @@ export default function NotFound() {
       <Nav />
       {/* Column, not a fixed height: the copy block takes the viewport and the
           footer sits under it rather than overlapping. */}
-      <main className="relative flex min-h-dvh flex-col bg-background">
+      <main id="main" tabIndex={-1} className="relative flex min-h-dvh flex-col bg-background">
         {/* Backdrop. Absolute and clipped in its own layer so `overflow-hidden`
             never lands on `main`, where it would turn the page into a scroll
             container. */}

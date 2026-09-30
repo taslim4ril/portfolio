@@ -32,9 +32,8 @@ export default function Scramble({
   style,
 }: {
   text: string;
-  /** Bumping this replays the scramble even when `text` is unchanged. Three
-      of the four roles end in "designer", so keying off the string alone
-      would leave the gradient line frozen through most swaps. */
+  /** Bumping this replays the scramble even when `text` is unchanged, e.g.
+      when a heading scrolls back into view and should settle again. */
   trigger: number;
   className?: string;
   style?: CSSProperties;

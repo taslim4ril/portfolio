@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -14,16 +15,16 @@ export default function AboutPage() {
   return (
     <>
       <Nav />
-      <main className="relative bg-background">
+      <main id="main" tabIndex={-1} className="relative bg-background">
         {/* ===== Intro ===== */}
         <section className="px-6 pb-16 pt-36 md:px-[100px] md:pt-44">
           <Reveal>
-            <a
+            <Link
               href="/"
               className="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
             >
               <span aria-hidden>←</span> Back home
-            </a>
+            </Link>
             <ScrambleHeading
               as="h1"
               lead="About"

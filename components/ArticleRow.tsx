@@ -44,14 +44,11 @@ export default function ArticleRow({
         handleMouseMove(e);
       }}
       onMouseLeave={() => setHovering(false)}
-      /* Suppresses the global accent cursor — this row supplies its own
-         cursor-following preview instead, same convention as WorkCard. */
-      data-cursor-hide
       className="group relative flex flex-col gap-3 py-14 transition-colors duration-500 ease-out hover:bg-surface/40 md:flex-row md:items-center md:justify-between md:gap-10 md:px-6 md:py-20"
     >
       <div className="max-w-2xl">
         <div className="mb-2 flex items-center gap-3 text-sm text-muted">
-          <span className="text-xs text-white/40">
+          <span className="text-xs text-white/60">
             /{String(index + 1).padStart(2, "0")}
           </span>
           {post.date}

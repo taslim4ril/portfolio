@@ -19,7 +19,7 @@ export default function WorkCard({
 
   // Cursor-follow button: position is driven by real mouse coordinates
   // relative to the card, smoothed with a spring so it trails slightly
-  // rather than snapping — same spring pattern as the global custom cursor.
+  // rather than snapping.
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 350, damping: 32, mass: 0.6 });
@@ -42,9 +42,6 @@ export default function WorkCard({
         handleMouseMove(e);
       }}
       onMouseLeave={() => setHovering(false)}
-      /* Suppresses the global accent cursor — this card supplies its own
-         cursor-following button instead, so showing both would double up. */
-      data-cursor-hide
       className="card-rise group relative block h-[76vh] min-h-[500px] overflow-hidden rounded-[2.5rem] bg-surface"
     >
       {/* Image. Optional: a project can exist before its shots do, and a

@@ -3,35 +3,40 @@
 /* ===== PP Neue Montreal (self-hosted) ===== */
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Thin.otf") format("opentype");
+  src: url("/fonts/PPNeueMontreal-Thin.woff2") format("woff2"),
+    url("/fonts/PPNeueMontreal-Thin.otf") format("opentype");
   font-weight: 100 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
+  src: url("/fonts/PPNeueMontreal-Book.woff2") format("woff2"),
+    url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2"),
+    url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
   font-weight: 500 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Bold.otf") format("opentype");
+  src: url("/fonts/PPNeueMontreal-Bold.woff2") format("woff2"),
+    url("/fonts/PPNeueMontreal-Bold.otf") format("opentype");
   font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Italic.otf") format("opentype");
+  src: url("/fonts/PPNeueMontreal-Italic.woff2") format("woff2"),
+    url("/fonts/PPNeueMontreal-Italic.otf") format("opentype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -40,14 +45,16 @@
 /* ===== Acorn — used for section headers ===== */
 @font-face {
   font-family: "Acorn";
-  src: url("/fonts/Acorn-Regular.otf") format("opentype");
+  src: url("/fonts/Acorn-Regular.woff2") format("woff2"),
+    url("/fonts/Acorn-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Acorn";
-  src: url("/fonts/Acorn-Bold.otf") format("opentype");
+  src: url("/fonts/Acorn-Bold.woff2") format("woff2"),
+    url("/fonts/Acorn-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -67,6 +74,8 @@
      8.7:1 against the background, and holds its hue on both. */
   --accent: #fb923c;
   --accent-ink: #0a0a0b;
+  /* Native scrollbars, form controls and the like render dark to match. */
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -93,6 +102,16 @@
 @layer base {
   * {
     border-color: var(--border);
+  }
+  /* One focus ring for the whole site, keyboard only. The browser default is
+     a faint ring that disappears against dark pills and image cards. Outline
+     follows border-radius, so pills and rounded cards keep their shape. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  main:focus-visible {
+    outline: none;
   }
 }
 

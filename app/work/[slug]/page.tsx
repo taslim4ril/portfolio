@@ -43,7 +43,7 @@ export default async function CaseStudyPage({ params }: Params) {
   return (
     <>
       <Nav />
-      <main className="relative bg-background">
+      <main id="main" tabIndex={-1} className="relative bg-background">
         <CaseStudy project={project} next={next} />
         <Footer />
       </main>

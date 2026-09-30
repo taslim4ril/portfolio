@@ -1,4 +1,5 @@
 import type { CaseBlock, CaseRating, Project } from "@/lib/data";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import Button, { CircleIcon } from "./Button";
 
@@ -83,7 +84,6 @@ function Figure({
                it up to poster size. */
             <picture className="block">
               {mobileSrc && <source media="(min-width: 1024px)" srcSet={src} />}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={mobileSrc ?? src}
                 alt={caption ?? ""}
@@ -92,10 +92,10 @@ function Figure({
             </picture>
           ) : (
             <div className="overflow-hidden rounded-3xl border border-border bg-surface">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               {/* No `loading="lazy"` here: with h-auto and no width/height
                   attributes an unloaded image is zero-height, so it never
                   reaches the viewport and never loads. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={src} alt={caption ?? ""} className="block h-auto w-full" />
             </div>
           )
@@ -125,7 +125,7 @@ function Figure({
             Narrower than the frame above it, so the note reads as commentary
             on the screen rather than a second label. */}
         {impact && (
-          <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-white/45">
+          <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-white/60">
             {impact}
           </p>
         )}
@@ -147,14 +147,14 @@ function Rating({ rating, note }: CaseRating) {
     <span className="block">
       <span
         className={`flex items-center gap-2.5 font-medium ${
-          rating === "no" ? "text-white/40" : "text-white/90"
+          rating === "no" ? "text-white/55" : "text-white/90"
         }`}
       >
         <span aria-hidden className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} />
         {label}
       </span>
       {note && (
-        <span className="mt-1 block whitespace-normal text-sm leading-snug text-white/45">
+        <span className="mt-1 block whitespace-normal text-sm leading-snug text-white/60">
           {note}
         </span>
       )}
@@ -470,7 +470,7 @@ function Block({ block }: { block: CaseBlock }) {
                   </div>
                   <div className="mt-3 text-base text-white/60">{m.label}</div>
                   {m.baseline && (
-                    <div className="mt-2 text-sm leading-relaxed text-white/40">
+                    <div className="mt-2 text-sm leading-relaxed text-white/60">
                       {m.baseline}
                     </div>
                   )}
@@ -721,12 +721,12 @@ export default function CaseStudy({
       {/* ===== Hero ===== */}
       <header className="px-6 pt-32 md:px-[100px] md:pt-44">
         <Reveal>
-          <a
+          <Link
             href="/work"
             className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
           >
             <span aria-hidden>←</span> All work
-          </a>
+          </Link>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-muted">
             <span className="rounded-full border border-border px-3 py-1">

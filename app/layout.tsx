@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/data";
-import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 
 // Inter is the fallback while PP Neue Montreal (self-hosted, see
@@ -48,10 +47,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: the intro gate below adds `intro-skip` to
+    // this element before React hydrates, on purpose. Scoped to <html> only.
     <html
       lang="en"
       data-scroll-behavior="smooth"
       className={`${inter.variable} antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* No-flash intro gate: decided before first paint. Skip the loader
@@ -66,8 +68,14 @@ export default function RootLayout({
         />
       </head>
       <body className="grain min-h-dvh">
+        {/* First tab stop on every page. Hidden until focused. */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-accent-ink"
+        >
+          Skip to content
+        </a>
         <SmoothScroll />
-        <CustomCursor />
         {children}
         {/* Soft blur along the bottom edge (~half an inch) so content
             dissolves as it scrolls out. Uses Tailwind's backdrop-blur — a

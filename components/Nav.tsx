@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { site, projects } from "@/lib/data";
+import { projects } from "@/lib/data";
 import Logo from "./Logo";
 import Button, { BUTTON_HEIGHT } from "./Button";
 
@@ -27,14 +27,34 @@ export default function Nav() {
   // Elsewhere prefix with "/" so they navigate home and then jump.
   const to = (hash: string) => (isHome ? hash : `/${hash}`);
 
+  // A 1px marker 24px down the document: once it leaves the viewport the
+  // page has scrolled. An observer fires twice per crossing instead of on
+  // every scroll frame.
+  const sentinel = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const el = sentinel.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) =>
+      setScrolled(!entry.isIntersecting),
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
+    <>
+    <span
+      ref={sentinel}
+      aria-hidden
+      className="pointer-events-none absolute left-0 top-6 h-px w-px"
+    />
     <header className="fixed inset-x-0 top-0 z-50">
       {/* Side gutters match the Selected Work cards so everything lines up. */}
       <div className="relative flex items-center justify-between px-6 py-5 md:px-[100px]">
@@ -61,7 +81,7 @@ export default function Nav() {
             >
               {l.label}
               {l.count != null && (
-                <sup className="text-[10px] text-white/40">({l.count})</sup>
+                <sup className="text-[10px] text-white/60">({l.count})</sup>
               )}
             </a>
           ))}
@@ -72,15 +92,20 @@ export default function Nav() {
             itself collides with the display utility in its own base classes,
             and lost, so it stayed visible on mobile. */}
         <span className="hidden md:block">
-          <Button href={`mailto:${site.email}`} size="sm" icon="✦">
+          <Button href={to("#contact")} size="sm" icon="✦">
             Let&apos;s connect
           </Button>
         </span>
 
         {/* Mobile toggle */}
+        {/* 44px square so it is a comfortable thumb target; the bars
+            stay 24px wide inside it. */}
         <button
-          aria-label="Toggle menu"
-          className="flex flex-col gap-1.5 md:hidden"
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="-mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           <span className={`h-0.5 w-6 bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`} />
@@ -91,7 +116,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="mx-6 rounded-2xl border border-white/10 bg-black/90 px-6 py-5 backdrop-blur-xl md:hidden">
+        <div id="mobile-menu" className="mx-6 rounded-2xl border border-white/10 bg-black/90 px-6 py-5 backdrop-blur-xl md:hidden">
           <div className="flex flex-col gap-4">
             {links.map((l) => (
               <a
@@ -102,12 +127,12 @@ export default function Nav() {
               >
                 {l.label}
                 {l.count != null && (
-                  <sup className="ml-0.5 text-[10px] text-white/40">({l.count})</sup>
+                  <sup className="ml-0.5 text-[10px] text-white/60">({l.count})</sup>
                 )}
               </a>
             ))}
             <Button
-              href={`mailto:${site.email}`}
+              href={to("#contact")}
               onClick={() => setOpen(false)}
               variant="solid"
               size="sm"
@@ -119,5 +144,6 @@ export default function Nav() {
         </div>
       )}
     </header>
+    </>
   );
 }

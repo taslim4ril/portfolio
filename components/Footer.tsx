@@ -7,33 +7,16 @@ export default function Footer() {
       <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
         {/* Left: location + availability */}
         <div>
-          <div className="inline-block rounded-lg border border-border px-4 py-2 text-xs uppercase tracking-[0.2em] text-muted">
-            {site.location}
-          </div>
-
-          <div className="mt-2 flex items-stretch overflow-hidden rounded-lg border border-border text-xs uppercase tracking-[0.2em] text-muted">
-            <span className="flex items-center border-r border-border px-3 py-2">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z" />
-              </svg>
-            </span>
-            <span className="px-3 py-2">Working globally</span>
-            <span className="flex items-center border-l border-border px-2 py-2 [writing-mode:vertical-rl]">
-              NGA
-            </span>
-          </div>
+          {/* One plain line. The globe badge and the rotated country code
+              were decoration; where you are and whether you are free is the
+              information. */}
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">
+            {site.location} · Working with teams anywhere
+          </p>
 
           {/* A free proof point: the site is the work, so say who built it
               and leave the source one click away. */}
-          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted/70">
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted">
             This site is Next.js, built and deployed by me.{" "}
             <a
               href={site.repo}
@@ -45,7 +28,7 @@ export default function Footer() {
             </a>
           </p>
 
-          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted/70">
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted">
             © {new Date().getFullYear()} {site.name.split(" ")[0]}, all
             rights reserved.
           </p>
