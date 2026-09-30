@@ -194,8 +194,7 @@ export default function WhatIDo() {
               className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
             />
             <p className="max-w-xl text-base leading-relaxed text-muted">
-              Four ways into the same job: find the problem underneath the
-              brief, then ship something that solves it.
+              Find the real problem. Then build the fix.
             </p>
           </div>
         </Reveal>
