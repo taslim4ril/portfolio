@@ -45,7 +45,7 @@ export const services = [
   {
     title: "Design Systems",
     description:
-      "Components other teams ship on for months without asking me anything. That is the test.",
+      "Reusable components and rules that keep a product consistent as it grows.",
   },
   {
     title: "Design Engineering",
