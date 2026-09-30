@@ -253,14 +253,14 @@ export const projects: Project[] = [
     slug: "flowz",
     title: "Flowz",
     category: "Process Automation",
-    tag: "SaaS · Revent Technologies",
+    tag: "Web · SaaS",
     year: "2024",
     description:
       "A process-automation platform that turns repetitive, multi-step workflows into simple guided journeys anyone on the team can run.",
     image: "/images/work/flowz.webp",
     subtitle: "Process automation platform",
     metric:
-      "[Client reported after rollout:] [60%] less time per task and [20 hours] a week back for one logistics team",
+      "[Customer reported after rollout:] [60%] less time per task and [20 hours] a week back for one logistics team",
     tags: ["Product Design", "SaaS"],
     accent: true,
     caseStudy: {
@@ -408,17 +408,17 @@ export const projects: Project[] = [
             {
               title: "Workflow builder",
               desc: "A drag-and-drop canvas for mapping a process step by step, with tasks, deadlines, and dependencies laid out as blocks rather than configured in a form.",
-              result: "45% faster workflow setup (client reported)",
+              result: "45% faster workflow setup (customer reported)",
             },
             {
               title: "Task automation",
               desc: "Reminders, approvals, and status updates handled by pre-built templates, so the routine parts move without anyone pushing them.",
-              result: "60% less time per task (client reported)",
+              result: "60% less time per task (customer reported)",
             },
             {
               title: "Real-time collaboration",
               desc: "Comments, mentions, and notifications living inside the task, so context stays attached to the work instead of scattering into chat.",
-              result: "30% more tasks completed (client reported)",
+              result: "30% more tasks completed (customer reported)",
             },
             {
               title: "Analytics dashboard",
@@ -513,7 +513,7 @@ export const projects: Project[] = [
           intro: [
             "These came from the customer teams using it after rollout, not from my own measurement. I am reporting what they told me.",
           ],
-          source: "Client reported, after rollout",
+          source: "Customer reported, after rollout",
           metrics: [
             { value: "60%", label: "less time per task" },
             { value: "45%", label: "faster to set up a workflow" },
@@ -540,14 +540,14 @@ export const projects: Project[] = [
     slug: "plantinerary",
     title: "Plantinerary",
     category: "Travel Planning",
-    tag: "Mobile · Self-directed",
+    tag: "Mobile · Travel",
     year: "2023",
     description:
       "A travel planner that turns scattered saves into a real day-by-day schedule, with AI suggestions that narrow the field instead of widening it.",
     image: "/images/work/plantinerary.webp",
     subtitle: "Travel planner",
     metric:
-      "[Self-directed concept.] Time to a finished day-by-day plan cut [45%] in prototype testing, against the participant's own multi-tool process",
+      "[Prototype testing:] time to a finished day-by-day plan cut [45%], against the participant's own multi-tool process",
     tags: ["Product Design", "Travel"],
     caseStudy: {
       title: "Plantinerary",
@@ -559,7 +559,6 @@ export const projects: Project[] = [
         { label: "Role", value: "Sole Product Designer" },
         { label: "Timeline", value: "4 - 5 weeks" },
         { label: "Tools", value: "Figma, ChatGPT, Claude" },
-        { label: "Project type", value: "Self-directed concept" },
       ],
       blocks: [
         {
@@ -679,7 +678,7 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "The brief I set myself, and the argument with it",
+          heading: "The obvious brief, and the argument with it",
           body: [
             "The brief I started with was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
             "It is also the opposite of what the research pointed at. Every product in this space is already excellent at showing you more. Building another one would have been answering a question nobody was stuck on.",
@@ -690,7 +689,7 @@ export const projects: Project[] = [
           kind: "decisions",
           heading: "Where I got pushed back on it",
           intro: [
-            "No client to overrule me on this one, so the pushback came from the people I put it in front of: testers, and two designers I trust to be blunt. Three objections came back hard. One of them I lost, and it improved the product.",
+            "The pushback came from the people I put it in front of: testers, and two designers I trust to be blunt. Three objections came back hard. One of them I lost, and it improved the product.",
           ],
           items: [
             {
@@ -707,7 +706,7 @@ export const projects: Project[] = [
             {
               title: "“Can you not just look at what Airbnb does?”",
               problem:
-                "With no research budget and no client, the reasonable suggestion was to skip the study and copy the leaders. They have spent more on this than I ever will, so their patterns must be right.",
+                "With no research budget, the reasonable suggestion was to skip the study and copy the leaders. They have spent more on this than I ever will, so their patterns must be right.",
               decision:
                 "I did look, closely, and used it. But I framed the teardown as a search for where each product stops helping rather than a list of patterns to lift, and I said plainly which conclusions were evidence and which were guesses.",
               note: {
@@ -790,7 +789,7 @@ export const projects: Project[] = [
                 "Suggestions appear in context and in small numbers. An empty afternoon prompts two or three options that fit the gap, the neighbourhood, and the length of the trip. Not a feed. Not a carousel. A dismissed suggestion stays dismissed.",
               note: {
                 label: "The tradeoff",
-                body: "Fewer suggestions means fewer chances to delight someone with an unexpected find, and it is the decision a client would most likely have overruled. Engagement metrics reward the feed. I accepted the cost: a product that surfaces three relevant things is more useful than one that surfaces thirty and asks you to sort them, and trust is easier to lose than to build.",
+                body: "Fewer suggestions means fewer chances to delight someone with an unexpected find, and it is the decision most likely to be overruled in a product review. Engagement metrics reward the feed. I accepted the cost: a product that surfaces three relevant things is more useful than one that surfaces thirty and asks you to sort them, and trust is easier to lose than to build.",
               },
             },
             {
@@ -857,7 +856,7 @@ export const projects: Project[] = [
           kind: "impact",
           heading: "The impact",
           intro: [
-            "A self-directed concept, so there is no launch behind these. They come from moderated sessions with each traveller planning a real trip twice: once the way they normally would, once in Plantinerary.",
+            "There is no launch behind these. They come from moderated sessions with each traveller planning a real trip twice: once the way they normally would, once in Plantinerary.",
           ],
           source: "Prototype testing",
           metrics: [
@@ -918,7 +917,7 @@ export const projects: Project[] = [
     slug: "caldeck",
     title: "CalDeck AI",
     category: "Calendar AI",
-    tag: "Mobile · Self-directed",
+    tag: "Mobile · AI",
     year: "2026",
     description:
       "A full calendar app with an AI assistant built into it. The case study follows the assistant through one job, moving a meeting, and every place that job breaks.",
@@ -935,7 +934,6 @@ export const projects: Project[] = [
         "A full calendar app with an AI assistant built in. The assistant does the slow part of scheduling: checking calendars, spotting clashes, ranking times and writing the message. Then it stops so you make the call.",
       meta: [
         { label: "Role", value: "Sole Product Designer" },
-        { label: "Project type", value: "Self-directed concept" },
         { label: "Scope", value: "Full calendar app, AI layer in depth" },
         { label: "Platform", value: "iOS" },
         { label: "Tools", value: "Claude Design, ChatGPT, Claude" },
@@ -948,7 +946,7 @@ export const projects: Project[] = [
             "CalDeck AI is a calendar app for people whose week is mostly meetings. It does everything you would expect a calendar to do: day, week and month views, events, invites, reminders, search, and sync across accounts.",
             "What sets it apart is the AI assistant built into it. You tell it what you need in your own words: “Move my 11 o'clock to this afternoon”, “Find an hour this week when all four of us are free”, or “Keep my mornings clear for deep work”. It then does the slow part: checking everyone's calendar, spotting clashes, ranking the times that work and writing the message. Then it stops, and you make the call.",
             "This study follows the assistant through its hardest job, moving a meeting that involves other people, and through the four ways that job goes wrong: the meeting starts in twelve minutes, someone says no, someone is at another company, or the whole weekly series has to move.",
-            "It is a personal project. I designed it alone, with no client, and checked the core flows with 8 people in a lightweight prototype evaluation before calling it done.",
+            "I designed it alone, and checked the core flows with 8 people in a lightweight prototype evaluation before calling it done.",
           ],
         },
         {
@@ -1379,7 +1377,7 @@ export const projects: Project[] = [
     slug: "ibank",
     title: "GTBank i-Bank",
     category: "Internet Banking",
-    tag: "Web · Client Project",
+    tag: "Web · Banking",
     year: "2025",
     description:
       "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
@@ -1398,10 +1396,9 @@ export const projects: Project[] = [
         "i-Bank worked. Customers could do everything the bank offered, provided they already knew where it was. The redesign rebuilt the dashboard and transactional workflows around task completion, inside constraints that are not negotiable in retail banking.",
       meta: [
         { label: "Role", value: "Product Designer" },
-        { label: "Client", value: "Guaranty Trust Bank" },
+        { label: "Company", value: "Guaranty Trust Bank" },
         { label: "Platform", value: "Web · Internet Banking" },
         { label: "Deliverables", value: "Research, UX, UI, Testing" },
-        { label: "Project type", value: "Client engagement" },
       ],
       blocks: [
         {
@@ -1640,7 +1637,7 @@ export const projects: Project[] = [
     slug: "gopal",
     title: "GoPal",
     category: "Digital Banking",
-    tag: "Mobile · Client Project",
+    tag: "Mobile · Banking",
     year: "2024",
     description:
       "An online banking experience designed to make everyday transactions effortless while helping users build better saving habits.",
@@ -1654,13 +1651,12 @@ export const projects: Project[] = [
       tagline:
         "People asked for faster payments. What they described was regret about not saving.",
       overview:
-        "A mobile banking app for a client, where the feature nobody requested, saving built into everyday banking, became the reason the product exists.",
+        "A mobile banking app where the feature nobody requested, saving built into everyday banking, became the reason the product exists.",
       meta: [
         { label: "Role", value: "Product & UI/UX Designer" },
         { label: "Timeline", value: "1 month" },
         { label: "Platform", value: "Mobile · Banking App" },
         { label: "Deliverables", value: "Research, UX, UI, Prototyping" },
-        { label: "Project type", value: "Client engagement" },
       ],
       blocks: [
         {
@@ -1684,7 +1680,7 @@ export const projects: Project[] = [
           kind: "prose",
           heading: "The brief, and how I tested it",
           body: [
-            "The requirement I was given was a mobile banking app: balances, transfers, bill payments, card management. A digital bank, competently executed.",
+            "The starting requirement was a mobile banking app: balances, transfers, bill payments, card management. A digital bank, competently executed.",
             "I took that as the floor rather than the specification, and put three rounds of testing between the brief and the build. Each round was aimed at finding what I had got wrong rather than confirming what I had got right, because a requirement list tells you what to build and nothing about whether it will work.",
             "Everything below that reads as a correction came from those rounds, not from hindsight.",
           ],

@@ -39,8 +39,8 @@ export default function WorkPage() {
                 </ScrambleHeading>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-muted">
-                Five case studies: in-house and client work in banking and
-                SaaS, and two self-directed studies in AI-assisted planning.
+                Five case studies across banking, SaaS, and AI-assisted
+                planning.
               </p>
             </div>
           </Reveal>

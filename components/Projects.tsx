@@ -26,8 +26,8 @@ export default function Projects() {
             </sup>
           </ScrambleHeading>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            In-house and client work in banking and SaaS, plus two
-            self-directed studies in AI-assisted planning.
+            Banking, SaaS, and AI-assisted planning, each told as the
+            problem underneath the brief.
           </p>
         </div>
       </Reveal>
