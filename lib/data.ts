@@ -236,7 +236,17 @@ export type Project = {
   accent?: boolean;
   /** Full case study. When present, /work/[slug] renders the story. */
   caseStudy?: CaseStudy;
+  /** Under NDA. The card stays on the Work page, shown blurred with a
+   *  request-access link, and the case study route 404s. The study itself
+   *  stays in this file so unlocking it is a one-line change. */
+  locked?: boolean;
+  /** Pre-blurred thumbnail for a locked card. A CSS blur would still ship
+   *  the real screen to anyone who opens the image URL. */
+  lockedImage?: string;
 };
+
+/** A case study anyone can open: written, and not held back by an NDA. */
+export const isPublished = (p: Project) => Boolean(p.caseStudy) && !p.locked;
 
 export const projects: Project[] = [
   {
@@ -905,265 +915,6 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "ibank",
-    title: "GTBank i-Bank",
-    category: "Internet Banking",
-    tag: "Web · Client Project",
-    year: "2025",
-    description:
-      "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
-    image: "/images/work/ibank.webp",
-    subtitle: "Bank redesign",
-    metric:
-      "[Prototype testing:] transaction completion time down [40%] across [3 core journeys], measured against the live portal. Build in progress",
-    tags: ["Product Design", "Fintech"],
-    caseStudy: {
-      title: "GTBank i-Bank",
-      tagline:
-        "Redesigning an internet banking portal without breaking the things a bank cannot break.",
-      overview:
-        "i-Bank worked. Customers could do everything the bank offered, provided they already knew where it was. The redesign rebuilt the dashboard and transactional workflows around task completion, inside constraints that are not negotiable in retail banking.",
-      meta: [
-        { label: "Role", value: "Product Designer" },
-        { label: "Client", value: "Guaranty Trust Bank" },
-        { label: "Platform", value: "Web · Internet Banking" },
-        { label: "Deliverables", value: "Research, UX, UI, Testing" },
-        { label: "Project type", value: "Client engagement" },
-      ],
-      blocks: [
-        {
-          kind: "prose",
-          heading: "A portal that worked, for people who already knew it",
-          body: [
-            "Internet banking portals age in a particular way. Features get added, each one reasonable on its own, each one earning a place in the navigation. Nothing is ever removed, because everything is used by somebody.",
-            "What you end up with is a product that can do everything and helps with nothing. Customers who had used i-Bank for years moved through it fine. Everyone else was navigating a filing cabinet.",
-            "The redesign started from a question the feature list could not answer: what is a customer actually here to finish, and how much is standing between them and finishing it?",
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "Finding out where it actually broke",
-          body: [
-            "I ran usability testing, surveys, and one-on-one interviews rather than relying on the support tickets already in hand. Tickets tell you what made someone angry enough to call. They are silent about the customer who gave up quietly, and that was the group the redesign existed for.",
-            "Watching sessions changed what I thought the problem was. People were not confused by individual screens. They were losing the thread between them: starting a transfer, being sent somewhere to confirm something, and arriving back without a clear sense of whether the thing had happened.",
-            "Task completion was the metric that mattered, and the failures were in the joins rather than the parts.",
-          ],
-        },
-        {
-          kind: "compare",
-          heading: "What changed on screen",
-          intro: [
-            "Three comparisons carry most of the redesign. In each case the old screen is not badly made; it is organised around what the bank offers rather than what the customer came to do.",
-          ],
-          items: [
-            {
-              label: "Dashboard",
-              beforeSrc: "/images/work/ibank-dashboard-old.webp",
-              afterSrc: "/images/work/ibank-dashboard-new.webp",
-              caption:
-                "Before, eight accounts sat in a paged carousel showing three at a time, with balances masked by default, so the first thing a customer saw was a row of hidden numbers they had to page through. Nothing next to the money did anything; every action lived in the left nav. Below that, Payments for Trade took the lower half of the screen, a section most retail customers never touch. After, one account is chosen from a dropdown and its balance is the largest thing on the page, with the four actions that make up most sessions sitting directly beside it. The promo moved out of the right rail into a Don't miss band underneath. The smallest change matters most: the old empty state read No Record - No frequent records, which sounds like you have no transactions, where the new one reads You are yet to select a tab, which correctly says the screen is waiting on you.",
-            },
-            {
-              label: "Transfer flow",
-              beforeSrc: "/images/work/ibank-transfer-old.webp",
-              afterSrc: "/images/work/ibank-transfer-new.webp",
-              caption:
-                "Before, the screen was titled Other Banks, so the customer had already committed to a destination type before arriving. It then asked for the rail (Instant or NEFT), then Saved or New, and defaulted to New: a blank account number field as the first thing you meet. You had to know the digits before you could begin. The right rail carried an empty Frequent Transfers panel and a video about updating your account details, and the bottom two thirds of the page were empty. After, it is one Account transfer screen with no upfront choice of rail or bank. It opens on people you have paid before, listed alphabetically with their bank and account number visible, and a search that accepts a name or phone number as readily as an account number. View Transfer Success Rates is the addition I would defend hardest: interbank transfers in Nigeria fail often enough that knowing which banks are currently settling is worth more than any layout change on this screen.",
-            },
-            {
-              label: "Transaction history",
-              beforeSrc: "/images/work/ibank-history-old.webp",
-              afterSrc: "/images/work/ibank-history-new.webp",
-              caption:
-                "Before, four inputs stood between the customer and any result: account, start date, end date typed as DD/MM/YYYY, plus Amount and Remarks filters that most people do not need on a first look. Results arrived as dense rows carrying full reference strings, and a third of the width went to an account officer card and a help centre advert. After, the period is a row of preset chips (current week, last week, current month, last month), so the common case is one tap and the date fields only matter if you choose Custom period. The balance sits behind a mask on a screen people often open in public. Generate stays disabled until the selection is valid, and the empty state says what it is waiting for rather than leaving a blank panel.",
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "A reskin would have left the problem where it was",
-          body: [
-            "The brief was a redesign of the dashboard and transactional workflows. Read narrowly, that is a visual refresh and some reorganised navigation, and it would have shipped.",
-            "The research pointed somewhere less convenient. If customers were losing the thread between steps, then reskinning the steps would leave the problem exactly where it was. What the portal needed was feedback and orientation, which are not layout problems.",
-            "So I argued for two things beyond the brief, and one of them ran straight into constraints that outrank design.",
-          ],
-        },
-        {
-          kind: "decisions",
-          heading: "The additions, and what pushed back",
-          intro: [
-            "In retail banking, the pushback is not a matter of taste. Security and compliance set the boundary, and the design works inside it.",
-          ],
-          items: [
-            {
-              title: "Transaction status the brief did not mention",
-              problem:
-                "The brief covered the dashboard and the workflows that move money. It said nothing about what a customer sees afterwards, which is where most of the uncertainty in the sessions actually sat.",
-              decision:
-                "I pushed for status to be explicit on every transaction rather than inferred from its presence in a list, and for recent activity to be separated from full history.",
-              note: {
-                label: "Why I pushed for it",
-                body: "A customer who is not sure whether a transfer completed does the same thing every time: they try again, or they call. Both are expensive, and neither shows up as a failed task in the workflow the redesign was scoped around. Fixing the flow without fixing what follows it would have moved the confusion rather than removing it.",
-              },
-            },
-            {
-              title: "More visible feedback through authentication",
-              problem:
-                "Multi-factor authentication is where customers most often lost their place, and where they were least sure whether their money had moved.",
-              decision:
-                "I designed clearer state and progress through the authentication and confirmation sequence, so customers always knew what stage they were at.",
-              note: {
-                label: "The constraint",
-                body: "This is where design stops being the deciding voice. Multi-factor authentication and real-time transaction monitoring are not steps that can be streamlined for elegance, and how much a screen may reveal about a transaction's state is a compliance question before it is a UX one. Working with engineering and compliance, in sessions I set up before the first flow was drawn rather than after, the answer was not fewer steps but better narration of the steps that must exist. That constraint improved the work: it forced the fix to be clarity rather than removal, which is the more durable version anyway.",
-              },
-            },
-            {
-              title: "Holding the brand inside the redesign",
-              problem:
-                "A redesign is the easiest moment to quietly drift away from an established identity, and this one is among the most recognisable in Nigerian banking.",
-              decision:
-                "I kept the bank's identity consistent across every touchpoint the redesign covered, treating it as a fixed input rather than something to modernise.",
-              note: {
-                label: "The tradeoff",
-                body: "Some interface decisions would have been easier with a freer palette. But customers read that identity as a signal they are in the right place, on the correct site, which in banking is a security cue as much as a brand one. Consistency was worth more than the visual latitude I gave up.",
-              },
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "What I got wrong",
-          body: [
-            "The dashboard replaced an eight-account carousel with a single selector and one large balance. I treated that as settled early and built the rest of the redesign on top of it.",
-            "It tested badly with customers holding multiple accounts. That is a smaller group than the retail majority, and it is also the group that opens the portal most. Collapsing eight accounts into a selector meant they could no longer tell at a glance which account a payment had landed in. They had to go looking. I had optimised for the median session and made the heaviest sessions worse.",
-            "The real mistake was upstream of the screen. I had a segment split sitting in the research and I did not use it to structure the first round of testing, so I found the problem two weeks later than I needed to, and after three other screens had already been built against the assumption.",
-            "I would still defend the selector. Eight masked balances in a paged carousel was not serving anyone. What I would not defend is how thin the evidence was when I locked it, or how long I let it stand unexamined because the rest of the layout depended on it.",
-          ],
-        },
-        {
-          kind: "grid",
-          heading: "The three constraints everything sat inside",
-          intro: [
-            "Every decision in this project had to satisfy all three at once. Anything that failed one of them was not a design option, however well it tested:",
-          ],
-          columns: 3,
-          items: [
-            {
-              title: "Security",
-              desc: "Multi-factor authentication and real-time transaction monitoring are load-bearing. The design accommodates them; it does not negotiate with them.",
-            },
-            {
-              title: "Regulatory compliance",
-              desc: "What can be shown, when, and to whom is set outside the design process. Working with compliance early is cheaper than redesigning around a rejection late.",
-            },
-            {
-              title: "Brand integrity",
-              desc: "A recognisable identity held consistently across digital touchpoints, because in banking, looking correct is part of being trusted.",
-            },
-          ],
-        },
-        {
-          kind: "prose",
-          heading: "The status system underneath it",
-          body: [
-            "Everything above turns on a customer knowing what state their money is in. That is not one component with three variants. It is twelve states, most of which are invisible on a happy path and all of which somebody eventually hits.",
-            "It was too large to sit inside the case study without swallowing it, so it lives as its own artifact: every state with its copy, what moves between them, and the places where what the system knows and what the customer may be told come apart.",
-          ],
-          link: {
-            label: "View the full state map",
-            href: "/system/transaction-status",
-          },
-        },
-        {
-          kind: "prose",
-          anchor: "final-design",
-          heading: "Final designs",
-          body: [
-            "The comparisons above are sized to be read against each other. Here the finished screens sit at full width, where the detail is actually legible.",
-          ],
-        },
-        {
-          kind: "figure",
-          src: "/images/work/ibank-dashboard-new.webp",
-          caption:
-            "Dashboard: account selector, balance with a hide toggle, and the four most-used actions beside it.",
-          impact:
-            "The eye toggle sits on the balance rather than in settings, because internet banking gets opened in offices and shared spaces. Hiding your own balance should cost one tap, not a trip through preferences.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/ibank-transfer-new.webp",
-          caption:
-            "Transfer: search across name, phone, or account number, with saved beneficiaries grouped alphabetically.",
-          impact:
-            "Each avatar carries a small bank badge, so the destination institution is visible before selection rather than confirmed a screen later. Sending to the right person at the wrong bank is a common and expensive mistake.",
-        },
-        {
-          kind: "figure",
-          src: "/images/work/ibank-history-new.webp",
-          caption:
-            "Transaction history: period presets with a custom range, and a statement that generates only once the selection is valid.",
-          impact:
-            "Generate stays disabled until the range is complete, so the failure is prevented rather than reported. The empty state names what it is waiting for, which is the difference between a screen that looks broken and one that looks ready.",
-        },
-        {
-          kind: "impact",
-          heading: "What it is projected to do, and how I know",
-          intro: [
-            "The build is in progress, so these are not live numbers and I am not going to present them as if they were.",
-            "They come from moderated task testing on the new prototype, run against the same three journeys on the current portal. Three things were measured: time on task, repeat attempts, and how often a participant had to ask how to proceed.",
-          ],
-          source: "Prototype testing",
-          metrics: [
-            {
-              value: "40%",
-              label: "faster to complete a transaction",
-              baseline: "Median time on task, new prototype against the live portal",
-            },
-            {
-              value: "31%",
-              label: "fewer repeat attempts on the same transfer",
-              baseline:
-                "Participants who re-ran a transfer they had already completed successfully",
-            },
-            {
-              value: "26%",
-              label: "fewer how do I moments",
-              baseline:
-                "Times a participant stopped and asked the moderator what to do next. Not support tickets: the product has not shipped, so there are none yet.",
-            },
-          ],
-          body: [
-            "The first is the headline and the second is the one I would defend hardest. A repeat attempt is somebody who could not tell whether their money had moved, and every one of them was about to become a support call, a duplicate transfer, or both.",
-            "The live numbers will be different from these, probably worse, because a prototype is a friendlier environment than a Tuesday morning on mobile data. I would rather publish the method than a rounder number.",
-          ],
-        },
-        {
-          kind: "list",
-          heading: "What a regulated redesign teaches you",
-          intro: [
-            "A redesign inside a regulated product teaches you different lessons than a greenfield one:",
-          ],
-          items: [
-            "The steps you cannot remove are the ones most worth designing. Narration beats deletion.",
-            "A customer who cannot tell whether a transfer completed will try it again. Status is not a detail, it is the product.",
-            "Brand consistency in banking is a security cue. Modernising the palette would have cost more trust than it bought.",
-            "A decision that everything else gets built on top of should be the most tested, not the least. Mine was the least, because it felt obvious.",
-          ],
-        },
-        {
-          kind: "quote",
-          heading: "Reflection",
-          body: [
-            "Redesigning a banking solution is mostly an exercise in what you are not allowed to change.",
-            "The steps that frustrated customers were, in almost every case, the steps protecting them. The work was not removing friction but making necessary friction legible, so a customer waiting on a security check understands they are being protected rather than obstructed.",
-            "That constraint made the design better. Given a free hand I would have tried to shorten the flow, and shipped something faster and less trustworthy.",
-          ],
-        },
-      ],
-    },
-  },
-  {
     slug: "caldeck",
     title: "CalDeck AI",
     category: "Calendar AI",
@@ -1619,6 +1370,267 @@ export const projects: Project[] = [
           body: [
             "You judge an assistant by what it refuses to do for you.",
             "Five of eight took the top suggestion. High enough that the ranking earns its badge, low enough that people were still reading before they accepted. That ratio is the whole product's report card.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "ibank",
+    title: "GTBank i-Bank",
+    category: "Internet Banking",
+    tag: "Web · Client Project",
+    year: "2025",
+    description:
+      "A redesign of the i-Bank internet banking portal, rebuilding the dashboard and transactional workflows around what customers were actually trying to finish.",
+    image: "/images/work/ibank.webp",
+    subtitle: "Bank redesign",
+    metric:
+      "[Prototype testing:] transaction completion time down [40%] across [3 core journeys], measured against the live portal. Build in progress",
+    tags: ["Product Design", "Fintech"],
+    locked: true,
+    lockedImage: "/images/work/ibank-locked.webp",
+    caseStudy: {
+      title: "GTBank i-Bank",
+      tagline:
+        "Redesigning an internet banking portal without breaking the things a bank cannot break.",
+      overview:
+        "i-Bank worked. Customers could do everything the bank offered, provided they already knew where it was. The redesign rebuilt the dashboard and transactional workflows around task completion, inside constraints that are not negotiable in retail banking.",
+      meta: [
+        { label: "Role", value: "Product Designer" },
+        { label: "Client", value: "Guaranty Trust Bank" },
+        { label: "Platform", value: "Web · Internet Banking" },
+        { label: "Deliverables", value: "Research, UX, UI, Testing" },
+        { label: "Project type", value: "Client engagement" },
+      ],
+      blocks: [
+        {
+          kind: "prose",
+          heading: "A portal that worked, for people who already knew it",
+          body: [
+            "Internet banking portals age in a particular way. Features get added, each one reasonable on its own, each one earning a place in the navigation. Nothing is ever removed, because everything is used by somebody.",
+            "What you end up with is a product that can do everything and helps with nothing. Customers who had used i-Bank for years moved through it fine. Everyone else was navigating a filing cabinet.",
+            "The redesign started from a question the feature list could not answer: what is a customer actually here to finish, and how much is standing between them and finishing it?",
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "Finding out where it actually broke",
+          body: [
+            "I ran usability testing, surveys, and one-on-one interviews rather than relying on the support tickets already in hand. Tickets tell you what made someone angry enough to call. They are silent about the customer who gave up quietly, and that was the group the redesign existed for.",
+            "Watching sessions changed what I thought the problem was. People were not confused by individual screens. They were losing the thread between them: starting a transfer, being sent somewhere to confirm something, and arriving back without a clear sense of whether the thing had happened.",
+            "Task completion was the metric that mattered, and the failures were in the joins rather than the parts.",
+          ],
+        },
+        {
+          kind: "compare",
+          heading: "What changed on screen",
+          intro: [
+            "Three comparisons carry most of the redesign. In each case the old screen is not badly made; it is organised around what the bank offers rather than what the customer came to do.",
+          ],
+          items: [
+            {
+              label: "Dashboard",
+              beforeSrc: "/images/work/ibank-dashboard-old.webp",
+              afterSrc: "/images/work/ibank-dashboard-new.webp",
+              caption:
+                "Before, eight accounts sat in a paged carousel showing three at a time, with balances masked by default, so the first thing a customer saw was a row of hidden numbers they had to page through. Nothing next to the money did anything; every action lived in the left nav. Below that, Payments for Trade took the lower half of the screen, a section most retail customers never touch. After, one account is chosen from a dropdown and its balance is the largest thing on the page, with the four actions that make up most sessions sitting directly beside it. The promo moved out of the right rail into a Don't miss band underneath. The smallest change matters most: the old empty state read No Record - No frequent records, which sounds like you have no transactions, where the new one reads You are yet to select a tab, which correctly says the screen is waiting on you.",
+            },
+            {
+              label: "Transfer flow",
+              beforeSrc: "/images/work/ibank-transfer-old.webp",
+              afterSrc: "/images/work/ibank-transfer-new.webp",
+              caption:
+                "Before, the screen was titled Other Banks, so the customer had already committed to a destination type before arriving. It then asked for the rail (Instant or NEFT), then Saved or New, and defaulted to New: a blank account number field as the first thing you meet. You had to know the digits before you could begin. The right rail carried an empty Frequent Transfers panel and a video about updating your account details, and the bottom two thirds of the page were empty. After, it is one Account transfer screen with no upfront choice of rail or bank. It opens on people you have paid before, listed alphabetically with their bank and account number visible, and a search that accepts a name or phone number as readily as an account number. View Transfer Success Rates is the addition I would defend hardest: interbank transfers in Nigeria fail often enough that knowing which banks are currently settling is worth more than any layout change on this screen.",
+            },
+            {
+              label: "Transaction history",
+              beforeSrc: "/images/work/ibank-history-old.webp",
+              afterSrc: "/images/work/ibank-history-new.webp",
+              caption:
+                "Before, four inputs stood between the customer and any result: account, start date, end date typed as DD/MM/YYYY, plus Amount and Remarks filters that most people do not need on a first look. Results arrived as dense rows carrying full reference strings, and a third of the width went to an account officer card and a help centre advert. After, the period is a row of preset chips (current week, last week, current month, last month), so the common case is one tap and the date fields only matter if you choose Custom period. The balance sits behind a mask on a screen people often open in public. Generate stays disabled until the selection is valid, and the empty state says what it is waiting for rather than leaving a blank panel.",
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "A reskin would have left the problem where it was",
+          body: [
+            "The brief was a redesign of the dashboard and transactional workflows. Read narrowly, that is a visual refresh and some reorganised navigation, and it would have shipped.",
+            "The research pointed somewhere less convenient. If customers were losing the thread between steps, then reskinning the steps would leave the problem exactly where it was. What the portal needed was feedback and orientation, which are not layout problems.",
+            "So I argued for two things beyond the brief, and one of them ran straight into constraints that outrank design.",
+          ],
+        },
+        {
+          kind: "decisions",
+          heading: "The additions, and what pushed back",
+          intro: [
+            "In retail banking, the pushback is not a matter of taste. Security and compliance set the boundary, and the design works inside it.",
+          ],
+          items: [
+            {
+              title: "Transaction status the brief did not mention",
+              problem:
+                "The brief covered the dashboard and the workflows that move money. It said nothing about what a customer sees afterwards, which is where most of the uncertainty in the sessions actually sat.",
+              decision:
+                "I pushed for status to be explicit on every transaction rather than inferred from its presence in a list, and for recent activity to be separated from full history.",
+              note: {
+                label: "Why I pushed for it",
+                body: "A customer who is not sure whether a transfer completed does the same thing every time: they try again, or they call. Both are expensive, and neither shows up as a failed task in the workflow the redesign was scoped around. Fixing the flow without fixing what follows it would have moved the confusion rather than removing it.",
+              },
+            },
+            {
+              title: "More visible feedback through authentication",
+              problem:
+                "Multi-factor authentication is where customers most often lost their place, and where they were least sure whether their money had moved.",
+              decision:
+                "I designed clearer state and progress through the authentication and confirmation sequence, so customers always knew what stage they were at.",
+              note: {
+                label: "The constraint",
+                body: "This is where design stops being the deciding voice. Multi-factor authentication and real-time transaction monitoring are not steps that can be streamlined for elegance, and how much a screen may reveal about a transaction's state is a compliance question before it is a UX one. Working with engineering and compliance, in sessions I set up before the first flow was drawn rather than after, the answer was not fewer steps but better narration of the steps that must exist. That constraint improved the work: it forced the fix to be clarity rather than removal, which is the more durable version anyway.",
+              },
+            },
+            {
+              title: "Holding the brand inside the redesign",
+              problem:
+                "A redesign is the easiest moment to quietly drift away from an established identity, and this one is among the most recognisable in Nigerian banking.",
+              decision:
+                "I kept the bank's identity consistent across every touchpoint the redesign covered, treating it as a fixed input rather than something to modernise.",
+              note: {
+                label: "The tradeoff",
+                body: "Some interface decisions would have been easier with a freer palette. But customers read that identity as a signal they are in the right place, on the correct site, which in banking is a security cue as much as a brand one. Consistency was worth more than the visual latitude I gave up.",
+              },
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "What I got wrong",
+          body: [
+            "The dashboard replaced an eight-account carousel with a single selector and one large balance. I treated that as settled early and built the rest of the redesign on top of it.",
+            "It tested badly with customers holding multiple accounts. That is a smaller group than the retail majority, and it is also the group that opens the portal most. Collapsing eight accounts into a selector meant they could no longer tell at a glance which account a payment had landed in. They had to go looking. I had optimised for the median session and made the heaviest sessions worse.",
+            "The real mistake was upstream of the screen. I had a segment split sitting in the research and I did not use it to structure the first round of testing, so I found the problem two weeks later than I needed to, and after three other screens had already been built against the assumption.",
+            "I would still defend the selector. Eight masked balances in a paged carousel was not serving anyone. What I would not defend is how thin the evidence was when I locked it, or how long I let it stand unexamined because the rest of the layout depended on it.",
+          ],
+        },
+        {
+          kind: "grid",
+          heading: "The three constraints everything sat inside",
+          intro: [
+            "Every decision in this project had to satisfy all three at once. Anything that failed one of them was not a design option, however well it tested:",
+          ],
+          columns: 3,
+          items: [
+            {
+              title: "Security",
+              desc: "Multi-factor authentication and real-time transaction monitoring are load-bearing. The design accommodates them; it does not negotiate with them.",
+            },
+            {
+              title: "Regulatory compliance",
+              desc: "What can be shown, when, and to whom is set outside the design process. Working with compliance early is cheaper than redesigning around a rejection late.",
+            },
+            {
+              title: "Brand integrity",
+              desc: "A recognisable identity held consistently across digital touchpoints, because in banking, looking correct is part of being trusted.",
+            },
+          ],
+        },
+        {
+          kind: "prose",
+          heading: "The status system underneath it",
+          body: [
+            "Everything above turns on a customer knowing what state their money is in. That is not one component with three variants. It is twelve states, most of which are invisible on a happy path and all of which somebody eventually hits.",
+            "It was too large to sit inside the case study without swallowing it, so it lives as its own artifact: every state with its copy, what moves between them, and the places where what the system knows and what the customer may be told come apart.",
+          ],
+          link: {
+            label: "View the full state map",
+            href: "/system/transaction-status",
+          },
+        },
+        {
+          kind: "prose",
+          anchor: "final-design",
+          heading: "Final designs",
+          body: [
+            "The comparisons above are sized to be read against each other. Here the finished screens sit at full width, where the detail is actually legible.",
+          ],
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-dashboard-new.webp",
+          caption:
+            "Dashboard: account selector, balance with a hide toggle, and the four most-used actions beside it.",
+          impact:
+            "The eye toggle sits on the balance rather than in settings, because internet banking gets opened in offices and shared spaces. Hiding your own balance should cost one tap, not a trip through preferences.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-transfer-new.webp",
+          caption:
+            "Transfer: search across name, phone, or account number, with saved beneficiaries grouped alphabetically.",
+          impact:
+            "Each avatar carries a small bank badge, so the destination institution is visible before selection rather than confirmed a screen later. Sending to the right person at the wrong bank is a common and expensive mistake.",
+        },
+        {
+          kind: "figure",
+          src: "/images/work/ibank-history-new.webp",
+          caption:
+            "Transaction history: period presets with a custom range, and a statement that generates only once the selection is valid.",
+          impact:
+            "Generate stays disabled until the range is complete, so the failure is prevented rather than reported. The empty state names what it is waiting for, which is the difference between a screen that looks broken and one that looks ready.",
+        },
+        {
+          kind: "impact",
+          heading: "What it is projected to do, and how I know",
+          intro: [
+            "The build is in progress, so these are not live numbers and I am not going to present them as if they were.",
+            "They come from moderated task testing on the new prototype, run against the same three journeys on the current portal. Three things were measured: time on task, repeat attempts, and how often a participant had to ask how to proceed.",
+          ],
+          source: "Prototype testing",
+          metrics: [
+            {
+              value: "40%",
+              label: "faster to complete a transaction",
+              baseline: "Median time on task, new prototype against the live portal",
+            },
+            {
+              value: "31%",
+              label: "fewer repeat attempts on the same transfer",
+              baseline:
+                "Participants who re-ran a transfer they had already completed successfully",
+            },
+            {
+              value: "26%",
+              label: "fewer how do I moments",
+              baseline:
+                "Times a participant stopped and asked the moderator what to do next. Not support tickets: the product has not shipped, so there are none yet.",
+            },
+          ],
+          body: [
+            "The first is the headline and the second is the one I would defend hardest. A repeat attempt is somebody who could not tell whether their money had moved, and every one of them was about to become a support call, a duplicate transfer, or both.",
+            "The live numbers will be different from these, probably worse, because a prototype is a friendlier environment than a Tuesday morning on mobile data. I would rather publish the method than a rounder number.",
+          ],
+        },
+        {
+          kind: "list",
+          heading: "What a regulated redesign teaches you",
+          intro: [
+            "A redesign inside a regulated product teaches you different lessons than a greenfield one:",
+          ],
+          items: [
+            "The steps you cannot remove are the ones most worth designing. Narration beats deletion.",
+            "A customer who cannot tell whether a transfer completed will try it again. Status is not a detail, it is the product.",
+            "Brand consistency in banking is a security cue. Modernising the palette would have cost more trust than it bought.",
+            "A decision that everything else gets built on top of should be the most tested, not the least. Mine was the least, because it felt obvious.",
+          ],
+        },
+        {
+          kind: "quote",
+          heading: "Reflection",
+          body: [
+            "Redesigning a banking solution is mostly an exercise in what you are not allowed to change.",
+            "The steps that frustrated customers were, in almost every case, the steps protecting them. The work was not removing friction but making necessary friction legible, so a customer waiting on a security check understands they are being protected rather than obstructed.",
+            "That constraint made the design better. Given a free hand I would have tried to shorten the flow, and shipped something faster and less trustworthy.",
           ],
         },
       ],

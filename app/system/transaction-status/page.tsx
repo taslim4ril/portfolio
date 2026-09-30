@@ -13,9 +13,11 @@ import {
   transitions,
   type StatusTone,
 } from "@/lib/status-system";
-import { site } from "@/lib/data";
+import { notFound } from "next/navigation";
+import { projects, site } from "@/lib/data";
 
 export const metadata: Metadata = {
+  robots: { index: false },
   title: `Transaction status system | ${site.name}`,
   description:
     "Every state a transfer can be in, what moves it between them, and the gap between what the system knows and what a customer is allowed to be told.",
@@ -64,6 +66,9 @@ function Section({
 }
 
 export default function TransactionStatusPage() {
+  // Part of the i-Bank work, so it follows that case study's NDA lock.
+  if (projects.find((p) => p.slug === "ibank")?.locked) notFound();
+
   const byId = Object.fromEntries(states.map((s) => [s.id, s]));
   const terminal = states.filter((s) => s.terminal).length;
 

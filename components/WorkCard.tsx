@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { type Project } from "@/lib/data";
+import { type Project, site } from "@/lib/data";
 
 export default function WorkCard({
   p,
@@ -13,7 +13,12 @@ export default function WorkCard({
   href?: string;
 }) {
   const [first, ...rest] = p.title.split(" ");
-  const target = href ?? `/work/${p.slug}`;
+  // A locked (NDA) project has no public page, so the card asks for access
+  // instead: an email to me, subject already filled in.
+  const target = p.locked
+    ? `mailto:${site.email}?subject=${encodeURIComponent(`Access to the ${p.title} case study`)}`
+    : (href ?? `/work/${p.slug}`);
+  const image = p.locked ? p.lockedImage : p.image;
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [hovering, setHovering] = useState(false);
 
@@ -46,11 +51,11 @@ export default function WorkCard({
     >
       {/* Image. Optional: a project can exist before its shots do, and a
           broken image icon reads worse than an honest empty frame. */}
-      {p.image ? (
+      {image ? (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
-          src={p.image}
-          alt={`${p.title}: ${p.category}`}
+          src={image}
+          alt={p.locked ? "" : `${p.title}: ${p.category}`}
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
         />
@@ -71,6 +76,11 @@ export default function WorkCard({
 
       {/* Tag pills */}
       <div className="absolute left-6 top-6 flex flex-col items-start gap-2 md:left-10 md:top-10">
+        {p.locked && (
+          <span className="rounded-full border border-accent/50 bg-black/60 px-4 py-1.5 text-xs font-medium text-accent backdrop-blur-sm">
+            Under NDA
+          </span>
+        )}
         {p.tags.map((t) => (
           <span
             key={t}
@@ -109,7 +119,7 @@ export default function WorkCard({
             transform: `translate(-50%, -50%) scale(${hovering ? 1 : 0.9})`,
           }}
         >
-          Read case study
+          {p.locked ? "Request access" : "Read case study"}
           <span className="text-base">↗</span>
         </div>
       </motion.div>
@@ -122,7 +132,14 @@ export default function WorkCard({
         <h3 className="heading mt-3 text-4xl font-medium leading-none text-white sm:text-5xl md:text-6xl">
           {first} <span className="text-white/45">{rest.join(" ")}</span>
         </h3>
-        {p.metric && (
+        {p.locked ? (
+          <div className="mt-5 max-w-lg border-t border-white/20 pt-4">
+            <p className="text-sm leading-relaxed text-white/75">
+              This work is under NDA. The full case study is available on
+              request.
+            </p>
+          </div>
+        ) : p.metric && (
           /* The proof line. Sits under the title behind a hairline so it
              reads as evidence for the name above it rather than more
              description, and it is capped in width so it never runs under
