@@ -134,7 +134,7 @@ export default function WorkRail({
     >
       <div
         ref={frameRef}
-        className="sticky top-0 flex h-dvh flex-col overflow-hidden pb-8 pt-24 md:pb-10 md:pt-28"
+        className="sticky top-0 flex h-dvh flex-col overflow-hidden pb-6 pt-24 md:pb-8 md:pt-28"
       >
         <div className="flex items-end justify-between gap-6 px-6 md:px-[100px]">
           <div className="min-w-0 flex-1">{header}</div>
@@ -156,10 +156,10 @@ export default function WorkRail({
           </div>
         </div>
 
-        <div className="relative mt-6 flex min-h-0 flex-1 items-center md:mt-8">
+        <div className="relative mt-5 flex min-h-0 flex-1 items-center md:mt-6">
           <motion.div
             ref={trackRef}
-            className="flex h-full max-h-[52rem] w-max items-stretch gap-4 pl-6 md:gap-6 md:pl-[100px]"
+            className="flex h-full max-h-[56rem] w-max items-stretch gap-4 pl-6 md:gap-6 md:pl-[100px]"
             style={{ x }}
           >
             {projects.map((p, i) => (
