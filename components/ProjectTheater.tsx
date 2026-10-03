@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
@@ -14,39 +14,52 @@ import ProjectSlide from "./ProjectSlide";
 /* The choreography runs on its own clock, `t`, rather than raw scroll
    progress, so each beat can be written as a start time and a length:
 
-     0.00-0.50  the title splits, "Selected" off left and "Work" off right
-     0.10-1.15  the first card fades in and zooms from a small preview to
-                full bleed
-     1.25-1.95  it settles back to its resting inset, corners rounding
-     2.10 ...   each later card rises over the one before, which recedes
+     0.00-0.25  hold: the title reads as giant letters cut out of the page,
+                the first project showing through them
+     0.25-1.60  the camera dives into the L until its stem fills the screen,
+                landing inside the first project at full bleed
+     1.70-2.40  the first card settles back to its resting inset
+     2.60 ...   each later card rises over the one before, which recedes
                 and dims; one every 1.25
 
    One unit of `t` is one screen of scrolling, so the pin lasts as long as
    the sequence does. */
+const DIVE_START = 0.25;
+const DIVE_END = 1.6;
+const SETTLE_START = 1.7;
+const SETTLE_END = 2.4;
+const FIRST_RISE = 2.6;
+const STEP = 1.25;
+const RISE = 1.1;
+
 const REST = 0.9; // resting scale of the active card
 const RECEDE = 0.82; // scale a covered card drops to
 const DIMMED = 0.55; // opacity of a covered card
 const RADIUS = 28; // resting corner radius, px
-const FIRST_RISE = 2.1;
-const STEP = 1.25;
-const RISE = 1.1;
+
+const LINES = ["SELECTED", "WORK"] as const;
+/** The letter the camera dives into: the L in SELECTED, whose stem is the
+    tallest solid stroke in the title. */
+const DIVE_LINE = 0;
+const DIVE_CHAR = 2;
 
 const riseAt = (i: number) => FIRST_RISE + STEP * (i - 1);
 const lengthFor = (count: number) =>
-  count > 1 ? riseAt(count - 1) + RISE : 1.95;
+  count > 1 ? riseAt(count - 1) + RISE : SETTLE_END;
 
-// The curves GSAP calls power1/power2: quadratic and cubic.
 const linear = (x: number) => x;
-const outQuad = (x: number) => 1 - (1 - x) ** 2;
-const inCubic = (x: number) => x ** 3;
 const outCubic = (x: number) => 1 - (1 - x) ** 3;
 const inOutCubic = (x: number) =>
   x < 0.5 ? 4 * x ** 3 : 1 - (-2 * x + 2) ** 3 / 2;
+const inOutQuad = (x: number) =>
+  x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2;
 
 /**
- * Selected work as a pinned theater. The section holds the screen while a
- * giant title parts to let the first project zoom up to full screen, then
- * each project after it stacks up over the last.
+ * Selected work as a pinned theater. The section holds the screen on a
+ * giant title cut out of the page, with the first project visible only
+ * through the letters. Scrolling dives into one letter until the project
+ * fills the screen; it settles, and each project after it stacks up over
+ * the last.
  *
  * Plain sticky positioning over a tall section, driven by framer-motion's
  * scroll progress. Lenis drives native scroll, so it needs no wiring here.
@@ -70,17 +83,12 @@ export default function ProjectTheater({
   });
   const t = useTransform(scrollYProgress, [0, 1], [0, length]);
 
-  const leftX = useTransform(t, [0, 0.5], ["-10%", "-165%"], { ease: inCubic });
-  const rightX = useTransform(t, [0, 0.5], ["10%", "165%"], { ease: inCubic });
-  const titleOpacity = useTransform(t, [0, 0.5], [1, 0], { ease: inCubic });
-  const blurbOpacity = useTransform(t, [0, 0.2], [1, 0]);
-
   // Focus lands on a card that may still be waiting below the screen.
   // Scroll the page to the moment that card is at rest instead.
   const focusCard = (i: number) => {
     const section = sectionRef.current;
     if (!section || reduce) return;
-    const at = i === 0 ? 1.95 : riseAt(i) + RISE;
+    const at = i === 0 ? SETTLE_END : riseAt(i) + RISE;
     const top = section.getBoundingClientRect().top + window.scrollY;
     const travel = section.offsetHeight - window.innerHeight;
     window.scrollTo({ top: top + (at / length) * travel, behavior: "instant" });
@@ -88,8 +96,18 @@ export default function ProjectTheater({
 
   if (reduce) {
     return (
-      <div className="px-6 md:px-[100px]">
-        <Title blurb={blurb} />
+      <div className="px-6 pt-24 md:px-[100px] md:pt-32">
+        <h2 className="heading text-center font-bold uppercase leading-[0.84] tracking-[-0.03em]">
+          <span className="block text-[#eceade]" style={{ fontSize: "clamp(3.25rem, 15vw, 13rem)" }}>
+            Selected
+          </span>
+          <span className="block text-accent" style={{ fontSize: "clamp(3.25rem, 15vw, 13rem)" }}>
+            Work
+          </span>
+        </h2>
+        <p className="mx-auto mt-8 max-w-sm text-center text-sm leading-relaxed text-muted">
+          {blurb}
+        </p>
         <div className="mt-12 flex flex-col gap-6">
           {projects.map((p, i) => (
             <div
@@ -112,7 +130,9 @@ export default function ProjectTheater({
       style={{ height: `${(1 + length) * 100}svh` }}
     >
       <div className="sticky top-0 h-svh overflow-hidden">
-        <div className="absolute inset-0">
+        {/* `isolate` keeps the cards' z-indexes inside this layer, so the
+            title mask after it always paints on top. */}
+        <div className="absolute inset-0 isolate">
           {projects.map((p, i) => (
             <Card key={p.slug} t={t} index={i} count={projects.length}>
               <ProjectSlide p={p} index={i} onFocus={() => focusCard(i)} />
@@ -120,71 +140,278 @@ export default function ProjectTheater({
           ))}
         </div>
 
-        {/* Above the cards, so the words fly out over the first one as it
-            grows. Never takes the pointer, so the card stays clickable. */}
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6">
-          <Title
-            blurb={blurb}
-            leftX={leftX}
-            rightX={rightX}
-            opacity={titleOpacity}
-            blurbOpacity={blurbOpacity}
-          />
-        </div>
+        <TitleMask t={t} blurb={blurb} />
       </div>
     </div>
   );
 }
 
-function Title({
+type Geometry = {
+  w: number;
+  h: number;
+  /** Font size and the two baselines, in px. */
+  size: number;
+  baselines: [number, number];
+  /** The point the dive zooms into: the middle of the L's stem. */
+  origin: { x: number; y: number };
+  /** Scale at which the stem covers the whole screen. */
+  maxScale: number;
+};
+
+/**
+ * The page colour with the title punched out of it, laid over the first
+ * card. Scaling it up around a point inside a letter's stem is the dive:
+ * the stem grows until it is wider than the screen, and the card behind is
+ * all that is left.
+ */
+function TitleMask({
+  t,
   blurb,
-  leftX,
-  rightX,
-  opacity,
-  blurbOpacity,
 }: {
+  t: MotionValue<number>;
   blurb: string;
-  leftX?: MotionValue<string>;
-  rightX?: MotionValue<string>;
-  opacity?: MotionValue<number>;
-  blurbOpacity?: MotionValue<number>;
 }) {
-  // Sized like the hero's "Product Designer", same cream-then-accent pair,
-  // so the two biggest moments on the page read as one voice.
-  const size = { fontSize: "clamp(3.25rem, 15vw, 13rem)" };
+  const frameRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<SVGTextElement>(null);
+  const [geo, setGeo] = useState<Geometry | null>(null);
+
+  // Layout is measured, not guessed: the SVG needs real pixel baselines,
+  // and the dive needs the exact column of the L's stem, which depends on
+  // the font. The stem is found by drawing the letter to a canvas and
+  // reading back one row of pixels.
+  useLayoutEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+    let cancelled = false;
+
+    const measure = async () => {
+      await document.fonts.ready;
+      if (cancelled) return;
+      const w = frame.clientWidth;
+      const h = frame.clientHeight;
+      // Larger share of the width on phones, where 15vw leaves the
+      // letters too thin to see the project through.
+      const size = Math.min(Math.max(w * (w < 768 ? 0.2 : 0.15), 52), 208);
+      const lead = size * 0.84;
+      const first = h / 2 - lead * 0.15;
+      const baselines: [number, number] = [first, first + lead];
+      // Provisional geometry so the text renders and can be measured.
+      setGeo((g) => ({
+        w,
+        h,
+        size,
+        baselines,
+        origin: g?.origin ?? { x: w / 2, y: h / 2 },
+        maxScale: g?.maxScale ?? 60,
+      }));
+
+      requestAnimationFrame(() => {
+        const text = textRef.current;
+        if (!text || cancelled) return;
+        const family = getComputedStyle(text).fontFamily;
+        const box = text.getExtentOfChar(DIVE_CHAR);
+
+        const canvas = document.createElement("canvas");
+        const pad = Math.ceil(size);
+        canvas.width = pad * 2;
+        canvas.height = pad * 2;
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+        ctx.font = `700 ${size}px ${family}`;
+        ctx.fillStyle = "#000";
+        const letter = LINES[DIVE_LINE][DIVE_CHAR];
+        ctx.fillText(letter, 0, pad);
+        const ascent = ctx.measureText(letter).actualBoundingBoxAscent;
+        const row = Math.round(pad - ascent * 0.45);
+        const pixels = ctx.getImageData(0, row, canvas.width, 1).data;
+
+        // First solid run on that row is the stem.
+        let start = -1;
+        let end = -1;
+        for (let x = 0; x < canvas.width; x++) {
+          const solid = pixels[x * 4 + 3] > 200;
+          if (solid && start < 0) start = x;
+          if (!solid && start >= 0) {
+            end = x;
+            break;
+          }
+        }
+        if (start < 0 || end < 0) return;
+
+        const origin = {
+          x: box.x + (start + end) / 2,
+          y: baselines[DIVE_LINE] - ascent * 0.45,
+        };
+        // The camera pans the stem to the centre as it dives, so it only
+        // has to grow until half its width reaches a corner from there.
+        const reach = Math.hypot(w / 2, h / 2);
+        const maxScale = (reach / ((end - start) / 2)) * 1.15;
+        setGeo({ w, h, size, baselines, origin, maxScale });
+      });
+    };
+
+    measure();
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(frame);
+    return () => {
+      cancelled = true;
+      ro.disconnect();
+    };
+  }, []);
+
+  const maxScale = geo?.maxScale ?? 60;
+  const dive = useTransform(t, (v) =>
+    Math.min(Math.max((v - DIVE_START) / (DIVE_END - DIVE_START), 0), 1),
+  );
+  // Interpolated in log space, so the dive feels like constant forward
+  // speed rather than crawling at the start and teleporting at the end.
+  const scale = useTransform(dive, (p) =>
+    Math.exp(Math.log(maxScale) * inOutQuad(p) ** 1.6),
+  );
+  // The pan: brings the stem from wherever it sits in the word to the
+  // middle of the screen, front-loaded so it is centred before the zoom
+  // gets fast.
+  const panX = useTransform(dive, (p) =>
+    geo ? (geo.w / 2 - geo.origin.x) * outCubic(p) : 0,
+  );
+  const panY = useTransform(dive, (p) =>
+    geo ? (geo.h / 2 - geo.origin.y) * outCubic(p) : 0,
+  );
+  // A safety net: if the stem ever misses the screen centre, the mask
+  // still clears before the card is meant to be seen whole.
+  const maskOpacity = useTransform(t, [DIVE_END - 0.2, DIVE_END], [1, 0]);
+  const extrasOpacity = useTransform(t, [0, DIVE_START + 0.2], [1, 0]);
+
   return (
-    <div className="flex flex-col items-center text-center">
-      <h2 className="heading flex flex-col font-bold uppercase leading-[0.84] tracking-[-0.03em]">
-        <motion.span
-          className="block text-[#eceade]"
-          style={{ ...size, x: leftX, opacity }}
+    <div
+      ref={frameRef}
+      aria-hidden
+      className="pointer-events-none absolute inset-0"
+    >
+      {geo && (
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{
+            x: panX,
+            y: panY,
+            scale,
+            opacity: maskOpacity,
+            transformOrigin: `${geo.origin.x}px ${geo.origin.y}px`,
+          }}
         >
-          Selected
-        </motion.span>
-        <motion.span
-          className="block text-accent"
-          style={{ ...size, x: rightX, opacity }}
-        >
-          Work
-          <sup className="ml-3 align-super text-base font-normal tracking-normal text-muted md:text-xl">
+          {/* The page-colour sheet runs well past every edge, so panning
+              it toward the letter never uncovers the card behind. */}
+          <svg width={geo.w} height={geo.h} className="block overflow-visible">
+            <defs>
+              <mask
+                id="work-title-mask"
+                maskUnits="userSpaceOnUse"
+                x={-geo.w}
+                y={-geo.h}
+                width={geo.w * 3}
+                height={geo.h * 3}
+              >
+                <rect
+                  x={-geo.w}
+                  y={-geo.h}
+                  width={geo.w * 3}
+                  height={geo.h * 3}
+                  fill="white"
+                />
+                <Lines geo={geo} fill="black" />
+              </mask>
+            </defs>
+            <rect
+              x={-geo.w}
+              y={-geo.h}
+              width={geo.w * 3}
+              height={geo.h * 3}
+              style={{ fill: "var(--background)" }}
+              mask="url(#work-title-mask)"
+            />
+            {/* A hairline round each letter, so the cut-outs keep their
+                shape where the photo behind them is dark. */}
+            <Lines
+              geo={geo}
+              textRef={textRef}
+              fill="none"
+              stroke="rgba(236,234,222,0.35)"
+            />
+          </svg>
+        </motion.div>
+      )}
+
+      {/* Count and blurb sit outside the mask and leave as the dive starts. */}
+      {geo && (
+        <motion.div style={{ opacity: extrasOpacity }}>
+          <span
+            className="absolute text-base text-muted md:text-xl"
+            style={{
+              left: geo.w / 2 + geo.size * 1.32,
+              top: geo.baselines[1] - geo.size * 0.72,
+            }}
+          >
             ({allProjects.length})
-          </sup>
-        </motion.span>
-      </h2>
-      <motion.p
-        className="mt-8 max-w-sm text-sm leading-relaxed text-muted"
-        style={{ opacity: blurbOpacity }}
-      >
-        {blurb}
-      </motion.p>
+          </span>
+          <p
+            className="absolute left-1/2 w-[min(24rem,calc(100%-3rem))] -translate-x-1/2 text-center text-sm leading-relaxed text-muted"
+            style={{ top: geo.baselines[1] + geo.size * 0.35 }}
+          >
+            {blurb}
+          </p>
+        </motion.div>
+      )}
+
+      {/* The real heading, for assistive tech and search; the SVG is
+          decorative. */}
+      <h2 className="sr-only">Selected work</h2>
     </div>
   );
 }
 
+function Lines({
+  geo,
+  textRef,
+  fill,
+  stroke,
+}: {
+  geo: Geometry;
+  textRef?: React.Ref<SVGTextElement>;
+  fill: string;
+  stroke?: string;
+}) {
+  return (
+    <>
+      {LINES.map((line, i) => (
+        <text
+          key={line}
+          ref={i === DIVE_LINE ? textRef : undefined}
+          x={geo.w / 2}
+          y={geo.baselines[i]}
+          textAnchor="middle"
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={stroke ? 1 : undefined}
+          vectorEffect={stroke ? "non-scaling-stroke" : undefined}
+          className="font-heading"
+          style={{
+            fontSize: geo.size,
+            fontWeight: 700,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          {line}
+        </text>
+      ))}
+    </>
+  );
+}
+
 /**
- * One card's part in the sequence. The first zooms up out of the title;
- * every later one waits just below the screen and rises over its
- * predecessor. Each recedes once the next one covers it.
+ * One card's part in the sequence. The first sits at full bleed behind the
+ * title and eases back once the dive lands; every later one waits just
+ * below the screen and rises over its predecessor. Each recedes once the
+ * next one covers it.
  */
 function Card({
   t,
@@ -205,26 +432,23 @@ function Card({
   const recedeFrom = covered ? coveredAt : 1e3;
   const recedeTo = covered ? coveredAt + RISE : 1e3 + 1;
 
+  // The first card drifts in from slightly oversized while the dive plays,
+  // so the photo is moving toward you too.
   const scale = useTransform(
     t,
     first
-      ? [0.15, 1.15, 1.25, 1.95, recedeFrom, recedeTo]
+      ? [DIVE_START, DIVE_END, SETTLE_START, SETTLE_END, recedeFrom, recedeTo]
       : [recedeFrom, recedeTo],
-    first
-      ? [0.26, 1, 1, REST, REST, RECEDE]
-      : [REST, RECEDE],
+    first ? [1.12, 1, 1, REST, REST, RECEDE] : [REST, RECEDE],
     {
       ease: first
         ? [outCubic, linear, inOutCubic, linear, outCubic]
         : [outCubic],
     },
   );
-  const opacity = useTransform(
-    t,
-    first ? [0.1, 0.45, recedeFrom, recedeTo] : [recedeFrom, recedeTo],
-    first ? [0, 1, 1, DIMMED] : [1, DIMMED],
-    { ease: first ? [outQuad, linear, outCubic] : [outCubic] },
-  );
+  const opacity = useTransform(t, [recedeFrom, recedeTo], [1, DIMMED], {
+    ease: outCubic,
+  });
   const y = useTransform(
     t,
     first ? [0, 1] : [riseAt(index), riseAt(index) + RISE],
@@ -235,7 +459,7 @@ function Card({
   // already at rest, so they are round from the start.
   const radius = useTransform(
     t,
-    [1.25, 1.95],
+    [SETTLE_START, SETTLE_END],
     first ? [0, RADIUS] : [RADIUS, RADIUS],
     { ease: inOutCubic },
   );
