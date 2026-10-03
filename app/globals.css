@@ -156,6 +156,30 @@ html.lenis body {
 
 /* The starburst beside every heading. A transform-only animation, so it
    stays on the compositor no matter how many headings are on the page. */
+/* Footer (Footer.tsx): the larger list type, and links that draw an
+   underline from the left on hover. */
+.footer-big {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .footer-big {
+    font-size: 1.375rem;
+  }
+}
+.footer-link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px
+    no-repeat;
+  transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.footer-link:hover,
+.footer-link:focus-visible {
+  background-size: 100% 1px;
+}
+
 /* /work title (WorkHero): the letters wipe up from their baseline on load
    while the covers inside them settle from a zoom, then the covers drift
    sideways for good. */

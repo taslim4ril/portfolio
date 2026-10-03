@@ -2,19 +2,22 @@
 // the supplied logo so it stays crisp at any size and needs no image request.
 export default function Logo({
   className = "h-10 w-10",
+  inverted = false,
 }: {
   className?: string;
+  /** Dark badge, light mark: for light surfaces such as the footer. */
+  inverted?: boolean;
 }) {
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-full bg-white ${className}`}
+      className={`inline-flex items-center justify-center rounded-full ${inverted ? "bg-[#0a0a0b]" : "bg-white"} ${className}`}
     >
       <svg
         viewBox="0 0 250 260"
         className="h-[58%] w-[58%] translate-y-[2%]"
         aria-hidden
       >
-        <g fill="#141414">
+        <g fill={inverted ? "#eceade" : "#141414"}>
           {/* T bar + stem */}
           <rect x="20" y="18" width="116" height="44" />
           <rect x="55" y="62" width="41" height="180" />
