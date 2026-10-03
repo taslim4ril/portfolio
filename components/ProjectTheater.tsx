@@ -24,7 +24,8 @@ import ProjectSlide from "./ProjectSlide";
 
    Beats run back to back with no dead scroll between them, and one unit of
    `t` is SCREENS_PER_UNIT screens of scrolling. Three projects take about
-   two screens end to end; anything much longer reads as a chore. */
+   three screens end to end: slow enough to watch each beat, short of the
+   five it once took, which read as a chore. */
 const DIVE_START = 0.08;
 const DIVE_END = 0.9;
 const SETTLE_START = 0.92;
@@ -32,7 +33,7 @@ const SETTLE_END = 1.3;
 const FIRST_RISE = 1.3;
 const STEP = 0.85;
 const RISE = 0.75;
-const SCREENS_PER_UNIT = 0.7;
+const SCREENS_PER_UNIT = 1.05;
 
 const REST = 0.9; // resting scale of the active card
 const RECEDE = 0.82; // scale a covered card drops to

@@ -1,11 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
 import { type Project, site } from "@/lib/data";
 import { renderMetric } from "./WorkCard";
-
-const spring = { stiffness: 350, damping: 32, mass: 0.6 };
+import CaseCursor from "./CaseCursor";
 
 /**
  * One project in the homepage theater: the image fills the card edge to edge
@@ -33,26 +31,12 @@ export default function ProjectSlide({
   const image = p.locked ? p.lockedImage : p.image;
   const action = p.locked ? "Request access" : "Read case study";
 
-  // Cursor-follow pill over the image. Motion values only, so following the
-  // pointer never re-renders the card.
   const frameRef = useRef<HTMLAnchorElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const followX = useSpring(x, spring);
-  const followY = useSpring(y, spring);
-  const follow = (e: React.MouseEvent) => {
-    const rect = frameRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
-  };
 
   return (
     <a
       ref={frameRef}
       href={href}
-      onMouseMove={follow}
-      onMouseEnter={follow}
       onFocus={onFocus}
       className="group relative block h-full w-full overflow-hidden bg-surface"
     >
@@ -106,17 +90,7 @@ export default function ProjectSlide({
         </dl>
       </div>
 
-      {/* Pointer-only, decorative: the whole card is already the link. */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute left-0 top-0 hidden md:block"
-        style={{ x: followX, y: followY }}
-      >
-        <div className="flex -translate-x-1/2 -translate-y-1/2 scale-90 items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-background/60 px-5 py-2.5 text-base font-medium text-white opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-[opacity,transform] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100">
-          {action}
-          <Arrow className="h-3.5 w-3.5" />
-        </div>
-      </motion.div>
+      <CaseCursor targetRef={frameRef} label={action} />
 
       {/* ===== Caption ===== */}
       <div className="absolute inset-x-5 bottom-6 flex items-end justify-between gap-6 md:inset-x-12 md:bottom-12">

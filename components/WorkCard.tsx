@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 import { type Project, site } from "@/lib/data";
+import CaseCursor from "./CaseCursor";
 
 export default function WorkCard({
   p,
@@ -27,33 +27,11 @@ export default function WorkCard({
     : (href ?? `/work/${p.slug}`);
   const image = p.locked ? p.lockedImage : p.image;
   const cardRef = useRef<HTMLAnchorElement>(null);
-  const [hovering, setHovering] = useState(false);
-
-  // Cursor-follow button: position is driven by real mouse coordinates
-  // relative to the card, smoothed with a spring so it trails slightly
-  // rather than snapping.
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 350, damping: 32, mass: 0.6 });
-  const springY = useSpring(y, { stiffness: 350, damping: 32, mass: 0.6 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
-  };
 
   return (
     <a
       ref={cardRef}
       href={target}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={(e) => {
-        setHovering(true);
-        handleMouseMove(e);
-      }}
-      onMouseLeave={() => setHovering(false)}
       className={`${rise ? "card-rise " : ""}group relative block overflow-hidden rounded-[2.5rem] bg-surface ${className}`}
     >
       {/* Image. Optional: a project can exist before its shots do, and a
@@ -111,25 +89,10 @@ export default function WorkCard({
         ))}
       </div>
 
-      {/* Cursor-follow "Read case study" button — desktop only (fine
-          pointers), purely decorative, so it never blocks the card's own
-          click target. */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute left-0 top-0 z-10 hidden md:block"
-        style={{ x: springX, y: springY }}
-      >
-        <div
-          className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-black/40 px-6 py-3 text-base font-medium text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 ease-out"
-          style={{
-            opacity: hovering ? 1 : 0,
-            transform: `translate(-50%, -50%) scale(${hovering ? 1 : 0.9})`,
-          }}
-        >
-          {p.locked ? "Request access" : "Read case study"}
-          <span className="text-base">↗</span>
-        </div>
-      </motion.div>
+      <CaseCursor
+        targetRef={cardRef}
+        label={p.locked ? "Request access" : "Read case study"}
+      />
 
       {/* Title block */}
       <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10">

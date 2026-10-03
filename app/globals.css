@@ -156,6 +156,13 @@ html.lenis body {
 
 /* The starburst beside every heading. A transform-only animation, so it
    stays on the compositor no matter how many headings are on the page. */
+/* The label ring on the project-card cursor badge (CaseCursor). */
+@keyframes case-cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes heading-mark-spin {
   to {
     transform: rotate(360deg);
