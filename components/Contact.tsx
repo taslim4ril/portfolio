@@ -76,8 +76,8 @@ export default function Contact() {
           </p>
 
           <p className="mt-8 max-w-md text-lg leading-relaxed text-muted md:text-xl">
-            Tell me about a role, a project or a quick question. A short note
-            on what you are building is plenty, and I will get back to you.
+            Have a role, a project or a question? Send me a message and I
+            will reply.
           </p>
 
           <p className="mt-10 text-base text-muted">
