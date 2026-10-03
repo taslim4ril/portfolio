@@ -130,7 +130,7 @@ export default function ContactForm() {
   const sending = status === "sending";
 
   return (
-    <form onSubmit={submit} noValidate className="flex flex-1 flex-col gap-6">
+    <form onSubmit={submit} noValidate className="flex flex-1 flex-col justify-center gap-6">
       <div className="grid gap-6 sm:grid-cols-2">
         <Field
           id="name"
@@ -173,7 +173,6 @@ export default function ContactForm() {
         onBlur={leave("message")}
         error={touched.message ? errors.message : undefined}
         placeholder="Hi Taslim, I'm working on..."
-        grow
       />
 
       {/* Honeypot: hidden from people and screen readers, tempting to bots. */}

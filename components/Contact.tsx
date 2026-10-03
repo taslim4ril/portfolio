@@ -51,9 +51,9 @@ export default function Contact() {
       </div>
 
       {/* ===== Content ===== */}
-      {/* Pitch on the left, form on the right, together filling the screen
-          between the nav and the bottom edge; stacked on smaller screens. */}
-      <div className="relative grid w-full gap-14 lg:min-h-[calc(100dvh-13rem)] lg:grid-cols-12 lg:gap-20">
+      {/* Pitch on the left, form on the right, across the full width and
+          centred in the screen; stacked on smaller screens. */}
+      <div className="relative grid w-full items-center gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="flex flex-col lg:col-span-5">
           <SectionBadge className="self-start">Contact</SectionBadge>
 
@@ -80,7 +80,7 @@ export default function Contact() {
             on what you are building is plenty, and I will get back to you.
           </p>
 
-          <p className="mt-10 text-base text-muted lg:mt-auto lg:pt-10">
+          <p className="mt-10 text-base text-muted">
             Prefer email?{" "}
             <a
               href={`mailto:${site.email}`}
