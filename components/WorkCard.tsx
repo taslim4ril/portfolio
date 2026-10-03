@@ -7,10 +7,17 @@ import { type Project, site } from "@/lib/data";
 export default function WorkCard({
   p,
   href,
+  className = "h-[76vh] min-h-[500px]",
+  rise = true,
 }: {
   p: Project;
   /** Where the card points. Defaults to the project's case-study page. */
   href?: string;
+  /** Sizing. The default suits a vertical list; the homepage rail sets its own. */
+  className?: string;
+  /** The CSS scale-in tied to vertical scroll. Off where the parent drives
+      the scale itself (the horizontal rail), since both would set transform. */
+  rise?: boolean;
 }) {
   const [first, ...rest] = p.title.split(" ");
   // A locked (NDA) project has no public page, so the card asks for access
@@ -47,7 +54,7 @@ export default function WorkCard({
         handleMouseMove(e);
       }}
       onMouseLeave={() => setHovering(false)}
-      className="card-rise group relative block h-[76vh] min-h-[500px] overflow-hidden rounded-[2.5rem] bg-surface"
+      className={`${rise ? "card-rise " : ""}group relative block overflow-hidden rounded-[2.5rem] bg-surface ${className}`}
     >
       {/* Image. Optional: a project can exist before its shots do, and a
           broken image icon reads worse than an honest empty frame. */}
