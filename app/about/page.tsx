@@ -21,7 +21,7 @@ export default function AboutPage() {
           <Reveal>
             <Link
               href="/"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
+              className="mb-6 inline-flex items-center gap-2 text-base text-muted transition-colors hover:text-white"
             >
               <span aria-hidden>←</span> Back home
             </Link>
@@ -42,7 +42,7 @@ export default function AboutPage() {
             <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
               {about.facts.map((f) => (
                 <div key={f.label} className="bg-background px-6 py-7">
-                  <dt className="text-sm text-muted">{f.label}</dt>
+                  <dt className="text-base text-muted">{f.label}</dt>
                   <dd className="mt-2 text-xl font-medium text-white">
                     {f.value}
                   </dd>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             {stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.08}>
                 <div className="text-center">
-                  <div className="border-t border-border pb-8 pt-4 text-sm text-muted">
+                  <div className="border-t border-border pb-8 pt-4 text-base text-muted">
                     {s.label}
                   </div>
                   <div className="heading text-[7.5rem] font-bold leading-none tracking-[-0.04em] text-white/90 md:text-[9rem]">
@@ -120,11 +120,11 @@ export default function AboutPage() {
               <Reveal key={`${role.company}-${role.period}`}>
                 <article className="grid gap-6 border-b border-border py-10 md:grid-cols-[15rem_1fr] md:gap-12">
                   <div>
-                    <div className="text-sm text-muted">{role.period}</div>
+                    <div className="text-base text-muted">{role.period}</div>
                     <div className="mt-2 text-lg font-medium text-white">
                       {role.company}
                     </div>
-                    <div className="mt-1 text-sm text-accent">{role.title}</div>
+                    <div className="mt-1 text-base text-accent">{role.title}</div>
                   </div>
                   <ul className="space-y-4">
                     {role.points.map((point, j) => (

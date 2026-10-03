@@ -193,7 +193,7 @@ export default function WhatIDo() {
               bold="I Do"
               className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
             />
-            <p className="max-w-xl text-base leading-relaxed text-muted">
+            <p className="max-w-xl text-lg leading-relaxed text-muted">
               Find the real problem. Then build the fix.
             </p>
           </div>
@@ -236,13 +236,13 @@ export default function WhatIDo() {
               </div>
 
               <div className="relative mt-10">
-                <span className="text-xs text-muted transition-colors duration-300 group-hover:text-[var(--tint-ink)]">
+                <span className="text-sm text-muted transition-colors duration-300 group-hover:text-[var(--tint-ink)]">
                   /{String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-2 text-xl font-medium text-white">
                   {s.title}
                 </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
+                  <p className="mt-3 text-base leading-relaxed text-muted">
                     {s.description}
                   </p>
                 </div>

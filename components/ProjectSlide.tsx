@@ -97,8 +97,8 @@ export default function ProjectSlide({
               key={m.k}
               className="flex flex-col-reverse border-b border-white/15 py-3 first:pt-0 last:border-b-0"
             >
-              <dt className="text-xs text-white/55">{m.k}</dt>
-              <dd className="text-sm font-medium tabular-nums text-white">
+              <dt className="text-sm text-white/55">{m.k}</dt>
+              <dd className="text-base font-medium tabular-nums text-white">
                 {m.v}
               </dd>
             </div>
@@ -112,7 +112,7 @@ export default function ProjectSlide({
         className="pointer-events-none absolute left-0 top-0 hidden md:block"
         style={{ x: followX, y: followY }}
       >
-        <div className="flex -translate-x-1/2 -translate-y-1/2 scale-90 items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-background/60 px-5 py-2.5 text-sm font-medium text-white opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-[opacity,transform] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100">
+        <div className="flex -translate-x-1/2 -translate-y-1/2 scale-90 items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-background/60 px-5 py-2.5 text-base font-medium text-white opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-[opacity,transform] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100">
           {action}
           <Arrow className="h-3.5 w-3.5" />
         </div>
@@ -121,7 +121,7 @@ export default function ProjectSlide({
       {/* ===== Caption ===== */}
       <div className="absolute inset-x-5 bottom-6 flex items-end justify-between gap-6 md:inset-x-12 md:bottom-12">
         <div className="min-w-0 max-w-2xl">
-          <p className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-white/70">
+          <p className="flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-white/70">
             <span className="tabular-nums text-accent">
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -133,7 +133,7 @@ export default function ProjectSlide({
           </h3>
           {/* The proof line, behind a hairline so it reads as evidence for
               the name above it rather than more description. */}
-          <p className="mt-4 line-clamp-4 max-w-xl border-t border-white/20 pt-4 text-sm leading-relaxed text-white/75 md:mt-5 md:line-clamp-2">
+          <p className="mt-4 line-clamp-4 max-w-2xl border-t border-white/20 pt-4 text-base leading-relaxed md:text-lg text-white/75 md:mt-5 md:line-clamp-2">
             {p.locked
               ? "Under NDA. The full case study is available on request."
               : p.metric && renderMetric(p.metric)}
@@ -160,7 +160,7 @@ function Pill({
 }) {
   return (
     <span
-      className={`rounded-full border border-white/15 bg-background/50 px-3.5 py-1.5 text-xs shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md ${className}`}
+      className={`rounded-full border border-white/15 bg-background/50 px-3.5 py-1.5 text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md ${className}`}
     >
       {children}
     </span>

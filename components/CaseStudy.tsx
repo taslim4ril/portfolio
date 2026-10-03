@@ -106,13 +106,13 @@ function Figure({
               <circle cx="8.5" cy="9" r="1.6" />
               <path d="M21 15l-5-5L5 21" />
             </svg>
-            <span className="text-[11px] uppercase tracking-widest">
+            <span className="text-sm uppercase tracking-widest">
               Image placeholder
             </span>
           </div>
         )}
         {caption && (
-          <figcaption className="mt-3 text-center text-sm text-muted">
+          <figcaption className="mt-3 text-center text-base text-muted">
             {figure != null && (
               <span className="font-medium text-white/80">
                 Figure {figure}.{" "}
@@ -125,7 +125,7 @@ function Figure({
             Narrower than the frame above it, so the note reads as commentary
             on the screen rather than a second label. */}
         {impact && (
-          <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-white/60">
+          <p className="mx-auto mt-3 max-w-2xl text-center text-base leading-relaxed text-white/60">
             {impact}
           </p>
         )}
@@ -154,7 +154,7 @@ function Rating({ rating, note }: CaseRating) {
         {label}
       </span>
       {note && (
-        <span className="mt-1 block whitespace-normal text-sm leading-snug text-white/60">
+        <span className="mt-1 block whitespace-normal text-base leading-snug text-white/60">
           {note}
         </span>
       )}
@@ -284,7 +284,7 @@ function Block({ block }: { block: CaseBlock }) {
                 <div className="grid gap-6 rounded-3xl border border-border bg-surface/60 p-8 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-10">
                   <div>
                     <div className="flex items-baseline gap-3">
-                      <span className="text-sm text-muted">
+                      <span className="text-base text-muted">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-2xl font-medium text-white">
@@ -296,7 +296,7 @@ function Block({ block }: { block: CaseBlock }) {
                     </p>
                   </div>
                   <div className="rounded-2xl bg-accent/10 px-6 py-5 md:min-w-[13rem]">
-                    <div className="text-[11px] uppercase tracking-widest text-accent/80">
+                    <div className="text-sm uppercase tracking-widest text-accent/80">
                       Result
                     </div>
                     <div className="mt-1 text-lg font-medium text-accent">
@@ -335,7 +335,7 @@ function Block({ block }: { block: CaseBlock }) {
                       ] as const
                     ).map(([side, src]) => (
                       <div key={side}>
-                        <div className="mb-2.5 text-[11px] uppercase tracking-widest text-muted">
+                        <div className="mb-2.5 text-sm uppercase tracking-widest text-muted">
                           {side}
                         </div>
                         {src ? (
@@ -353,7 +353,7 @@ function Block({ block }: { block: CaseBlock }) {
                               <circle cx="8.5" cy="9" r="1.6" />
                               <path d="M21 15l-5-5L5 21" />
                             </svg>
-                            <span className="text-[10px] uppercase tracking-widest">
+                            <span className="text-xs uppercase tracking-widest">
                               {side} placeholder
                             </span>
                           </div>
@@ -364,10 +364,10 @@ function Block({ block }: { block: CaseBlock }) {
                   {/* Description sits under the pair, not between the frames,
                       so the two are compared before they're explained. */}
                   <figcaption className="mx-auto mt-6 max-w-3xl">
-                    <span className="block text-sm font-medium text-white">
+                    <span className="block text-base font-medium text-white">
                       {item.label}
                     </span>
-                    <span className="mt-2 block text-sm leading-relaxed text-white/55">
+                    <span className="mt-2 block text-base leading-relaxed text-white/55">
                       {item.caption}
                     </span>
                   </figcaption>
@@ -396,7 +396,7 @@ function Block({ block }: { block: CaseBlock }) {
               <Reveal key={i} delay={i * 0.05}>
                 <div className="rounded-3xl border border-border bg-surface/60 p-8 md:p-10">
                   <div className="flex items-baseline gap-3">
-                    <span className="text-sm text-muted">
+                    <span className="text-base text-muted">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="text-2xl font-medium text-white">
@@ -405,7 +405,7 @@ function Block({ block }: { block: CaseBlock }) {
                   </div>
                   <dl className="mt-6 space-y-5">
                     <div>
-                      <dt className="text-[11px] uppercase tracking-widest text-muted">
+                      <dt className="text-sm uppercase tracking-widest text-muted">
                         The problem
                       </dt>
                       <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/60">
@@ -413,7 +413,7 @@ function Block({ block }: { block: CaseBlock }) {
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-[11px] uppercase tracking-widest text-accent/80">
+                      <dt className="text-sm uppercase tracking-widest text-accent/80">
                         The decision
                       </dt>
                       <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/90">
@@ -422,7 +422,7 @@ function Block({ block }: { block: CaseBlock }) {
                     </div>
                     {item.note && (
                       <div className="border-t border-border pt-5">
-                        <dt className="text-[11px] uppercase tracking-widest text-muted">
+                        <dt className="text-sm uppercase tracking-widest text-muted">
                           {item.note.label}
                         </dt>
                         <dd className="mt-1.5 max-w-2xl leading-relaxed text-white/60">
@@ -470,7 +470,7 @@ function Block({ block }: { block: CaseBlock }) {
                   </div>
                   <div className="mt-3 text-base text-white/60">{m.label}</div>
                   {m.baseline && (
-                    <div className="mt-2 text-sm leading-relaxed text-white/60">
+                    <div className="mt-2 text-base leading-relaxed text-white/60">
                       {m.baseline}
                     </div>
                   )}
@@ -493,7 +493,7 @@ function Block({ block }: { block: CaseBlock }) {
         <Reveal>
           <div className="mx-auto max-w-4xl space-y-8 border-t border-border pt-16 text-center">
             {block.heading && (
-              <div className="text-sm uppercase tracking-[0.3em] text-accent">
+              <div className="text-base uppercase tracking-[0.3em] text-accent">
                 {block.heading}
               </div>
             )}
@@ -572,7 +572,7 @@ function Block({ block }: { block: CaseBlock }) {
                                 : ""
                             }
                           >
-                            <dt className="text-[11px] uppercase tracking-widest text-muted">
+                            <dt className="text-sm uppercase tracking-widest text-muted">
                               {block.columns[ci + 1]}
                             </dt>
                             <dd
@@ -603,7 +603,7 @@ function Block({ block }: { block: CaseBlock }) {
                         <th
                           key={i}
                           scope="col"
-                          className="px-5 py-4 align-bottom text-[11px] font-medium uppercase tracking-widest text-muted"
+                          className="px-5 py-4 align-bottom text-sm font-medium uppercase tracking-widest text-muted"
                         >
                           {c}
                         </th>
@@ -667,7 +667,7 @@ function Block({ block }: { block: CaseBlock }) {
                 </table>
               </div>
               {block.caption && (
-                <figcaption className="mt-3 text-center text-sm text-muted">
+                <figcaption className="mt-3 text-center text-base text-muted">
                   {block.table != null && (
                     <span className="font-medium text-white/80">Table {block.table}. </span>
                   )}
@@ -723,12 +723,12 @@ export default function CaseStudy({
         <Reveal>
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
+            className="inline-flex items-center gap-2 text-base text-muted transition-colors hover:text-white"
           >
             <span aria-hidden>←</span> All work
           </Link>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-muted">
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-muted">
             <span className="rounded-full border border-border px-3 py-1">
               {project.category}
             </span>
@@ -763,7 +763,7 @@ export default function CaseStudy({
                   <circle cx="8.5" cy="9" r="1.6" />
                   <path d="M21 15l-5-5L5 21" />
                 </svg>
-                <span className="text-[11px] uppercase tracking-widest">
+                <span className="text-sm uppercase tracking-widest">
                   Cover image placeholder
                 </span>
               </div>
@@ -793,7 +793,7 @@ export default function CaseStudy({
           <dl className="mt-12 grid grid-cols-2 gap-8 border-y border-border py-10 md:grid-cols-4">
             {cs.meta.map((m) => (
               <div key={m.label}>
-                <dt className="text-xs uppercase tracking-widest text-muted">
+                <dt className="text-sm uppercase tracking-widest text-muted">
                   {m.label}
                 </dt>
                 <dd className="mt-2 text-base text-white/90">{m.value}</dd>
@@ -825,7 +825,7 @@ export default function CaseStudy({
         className="group block border-t border-border px-6 py-20 transition-colors hover:bg-surface/40 md:px-[100px] md:py-28"
       >
         <div className="mx-auto max-w-5xl">
-          <div className="text-sm uppercase tracking-[0.25em] text-muted">
+          <div className="text-base uppercase tracking-[0.25em] text-muted">
             Next project
           </div>
           <div className="mt-4 flex items-center justify-between gap-6">

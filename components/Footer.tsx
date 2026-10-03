@@ -10,13 +10,13 @@ export default function Footer() {
           {/* One plain line. The globe badge and the rotated country code
               were decoration; where you are and whether you are free is the
               information. */}
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">
+          <p className="text-sm uppercase tracking-[0.2em] text-muted">
             {site.location} · Working with teams anywhere
           </p>
 
           {/* A free proof point: the site is the work, so say who built it
               and leave the source one click away. */}
-          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted">
+          <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted">
             This site is Next.js, built and deployed by me.{" "}
             <a
               href={site.repo}
@@ -28,7 +28,7 @@ export default function Footer() {
             </a>
           </p>
 
-          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted">
+          <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted">
             © {new Date().getFullYear()} {site.name.split(" ")[0]}, all
             rights reserved.
           </p>
@@ -38,7 +38,7 @@ export default function Footer() {
         <div>
           {/* Same letterspaced caps as the hero's small type. The uppercase
               is CSS only, so the mailto address itself is untouched. */}
-          <div className="grid grid-cols-2 gap-x-12 gap-y-2.5 text-xs uppercase tracking-[0.2em] md:text-sm">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-2.5 text-sm uppercase tracking-[0.2em] md:text-base">
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
           <a
             href={`mailto:${site.email}`}
-            className="mt-5 block text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-foreground md:text-sm"
+            className="mt-5 block text-sm uppercase tracking-[0.2em] text-muted transition-colors hover:text-foreground md:text-base"
           >
             {site.email}
           </a>

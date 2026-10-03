@@ -107,7 +107,7 @@ export default function ProjectTheater({
             Work
           </span>
         </h2>
-        <p className="mx-auto mt-8 max-w-sm text-center text-sm leading-relaxed text-muted">
+        <p className="mx-auto mt-8 max-w-md text-center text-base leading-relaxed text-muted md:text-lg">
           {blurb}
         </p>
         <div className="mt-12 flex flex-col gap-6">
@@ -347,7 +347,7 @@ function TitleMask({
       {geo && (
         <motion.div style={{ opacity: extrasOpacity }}>
           <span
-            className="absolute text-base text-muted md:text-xl"
+            className="absolute text-lg text-muted md:text-2xl"
             style={{
               left: geo.w / 2 + geo.size * 1.32,
               top: geo.baselines[1] - geo.size * 0.72,
@@ -356,7 +356,7 @@ function TitleMask({
             ({allProjects.length})
           </span>
           <p
-            className="absolute left-1/2 w-[min(24rem,calc(100%-3rem))] -translate-x-1/2 text-center text-sm leading-relaxed text-muted"
+            className="absolute left-1/2 w-[min(30rem,calc(100%-3rem))] -translate-x-1/2 text-center text-base leading-relaxed text-muted md:text-lg"
             style={{ top: geo.baselines[1] + geo.size * 0.35 }}
           >
             {blurb}

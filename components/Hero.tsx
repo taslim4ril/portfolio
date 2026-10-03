@@ -130,7 +130,7 @@ export default function Hero() {
             {/* The wide top margin is deliberate on desktop, where it drops the
                 rail to the baseline of the name column. Stacked, it's a hole,
                 so it only applies from lg up. */}
-            <p className="max-w-sm border-t border-white/15 pt-6 text-base leading-relaxed text-white/55 lg:mt-24">
+            <p className="max-w-sm border-t border-white/15 pt-6 text-lg leading-relaxed text-white/55 lg:mt-24">
               {site.subhead}
             </p>
 

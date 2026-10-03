@@ -47,8 +47,8 @@ export default function ArticleRow({
       className="group relative flex flex-col gap-3 py-14 transition-colors duration-500 ease-out hover:bg-surface/40 md:flex-row md:items-center md:justify-between md:gap-10 md:px-6 md:py-20"
     >
       <div className="max-w-2xl">
-        <div className="mb-2 flex items-center gap-3 text-sm text-muted">
-          <span className="text-xs text-white/60">
+        <div className="mb-2 flex items-center gap-3 text-base text-muted">
+          <span className="text-sm text-white/60">
             /{String(index + 1).padStart(2, "0")}
           </span>
           {post.date}
@@ -91,18 +91,18 @@ export default function ArticleRow({
             className="h-56 w-full object-cover"
           />
           <div className="p-6">
-            <span className="text-xs uppercase tracking-[0.2em] text-muted">
+            <span className="text-sm uppercase tracking-[0.2em] text-muted">
               {post.date}
             </span>
             <h4 className="heading mt-2 text-xl font-bold leading-snug text-white">
               {post.title}
             </h4>
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/60">
+            <p className="mt-2 line-clamp-2 text-base leading-relaxed text-white/60">
               {post.excerpt}
             </p>
-            <div className="mt-5 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-accent">
+            <div className="mt-5 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.15em] text-accent">
               Read article
-              <span className="flex h-6 w-6 items-center justify-center rounded-full border border-accent/40 text-[10px]">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full border border-accent/40 text-xs">
                 ↗
               </span>
             </div>

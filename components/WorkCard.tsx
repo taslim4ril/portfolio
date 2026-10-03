@@ -73,7 +73,7 @@ export default function WorkCard({
             <circle cx="8.5" cy="9" r="1.6" />
             <path d="M21 15l-5-5L5 21" />
           </svg>
-          <span className="text-[11px] uppercase tracking-widest">
+          <span className="text-sm uppercase tracking-widest">
             Image placeholder
           </span>
         </div>
@@ -84,14 +84,14 @@ export default function WorkCard({
       {/* Tag pills */}
       <div className="absolute left-6 top-6 flex flex-col items-start gap-2 md:left-10 md:top-10">
         {p.locked && (
-          <span className="rounded-full border border-accent/50 bg-black/60 px-4 py-1.5 text-xs font-medium text-accent backdrop-blur-sm">
+          <span className="rounded-full border border-accent/50 bg-black/60 px-4 py-1.5 text-sm font-medium text-accent backdrop-blur-sm">
             Under NDA
           </span>
         )}
         {p.tags.map((t) => (
           <span
             key={t}
-            className="rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-xs text-white/85 backdrop-blur-sm"
+            className="rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-sm text-white/85 backdrop-blur-sm"
           >
             {t}
           </span>
@@ -105,8 +105,8 @@ export default function WorkCard({
           { k: "Year", v: p.year },
         ].map((m) => (
           <div key={m.k} className="border-b border-white/15 py-3 last:border-b-0">
-            <div className="text-sm font-medium text-white">{m.v}</div>
-            <div className="text-xs text-white/50">{m.k}</div>
+            <div className="text-base font-medium text-white">{m.v}</div>
+            <div className="text-sm text-white/50">{m.k}</div>
           </div>
         ))}
       </div>
@@ -120,7 +120,7 @@ export default function WorkCard({
         style={{ x: springX, y: springY }}
       >
         <div
-          className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-black/40 px-6 py-3 text-sm font-medium text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 ease-out"
+          className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-black/40 px-6 py-3 text-base font-medium text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 ease-out"
           style={{
             opacity: hovering ? 1 : 0,
             transform: `translate(-50%, -50%) scale(${hovering ? 1 : 0.9})`,
@@ -133,7 +133,7 @@ export default function WorkCard({
 
       {/* Title block */}
       <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10">
-        <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+        <p className="text-sm uppercase tracking-[0.2em] text-white/60">
           {p.subtitle}
         </p>
         <h3 className="heading mt-3 text-4xl font-medium leading-none text-white sm:text-5xl md:text-6xl">
@@ -141,7 +141,7 @@ export default function WorkCard({
         </h3>
         {p.locked ? (
           <div className="mt-5 max-w-lg border-t border-white/20 pt-4">
-            <p className="text-sm leading-relaxed text-white/75">
+            <p className="text-base leading-relaxed text-white/75">
               This work is under NDA. The full case study is available on
               request.
             </p>
@@ -152,7 +152,7 @@ export default function WorkCard({
              description, and it is capped in width so it never runs under
              the meta list on the opposite corner. */
           <div className="mt-5 max-w-lg border-t border-white/20 pt-4">
-            <p className="flex items-start gap-2.5 text-sm leading-relaxed text-white/70">
+            <p className="flex items-start gap-2.5 text-base leading-relaxed text-white/70 md:text-lg">
               <span aria-hidden className="mt-[0.3rem] text-[0.6rem] text-accent">
                 ✦
               </span>

@@ -23,7 +23,7 @@ export default function WorkPage() {
               <div>
                 <Link
                   href="/"
-                  className="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-white"
+                  className="mb-6 inline-flex items-center gap-2 text-base text-muted transition-colors hover:text-white"
                 >
                   <span aria-hidden>←</span> Back home
                 </Link>
@@ -38,7 +38,7 @@ export default function WorkPage() {
                   </sup>
                 </ScrambleHeading>
               </div>
-              <p className="max-w-sm text-sm leading-relaxed text-muted">
+              <p className="max-w-md text-lg leading-relaxed text-muted">
                 Five case studies across banking, SaaS, and AI-assisted
                 planning.
               </p>
