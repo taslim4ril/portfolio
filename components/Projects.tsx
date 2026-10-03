@@ -14,7 +14,7 @@ export default function Projects() {
     <section id="work" className="bg-background pb-24 md:pb-32">
       <ProjectTheater
         projects={featured}
-        blurb="Banking, SaaS, and AI-assisted planning, each told as the problem underneath the brief."
+        blurb="Products I have designed across banking, SaaS and AI."
       />
 
       <div className="mt-10 flex justify-center px-6 md:mt-12">
