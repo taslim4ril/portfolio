@@ -13,7 +13,7 @@ export const site = {
   headline: "Bridging the gap between technology and human interaction",
   /** The one idea every case study argues, said once, up front. */
   subhead:
-    "I find the problem underneath the brief, then build it, because a running version settles arguments a mockup only starts.",
+    "I design and build digital products for banking, SaaS and AI teams, from early research through to working code.",
   philosophy:
     "Most products don't fail because of bad ideas. They fail because things get complicated too early. I design ethical, user-centered products that stay simple from concept to launch.",
 } as const;
@@ -40,7 +40,7 @@ export const services = [
   {
     title: "Product Design",
     description:
-      "Research to shipped screen. The brief is where I start, not where I stop.",
+      "User research, flows and interface design, carried through to the screens that ship.",
   },
   {
     title: "Design Systems",
@@ -266,9 +266,9 @@ export const projects: Project[] = [
     caseStudy: {
       title: "Flowz Process Manager",
       tagline:
-        "The brief said digitise our workflows. The real problem was that nobody could see them.",
+        "A process automation platform that shows teams where their work is stuck.",
       overview:
-        "A process-automation platform I led the design of at Revent Technologies. The brief asked for a workflow builder; the research said teams needed to see where work was stuck.",
+        "A process-automation platform I led the design of at Revent Technologies. It started as a request for a workflow builder; research showed that teams most needed to see where work was stuck.",
       meta: [
         { label: "Role", value: "Lead Product Designer" },
         { label: "Company", value: "Revent Technologies" },
@@ -293,11 +293,11 @@ export const projects: Project[] = [
           caption:
             "The dashboard that became the product's front door: running processes, approvals waiting on you, and execution monitoring in one view.",
           impact:
-            "The brief asked for a workflow tool. This screen is the argument that what they actually needed was a status answer, available before anyone has to go looking for it.",
+            "The dashboard answers the question people asked most often, where is my request, before anyone has to go looking for it.",
         },
         {
           kind: "list",
-          heading: "The brief, and what was missing from it",
+          heading: "What the request left out",
           intro: [
             "The request that came to me was specific: build a platform to digitise our workflows. Teams were spread across a chat tool for communication, a tracker for tasks, and spreadsheets for reporting.",
             "That fragmentation was creating real cost:",
@@ -310,7 +310,7 @@ export const projects: Project[] = [
           ],
           outro: [
             "Digitising those workflows would have solved the first problem and none of the others. A faster version of a process nobody can see is still a process nobody can see.",
-            "So I treated the brief as the starting position rather than the specification, and went looking for what the fragmentation was actually costing.",
+            "So I took the request as a starting point and went looking for what the fragmentation was costing each team.",
           ],
         },
         {
@@ -335,7 +335,7 @@ export const projects: Project[] = [
             },
           ],
           outro: [
-            "Different goals, one shared need: a clear view of how work moves through the organisation. That became the thing I designed toward, and it is broader than the brief I was handed.",
+            "Different goals, one shared need: a clear view of how work moves through the organisation. That became the thing I designed toward.",
           ],
         },
         {
@@ -344,7 +344,7 @@ export const projects: Project[] = [
           body: [
             "The stated requirement was a workflow builder with task assignment and status tracking. Reasonable, and it would have shipped.",
             "But watching how teams worked made a different problem obvious. The bottleneck was rarely creating the workflow. It was everything around it: the approval sitting in someone's inbox, the update that lived in a chat thread nobody searched, the report assembled by hand every Friday.",
-            "A builder alone would have digitised the easy part and left the expensive part untouched. So I proposed three things that were not in the brief, and had to make the case for each.",
+            "A builder alone would have digitised the easy part and left the expensive part untouched. So I proposed three additions and made the case for each.",
           ],
         },
         {
@@ -357,7 +357,7 @@ export const projects: Project[] = [
             {
               title: "Automation, when the ask was assignment",
               problem:
-                "The brief covered assigning tasks to people. It did not cover the reminders, approvals, and status updates that were eating the day between those tasks.",
+                "Assigning tasks to people was covered. The reminders, approvals and status updates that ate the day between those tasks were not.",
               decision:
                 "I pushed for automation as a first-class part of the product rather than a later phase, so repetitive actions could move without a person pushing them.",
               note: {
@@ -384,7 +384,7 @@ export const projects: Project[] = [
                 "I designed the dashboard into the first release: throughput, progress, and bottlenecks surfaced in real time.",
               note: {
                 label: "The tradeoff",
-                body: "This one cost me elsewhere. Building it meant deferring depth in the workflow builder, and I argued that a shallower builder with visibility beats a richer builder without it. Visibility was the actual complaint underneath the brief. The builder was just the thing they knew how to ask for.",
+                body: "This one cost me elsewhere. Building it meant deferring depth in the workflow builder, and I argued that a shallower builder with visibility beats a richer builder without it. Visibility was what teams complained about most. The builder was the feature they knew to ask for.",
               },
             },
           ],
@@ -402,7 +402,7 @@ export const projects: Project[] = [
           kind: "features",
           heading: "What shipped",
           intro: [
-            "Four areas carried the product, two of them from the original brief and two argued into it:",
+            "Four areas carried the product, two planned from the start and two added along the way:",
           ],
           items: [
             {
@@ -471,7 +471,7 @@ export const projects: Project[] = [
           kind: "prose",
           heading: "The screen nobody asks for until the first failure",
           body: [
-            "Status tracking was in the brief. Watching an automated run fail was not. Automation gets sold on the days it works, and every demo shows a process completing.",
+            "Status tracking was always planned. Watching an automated run fail was not. Automation gets sold on the days it works, and every demo shows a process completing.",
             "But an automated process that fails silently is worse than a manual one, because at least a manual one has a person waiting on it who will eventually ask. The first time a run dies at 2am, the only questions anyone has are which run, whose, and how far did it get.",
           ],
         },
@@ -529,7 +529,7 @@ export const projects: Project[] = [
           heading: "Reflection",
           body: [
             "Good design is not about adding more features. It is about removing friction.",
-            "The harder lesson was about the brief. Stakeholders describe the problem in the vocabulary of the solution they already imagined, and taking that literally produces something correct and useless. The job was to hear digitise our workflows and understand it as we cannot see our own work.",
+            "The harder lesson was about requests. Stakeholders often name a solution, and building exactly that can produce something correct and unused. Digitise our workflows turned out to mean help us see our own work, and the research was what made that visible.",
             "The pushback was part of that, not an obstacle to it. The objection to automation was right about users, and the product is better for having lost that argument.",
           ],
         },
@@ -678,9 +678,9 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "The obvious brief, and the argument with it",
+          heading: "Why more discovery was the wrong bet",
           body: [
-            "The brief I started with was the one this category always produces: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
+            "The obvious direction was the one this category always takes: better discovery, richer recommendations, more inspiration. That is what travel products sell, and it is what users say they want when you ask them directly.",
             "It is also the opposite of what the research pointed at. Every product in this space is already excellent at showing you more. Building another one would have been answering a question nobody was stuck on.",
             "Making that case meant arguing against the most fundable version of the product. Discovery features demo well and their value is easy to describe in a meeting. Sequencing is invisible until you watch someone fail at it.",
           ],
@@ -1453,9 +1453,9 @@ export const projects: Project[] = [
           kind: "prose",
           heading: "A reskin would have left the problem where it was",
           body: [
-            "The brief was a redesign of the dashboard and transactional workflows. Read narrowly, that is a visual refresh and some reorganised navigation, and it would have shipped.",
+            "The scope was a redesign of the dashboard and transactional workflows. Read narrowly, that is a visual refresh and some reorganised navigation, and it would have shipped.",
             "The research pointed somewhere less convenient. If customers were losing the thread between steps, then reskinning the steps would leave the problem exactly where it was. What the portal needed was feedback and orientation, which are not layout problems.",
-            "So I argued for two things beyond the brief, and one of them ran straight into constraints that outrank design.",
+            "So I pushed for two additions, and one of them ran straight into constraints that outrank design.",
           ],
         },
         {
@@ -1466,9 +1466,9 @@ export const projects: Project[] = [
           ],
           items: [
             {
-              title: "Transaction status the brief did not mention",
+              title: "Transaction status, which nobody had scoped",
               problem:
-                "The brief covered the dashboard and the workflows that move money. It said nothing about what a customer sees afterwards, which is where most of the uncertainty in the sessions actually sat.",
+                "The scope covered the dashboard and the workflows that move money, but not what a customer sees afterwards, which is where most of the uncertainty in the sessions actually sat.",
               decision:
                 "I pushed for status to be explicit on every transaction rather than inferred from its presence in a list, and for recent activity to be separated from full history.",
               note: {
@@ -1678,10 +1678,10 @@ export const projects: Project[] = [
         },
         {
           kind: "prose",
-          heading: "The brief, and how I tested it",
+          heading: "Testing the requirement",
           body: [
             "The starting requirement was a mobile banking app: balances, transfers, bill payments, card management. A digital bank, competently executed.",
-            "I took that as the floor rather than the specification, and put three rounds of testing between the brief and the build. Each round was aimed at finding what I had got wrong rather than confirming what I had got right, because a requirement list tells you what to build and nothing about whether it will work.",
+            "I took that as the floor rather than the specification, and put three rounds of testing between the requirement and the build. Each round was aimed at finding what I had got wrong rather than confirming what I had got right, because a requirement list tells you what to build and nothing about whether it will work.",
             "Everything below that reads as a correction came from those rounds, not from hindsight.",
           ],
         },
@@ -1831,7 +1831,7 @@ export const projects: Project[] = [
           ],
           items: [
             "Saving is behavioural, not functional. The interface is a habit-forming tool, not a form.",
-            "People describe solutions when asked what they want. The job is hearing the problem underneath.",
+            "Ask people what they want and you get a feature list. Ask what happened with their money last month and you get something to design for.",
             "Small UX decisions carry real financial consequence, so edge cases are not polish here.",
             "Iteration is not refinement. It is how you find out your good idea has a toll gate in front of it.",
           ],
@@ -1879,9 +1879,10 @@ export const about = {
     { value: "Available", label: "Freelance" },
   ],
   bio: [
-    "I'm Taslim Abdulkadir, a product designer in Lagos. For five years I have worked on banking, SaaS, agritech and AI products, and the same thing keeps happening: the brief describes the solution someone already imagined, and the real problem is underneath it.",
-    "My job is to find that problem, design for it, and then build enough of it that the argument is settled by a running version rather than a mockup. It is why the case studies here spend as long on what I was asked for as on what I made.",
+    "I'm Taslim Abdulkadir, a product designer in Lagos. For five years I have worked on banking, SaaS, agritech and AI products, mostly ones people rely on to get something done.",
+    "I start with research and end in code. Designing in React and Tailwind means ideas get tested as working software early, and teams react to how a product behaves, not just how it looks. The case studies here show both halves: what I found, and what I built from it.",
   ],
+
   /** The work that never shows up in a file, and the part reviewers are
    *  actually scanning for. Kept as its own section so it does not get
    *  buried inside the bio. */
@@ -1890,7 +1891,7 @@ export const about = {
     body: [
       "Most of my work has happened in teams too small to have a design function, which means the job was never only the file.",
       "I have run research sessions with engineers in the room, because a failure someone watched is worth more than a failure they read about in a deck. I have mentored junior designers through their first end-to-end projects, which mostly meant resisting the urge to fix their work and asking what they were optimising for instead. I have built component libraries that other people shipped on for months without needing to ask me anything, which I have come to think is the actual test of a design system.",
-      "The i-Bank work is the clearest case. The compliance constraints that ended up shaping the entire redesign were not handed to me in the brief. I went and got them in week one, because the alternative was discovering them in week six with three flows already built. Pulling the right people into the room early is not a design skill exactly. It is usually the thing that decides whether the design survives contact with the organisation.",
+      "The i-Bank work is the clearest case. The compliance constraints that ended up shaping the entire redesign were not in the original scope. I went and got them in week one, because the alternative was discovering them in week six with three flows already built. Pulling the right people into the room early is not a design skill exactly. It is usually the thing that decides whether the design survives contact with the organisation.",
     ],
   },
 } as const;

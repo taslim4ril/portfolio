@@ -3,7 +3,7 @@ import Button from "./Button";
 import SectionBadge from "./SectionBadge";
 
 const COPY =
-  "I design for the problem underneath the brief, then build enough of it that nobody has to imagine how it works. Most of my work sits where the stakes are real: people's time, their work, and their trust.";
+  "I'm a product designer who also writes the code, so ideas get tried as working software, not just pictures. Most of my work is in products people use every day, where a clearer screen saves time and earns trust.";
 
 export default function About() {
   const words = COPY.split(" ");

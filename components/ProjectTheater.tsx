@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -9,7 +8,6 @@ import {
 } from "react";
 import {
   motion,
-  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -18,7 +16,6 @@ import {
 import { projects as allProjects, type Project } from "@/lib/data";
 import ProjectSlide from "./ProjectSlide";
 import { MaskTitle } from "./WorkHero";
-import { isLowPower } from "@/lib/device";
 
 /* The choreography runs on its own clock, `t`, rather than raw scroll
    progress, so each beat can be written as a start time and a length:
@@ -341,43 +338,12 @@ function TitleMask({
   // still clears before the card is meant to be seen whole.
   const maskOpacity = useTransform(t, [DIVE_END - 0.12, DIVE_END], [1, 0]);
   const extrasOpacity = useTransform(t, [0, DIVE_START + 0.15], [1, 0]);
-  // Fully transparent layers still cost a composite each frame; once a
-  // layer has faded out, take it out of rendering altogether.
-  const maskVisibility = useTransform(maskOpacity, (o) =>
-    o <= 0.001 ? "hidden" : "visible",
-  );
+  // The count and blurb leave rendering once faded. The masked title does
+  // not: hiding it, or caching it as a bitmap, left Chrome holding a stale
+  // copy of the mask at the wrong scale when scrolling back up.
   const extrasVisibility = useTransform(extrasOpacity, (o) =>
     o <= 0.001 ? "hidden" : "visible",
   );
-
-  // Redrawing the masked title on every frame keeps its edges sharp, and a
-  // desktop does it easily. A phone or modest laptop can't, so there the
-  // layer is cached as a bitmap (will-change) and re-cached only each time
-  // the zoom grows by another 1.6x. Between re-caches the bitmap is
-  // enlarged by at most that much: close to sharp, at a fraction of the
-  // work.
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const lowPower = useRef(false);
-  const bucket = useRef(0);
-  useEffect(() => {
-    lowPower.current = isLowPower();
-    if (lowPower.current && overlayRef.current) {
-      overlayRef.current.style.willChange = "transform";
-    }
-  }, [geo]);
-  useMotionValueEvent(scale, "change", (v) => {
-    const el = overlayRef.current;
-    if (!lowPower.current || !el) return;
-    const next = Math.floor(Math.log(v) / Math.log(1.6));
-    if (next === bucket.current) return;
-    bucket.current = next;
-    // Dropping the hint for one frame makes the browser redraw the layer
-    // at its current scale; restoring it caches that redraw.
-    el.style.willChange = "auto";
-    requestAnimationFrame(() => {
-      el.style.willChange = "transform";
-    });
-  });
 
   return (
     <div
@@ -386,20 +352,17 @@ function TitleMask({
       className="pointer-events-none absolute inset-0"
     >
       {geo && (
-        // No will-change by default, on purpose. With it, the browser
-        // rasterises the title once and stretches that bitmap, so the
-        // letter edges went soft deep into the dive. Without it, each
-        // scroll-driven frame is drawn at its real scale and the edges stay
-        // sharp. Low-power devices get a stepped cache instead; see above.
+        // No will-change here, on purpose. With it, the browser rasterises
+        // the title once and stretches that bitmap, so the letter edges
+        // went soft deep into the dive. Without it, each scroll-driven
+        // frame is drawn at its real scale and the edges stay sharp.
         <motion.div
-          ref={overlayRef}
           className="absolute inset-0"
           style={{
             x: panX,
             y: panY,
             scale,
             opacity: maskOpacity,
-            visibility: maskVisibility,
             transformOrigin: `${geo.origin.x}px ${geo.origin.y}px`,
           }}
         >
