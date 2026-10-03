@@ -281,6 +281,7 @@ function FitLines({
   useEffect(() => {
     const el = box.current;
     if (!el) return;
+    let lastWidth = -1;
     const fit = () => {
       const rows = Array.from(el.children) as HTMLElement[];
       if (!rows.length || el.clientWidth === 0) return;
@@ -288,7 +289,9 @@ function FitLines({
       const natural = Math.max(
         ...rows.map((row) =>
           Array.from(row.children).reduce(
-            (sum, c) => sum + (c as HTMLElement).offsetWidth,
+            // Fractional widths: whole-pixel offsetWidth rounded differently
+            // at each size and kept the fit from ever settling.
+            (sum, c) => sum + c.getBoundingClientRect().width,
             0,
           ),
         ),
@@ -297,11 +300,19 @@ function FitLines({
       // Width per px of font, then the size that fills the box with a hair
       // of slack so rounding never clips the last letter.
       const perPx = natural / fontSize;
-      setRatio((0.985 * 100) / (perPx * 100));
+      const next = 0.985 / perPx;
+      // Ignore changes too small to see, so a re-fit can never feed itself.
+      setRatio((prev) => (Math.abs(next - prev) / prev < 0.004 ? prev : next));
     };
     document.fonts.ready.then(fit);
     document.fonts.addEventListener("loadingdone", fit);
-    const ro = new ResizeObserver(fit);
+    // Width only: re-fitting changes the text height, and reacting to that
+    // made the name re-fit itself in a loop, which showed as a shimmer.
+    const ro = new ResizeObserver(() => {
+      if (el.clientWidth === lastWidth) return;
+      lastWidth = el.clientWidth;
+      fit();
+    });
     ro.observe(el);
     return () => {
       document.fonts.removeEventListener("loadingdone", fit);
