@@ -41,6 +41,8 @@ export default function ProjectSlide({
       className="group relative block h-full w-full overflow-hidden bg-surface"
     >
       {image && (
+        // The original file, not an optimised copy: the resized version
+        // visibly softened the screenshots, inside the title and the cards.
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={image}
@@ -116,7 +118,7 @@ export default function ProjectSlide({
 
         {/* The visible affordance for touch, where the cursor pill never
             shows. Fills with the accent on hover. */}
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 bg-background/40 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-[background-color,border-color,color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink md:h-16 md:w-16">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 bg-background/60 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-[background-color,border-color,color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink md:h-16 md:w-16">
           <Arrow className="h-4 w-4 md:h-5 md:w-5" />
           <span className="sr-only">{action}</span>
         </span>
@@ -134,7 +136,7 @@ function Pill({
 }) {
   return (
     <span
-      className={`rounded-full border border-white/15 bg-background/50 px-3.5 py-1.5 text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md ${className}`}
+      className={`rounded-full border border-white/15 bg-background/70 px-3.5 py-1.5 text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${className}`}
     >
       {children}
     </span>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { projects } from "@/lib/data";
+import { isLowPower } from "@/lib/device";
 
 /** Every project's cover, the NDA one blurred, in list order. */
 const IMAGES = projects
@@ -75,7 +76,9 @@ export default function WorkHero({
 
 type Box = { x: number; y: number; w: number; h: number };
 
-function MaskTitle({
+/** A title cut out of the page with the project covers drifting behind the
+    letters. Also used, without the dive, for Selected Projects on phones. */
+export function MaskTitle({
   lines,
   className,
 }: {
@@ -83,6 +86,28 @@ function MaskTitle({
   className?: string;
 }) {
   const id = useRef(`work-mask-${lines.length}`).current;
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  // The drift repaints the masked title every frame. Run it only while the
+  // title is on screen, and not at all on low-power devices, where a still
+  // strip of covers looks nearly as good for none of the cost.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const strip = svg.querySelector<SVGGElement>(".work-title-strip");
+    if (!strip) return;
+    if (isLowPower()) {
+      strip.style.animationPlayState = "paused";
+      return;
+    }
+    const io = new IntersectionObserver(([entry]) => {
+      strip.style.animationPlayState = entry.isIntersecting
+        ? "running"
+        : "paused";
+    });
+    io.observe(svg);
+    return () => io.disconnect();
+  }, []);
   const textRefs = useRef<(SVGTextElement | null)[]>([]);
   const lead = UNITS * 0.86;
   // A placeholder box until the real one is measured; the title is
@@ -164,6 +189,7 @@ function MaskTitle({
   return (
     <div className={className}>
       <svg
+        ref={svgRef}
         viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
         className={`block w-full ${box ? "work-title-in" : "opacity-0"}`}
       >

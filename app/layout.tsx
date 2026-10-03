@@ -82,7 +82,9 @@ export default function RootLayout({
             hand-written backdrop-filter gets stripped by the CSS pipeline. */}
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-12"
+          // Desktop only: a backdrop blur over a fixed strip is re-computed
+          // on every scroll frame, which phones can't keep up with.
+          className="pointer-events-none fixed inset-x-0 bottom-0 z-40 hidden h-12 md:block"
         >
           {/* Blur only — no tint, so it stays fully transparent. */}
           <div className="absolute inset-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent_0%,black_70%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_70%)]" />

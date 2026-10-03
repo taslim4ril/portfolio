@@ -62,14 +62,14 @@ export default function WorkCard({
       {/* Tag pills */}
       <div className="absolute left-6 top-6 flex flex-col items-start gap-2 md:left-10 md:top-10">
         {p.locked && (
-          <span className="rounded-full border border-accent/50 bg-black/60 px-4 py-1.5 text-sm font-medium text-accent backdrop-blur-sm">
+          <span className="rounded-full border border-accent/50 bg-black/70 px-4 py-1.5 text-sm font-medium text-accent">
             Under NDA
           </span>
         )}
         {p.tags.map((t) => (
           <span
             key={t}
-            className="rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-sm text-white/85 backdrop-blur-sm"
+            className="rounded-full border border-white/15 bg-black/60 px-4 py-1.5 text-sm text-white/85"
           >
             {t}
           </span>

@@ -1,8 +1,15 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   motion,
+  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -10,6 +17,8 @@ import {
 } from "framer-motion";
 import { projects as allProjects, type Project } from "@/lib/data";
 import ProjectSlide from "./ProjectSlide";
+import { MaskTitle } from "./WorkHero";
+import { isLowPower } from "@/lib/device";
 
 /* The choreography runs on its own clock, `t`, rather than raw scroll
    progress, so each beat can be written as a start time and a length:
@@ -46,6 +55,13 @@ const LINES = ["SELECTED", "PROJECTS"] as const;
 const DIVE_LINE = 0;
 const DIVE_CHAR = 2;
 
+const PHONE = "(max-width: 767px)";
+const subscribePhone = (onChange: () => void) => {
+  const mq = window.matchMedia(PHONE);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+};
+
 const riseAt = (i: number) => FIRST_RISE + STEP * (i - 1);
 const lengthFor = (count: number) =>
   count > 1 ? riseAt(count - 1) + RISE : SETTLE_END;
@@ -77,6 +93,11 @@ export default function ProjectTheater({
   blurb: string;
 }) {
   const reduce = useReducedMotion();
+  const isPhone = useSyncExternalStore(
+    subscribePhone,
+    () => window.matchMedia(PHONE).matches,
+    () => false,
+  );
   const sectionRef = useRef<HTMLDivElement>(null);
   const length = lengthFor(projects.length);
 
@@ -97,25 +118,31 @@ export default function ProjectTheater({
     window.scrollTo({ top: top + (at / length) * travel, behavior: "instant" });
   };
 
-  if (reduce) {
+  // Phones skip the pinned sequence: the cut-out title shows, then the
+  // projects scroll up as a plain list. Same with reduced motion.
+  if (reduce || isPhone) {
     return (
-      <div className="px-6 pt-24 md:px-[100px] md:pt-32">
-        <h2 className="heading text-center font-bold uppercase leading-[0.84] tracking-[-0.03em]">
-          <span className="block text-[#eceade]" style={{ fontSize: "clamp(3.25rem, 15vw, 13rem)" }}>
-            Selected
-          </span>
-          <span className="block text-accent" style={{ fontSize: "clamp(3.25rem, 15vw, 13rem)" }}>
-            Projects
-          </span>
-        </h2>
-        <p className="mx-auto mt-8 max-w-md text-center text-base leading-relaxed text-muted md:text-lg">
-          {blurb}
-        </p>
-        <div className="mt-12 flex flex-col gap-6">
+      <div className="px-6 pt-20 md:px-[100px] md:pt-32">
+        <h2 className="sr-only">Selected projects</h2>
+        <div aria-hidden>
+          <MaskTitle lines={["SELECTED", "PROJECTS"]} />
+        </div>
+        <div className="mt-6 flex items-baseline justify-between gap-4 border-t border-white/10 pt-5">
+          <p className="max-w-md text-base leading-relaxed text-muted md:text-lg">
+            {blurb}
+          </p>
+          <p className="shrink-0 text-sm uppercase tracking-[0.2em] text-white/60">
+            <span className="tabular-nums text-accent">
+              {String(allProjects.length).padStart(2, "0")}
+            </span>{" "}
+            projects
+          </p>
+        </div>
+        <div className="mt-10 flex flex-col gap-5 md:gap-6">
           {projects.map((p, i) => (
             <div
               key={p.slug}
-              className="h-[80svh] min-h-[480px] overflow-hidden rounded-[28px]"
+              className="h-[72svh] min-h-[460px] overflow-hidden rounded-[28px] md:h-[80svh]"
             >
               <ProjectSlide p={p} index={i} />
             </div>
@@ -314,6 +341,43 @@ function TitleMask({
   // still clears before the card is meant to be seen whole.
   const maskOpacity = useTransform(t, [DIVE_END - 0.12, DIVE_END], [1, 0]);
   const extrasOpacity = useTransform(t, [0, DIVE_START + 0.15], [1, 0]);
+  // Fully transparent layers still cost a composite each frame; once a
+  // layer has faded out, take it out of rendering altogether.
+  const maskVisibility = useTransform(maskOpacity, (o) =>
+    o <= 0.001 ? "hidden" : "visible",
+  );
+  const extrasVisibility = useTransform(extrasOpacity, (o) =>
+    o <= 0.001 ? "hidden" : "visible",
+  );
+
+  // Redrawing the masked title on every frame keeps its edges sharp, and a
+  // desktop does it easily. A phone or modest laptop can't, so there the
+  // layer is cached as a bitmap (will-change) and re-cached only each time
+  // the zoom grows by another 1.6x. Between re-caches the bitmap is
+  // enlarged by at most that much: close to sharp, at a fraction of the
+  // work.
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const lowPower = useRef(false);
+  const bucket = useRef(0);
+  useEffect(() => {
+    lowPower.current = isLowPower();
+    if (lowPower.current && overlayRef.current) {
+      overlayRef.current.style.willChange = "transform";
+    }
+  }, [geo]);
+  useMotionValueEvent(scale, "change", (v) => {
+    const el = overlayRef.current;
+    if (!lowPower.current || !el) return;
+    const next = Math.floor(Math.log(v) / Math.log(1.6));
+    if (next === bucket.current) return;
+    bucket.current = next;
+    // Dropping the hint for one frame makes the browser redraw the layer
+    // at its current scale; restoring it caches that redraw.
+    el.style.willChange = "auto";
+    requestAnimationFrame(() => {
+      el.style.willChange = "transform";
+    });
+  });
 
   return (
     <div
@@ -322,17 +386,20 @@ function TitleMask({
       className="pointer-events-none absolute inset-0"
     >
       {geo && (
-        // No will-change here, on purpose. With it, the browser rasterises
-        // the title once and stretches that bitmap, so the letter edges
-        // went soft deep into the dive. Without it, each scroll-driven
-        // frame is drawn at its real scale and the edges stay sharp.
+        // No will-change by default, on purpose. With it, the browser
+        // rasterises the title once and stretches that bitmap, so the
+        // letter edges went soft deep into the dive. Without it, each
+        // scroll-driven frame is drawn at its real scale and the edges stay
+        // sharp. Low-power devices get a stepped cache instead; see above.
         <motion.div
+          ref={overlayRef}
           className="absolute inset-0"
           style={{
             x: panX,
             y: panY,
             scale,
             opacity: maskOpacity,
+            visibility: maskVisibility,
             transformOrigin: `${geo.origin.x}px ${geo.origin.y}px`,
           }}
         >
@@ -380,7 +447,9 @@ function TitleMask({
 
       {/* Count and blurb sit outside the mask and leave as the dive starts. */}
       {geo && (
-        <motion.div style={{ opacity: extrasOpacity }}>
+        <motion.div
+          style={{ opacity: extrasOpacity, visibility: extrasVisibility }}
+        >
           <span
             className="absolute text-lg text-muted md:text-2xl"
             style={{
@@ -494,6 +563,9 @@ function Card({
   // can no longer peek out from behind anything.
   const buriedAt = index + 2 < count ? riseAt(index + 2) : 1e3;
   const opacity = useTransform(t, [buriedAt, buriedAt + 0.01], [1, 0]);
+  const visibility = useTransform(opacity, (o) =>
+    o <= 0.001 ? "hidden" : "visible",
+  );
   const y = useTransform(
     t,
     first ? [0, 1] : [riseAt(index), riseAt(index) + RISE],
@@ -512,7 +584,14 @@ function Card({
   return (
     <motion.div
       className="absolute inset-0 overflow-hidden will-change-transform"
-      style={{ scale, opacity, y, borderRadius: radius, zIndex: index + 1 }}
+      style={{
+        scale,
+        opacity,
+        visibility,
+        y,
+        borderRadius: radius,
+        zIndex: index + 1,
+      }}
     >
       {children}
       <motion.div

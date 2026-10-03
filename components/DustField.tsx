@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { isLowPower } from "@/lib/device";
 
 const COUNT = 150;
 /** Furthest a speck shifts when the cursor travels from centre to edge. */
@@ -41,7 +42,10 @@ export default function DustField() {
     let height = 0;
     let raf = 0;
 
-    const specks: Speck[] = Array.from({ length: COUNT }, () => ({
+    // Fewer specks and a 1x canvas on low-power devices: the field reads
+    // the same at a glance, for well under half the drawing.
+    const low = isLowPower();
+    const specks: Speck[] = Array.from({ length: low ? 60 : COUNT }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: 0.5 + Math.random() * 1.4,
@@ -53,7 +57,7 @@ export default function DustField() {
     }));
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = low ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
