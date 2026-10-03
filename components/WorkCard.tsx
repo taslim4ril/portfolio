@@ -163,22 +163,27 @@ export default function WorkCard({
                     a figure carries a different number of words each time
                     (7-tool, 3 core journeys, 20 hours), and guessing at that
                     gets it wrong somewhere every time. */}
-                {/* Odd indices are the captured groups, i.e. the bracketed
-                    spans; even indices are the plain text between them. */}
-                {p.metric.split(/\[([^\]]+)\]/g).map((part, i) =>
-                  i % 2 === 1 ? (
-                    <strong key={i} className="font-medium text-accent">
-                      {part}
-                    </strong>
-                  ) : (
-                    part
-                  ),
-                )}
+                {renderMetric(p.metric)}
               </span>
             </p>
           </div>
         )}
       </div>
     </a>
+  );
+}
+
+/** A metric line with its [bracketed] figures picked out in the accent.
+    Odd indices of the split are the captured groups, i.e. the bracketed
+    spans; even indices are the plain text between them. */
+export function renderMetric(metric: string) {
+  return metric.split(/\[([^\]]+)\]/g).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-medium text-accent">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
   );
 }

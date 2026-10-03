@@ -2,7 +2,6 @@ import { projects } from "@/lib/data";
 import Reveal from "./Reveal";
 import WorkRail from "./WorkRail";
 import ScrambleHeading from "./ScrambleHeading";
-import Button, { CircleIcon } from "./Button";
 
 // The homepage teases the first few; the rest live on /work.
 const FEATURED_COUNT = 3;
@@ -36,11 +35,7 @@ export default function Projects() {
             </div>
           </Reveal>
         }
-        end={
-          <Button href="/work" size="lg" icon={<CircleIcon>→</CircleIcon>}>
-            See all projects
-          </Button>
-        }
+        allHref="/work"
       />
     </section>
   );
