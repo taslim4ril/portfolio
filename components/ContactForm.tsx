@@ -89,7 +89,7 @@ export default function ContactForm() {
 
   if (status === "sent" || status === "mailto") {
     return (
-      <div className="flex min-h-[28rem] flex-col items-start justify-center" role="status">
+      <div className="flex min-h-[28rem] flex-1 flex-col items-start justify-center" role="status">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-ink">
           <svg aria-hidden viewBox="0 0 16 16" fill="none" className="h-6 w-6">
             <path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -130,7 +130,7 @@ export default function ContactForm() {
   const sending = status === "sending";
 
   return (
-    <form onSubmit={submit} noValidate className="flex flex-col gap-6">
+    <form onSubmit={submit} noValidate className="flex flex-1 flex-col gap-6">
       <div className="grid gap-6 sm:grid-cols-2">
         <Field
           id="name"
@@ -173,6 +173,7 @@ export default function ContactForm() {
         onBlur={leave("message")}
         error={touched.message ? errors.message : undefined}
         placeholder="Hi Taslim, I'm working on..."
+        grow
       />
 
       {/* Honeypot: hidden from people and screen readers, tempting to bots. */}
@@ -239,6 +240,7 @@ function Field({
   helper,
   optional,
   multiline,
+  grow,
 }: {
   id: string;
   label: string;
@@ -252,6 +254,8 @@ function Field({
   helper?: string;
   optional?: boolean;
   multiline?: boolean;
+  /** Take up the panel's spare height (the message box). */
+  grow?: boolean;
 }) {
   const uid = useId();
   const inputId = `contact-${id}`;
@@ -274,7 +278,7 @@ function Field({
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 ${grow ? "flex-1" : ""}`}>
       <label htmlFor={inputId} className="flex items-baseline gap-2 text-xs uppercase tracking-[0.2em] text-white/70">
         {label}
         {optional && (
@@ -288,7 +292,7 @@ function Field({
           {...shared}
           rows={5}
           onChange={(e) => onChange(e.target.value)}
-          className={`${cls} min-h-[9rem] resize-y leading-relaxed`}
+          className={`${cls} min-h-[9rem] resize-y leading-relaxed ${grow ? "flex-1" : ""}`}
         />
       ) : (
         <input
