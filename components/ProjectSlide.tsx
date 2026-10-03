@@ -1,34 +1,28 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { type Project, site } from "@/lib/data";
 import { renderMetric } from "./WorkCard";
 
 const spring = { stiffness: 350, damping: 32, mass: 0.6 };
 
 /**
- * One project on the homepage rail: the image fills the frame edge to edge
+ * One project in the homepage theater: the image fills the card edge to edge
  * and everything else is set inside it, tags and meta along the top, title
- * and proof line along the bottom. The vertical list on /work keeps WorkCard.
+ * and proof line along the bottom. Shape (corner radius, clipping) belongs
+ * to the parent, which animates it. The vertical list on /work keeps
+ * WorkCard.
  */
 export default function ProjectSlide({
   p,
   index,
-  drift,
+  onFocus,
 }: {
   p: Project;
-  /** Position on the rail, printed as 01, 02, ... */
+  /** Position in the sequence, printed as 01, 02, ... */
   index: number;
-  /** Sideways offset for the image inside its frame, in percent. The rail
-      drives it from the card's position so the picture moves a little
-      slower than the frame around it. */
-  drift: MotionValue<string>;
+  onFocus?: () => void;
 }) {
   const [first, ...rest] = p.title.split(" ");
   // A locked (NDA) project has no public page, so the card asks for access
@@ -59,23 +53,16 @@ export default function ProjectSlide({
       href={href}
       onMouseMove={follow}
       onMouseEnter={follow}
-      className="group relative block h-full overflow-hidden rounded-[1.75rem] bg-surface shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.99] md:rounded-[2.25rem]"
+      onFocus={onFocus}
+      className="group relative block h-full w-full overflow-hidden bg-surface"
     >
       {image && (
-        // Oversized by the drift range so the sideways travel never shows
-        // an edge.
-        <motion.div
-          className="absolute inset-y-0 -left-[6%] -right-[6%]"
-          style={{ x: drift }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={image}
-            alt={p.locked ? "" : `${p.title}: ${p.category}`}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.035]"
-          />
-        </motion.div>
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={image}
+          alt={p.locked ? "" : `${p.title}: ${p.category}`}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.035]"
+        />
       )}
 
       {/* Legibility scrims, tinted to the page rather than pure black: a
@@ -90,15 +77,9 @@ export default function ProjectSlide({
         className="absolute inset-x-0 bottom-0 h-[78%] bg-gradient-to-t from-background via-background/75 to-transparent md:h-[62%] md:from-background/95 md:via-background/55"
       />
 
-      {/* Edge light: a hairline and a top highlight drawn above the photo,
-          so the frame reads as a physical surface rather than a crop. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-      />
-
       {/* ===== Top row: tags, then category and year ===== */}
-      <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-6 md:inset-x-10 md:top-10">
+      {/* Starts below the fixed nav: the card passes under it at full bleed. */}
+      <div className="absolute inset-x-5 top-20 flex items-start justify-between gap-6 md:inset-x-12 md:top-24">
         <div className="flex flex-wrap gap-2">
           {p.locked && (
             <Pill className="border-accent/40 text-accent">Under NDA</Pill>
@@ -138,7 +119,7 @@ export default function ProjectSlide({
       </motion.div>
 
       {/* ===== Caption ===== */}
-      <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-6 md:inset-x-10 md:bottom-10">
+      <div className="absolute inset-x-5 bottom-6 flex items-end justify-between gap-6 md:inset-x-12 md:bottom-12">
         <div className="min-w-0 max-w-2xl">
           <p className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-white/70">
             <span className="tabular-nums text-accent">
