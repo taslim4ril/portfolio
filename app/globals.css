@@ -180,6 +180,21 @@ html.lenis body {
   background-size: 100% 1px;
 }
 
+/* An underline that draws from the left: on hover of the element itself,
+   or of the card (.group) it sits in. Wraps across lines with the text. */
+.link-sweep {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px
+    no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+a:hover > .link-sweep,
+.group:hover .link-sweep,
+.group:focus-visible .link-sweep {
+  background-size: 100% 1px;
+}
+
 /* /work title (WorkHero): the letters wipe up from their baseline on load
    while the covers inside them settle from a zoom, then the covers drift
    sideways for good. */

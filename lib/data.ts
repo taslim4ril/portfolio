@@ -1853,7 +1853,9 @@ export const posts = [
   {
     title: "AI as a designer's tool, not a replacement",
     date: "July 2024",
-    href: "https://medium.com/",
+    // The profile until the article URLs are in: the bare medium.com
+    // root these used to point at led nowhere.
+    href: "https://medium.com/@taslim.designx",
     image: "/images/articles/ai-tool.webp",
     excerpt:
       "How I fold AI into my process to move faster without losing the craft and judgment that make design matter.",
@@ -1861,10 +1863,24 @@ export const posts = [
   {
     title: "UI/UX design guidance for Nigerian youth",
     date: "March 2022",
-    href: "https://medium.com/",
+    // The profile until the article URLs are in: the bare medium.com
+    // root these used to point at led nowhere.
+    href: "https://medium.com/@taslim.designx",
     image: "/images/articles/uiux-youth.webp",
     excerpt:
       "A practical starting point for young designers in Nigeria breaking into product design from scratch.",
+  },
+  // Placeholder slot. Replace the title, date, excerpt and href, and add an
+  // `image`, when the article is published; drop `placeholder` to make the
+  // card a normal link.
+  {
+    title: "A new article is on the way",
+    date: "Coming soon",
+    href: "https://medium.com/@taslim.designx",
+    image: undefined as string | undefined,
+    placeholder: true,
+    excerpt:
+      "The next piece is being written. Follow along on Medium to read it when it lands.",
   },
 ];
 
@@ -1872,7 +1888,7 @@ export const posts = [
 
 export const about = {
   tagline:
-    "Product designer who ships. I take complex ideas to clear interfaces, then build them, so the argument is settled by a running version rather than a mockup.",
+    "Product designer who ships. I turn complex ideas into clear interfaces, then build them in code.",
   facts: [
     { value: "5+ years", label: "Experience" },
     { value: "Lagos, Nigeria", label: "Location" },
