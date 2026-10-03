@@ -14,23 +14,25 @@ import ProjectSlide from "./ProjectSlide";
 /* The choreography runs on its own clock, `t`, rather than raw scroll
    progress, so each beat can be written as a start time and a length:
 
-     0.00-0.25  hold: the title reads as giant letters cut out of the page,
+     0.00-0.08  a beat: the title reads as giant letters cut out of the page,
                 the first project showing through them
-     0.25-1.60  the camera dives into the L until its stem fills the screen,
+     0.08-0.90  the camera dives into the L until its stem fills the screen,
                 landing inside the first project at full bleed
-     1.70-2.40  the first card settles back to its resting inset
-     2.60 ...   each later card rises over the one before, which recedes
-                and dims; one every 1.25
+     0.92-1.30  the first card settles back to its resting inset
+     1.30 ...   each later card rises over the one before, which recedes
+                and dims; one every 0.85
 
-   One unit of `t` is one screen of scrolling, so the pin lasts as long as
-   the sequence does. */
-const DIVE_START = 0.25;
-const DIVE_END = 1.6;
-const SETTLE_START = 1.7;
-const SETTLE_END = 2.4;
-const FIRST_RISE = 2.6;
-const STEP = 1.25;
-const RISE = 1.1;
+   Beats run back to back with no dead scroll between them, and one unit of
+   `t` is SCREENS_PER_UNIT screens of scrolling. Three projects take about
+   two screens end to end; anything much longer reads as a chore. */
+const DIVE_START = 0.08;
+const DIVE_END = 0.9;
+const SETTLE_START = 0.92;
+const SETTLE_END = 1.3;
+const FIRST_RISE = 1.3;
+const STEP = 0.85;
+const RISE = 0.75;
+const SCREENS_PER_UNIT = 0.7;
 
 const REST = 0.9; // resting scale of the active card
 const RECEDE = 0.82; // scale a covered card drops to
@@ -126,8 +128,8 @@ export default function ProjectTheater({
     <div
       ref={sectionRef}
       className="relative"
-      // One screen of scroll per unit of `t`, plus the screen it pins in.
-      style={{ height: `${(1 + length) * 100}svh` }}
+      // The scroll the sequence needs, plus the screen it pins in.
+      style={{ height: `${(1 + length * SCREENS_PER_UNIT) * 100}svh` }}
     >
       <div className="sticky top-0 h-svh overflow-hidden">
         {/* `isolate` keeps the cards' z-indexes inside this layer, so the
@@ -279,8 +281,8 @@ function TitleMask({
   );
   // A safety net: if the stem ever misses the screen centre, the mask
   // still clears before the card is meant to be seen whole.
-  const maskOpacity = useTransform(t, [DIVE_END - 0.2, DIVE_END], [1, 0]);
-  const extrasOpacity = useTransform(t, [0, DIVE_START + 0.2], [1, 0]);
+  const maskOpacity = useTransform(t, [DIVE_END - 0.12, DIVE_END], [1, 0]);
+  const extrasOpacity = useTransform(t, [0, DIVE_START + 0.15], [1, 0]);
 
   return (
     <div
