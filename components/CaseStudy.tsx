@@ -725,7 +725,7 @@ export default function CaseStudy({
             href="/work"
             className="inline-flex items-center gap-2 text-base text-muted transition-colors hover:text-white"
           >
-            <span aria-hidden>←</span> All work
+            <span aria-hidden>←</span> All projects
           </Link>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-muted">

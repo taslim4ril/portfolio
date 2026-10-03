@@ -185,7 +185,7 @@ export default function WhatIDo() {
         <div className="pin-zoom w-full">
         {/* Heading + intro */}
         <Reveal>
-          {/* Stacked, not split: Selected Work below already uses the
+          {/* Stacked, not split: Selected Projects below already uses the
               heading-left, paragraph-right header. */}
           <div className="flex flex-col gap-5">
             <ScrambleHeading

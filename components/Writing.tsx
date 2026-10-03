@@ -5,7 +5,7 @@ import ScrambleHeading from "./ScrambleHeading";
 
 export default function Writing() {
   return (
-    // Side gutters match the Selected Work cards so everything lines up.
+    // Side gutters match the Selected Projects cards so everything lines up.
     <section
       id="articles"
       className="border-t border-border px-6 py-24 md:px-[100px] md:py-32"

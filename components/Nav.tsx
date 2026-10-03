@@ -56,7 +56,7 @@ export default function Nav() {
       className="pointer-events-none absolute left-0 top-6 h-px w-px"
     />
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* Side gutters match the Selected Work cards so everything lines up. */}
+      {/* Side gutters match the Selected Projects cards so everything lines up. */}
       <div className="relative flex items-center justify-between px-6 py-5 md:px-[100px]">
         {/* Logo */}
         <a

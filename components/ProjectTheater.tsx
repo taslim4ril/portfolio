@@ -40,7 +40,7 @@ const RECEDE = 0.82; // scale a covered card drops to
 const DIMMED = 0.55; // opacity of a covered card
 const RADIUS = 28; // resting corner radius, px
 
-const LINES = ["SELECTED", "WORK"] as const;
+const LINES = ["SELECTED", "PROJECTS"] as const;
 /** The letter the camera dives into: the L in SELECTED, whose stem is the
     tallest solid stroke in the title. */
 const DIVE_LINE = 0;
@@ -58,7 +58,7 @@ const inOutQuad = (x: number) =>
   x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2;
 
 /**
- * Selected work as a pinned theater. The section holds the screen on a
+ * Selected projects as a pinned theater. The section holds the screen on a
  * giant title cut out of the page, with the first project visible only
  * through the letters. Scrolling dives into one letter until the project
  * fills the screen; it settles, and each project after it stacks up over
@@ -105,7 +105,7 @@ export default function ProjectTheater({
             Selected
           </span>
           <span className="block text-accent" style={{ fontSize: "clamp(3.25rem, 15vw, 13rem)" }}>
-            Work
+            Projects
           </span>
         </h2>
         <p className="mx-auto mt-8 max-w-md text-center text-base leading-relaxed text-muted md:text-lg">
@@ -159,6 +159,8 @@ type Geometry = {
   origin: { x: number; y: number };
   /** Scale at which the stem covers the whole screen. */
   maxScale: number;
+  /** Where the project count sits: just past the end of the second line. */
+  countX: number;
 };
 
 /**
@@ -193,8 +195,28 @@ function TitleMask({
       const w = frame.clientWidth;
       const h = frame.clientHeight;
       // Larger share of the width on phones, where 15vw leaves the
-      // letters too thin to see the project through.
-      const size = Math.min(Math.max(w * (w < 768 ? 0.2 : 0.15), 52), 208);
+      // letters too thin to see the project through, but never so large
+      // that the longest line plus the count after it overruns the gutters.
+      const probe = document.createElement("canvas").getContext("2d");
+      let perPx = 4.6; // line width per px of font size, until measured
+      if (probe) {
+        // Resolved from a rendered heading: the CSS variable itself nests
+        // another var(), which canvas can't parse.
+        const heading = document.querySelector(".heading, .font-heading");
+        const family = heading
+          ? getComputedStyle(heading).fontFamily
+          : "sans-serif";
+        probe.font = `700 100px ${family}`;
+        perPx =
+          Math.max(...LINES.map((l) => probe.measureText(l).width)) / 100 -
+          0.03 * 7;
+      }
+      const room = (w - 2 * 24 - 2 * 44) / perPx; // gutters, count either side
+      const size = Math.min(
+        Math.max(w * (w < 768 ? 0.2 : 0.15), 40),
+        208,
+        room,
+      );
       const lead = size * 0.84;
       const first = h / 2 - lead * 0.15;
       const baselines: [number, number] = [first, first + lead];
@@ -206,6 +228,7 @@ function TitleMask({
         baselines,
         origin: g?.origin ?? { x: w / 2, y: h / 2 },
         maxScale: g?.maxScale ?? 60,
+        countX: g?.countX ?? w / 2 + size * 2.2,
       }));
 
       requestAnimationFrame(() => {
@@ -249,7 +272,14 @@ function TitleMask({
         // has to grow until half its width reaches a corner from there.
         const reach = Math.hypot(w / 2, h / 2);
         const maxScale = (reach / ((end - start) / 2)) * 1.15;
-        setGeo({ w, h, size, baselines, origin, maxScale });
+        // The second line is centred, so its right edge is half its
+        // width past the middle. Letter-spacing tightens each gap but the
+        // last, which canvas doesn't apply.
+        const second = LINES[1];
+        const secondW =
+          ctx.measureText(second).width - size * 0.03 * (second.length - 1);
+        const countX = w / 2 + secondW / 2 + size * 0.06;
+        setGeo({ w, h, size, baselines, origin, maxScale, countX });
       });
     };
 
@@ -350,7 +380,7 @@ function TitleMask({
           <span
             className="absolute text-lg text-muted md:text-2xl"
             style={{
-              left: geo.w / 2 + geo.size * 1.32,
+              left: geo.countX,
               top: geo.baselines[1] - geo.size * 0.72,
             }}
           >
@@ -367,7 +397,7 @@ function TitleMask({
 
       {/* The real heading, for assistive tech and search; the SVG is
           decorative. */}
-      <h2 className="sr-only">Selected work</h2>
+      <h2 className="sr-only">Selected projects</h2>
     </div>
   );
 }

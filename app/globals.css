@@ -156,6 +156,41 @@ html.lenis body {
 
 /* The starburst beside every heading. A transform-only animation, so it
    stays on the compositor no matter how many headings are on the page. */
+/* /work title (WorkHero): the letters wipe up from their baseline on load
+   while the covers inside them settle from a zoom, then the covers drift
+   sideways for good. */
+@keyframes work-title-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes work-title-zoom {
+  from {
+    transform: scale(1.18);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes work-title-strip {
+  to {
+    transform: translateX(var(--strip));
+  }
+}
+.work-title-in {
+  animation: work-title-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.work-title-zoom {
+  transform-box: view-box;
+  animation: work-title-zoom 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.work-title-strip {
+  animation: work-title-strip linear infinite;
+}
+
 /* The label ring on the project-card cursor badge (CaseCursor). */
 @keyframes case-cursor-spin {
   to {
@@ -214,7 +249,7 @@ html.lenis body {
 
 /* The pinned section zooms in as it scrolls into view, hits full size for a
    single instant right as it locks into place, then immediately starts
-   zooming back out as Selected Work scrolls over it — no static hold in
+   zooming back out as Selected Projects scrolls over it — no static hold in
    between, so motion never stops. One keyframe spans the section's "cover"
    journey from 0% (first pixel appearing at the bottom of the viewport) to
    50% (fully covered by the overlay — see the matching -200vh pull on the
@@ -431,6 +466,9 @@ html.lenis body {
   .word-reveal,
   .card-rise,
   .card-in,
+  .work-title-in,
+  .work-title-zoom,
+  .work-title-strip,
   .pixel-drift {
     animation: none;
   }

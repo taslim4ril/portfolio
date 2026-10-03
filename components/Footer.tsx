@@ -2,7 +2,7 @@ import { site, socials } from "@/lib/data";
 
 export default function Footer() {
   return (
-    // Side gutters match the Selected Work cards so everything lines up.
+    // Side gutters match the Selected Projects cards so everything lines up.
     <footer className="px-6 pb-10 md:px-[100px]">
       <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
         {/* Left: location + availability */}

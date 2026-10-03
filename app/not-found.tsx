@@ -73,7 +73,7 @@ export default function NotFound() {
               icon={<CircleIcon>→</CircleIcon>}
               className="w-full sm:w-auto"
             >
-              All work
+              All projects
             </Button>
           </div>
 

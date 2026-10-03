@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WorkCard from "@/components/WorkCard";
-import Reveal from "@/components/Reveal";
-import ScrambleHeading from "@/components/ScrambleHeading";
+import WorkHero from "@/components/WorkHero";
 import { projects, site } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -18,32 +16,10 @@ export default function WorkPage() {
       <Nav />
       <main id="main" tabIndex={-1} className="relative bg-background">
         <section className="px-6 pb-24 pt-36 md:px-[100px] md:pb-32 md:pt-44">
-          <Reveal>
-            <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <Link
-                  href="/"
-                  className="mb-6 inline-flex items-center gap-2 text-base text-muted transition-colors hover:text-white"
-                >
-                  <span aria-hidden>←</span> Back home
-                </Link>
-                <ScrambleHeading
-                  as="h1"
-                  lead="All"
-                  bold="Work"
-                  className="heading text-4xl leading-none text-white sm:text-5xl md:text-6xl"
-                >
-                  <sup className="ml-2 align-super text-base font-normal text-muted">
-                    ({projects.length})
-                  </sup>
-                </ScrambleHeading>
-              </div>
-              <p className="max-w-md text-lg leading-relaxed text-muted">
-                Five case studies across banking, SaaS, and AI-assisted
-                planning.
-              </p>
-            </div>
-          </Reveal>
+          <WorkHero
+            count={projects.length}
+            blurb="Five case studies across banking, SaaS, and AI-assisted planning."
+          />
 
           <div className="flex flex-col gap-[4.5px]">
             {projects.map((p) => (

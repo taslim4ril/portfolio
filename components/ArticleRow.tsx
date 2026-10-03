@@ -16,7 +16,7 @@ export default function ArticleRow({
   const rowRef = useRef<HTMLAnchorElement>(null);
   const [hovering, setHovering] = useState(false);
 
-  // Cursor-follow preview card. Softer than the Selected Work spring on
+  // Cursor-follow preview card. Softer than the Selected Projects spring on
   // purpose: these rows sit close together, so a snappier follow reads as
   // twitchy when the pointer crosses several of them.
   const x = useMotionValue(0);
