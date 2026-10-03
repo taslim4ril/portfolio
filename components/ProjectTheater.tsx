@@ -37,7 +37,7 @@ const SCREENS_PER_UNIT = 1.05;
 
 const REST = 0.9; // resting scale of the active card
 const RECEDE = 0.82; // scale a covered card drops to
-const DIMMED = 0.55; // opacity of a covered card
+const DIMMED = 0.45; // strength of the shade over a covered card
 const RADIUS = 28; // resting corner radius, px
 
 const LINES = ["SELECTED", "PROJECTS"] as const;
@@ -483,9 +483,17 @@ function Card({
         : [outCubic],
     },
   );
-  const opacity = useTransform(t, [recedeFrom, recedeTo], [1, DIMMED], {
+  // A covered card darkens under a shade rather than fading. Fading made
+  // it see-through, so once the next card was covered too, the one beneath
+  // both showed through it before the following card arrived.
+  const shade = useTransform(t, [recedeFrom, recedeTo], [0, DIMMED], {
     ease: outCubic,
   });
+  // Gone entirely once the card after next starts rising: by then the card
+  // directly above covers it at the same size, so nothing is lost, and it
+  // can no longer peek out from behind anything.
+  const buriedAt = index + 2 < count ? riseAt(index + 2) : 1e3;
+  const opacity = useTransform(t, [buriedAt, buriedAt + 0.01], [1, 0]);
   const y = useTransform(
     t,
     first ? [0, 1] : [riseAt(index), riseAt(index) + RISE],
@@ -507,6 +515,11 @@ function Card({
       style={{ scale, opacity, y, borderRadius: radius, zIndex: index + 1 }}
     >
       {children}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-background"
+        style={{ opacity: shade }}
+      />
     </motion.div>
   );
 }
