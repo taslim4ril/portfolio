@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
-  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -293,35 +292,24 @@ function TitleMask({
     };
   }, []);
 
+  const maxScale = geo?.maxScale ?? 60;
   const dive = useTransform(t, (v) =>
     Math.min(Math.max((v - DIVE_START) / (DIVE_END - DIVE_START), 0), 1),
   );
-  // The zoom is applied inside the SVG, as a transform on the letters,
-  // rather than by scaling the element. Scaling the element enlarges one
-  // rasterised snapshot, so at 60x the letter edges went soft; a transform
-  // inside the SVG is redrawn as vector every frame and stays crisp.
-  const maskLetters = useRef<SVGGElement>(null);
-  const outlineLetters = useRef<SVGGElement>(null);
-  const place = useCallback(
-    (p: number) => {
-      if (!geo) return;
-      const { x: ox, y: oy } = geo.origin;
-      // Interpolated in log space, so the dive feels like constant forward
-      // speed rather than crawling at the start and teleporting at the end.
-      const s = Math.exp(Math.log(geo.maxScale) * inOutQuad(p) ** 1.6);
-      // The pan brings the stem from wherever it sits in the word to the
-      // middle of the screen, front-loaded so it is centred before the
-      // zoom gets fast.
-      const tx = (geo.w / 2 - ox) * outCubic(p);
-      const ty = (geo.h / 2 - oy) * outCubic(p);
-      const m = `translate(${tx + ox} ${ty + oy}) scale(${s}) translate(${-ox} ${-oy})`;
-      maskLetters.current?.setAttribute("transform", m);
-      outlineLetters.current?.setAttribute("transform", m);
-    },
-    [geo],
+  // Interpolated in log space, so the dive feels like constant forward
+  // speed rather than crawling at the start and teleporting at the end.
+  const scale = useTransform(dive, (p) =>
+    Math.exp(Math.log(maxScale) * inOutQuad(p) ** 1.6),
   );
-  useMotionValueEvent(dive, "change", place);
-  useLayoutEffect(() => place(dive.get()), [place, dive]);
+  // The pan: brings the stem from wherever it sits in the word to the
+  // middle of the screen, front-loaded so it is centred before the zoom
+  // gets fast.
+  const panX = useTransform(dive, (p) =>
+    geo ? (geo.w / 2 - geo.origin.x) * outCubic(p) : 0,
+  );
+  const panY = useTransform(dive, (p) =>
+    geo ? (geo.h / 2 - geo.origin.y) * outCubic(p) : 0,
+  );
   // A safety net: if the stem ever misses the screen centre, the mask
   // still clears before the card is meant to be seen whole.
   const maskOpacity = useTransform(t, [DIVE_END - 0.12, DIVE_END], [1, 0]);
@@ -334,45 +322,58 @@ function TitleMask({
       className="pointer-events-none absolute inset-0"
     >
       {geo && (
+        // No will-change here, on purpose. With it, the browser rasterises
+        // the title once and stretches that bitmap, so the letter edges
+        // went soft deep into the dive. Without it, each scroll-driven
+        // frame is drawn at its real scale and the edges stay sharp.
         <motion.div
           className="absolute inset-0"
-          style={{ opacity: maskOpacity }}
+          style={{
+            x: panX,
+            y: panY,
+            scale,
+            opacity: maskOpacity,
+            transformOrigin: `${geo.origin.x}px ${geo.origin.y}px`,
+          }}
         >
-          {/* The page-colour sheet stays put and fills the screen; only the
-              letters punched out of it move. */}
-          <svg width={geo.w} height={geo.h} className="block">
+          {/* The page-colour sheet runs well past every edge, so panning
+              it toward the letter never uncovers the card behind. */}
+          <svg width={geo.w} height={geo.h} className="block overflow-visible">
             <defs>
               <mask
                 id="work-title-mask"
                 maskUnits="userSpaceOnUse"
-                x={0}
-                y={0}
-                width={geo.w}
-                height={geo.h}
+                x={-geo.w}
+                y={-geo.h}
+                width={geo.w * 3}
+                height={geo.h * 3}
               >
-                <rect width={geo.w} height={geo.h} fill="white" />
-                <g ref={maskLetters}>
-                  <Lines geo={geo} fill="black" />
-                </g>
+                <rect
+                  x={-geo.w}
+                  y={-geo.h}
+                  width={geo.w * 3}
+                  height={geo.h * 3}
+                  fill="white"
+                />
+                <Lines geo={geo} fill="black" />
               </mask>
             </defs>
             <rect
-              width={geo.w}
-              height={geo.h}
+              x={-geo.w}
+              y={-geo.h}
+              width={geo.w * 3}
+              height={geo.h * 3}
               style={{ fill: "var(--background)" }}
               mask="url(#work-title-mask)"
             />
             {/* A hairline round each letter, so the cut-outs keep their
-                shape where the photo behind them is dark. Non-scaling, so
-                it stays a hairline however far the dive zooms. */}
-            <g ref={outlineLetters}>
-              <Lines
-                geo={geo}
-                textRef={textRef}
-                fill="none"
-                stroke="rgba(236,234,222,0.35)"
-              />
-            </g>
+                shape where the photo behind them is dark. */}
+            <Lines
+              geo={geo}
+              textRef={textRef}
+              fill="none"
+              stroke="rgba(236,234,222,0.35)"
+            />
           </svg>
         </motion.div>
       )}
